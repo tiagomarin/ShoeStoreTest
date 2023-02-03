@@ -5,6 +5,6 @@
 <div>
   <%= link_to "Edit this order", edit_order_path(@order) %> |
   <%= link_to "Back to orders", orders_path %>
-
   <%= button_to "Destroy this order", @order, method: :delete %>
+  <%# verify if adm's gonna be able to destroy or not %>
 </div>
