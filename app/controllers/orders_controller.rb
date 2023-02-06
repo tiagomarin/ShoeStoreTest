@@ -1,14 +1,18 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: %i[show edit update destroy]
+  before_action :set_order_items, only: %i[show edit update destroy]
   before_action :authenticate_user!
 
   # GET /orders or /orders.json
   def index
-    @orders = Order.all
+    # @orders = Order.all
+    @orders = Order.where(user: current_user)
   end
 
   # GET /orders/1 or /orders/1.json
-  def show; end
+  def show
+    @render_order = false
+  end
 
   # GET /orders/new
   def new
@@ -24,7 +28,7 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
-        format.html { redirect_to order_url(@order), notice: 'Order was successfully created.' }
+        format.html { redirect_to user_orders_path(current_user, @order), notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -37,7 +41,7 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to order_url(@order), notice: 'Order was successfully updated.' }
+        format.html { redirect_to user_orders_path(current_user, @order), notice: 'Order was successfully updated.' }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -51,7 +55,7 @@ class OrdersController < ApplicationController
     @order.destroy
 
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
+      format.html { redirect_to user_orders_path(current_user), notice: 'Order was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -63,8 +67,16 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
+  def set_order_items
+    @order_items = OrderItem.where(order_id: params[:id])
+    # @order_items = @order.order_items(params[:id])
+  end
+
   # Only allow a list of trusted parameters through.
   def order_params
-    params.require(:order).permit(:total_price, :status)
+    params
+      .require(:order)
+      .permit(:total_price, :status)
+      .with_defaults(total_price: 0, status: 'Shopping Cart')
   end
 end

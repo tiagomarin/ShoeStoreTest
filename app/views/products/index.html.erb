@@ -5,11 +5,14 @@
 <div id="products">
   <% @products.each do |product| %>
     <%= render product %>
-    <p>
-      <%= link_to "Show this product", product %>
-    </p>
+    <%= link_to "Show this product", product %>
+    <%= button_to "Add to cart", user_order_order_items_path(user_id: current_user.id, order_id: @order.id, product_id: product.id) %>
   <% end %>
 </div>
 
 <%= link_to "New product", new_product_path %>
 <%= link_to "Back to Home", root_path %>
+
+<% if current_user %>
+  <%= link_to "Orders", user_orders_path(current_user) %>
+<% end %>
