@@ -69,7 +69,6 @@ class OrdersController < ApplicationController
 
   def set_order_items
     @order_items = OrderItem.where(order_id: params[:id])
-    # @order_items = @order.order_items(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

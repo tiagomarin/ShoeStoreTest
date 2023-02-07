@@ -1,7 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @order %>
+
 <%= render "orders/order_items" %>
+
 <div>
   <%= link_to "Edit this order", edit_user_order_path(current_user, @order) %> |
   <%= link_to "Back to orders", user_orders_path %>

@@ -3,6 +3,7 @@
   <% product = Product.find(item.product_id)%>
 
 <div style="background-color: yellow; padding: 10px">
+  <%= product.id %>
   <p>
     <strong>Product:</strong>
     <%= product.name %>
@@ -26,7 +27,7 @@
     <strong>Total price:</strong>
   </p>
 
-  
+  <%= button_to "Remove from shopping cart", user_order_order_item_path(current_user, @order, item), method: :delete %>
 </div>
 <% end %>
 

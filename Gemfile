@@ -21,6 +21,9 @@ gem 'puma', '~> 5.0'
 # Use for hiding credentials
 gem 'dotenv-rails'
 
+# Use faker to mock seeds
+gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'main'
+
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem 'importmap-rails'
 
