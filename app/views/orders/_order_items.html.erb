@@ -1,9 +1,8 @@
 <% @order_items.each do |item| %>
 
-  <% product = Product.find(item.product_id)%>
+<% product = Product.find(item.product_id)%>
 
-<div style="background-color: yellow; padding: 10px">
-  <%= product.id %>
+<div style="background-color: yellow; padding: 10px; border: 1px solid black">
   <p>
     <strong>Product:</strong>
     <%= product.name %>
@@ -16,6 +15,7 @@
 
   <p>
     <strong>quantity:</strong>
+    <%= product.quantity %>
   </p>
 
   <p>
@@ -25,6 +25,7 @@
 
   <p>
     <strong>Total price:</strong>
+    <%= (product.quantity * product.price) %>
   </p>
 
   <%= button_to "Remove from shopping cart", user_order_order_item_path(current_user, @order, item), method: :delete %>

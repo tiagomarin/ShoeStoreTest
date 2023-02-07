@@ -33,17 +33,17 @@
 
   <div>
     <%= form.label :color, style: "display: block" %>
-    <%= form.text_field :color %>
+    <%= form.select :color, ["Blue", "Black", "White", "Red", "Pink", "Purple", "Orange", "Green", "Yellow", "Grey", "Cyan", "Violet", "Brown"] %>
   </div>
 
   <div>
     <%= form.label :gender, style: "display: block" %>
-    <%= form.text_field :gender %>
+    <%= form.select :gender, ["Male", "Female", "Other"] %>
   </div>
 
   <div>
     <%= form.label :brand, style: "display: block" %>
-    <%= form.text_field :brand %>
+    <%= form.select :brand, ["Nike", "Adidas", "Puma", "Reebok", "Vans"] %>
   </div>
 
   <div>
@@ -54,6 +54,11 @@
   <div>
     <%= form.label :category, style: "display: block" %>
     <%= form.text_field :category %>
+  </div>
+
+  <div>
+    <%= form.label :quantity, style: "display: block" %>
+    <%= form.number_field :quantity %>
   </div>
 
   <div>

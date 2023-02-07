@@ -10,6 +10,7 @@ class CreateProducts < ActiveRecord::Migration[7.0]
       t.string :brand
       t.integer :discount
       t.string :category
+      t.integer :quantity
 
       t.timestamps
     end

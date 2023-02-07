@@ -6,8 +6,8 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-20.times do |comment|
-  Product.create!(name: Faker::Name.name, price: Faker::Number.number(digits: 3), description: 'so cool', size: 40, color: Faker::Color.color_name, gender: 'Male', brand: Faker::Color.color_name, discount: 15, category: 'sports')
+10.times do |comment|
+  Product.create!(name: Faker::Name.name, price: Faker::Number.number(digits: 3), description: 'so cool', size: 40, color: Faker::Color.color_name, gender: 'Male', brand: Faker::Color.color_name, discount: 15, category: 'sports', quantity: Faker::Number.number(digits: 2))
 end
 
 User.create!(name: 'Vitor', email: 'vgm_rox@hotmail.com', password: 123321)

@@ -12,4 +12,5 @@ class Product < ApplicationRecord
   validates :brand, presence: true
   validates :discount, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
   validates :category, presence: true
+  validates :quantity, presence: true, numericality: { greater_than_or_equal_to: 0 }
 end
