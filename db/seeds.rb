@@ -11,4 +11,4 @@
 end
 
 User.create!(name: 'Vitor', email: 'vgm_rox@hotmail.com', password: 123321)
-User.create!(name: 'Tiago', email: 'tiago_lelinski@gmail.com', password: 123321)
+User.create!(name: 'Tiago', email: 'tiago.lelinski@gmail.com', password: 123321)
