@@ -2,6 +2,8 @@
 
   <% if user.avatar.attached? %>
     <%= image_tag user.avatar, width: "250px" %>
+  <% else %>
+    <%= image_tag "no-image-user.png" %>
   <% end %>
 
   <p>
