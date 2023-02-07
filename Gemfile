@@ -12,11 +12,17 @@ gem 'sprockets-rails'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 
+# Use Devise to authenticate Users
+gem 'devise'
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '~> 5.0'
 
 # Use for hiding credentials
 gem 'dotenv-rails'
+
+# Use faker to mock seeds
+gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'main'
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem 'importmap-rails'
