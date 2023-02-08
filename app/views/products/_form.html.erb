@@ -43,7 +43,7 @@
 
   <div>
     <%= form.label :brand, style: "display: block" %>
-    <%= form.select :brand, ["Nike", "Adidas", "Puma", "Reebok", "Vans"] %>
+    <%= form.select :brand_id, @brands %>
   </div>
 
   <div>
@@ -53,7 +53,7 @@
 
   <div>
     <%= form.label :category, style: "display: block" %>
-    <%= form.text_field :category %>
+    <%= form.select :category_id, @categories %>
   </div>
 
   <div>
