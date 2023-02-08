@@ -43,7 +43,6 @@ class OrdersController < ApplicationController
       if @order.update(order_params)
 
         @order.order_items.each do |item|
-          pp item.product_id
           product = Product.find(item.product_id)
           product.update(quantity: product.quantity - item.quantity)
         end
