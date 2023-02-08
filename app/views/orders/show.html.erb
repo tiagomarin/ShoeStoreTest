@@ -4,12 +4,25 @@
 
 <%= render "orders/order_items" %>
 
+<%= form_for @order, url: user_order_path(current_user, @order) do |f| %>
+  <div class="field">
+    <%= f.hidden_field :status, value: "Purchased" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "PAY" %>
+  </div>
+<% end %>
+
+
 <div>
   <%= link_to "Edit this order", edit_user_order_path(current_user, @order) %> |
   <%= link_to "Back to orders", user_orders_path %>
   <%= button_to "Destroy this order", user_order_path(current_user, @order), method: :delete %>
   <%# verify if adm's gonna be able to destroy or not %>
 </div>
+
+
 
 <%= link_to "Back to Home", root_path %>
 <%= link_to "Products", products_path %>
