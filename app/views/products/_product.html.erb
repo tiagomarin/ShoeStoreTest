@@ -1,4 +1,12 @@
 <div id="<%= dom_id product %>">
+  <% if product.images.attached? %>
+    <% product.images.each do |image| %>
+      <%= image_tag image, width: "250px", height: "250px" %>
+    <% end %>
+  <% else %>
+    <%= image_tag "no-product-image.png", width: "250px", height: "250px" %>
+  <% end %>
+
   <p>
     <strong>Name:</strong>
     <%= product.name %>
