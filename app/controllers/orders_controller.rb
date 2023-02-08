@@ -41,6 +41,13 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
+
+        @order.order_items.each do |item|
+          pp item.product_id
+          product = Product.find(item.product_id)
+          product.update(quantity: product.quantity - item.quantity)
+        end
+
         format.html { redirect_to user_orders_path(current_user, @order), notice: 'Order was successfully updated.' }
         format.json { render :show, status: :ok, location: @order }
       else
@@ -75,7 +82,7 @@ class OrdersController < ApplicationController
   def order_params
     params
       .require(:order)
-      .permit(:total_price, :status)
-      .with_defaults(total_price: 0, status: 'Shopping Cart')
+      .permit(:status)
+      .with_defaults(status: 'Shopping Cart')
   end
 end
