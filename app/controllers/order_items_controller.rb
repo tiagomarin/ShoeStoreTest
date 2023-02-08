@@ -1,21 +1,18 @@
 class OrderItemsController < ApplicationController
   before_action :authenticate_user!
-  
+
   def create
-    @product = Product
-    .where(name: params[:order_item][:name])
-    .where(color: params[:order_item][:color])
-    .where(size: params[:order_item][:size])
+    @product = Product.where(name: params[:order_item][:name], color: params[:order_item][:color],
+                             size: params[:order_item][:size]).take
 
-    # available = Product.find(params[:product_id]).quantity
-    # quantity = params:[:quantity]
+    quantity_requested = params[:order_item][:quantity].to_i
+    quantity_total = @product.quantity.to_i
 
-    # if available >= quantity
-    #   @order_item = OrderItem.create(product_id: params[:product_id], order_id: @order.id)
-    # else
-    #   puts 'wrong quantity'
-    #   # show error message
-    # end
+    if quantity_total >= quantity_requested
+      OrderItem.create!(product: @product, order: @order, quantity: quantity_requested)
+    else
+      puts 'wrong quantity'
+    end
   end
 
   def destroy

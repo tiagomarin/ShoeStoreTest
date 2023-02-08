@@ -4,7 +4,7 @@
 
 <div id="products">
   <% @products.each do |product| %>
-    <div style="background-color: yellow; padding: 10px; border: 1px solid black">
+    <div style="background-color: cadetblue; padding: 10px; border: 1px solid black">
       <%= render product %>
       <% if current_user %>
         <%= form_with model: OrderItem, url: user_order_order_items_path(@order, current_user) do |form| %>
