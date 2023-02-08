@@ -6,12 +6,24 @@ class OrderItemsController < ApplicationController
                              size: params[:order_item][:size]).take
 
     quantity_requested = params[:order_item][:quantity].to_i
-    quantity_total = @product.quantity.to_i
+    quantity_total = if @product
+                       @product.quantity.to_i
+                     else
+                       0
+                     end
 
     if quantity_total >= quantity_requested
-      OrderItem.create!(product: @product, order: @order, quantity: quantity_requested)
+      if (new_order_item = OrderItem.where(product: @product, order: @order).take)
+        if quantity_requested <= (@product.quantity - new_order_item.quantity)
+          new_order_item.update!(quantity: new_order_item.quantity + quantity_requested)
+        else
+          puts 'Not enough products'
+        end
+      else
+        OrderItem.create!(product: @product, order: @order, quantity: quantity_requested)
+      end
     else
-      puts 'wrong quantity'
+      puts 'Not enough products'
     end
   end
 
