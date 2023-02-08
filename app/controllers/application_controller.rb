@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
                @last_order
 
              else
-               Order.create(user: current_user, total_price: 0, status: 'Shopping Cart')
+               Order.create(user: current_user, status: 'Shopping Cart')
              end
   end
 

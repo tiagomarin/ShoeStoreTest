@@ -2,7 +2,7 @@ class Product < ApplicationRecord
   has_many :order_items, dependent: :destroy
   has_many_attached :images
 
-  validates :name, presence: true, uniqueness: true,
+  validates :name, presence: true,
                    length: { maximum: 30, too_long: '%<count>s characters is the maximum allowed' }
   validates :price, presence: true,
                     numericality: { greater_than_or_equal_to: 0 }
