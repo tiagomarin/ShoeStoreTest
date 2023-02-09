@@ -12,8 +12,8 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
-    @brands = Brand.all.map { |brand| [brand.name, brand.id] }
-    @categories = Category.all.map { |category| [category.name, category.id] }
+    @brands = Brand.all
+    @categories = Category.all
   end
 
   # GET /products/1/edit

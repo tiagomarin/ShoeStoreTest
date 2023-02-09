@@ -10,9 +10,10 @@ class BrandsController < ApplicationController
 
     respond_to do |format|
       if @brand.save
+        format.html { redirect_to new_product_path, notice: 'Brand was successfully created.' }
         format.json { render :show, status: :created, location: @brand }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to new_product_path, notice: 'Brand already exist.' }
         format.json { render json: @brand.errors, status: :unprocessable_entity }
       end
     end

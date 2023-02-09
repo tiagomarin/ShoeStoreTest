@@ -43,11 +43,11 @@
 
   <div>
     <%= form.label :brand, style: "display: block" %>
-    <%= form.select :brand_id, @brands %>
+    <%= form.select :brand_id, @brands.map { |brand| [brand.name, brand.id] } %>
 
     <%= button_to "New Brand" %>
 
-    <div style="color: red">
+    <div style="margin: 20px; padding: 20px; background-color: grey">
       Testing new Brand
       <%= form_with model: Brand do |form| %>
         <div>
@@ -59,6 +59,12 @@
           <%= form.submit "Add Brand" %>
         </div>
       <% end %>
+      <h3>Brands available</h3>
+      <ul>
+        <% @brands.each do |brand| %>
+          <li><%= brand.name %></li>
+        <% end %>
+      </ul>
     </div>
   </div>
 
@@ -69,11 +75,11 @@
 
   <div>
     <%= form.label :category, style: "display: block" %>
-    <%= form.select :category_id, @categories %>
+    <%= form.select :category_id, @categories.map { |category| [category.name, category.id] } %>
 
     <%= button_to "New Category" %>
 
-    <div style="color: red">
+    <div style="margin: 20px; padding: 20px; background-color: grey">
       Testing new Category
       <%= form_with model: Category do |form| %>
         <div>
@@ -85,6 +91,12 @@
           <%= form.submit "Add Category" %>
         </div>
       <% end %>
+      <h3>Categories available</h3>
+      <ul>
+        <% @categories.each do |category| %>
+          <li><%= category.name %></li>
+        <% end %>
+      </ul>
     </div>
   </div>
 
