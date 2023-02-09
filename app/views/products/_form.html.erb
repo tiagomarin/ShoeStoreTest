@@ -43,31 +43,9 @@
 
   <div>
     <%= form.label :brand, style: "display: block" %>
-    <%= form.select :brand_id, @brands.map { |brand| [brand.name, brand.id] } %>
-
-    <%= button_to "New Brand" %>
-
-    <div style="margin: 20px; padding: 20px; background-color: grey">
-      Testing new Brand
-      <%= form_with model: Brand do |form| %>
-        <div>
-          <%= form.label :name, style: "display: block" %>
-          <%= form.text_field :name, value: "" %>
-        </div>
-
-        <div>
-          <%= form.submit "Add Brand" %>
-        </div>
-      <% end %>
-      <h3>Brands available</h3>
-      <ul>
-        <% @brands.each do |brand| %>
-          <li><%= brand.name %></li>
-        <% end %>
-      </ul>
-    </div>
+    <%= form.select :brand_id, @brands.map { |brand| [brand.name, brand.id]} %>
   </div>
-
+  
   <div>
     <%= form.label :discount, style: "display: block" %>
     <%= form.number_field :discount %>
@@ -76,28 +54,6 @@
   <div>
     <%= form.label :category, style: "display: block" %>
     <%= form.select :category_id, @categories.map { |category| [category.name, category.id] } %>
-
-    <%= button_to "New Category" %>
-
-    <div style="margin: 20px; padding: 20px; background-color: grey">
-      Testing new Category
-      <%= form_with model: Category do |form| %>
-        <div>
-          <%= form.label :name, style: "display: block" %>
-          <%= form.text_field :name, value: "" %>
-        </div>
-
-        <div>
-          <%= form.submit "Add Category" %>
-        </div>
-      <% end %>
-      <h3>Categories available</h3>
-      <ul>
-        <% @categories.each do |category| %>
-          <li><%= category.name %></li>
-        <% end %>
-      </ul>
-    </div>
   </div>
 
   <div>
@@ -114,3 +70,33 @@
     <%= form.submit %>
   </div>
 <% end %>
+
+<button class="open-modal">New Brand</button>
+<button class="open-modal">New Category</button>
+
+<%#  Modal for adding a new Brand %>
+  <div id="brand-modal" style="position: relative; margin: 20px; padding: 20px; background-color: grey">
+    <button class="close-modal" style="position: absolute; top:10px; right: 10px; padding: 6px">X</button>
+    <p>Testing new Category</p>
+    <%= render partial: "categories/form" %>
+    <h3>Categories available</h3>
+    <ul>
+      <% @categories.each do |category| %>
+        <li><%= category.name %></li>
+      <% end %>
+    </ul>
+  </div>
+
+<%#  Modal for adding a new Brand %>
+  <div id="category-modal" style="position: relative; margin: 20px; padding: 20px; background-color: grey">
+    <button class="close-modal" style="position: absolute; top:10px; right: 10px; padding: 6px">X</button>
+    <p>Testing new Brand</p>
+    <%= render partial: "brands/form" %>
+    <h3>Brands available</h3>
+    <ul>
+      <% @brands.each do |brand| %>
+        <li><%= brand.name %></li>
+      <% end %>
+    </ul>
+  </div>
+

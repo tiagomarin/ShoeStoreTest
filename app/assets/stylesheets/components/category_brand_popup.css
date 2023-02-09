@@ -1,3 +1,12 @@
-.hidden {
-  display: none;
+#brand-modal {
+  display:none
+}
+
+#category-modal {
+  display:none
+}
+
+#brand-modal.show,
+#category-modal.show {
+  display: flex;
 }

@@ -1,0 +1,10 @@
+<%= form_with model: Brand do |brand_form| %>
+  <div>
+    <%= brand_form.label :name, style: "display: block" %>
+    <%= brand_form.text_field :name, value: "" %>
+  </div>
+
+  <div>
+    <%= brand_form.submit "Add Brand" %>
+  </div>
+<% end %>
