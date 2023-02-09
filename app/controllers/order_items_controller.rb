@@ -15,12 +15,14 @@ class OrderItemsController < ApplicationController
     if quantity_total >= quantity_requested
       if (new_order_item = OrderItem.where(product: @product, order: @order).take)
         if quantity_requested <= (@product.quantity - new_order_item.quantity)
-          new_order_item.update!(quantity: new_order_item.quantity + quantity_requested)
+          new_order_item.update!(quantity: new_order_item.quantity + quantity_requested,
+                                 total_price: (new_order_item.quantity + quantity_requested) * @product.price)
         else
           puts 'Not enough products'
         end
       else
-        OrderItem.create!(product: @product, order: @order, quantity: quantity_requested)
+        OrderItem.create!(product: @product, order: @order, quantity: quantity_requested, price: @product.price,
+                          total_price: @product.price * quantity_requested)
       end
     else
       puts 'Not enough products'
