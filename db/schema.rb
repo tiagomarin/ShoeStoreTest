@@ -80,9 +80,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_08_204419) do
     t.decimal "size"
     t.string "color"
     t.string "gender"
-    t.string "brand"
     t.integer "discount"
-    t.string "category"
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
