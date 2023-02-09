@@ -44,6 +44,22 @@
   <div>
     <%= form.label :brand, style: "display: block" %>
     <%= form.select :brand_id, @brands %>
+
+    <%= button_to "New Brand" %>
+
+    <div style="color: red">
+      Testing new Brand
+      <%= form_with model: Brand do |form| %>
+        <div>
+          <%= form.label :name, style: "display: block" %>
+          <%= form.text_field :name, value: "" %>
+        </div>
+
+        <div>
+          <%= form.submit "Add Brand" %>
+        </div>
+      <% end %>
+    </div>
   </div>
 
   <div>
@@ -54,6 +70,22 @@
   <div>
     <%= form.label :category, style: "display: block" %>
     <%= form.select :category_id, @categories %>
+
+    <%= button_to "New Category" %>
+
+    <div style="color: red">
+      Testing new Category
+      <%= form_with model: Category do |form| %>
+        <div>
+          <%= form.label :name, style: "display: block" %>
+          <%= form.text_field :name, value: "" %>
+        </div>
+
+        <div>
+          <%= form.submit "Add Category" %>
+        </div>
+      <% end %>
+    </div>
   </div>
 
   <div>

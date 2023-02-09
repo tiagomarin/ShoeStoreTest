@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :categories
-  resources :brands
   devise_for :users
   
   resources :users do
@@ -9,6 +7,8 @@ Rails.application.routes.draw do
     end
   end
   resources :products
+  resources :categories
+  resources :brands
   
   # Defines the root path route ("/")
   root "home#index"
