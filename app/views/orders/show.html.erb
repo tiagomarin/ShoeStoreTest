@@ -3,15 +3,16 @@
 <%= render @order %>
 
 <%= render "orders/order_items" %>
+<% if @order.status == "Shopping Cart" %>
+  <%= form_for @order, url: user_order_path(current_user, @order) do |f| %>
+    <div class="field">
+      <%= f.hidden_field :status, value: "Purchased" %>
+    </div>
 
-<%= form_for @order, url: user_order_path(current_user, @order) do |f| %>
-  <div class="field">
-    <%= f.hidden_field :status, value: "Purchased" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "PAY" %>
-  </div>
+    <div class="actions">
+      <%= f.submit "PAY" %>
+    </div>
+  <% end %>
 <% end %>
 
 <div>

@@ -12,6 +12,8 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
+    @brands = Brand.all
+    @categories = Category.all
   end
 
   # GET /products/1/edit
@@ -66,7 +68,9 @@ class ProductsController < ApplicationController
   def product_params
     params
       .require(:product)
-      .permit(:name, :price, :description, :size, :color, :gender, :brand, :discount, :category, :quantity, images: [])
+      .permit(:name, :price, :description, :size, :color, :gender,
+              :brand_id, :discount, :category_id, :quantity, images:
+               [])
       .with_defaults(discount: 0)
   end
 end

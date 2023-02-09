@@ -25,7 +25,7 @@
 
   <p>
     <strong>Total price:</strong>
-    <%= (product.quantity * product.price) %>
+    <%= item.total_price %>
   </p>
 
   <%= button_to "Remove from shopping cart", user_order_order_item_path(current_user, @order, item), method: :delete %>
