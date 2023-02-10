@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :products
   resources :categories
   resources :brands
+  resources :promo_codes
   
   # Defines the root path route ("/")
   root "home#index"
