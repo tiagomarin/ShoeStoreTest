@@ -9,9 +9,14 @@
     <%= promo_code.value %>
   </p>
 
-   <p>
-    <strong>Applicable to:</strong>
-    <%= promo_code.applicable_to %>
-  </p>
+  <% if @promo_code_categories %>
+    <p>
+      <strong>Applicable to:</strong>
+      <ul style="display: flex; flex-direction: column; gap: 5px; margin: 10px">
+      <% @promo_code_categories.each do |category| %>
+        <li><%= category.name %></li>
+      <% end %>
+    </p>
+  <% end %>
 
 </div>

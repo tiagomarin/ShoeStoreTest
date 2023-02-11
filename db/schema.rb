@@ -93,7 +93,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_10_115115) do
   create_table "promo_codes", force: :cascade do |t|
     t.string "title"
     t.float "value"
-    t.string "applicable_to", default: [], array: true
+    t.string "applicable_to"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

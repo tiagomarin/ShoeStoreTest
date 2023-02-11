@@ -1,6 +1,9 @@
+require 'json'
+
 class PromoCodesController < ApplicationController
   before_action :set_promo_code, only: %i[show edit update destroy]
   before_action :set_categories, only: %i[new edit]
+  before_action :set_promo_code_categories, only: %i[show edit]
 
   # GET /promo_codes or /promo_codes.json
   def index
@@ -21,6 +24,9 @@ class PromoCodesController < ApplicationController
   # POST /promo_codes or /promo_codes.json
   def create
     @promo_code = PromoCode.new(promo_code_params)
+    # transform the array of categories into a json string
+    promo_categories = params[:promo_code][:applicable_to].map(&:to_i).to_json
+    @promo_code.applicable_to = promo_categories
 
     respond_to do |format|
       if @promo_code.save
@@ -71,5 +77,11 @@ class PromoCodesController < ApplicationController
   # List all available categories
   def set_categories
     @categories = Category.all
+  end
+
+  # List all categories for a promo code
+  def set_promo_code_categories
+    ids_arr = JSON.parse(@promo_code.applicable_to)
+    @promo_code_categories = Category.where(id: ids_arr)
   end
 end
