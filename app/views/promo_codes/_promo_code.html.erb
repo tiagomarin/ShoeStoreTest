@@ -9,14 +9,12 @@
     <%= promo_code.value %>
   </p>
 
-  <% if @promo_code_categories %>
-    <p>
-      <strong>Applicable to:</strong>
-      <ul style="display: flex; flex-direction: column; gap: 5px; margin: 10px">
-      <% @promo_code_categories.each do |category| %>
-        <li><%= category.name %></li>
-      <% end %>
-    </p>
-  <% end %>
+  <p>
+    <strong>Applicable to:</strong>
+    <ul style="display: flex; flex-direction: column; gap: 5px; margin: 10px">
+    <% promo_code.categories.each do |category| %>
+      <li><%= category.name %></li>
+    <% end %>
+  </p>
 
 </div>

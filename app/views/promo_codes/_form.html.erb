@@ -22,8 +22,8 @@
   </div>
 
   <div>
-    <%= form.label :applicable_to, style: "display: block" %>
-    <%= form.collection_check_boxes(:applicable_to, @categories.order( 'name ASC' ), :id, :name, include_hidden: false) %>
+    <%= form.label :category_ids, style: "display: block" %>
+    <%= form.collection_check_boxes(:category_ids, @categories, :id, :name, include_hidden: false) %>
   </div>
 
   <div>

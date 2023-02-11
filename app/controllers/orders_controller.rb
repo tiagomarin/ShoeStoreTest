@@ -81,7 +81,7 @@ class OrdersController < ApplicationController
   def order_params
     params
       .require(:order)
-      .permit(:status)
+      .permit(:status, :promo_code)
       .with_defaults(status: 'Shopping Cart')
   end
 end
