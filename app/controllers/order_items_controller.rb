@@ -6,23 +6,24 @@ class OrderItemsController < ApplicationController
                              size: params[:order_item][:size]).take
 
     quantity_requested = params[:order_item][:quantity].to_i
-    quantity_total = if @product
-                       @product.quantity.to_i
-                     else
-                       0
-                     end
+    quantity_available = if @product
+                           @product.quantity.to_i
+                         else
+                           0
+                         end
 
-    if quantity_total >= quantity_requested
-      if (new_order_item = OrderItem.where(product: @product, order: @order).take)
-        if quantity_requested <= (@product.quantity - new_order_item.quantity)
-          new_order_item.update!(quantity: new_order_item.quantity + quantity_requested,
-                                 total_price: (new_order_item.quantity + quantity_requested) * @product.price)
+    if quantity_available >= quantity_requested
+      if (item_in_cart = OrderItem.where(product: @product, order: @order).take)
+        if quantity_requested <= (quantity_available - item_in_cart.quantity.to_i)
+          final_quantity = item_in_cart.quantity + quantity_requested
+          total_price = (final_quantity * @product.price) * (1 - (@product.discount / 100)) * (1 - (@order.code_discount / 100))
+          item_in_cart.update!(quantity: final_quantity, total_price:)
         else
           puts 'Not enough products'
         end
-      else
-        OrderItem.create!(product: @product, order: @order, quantity: quantity_requested,
-                          total_price: @product.price * quantity_requested)
+      else # if item is not in cart
+        total_price = (@product.price * quantity_requested) * (1 - (@product.discount / 100))
+        OrderItem.create!(product: @product, order: @order, quantity: quantity_requested, total_price:)
       end
     else
       puts 'Not enough products'
@@ -38,13 +39,5 @@ class OrderItemsController < ApplicationController
       end
       format.json { head :no_content }
     end
-  end
-
-  private
-
-  def product_params
-    params
-      .require(:product)
-      .permit(:name, :size, :color)
   end
 end

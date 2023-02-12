@@ -5,6 +5,16 @@
 <%= render "orders/order_items" %>
 
 <button>Add Code</button>
+<%= form_for @order, url: user_order_path(current_user, @order) do |f| %>
+    <div class="field">
+      <%= f.hidden_field :promo_code, value: "" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Remove Code" %>
+    </div>
+<% end %>
+
 <div style="background-color: WhiteSmoke; padding:20px; border: 1px solid black; margin: 10px 0">
   <%= form_for @order, url: user_order_path(current_user, @order) do |f| %>
       <div class="field">
@@ -16,6 +26,9 @@
       </div>
   <% end %>
 </div>
+
+
+
 
 
 <% if @order.status == "Shopping Cart" %>

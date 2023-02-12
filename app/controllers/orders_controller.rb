@@ -47,7 +47,42 @@ class OrdersController < ApplicationController
           product.update(quantity: product.quantity - item.quantity)
         end
 
-        format.html { redirect_to user_orders_path(current_user, @order), notice: 'Order was successfully updated.' }
+        # calculate cupon discount on order
+        if params[:commit] == 'Apply Code'
+          promo_code = PromoCode.where(title: params[:order][:promo_code]).take
+
+          # find categories this promo code is valid for
+          valid_categories_ids = Category.joins(:promo_codes).where(promo_codes: { id: promo_code }).map(&:id)
+          discount_value = promo_code.value
+
+          # find all products that will be discounted and update the code_discount on them and total price.
+          @order_items.each do |order_item|
+            product = Product.find(order_item.product_id)
+            categories_ids = Category.where(id: product.category_id).map(&:id)
+            puts '==========================================='
+            pp valid_categories_ids
+            pp categories_ids
+            puts '==========================================='
+            next unless categories_ids.intersect?(valid_categories_ids)
+            next unless order_item.code_discount < discount_value
+
+            order_item.update(code_discount: discount_value,
+                              total_price: product.price * order_item.quantity * (1 - (product.discount / 100)) * (1 - (discount_value / 100)))
+          end
+        end
+
+        if params[:commit] == 'Remove Code'
+          # Calculate the total price of the order
+          @order_items.each do |order_item|
+            product = Product.find(order_item.product_id)
+            item.update(
+              code_discount: '',
+              total_price: product.price * order_item.quantity * (1 - (product.discount / 100))
+            )
+          end
+        end
+
+        format.html { redirect_to user_order_path(current_user, @order), notice: 'Order was successfully updated.' }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit, status: :unprocessable_entity }

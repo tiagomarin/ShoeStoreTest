@@ -23,8 +23,6 @@ class PromoCodesController < ApplicationController
   # POST /promo_codes or /promo_codes.json
   def create
     @promo_code = PromoCode.new(promo_code_params)
-    # transform the array of categories into a json string
-    pp @promo_code.category_ids
 
     respond_to do |format|
       if @promo_code.save
