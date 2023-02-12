@@ -58,12 +58,14 @@ class OrdersController < ApplicationController
           # find all products that will be discounted and update the code_discount on them and total price.
           @order_items.each do |order_item|
             product = Product.find(order_item.product_id)
-            categories_ids = Category.where(id: product.category_id).map(&:id)
             puts '==========================================='
             pp valid_categories_ids
-            pp categories_ids
+            pp categories_ids = product.category_ids
             puts '==========================================='
-            next unless categories_ids.intersect?(valid_categories_ids)
+
+            # check next item in cart if this doesn't have any category that is valid for this promo code
+            next unless product.category_ids.intersect?(valid_categories_ids)
+            # return if item in cart already has a bigger discount
             next unless order_item.code_discount < discount_value
 
             order_item.update(code_discount: discount_value,
@@ -75,7 +77,7 @@ class OrdersController < ApplicationController
           # Calculate the total price of the order
           @order_items.each do |order_item|
             product = Product.find(order_item.product_id)
-            item.update(
+            order_item.update(
               code_discount: '',
               total_price: product.price * order_item.quantity * (1 - (product.discount / 100))
             )

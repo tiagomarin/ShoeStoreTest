@@ -23,5 +23,6 @@ class CategoriesController < ApplicationController
 
   def category_params
     params.require(:category).permit(:name)
+    # , :promo_code_ids:[]
   end
 end

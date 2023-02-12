@@ -6,6 +6,6 @@
 <%= link_to "New Product", new_product_path %>
 <% if current_user %>
   <%= link_to "Orders", user_orders_path(current_user) %>
-  <%= button_to "New promo code", new_promo_code_path %>
+  <%= link_to "New promo code", new_promo_code_path %>
 <% end %>
 

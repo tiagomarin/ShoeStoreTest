@@ -48,12 +48,12 @@
   
   <div>
     <%= form.label :discount, style: "display: block" %>
-    <%= form.number_field :discount %>
+    <%= form.number_field :discount, value: 0 %>
   </div>
 
   <div>
-    <%= form.label :category, style: "display: block" %>
-    <%= form.select :category_id, @categories.map { |category| [category.name, category.id] } %>
+    <%= form.label :category_ids, style: "display: block" %>
+    <%= form.collection_check_boxes(:category_ids, @categories, :id, :name, include_hidden: false) %>
   </div>
 
   <div>
