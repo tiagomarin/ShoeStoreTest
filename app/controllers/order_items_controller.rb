@@ -16,13 +16,19 @@ class OrderItemsController < ApplicationController
       if (item_in_cart = OrderItem.where(product: @product, order: @order).take)
         if quantity_requested <= (quantity_available - item_in_cart.quantity.to_i)
           final_quantity = item_in_cart.quantity + quantity_requested
-          total_price = (final_quantity * @product.price) * (1 - (@product.discount / 100)) * (1 - (@order.code_discount / 100))
-          item_in_cart.update!(quantity: final_quantity, total_price:)
+          
+          # find all promo codes applied in this order
+          promo_codes = PromoCode.where(id: @order.promo_code_ids)
+          # find the biggest discount among all promo codes that are valid for this item
+          code_discount = code_discount(item_in_cart, promo_codes)
+
+          total_price = ((final_quantity * @product.price) * (1 - (@product.discount.to_f  / 100)) * code_discount).ceil(2)
+          item_in_cart.update!(quantity: final_quantity, total_price:, code_discount:)
         else
           puts 'Not enough products'
         end
       else # if item is not in cart
-        total_price = (@product.price * quantity_requested) * (1 - (@product.discount / 100))
+        total_price = ((@product.price * quantity_requested) * (1 - (@product.discount.to_f / 100))).ceil(2)
         OrderItem.create!(product: @product, order: @order, quantity: quantity_requested, total_price:)
       end
     else
@@ -39,5 +45,18 @@ class OrderItemsController < ApplicationController
       end
       format.json { head :no_content }
     end
+  end
+
+  private
+  # find the biggest discount among all promo codes that are valid for this item
+  def code_discount(order_item, promo_codes)
+    product = Product.find(order_item.product_id)
+    promo_codes.each do |promo_code|
+      # check if item in cart has any category that is valid for this promo code
+      if promo_code.category_ids.intersect?(product.category_ids)
+        code_discount = promo_code.value if code_discount < promo_code.value
+      end
+    end
+    1 - (code_discount.to_f / 100).ceil(2)
   end
 end
