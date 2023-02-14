@@ -73,6 +73,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_120548) do
     t.index ["promo_code_id", "category_id"], name: "index_categories_promo_codes_on_promo_code_id_and_category_id"
   end
 
+
+
+
+
+
+
+  
+
+
+
   create_table "order_items", force: :cascade do |t|
     t.integer "quantity"
     t.float "code_discount", default: 0.0
@@ -84,6 +94,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_120548) do
     t.index ["order_id"], name: "index_order_items_on_order_id"
     t.index ["product_id"], name: "index_order_items_on_product_id"
   end
+
+
+
+
+
+
+
+
+
+
 
   create_table "orders", force: :cascade do |t|
     t.string "status"

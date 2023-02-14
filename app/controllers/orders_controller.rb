@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: %i[show edit update destroy]
   before_action :set_order_items, only: %i[show edit update destroy]
+  before_action :set_promo_code, only: %i[update add_promo_code remove_promo_code]
   before_action :check_promo_code, only: %i[add_promo_code remove_promo_code]
   before_action :authenticate_user!
 
@@ -40,21 +41,22 @@ class OrdersController < ApplicationController
 
   # PATCH/PUT /orders/1 or /orders/1.json
   def update
+    add_promo_code()
+    remove_promo_code()
     respond_to do |format|
-      if @order.update(order_params)
-        add_promo_code()
-        remove_promo_code()
-        @order.order_items.each do |item|
-          product = Product.find(item.product_id)
-          product.update(quantity: product.quantity - item.quantity)
-        end
+      # if @order.update(order_params)
 
-        format.html { redirect_to user_order_path(current_user, @order), notice: 'Order was successfully updated.' }
-        format.json { render :show, status: :ok, location: @order }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
+      #   @order.order_items.each do |item|
+      #     product = Product.find(item.product_id)
+      #     product.update(quantity: product.quantity - item.quantity)
+      #   end
+
+      #   format.html { redirect_to user_order_path(current_user, @order), notice: 'Order was successfully updated.' }
+      #   format.json { render :show, status: :ok, location: @order }
+      # else
+      #   format.html { render :edit, status: :unprocessable_entity }
+      #   format.json { render json: @order.errors, status: :unprocessable_entity }
+      # end
     end
   end
 
@@ -62,16 +64,27 @@ class OrdersController < ApplicationController
     # calculate cupon discount on order
     return unless params[:commit] == 'Apply Code'
 
-    promo_code = PromoCode.where(title: params[:order][:promo_code]).take
-   
-    if !@order.promo_code_ids.empty? & @order.promo_code_ids.include?(promo_code.id)
+    if !@order.promo_code_ids.empty? & @order.promo_code_ids.include?(@promo_code.id)
       redirect_to user_order_path(current_user, @order), notice: 'This code is already applied'
     end
 
-    if @order.update(promo_code_ids: promo_code.id)
+    promo_code_ids = @order.promo_code_ids << @promo_code.id
+
+    if @order.update(promo_code_ids:)
+
+
+      # ==================================================================
+
+
       # find categories this promo code is valid for
-      valid_categories_ids = Category.joins(:promo_codes).where(promo_codes: { id: promo_code }).map(&:id)
-      discount_value = promo_code.value
+      valid_categories_ids = Category.joins(:promo_codes).where(promo_codes: { id: @promo_code }).map(&:id)
+      promo_codes = PromoCode.where(id: @order.promo_code_ids)
+      code_discount = @promo_code.value || 0
+      # promo_codes.each do |promo_code|
+      #   if valid_categories_ids.intersect?(promo_code.category_ids)
+      #     code_discount = promo_code.discount if code_discount < promo_code.discount
+      #   end
+      # end
 
       # find all products that will be discounted and update the code_discount on them and total price.
       @order_items.each do |order_item|
@@ -79,24 +92,36 @@ class OrdersController < ApplicationController
         # check next item in cart if this doesn't have any category that is valid for this promo code
         next unless product.category_ids.intersect?(valid_categories_ids)
         # return if item in cart already has a bigger discount
-        next unless order_item.code_discount < discount_value
+        next unless order_item.code_discount < code_discount
 
-        total_price = product.price * order_item.quantity * (1 - (product.discount / 100)) * (1 - (discount_value / 100)) 
-        order_item.update!(code_discount: discount_value, total_price:)
+        total_price = product.price * order_item.quantity * (1 - (product.discount / 100)) * (1 - (code_discount / 100)) 
+        order_item.update!(code_discount:, total_price:)
       end
     end
   end
 
+
+  # ==================================================================
+
   def remove_promo_code
     return unless params[:commit] == 'Remove Code'
+    puts "============================================"
+    pp @order.promo_code_ids
+    pp promo_code_ids = @order.promo_code_ids.filter { |id| id != @promo_code.id }
+    puts "============================================"
+    # a.select {|item|"a" == item}
 
-    # Calculate the total price of the order
-    @order_items.each do |order_item|
-      product = Product.find(order_item.product_id)
-      order_item.update!(
-        code_discount: '',
-        total_price: product.price * order_item.quantity * (1 - (product.discount / 100))
-      )
+    if @order.update(promo_code_ids:)
+
+      # Calculate the total price of the order
+      @order_items.each do |order_item|
+        product = Product.find(order_item.product_id)
+        order_item.update!(
+          code_discount: '',
+          total_price: product.price * order_item.quantity * (1 - (product.discount / 100))
+        )
+      end
+
     end
   end
 
@@ -121,11 +146,17 @@ class OrdersController < ApplicationController
     @order_items = OrderItem.where(order_id: params[:id])
   end
 
+  def set_promo_code
+    @promo_code = PromoCode.where(title: params[:order][:promo_code]).take
+  end
+
   def check_promo_code
     unless PromoCode.exists?(title: params[:order][:promo_code])
       redirect_to user_order_path(current_user, @order), notice: "This code doen't exist or is not valid anymore"
     end
   end
+
+
 
   # Only allow a list of trusted parameters through.
   def order_params
