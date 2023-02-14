@@ -27,6 +27,11 @@
   </div>
 
   <div>
+    <%= form.label :brand_ids, style: "display: block" %>
+    <%= form.collection_check_boxes(:brand_ids, @brands, :id, :name, include_hidden: false) %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

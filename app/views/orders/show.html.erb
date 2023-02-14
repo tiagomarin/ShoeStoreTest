@@ -5,6 +5,19 @@
 <%= render "orders/order_items" %>
 
 <button>Add Code</button>
+
+<div style="background-color: WhiteSmoke; padding:20px; border: 1px solid black; margin: 10px 0">
+  <%= form_for @order, url: user_order_path(current_user, @order) do |f| %>
+      <div class="field">
+        <%= f.text_field :promo_code, value: "" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Apply Code" %>
+      </div>
+  <% end %>
+</div>
+
 <%= form_for @order, url: user_order_path(current_user, @order) do |f| %>
     <div class="field">
       <%= f.hidden_field :promo_code, value: "" %>
@@ -14,22 +27,6 @@
       <%= f.submit "Remove Code" %>
     </div>
 <% end %>
-
-<div style="background-color: WhiteSmoke; padding:20px; border: 1px solid black; margin: 10px 0">
-  <%= form_for @order, url: user_order_path(current_user, @order) do |f| %>
-      <div class="field">
-        <%= f.text_field :promo_code %>
-      </div>
-
-      <div class="actions">
-        <%= f.submit "Apply Code" %>
-      </div>
-  <% end %>
-</div>
-
-
-
-
 
 <% if @order.status == "Shopping Cart" %>
   <%= form_for @order, url: user_order_path(current_user, @order) do |f| %>
@@ -55,3 +52,4 @@
 <%= link_to "Back to Home", root_path %>
 <%= link_to "Products", products_path %>
 <%= link_to "New Product", new_product_path %>
+<%= link_to "Promo Codes", promo_codes_path %>

@@ -10,8 +10,10 @@
   </p>
   
   <p>
-    <strong>Promo Code:</strong>
-    <%= order.promo_code %>
+    <strong>Coupons Applied:</strong>
+    <% order.promo_codes.each do |promo_code| %>
+    <%= promo_code.title %>
+    <% end %>
   </p>
 
 </div>

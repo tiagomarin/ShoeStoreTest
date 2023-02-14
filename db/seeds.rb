@@ -14,14 +14,14 @@ brands = [brand1, brand2]
 category_ids = [@category1.id, @category2.id, @category3.id, @category4.id]
 
 promocode1 = PromoCode.create!(title:"RUN10", value: 10)
-promocode2 = PromoCode.create!(title:"SWIM10", value: 20)
-promocode3 = PromoCode.create!(title:"XMAS10", value: 30)
+promocode2 = PromoCode.create!(title:"SWIM10", value: 10)
+promocode3 = PromoCode.create!(title:"XMAS30", value: 30)
 promocode4 = PromoCode.create!(title:"ADDIDAS15", value: 15)
 
 promocode1.category_ids = [@category1.id]
 promocode2.category_ids = [@category2.id]
 promocode3.category_ids = [@category1.id, @category2.id]
-promocode4.brand_ids = [brand1.id, brand2.id]
+promocode4.brand_ids = [brand2.id]
 
 10.times do
   product = Product.create!(name: Faker::Name.name,

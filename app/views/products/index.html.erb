@@ -2,6 +2,13 @@
 
 <h1>Products</h1>
 
+<%= link_to "New product", new_product_path %>
+<%= link_to "Back to Home", root_path %>
+
+<% if current_user %>
+  <%= link_to "Orders", user_orders_path(current_user) %>
+<% end %>
+
 <div id="products">
   <% @products.each do |product| %>
     <div style="background-color: cadetblue; padding: 10px; border: 1px solid black">
@@ -37,9 +44,3 @@
   <% end %>
 </div>
 
-<%= link_to "New product", new_product_path %>
-<%= link_to "Back to Home", root_path %>
-
-<% if current_user %>
-  <%= link_to "Orders", user_orders_path(current_user) %>
-<% end %>

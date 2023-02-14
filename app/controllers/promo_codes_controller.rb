@@ -3,6 +3,7 @@ require 'json'
 class PromoCodesController < ApplicationController
   before_action :set_promo_code, only: %i[show edit update destroy]
   before_action :set_categories, only: %i[new edit]
+  before_action :set_brands, only: %i[new edit]
 
   # GET /promo_codes or /promo_codes.json
   def index
@@ -73,5 +74,9 @@ class PromoCodesController < ApplicationController
   # List all available categories
   def set_categories
     @categories = Category.all
+  end
+
+  def set_brands
+    @brands = Brand.all
   end
 end

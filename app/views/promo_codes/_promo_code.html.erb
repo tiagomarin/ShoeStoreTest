@@ -1,4 +1,4 @@
-<div id="<%= dom_id promo_code %>">
+<div id="<%= dom_id promo_code %>" style="margin:10px; padding:10px">
   <p>
     <strong>Title:</strong>
     <%= promo_code.title %>
@@ -10,10 +10,21 @@
   </p>
 
   <p>
-    <strong>Applicable to:</strong>
-    <ul style="display: flex; flex-direction: column; gap: 5px; margin: 10px">
-    <% promo_code.categories.each do |category| %>
-      <li><%= category.name %></li>
+    <h2>Applicable to:</h2>
+    <% unless promo_code.categories.empty?  %>
+      <h3>categories:</h3>
+      <ul style="display: flex; flex-direction: column; gap: 5px">
+      <% promo_code.categories.each do |category| %>
+        <li><%= category.name %></li>
+      <% end %>
+    <% end %>
+
+    <% unless promo_code.brands.empty? %>
+      <h3>brands:</h3>
+      <ul style="display: flex; flex-direction: column; gap: 5px">
+      <% promo_code.brands.each do |brand| %>
+        <li><%= brand.name %></li>
+      <% end %>
     <% end %>
   </p>
 

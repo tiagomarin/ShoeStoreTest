@@ -3,30 +3,39 @@
 <% product = Product.find(item.product_id)%>
 
 <div style="background-color: yellow; padding: 10px; border: 1px solid black">
-  <p>
-    <strong>Product:</strong>
-    <%= product.name %>
-  </p>
+  <%= link_to product_path(product.id) do %>
+    <% if product.images.attached? %>
+      <% product.images.each do |image| %>
+        <%= image_tag image, width: "80px", height: "80px" %>
+      <% end %>
+    <% else %>
+      <%= image_tag "no-product-image.png", width: "80px", height: "80px" %>
+    <% end %>
+    <p>
+      <strong>Product:</strong>
+      <%= product.name %>
+    </p>
+  <% end %>
 
-  <p>
-    <strong>Description:</strong>
-    <%= product.description %>
-  </p>
+    <p>
+      <strong>Description:</strong>
+      <%= product.description %>
+    </p>
 
-  <p>
-    <strong>quantity:</strong>
-    <%= item.quantity %>
-  </p>
+    <p>
+      <strong>quantity:</strong>
+      <%= item.quantity %>
+    </p>
 
-  <p>
-    <strong>Unit price:</strong>
-    <%= product.price %>
-  </p>
+    <p>
+      <strong>Unit price:</strong>
+      <%= product.price %>
+    </p>
 
-  <p>
-    <strong>Total price:</strong>
-    <%= item.total_price %>
-  </p>
+    <p>
+      <strong>Total price:</strong>
+      <%= item.total_price %>
+    </p>
 
   <%= button_to "Remove from shopping cart", user_order_order_item_path(current_user, @order, item), method: :delete %>
 </div>
