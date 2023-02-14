@@ -20,6 +20,12 @@ class OrderItemsController < ApplicationController
           # find all promo codes applied in this order
           promo_codes = PromoCode.where(id: @order.promo_code_ids)
           # find the biggest discount among all promo codes that are valid for this item
+
+          puts "================================"
+          pp promo_codes
+          pp item_in_cart
+          puts "================================"
+
           code_discount = code_discount(item_in_cart, promo_codes)
 
           total_price = ((final_quantity * @product.price) * (1 - (@product.discount.to_f  / 100)) * code_discount).ceil(2)
@@ -50,6 +56,7 @@ class OrderItemsController < ApplicationController
   private
   # find the biggest discount among all promo codes that are valid for this item
   def code_discount(order_item, promo_codes)
+    code_discount = order_item.code_discount || 0
     product = Product.find(order_item.product_id)
     promo_codes.each do |promo_code|
       # check if item in cart has any category that is valid for this promo code
