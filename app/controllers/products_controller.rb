@@ -4,18 +4,18 @@ class ProductsController < ApplicationController
   # GET /products or /products.json
   def index
     if params[:query].present?
-      @products = Product.where("lower(name) LIKE ?", "%#{params[:query].downcase}%")
+      @products = Product.where('lower(name) LIKE ?', "%#{params[:query].downcase}%")
       @products |= Product.where('lower(color) LIKE ?', "%#{params[:query].downcase}%")
       @products |= Product.where('lower(description) LIKE ?', "%#{params[:query].downcase}%")
       @products |= Product.where('lower(gender) LIKE ?', "%#{params[:query].downcase}%")
-      @products |= Product.joins(:brand).where("lower(brands.name) LIKE ?", "%#{params[:query].downcase}%")
-      @products |= Product.joins(:category).where("lower(categories.name) LIKE ?", "%#{params[:query].downcase}%")
+      @products |= Product.joins(:brand).where('lower(brands.name) LIKE ?', "%#{params[:query].downcase}%")
+      @products |= Product.joins(:category).where('lower(categories.name) LIKE ?', "%#{params[:query].downcase}%")
     else
       @products = Product.all
     end
 
     if turbo_frame_request?
-      render partial: "products", locals: { products: @products }
+      render partial: 'products', locals: { products: @products }
     else
       render :index
     end
