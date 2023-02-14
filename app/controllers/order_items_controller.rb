@@ -21,7 +21,7 @@ class OrderItemsController < ApplicationController
           puts 'Not enough products'
         end
       else
-        OrderItem.create!(product: @product, order: @order, quantity: quantity_requested, price: @product.price,
+        OrderItem.create!(product: @product, order: @order, quantity: quantity_requested,
                           total_price: @product.price * quantity_requested)
       end
     else

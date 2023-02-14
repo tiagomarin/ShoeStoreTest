@@ -51,6 +51,11 @@
     <strong>color:</strong>
     <%= product.color %>
   </p>
+
+  <p>
+    <strong>gender:</strong>
+    <%= product.gender %>
+  </p>
   
   <% if current_user %>
     <%= form_with model: OrderItem, url: user_order_order_items_path(@order, current_user) do |form| %>

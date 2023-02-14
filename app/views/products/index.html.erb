@@ -2,9 +2,8 @@
 
 <h1>Products</h1>
 
-<%= form_with(url: products_path, method: :get, data: {controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
-  <%= form.label :query, "Search shoes by name" %>
-  <%= form.text_field :query, data: {action: "input->search-form#search"} %>
+<%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "articles", turbo_action: "advance"}) do |form| %>
+  <%= form.text_field :query, placeholder: "Search product", data: { action: "input->search-form#search"} %>
   <%= form.submit "Search" %>
 <% end %>
 
