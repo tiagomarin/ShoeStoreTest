@@ -1,9 +1,9 @@
 #brand-modal {
-  display:none
+  display: none;
 }
 
 #category-modal {
-  display:none
+  display: none;
 }
 
 #brand-modal.show,
