@@ -1,10 +1,25 @@
 #headline-container {
+  background-color: grey;
+}
+
+#headline-container__product-1 {
   min-height: 100vh;
   background-image: url("home-bg-1.jpg");
   background-size: cover;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  transition: 0.5s;
+}
+
+#headline-container__product-2 {
+  min-height: 100vh;
+  background-image: url("home-bg-2.jpg");
+  background-size: cover;
+  flex-direction: column;
+  justify-content: center;
+  display: none;
+  transition: 0.5s;
 }
 
 #headline-container__h1 {
@@ -21,6 +36,9 @@
   color: black;
   border: none;
   position: relative;
+  display: block;
+  width: fit-content;
+  text-decoration: none;
 }
 
 /* ====================================== */

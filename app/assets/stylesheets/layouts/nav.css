@@ -59,7 +59,26 @@
     background-color: green;
     height: 100%;
     align-items: center;
-    gap: 1rem;
+  }
+
+  #nav-container__ul li {
+    height: 100%;
+  }
+
+  #nav-container__ul a {
+    text-decoration: none;
+    background-color: purple;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--lateral-padding-1);
+    color: var(--text-color-5);
+    transition: 0.1s ease-out;
+  }
+
+  #nav-container__ul a:hover {
+    border-bottom: var(--border-3);
   }
 
   #nav-container__icons {
