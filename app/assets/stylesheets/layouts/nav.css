@@ -8,6 +8,7 @@
   height: 3rem;
   transform: translateY(0);
   transition: transform 0.25s ease-in-out;
+  z-index: 10;
 }
 
 #nav-container.sticky {

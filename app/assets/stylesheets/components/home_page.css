@@ -58,6 +58,35 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+#main-categories-container__img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#main-categories-container__h3 {
+  opacity: 0;
+  transition: 0.25s ease-in-out;
+}
+
+#main-categories-container__card:hover #main-categories-container__h3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background: radial-gradient(rgba(0, 0, 0, 0.4), black);
+  opacity: 1;
 }
 
 #iconic-products-container {

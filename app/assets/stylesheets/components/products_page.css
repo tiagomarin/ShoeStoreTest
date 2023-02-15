@@ -8,4 +8,9 @@
   justify-content: center;
   flex-wrap: wrap;
   background-color: red;
+  gap: 1rem;
+}
+
+.products-container__product {
+  background-color: blue;
 }
