@@ -1,3 +1,5 @@
+/* ========== SCROLL BAR STYLES ========== */
+
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
@@ -15,6 +17,8 @@
   background: blue;
   border-radius: 10px;
 }
+
+/* ========== VARIABLES ========== */
 
 :root {
   /* Simple fonts */
@@ -34,11 +38,6 @@
   --font-size-xxxl: 2rem;    /* 32px */
   --font-size-xxxxl: 2.5rem; /* 40px */
 
-  /* Three different text colors */
-  --color-text-header: hsl(0, 1%, 16%);
-  --color-text-body: hsl(0, 5%, 25%);
-  --color-text-muted: hsl(0, 1%, 44%);
-
   /* Classical and robust spacing system */
   --space-xxxs: 0.25rem; /* 4px */
   --space-xxs: 0.375rem; /* 6px */
@@ -51,16 +50,56 @@
   --space-xxxl: 3rem;    /* 48px */
   --space-xxxxl: 4rem;   /* 64px */
 
-  /* Border radius */
-  --border-radius: 0.375rem;
+  /* Background colors */
+  --color-background-1: rgb(255, 255, 255);
+  --color-background-2: rgb(204, 204, 204);
+  --color-background-3: rgb(153, 153, 153);
+  --color-background-4: rgb(102, 102, 102);
+  --color-background-5: rgb(51, 51, 51);
+  --color-background-6: rgb(0, 0, 0);
+
+  /* Text colors */
+  --color-text-1: rgb(255, 255, 255);
+  --color-text-2: rgb(204, 204, 204);
+  --color-text-3: rgb(153, 153, 153);
+  --color-text-4: rgb(102, 102, 102);
+  --color-text-5: rgb(51, 51, 51);
+  --color-text-6: rgb(0, 0, 0);
+
+  /* Paddings */
+  --padding-1: 1rem;
+  --padding-2: 2rem;
+  --padding-3: 3rem;
+  --padding-4: 4rem;
+  --padding-5: 5rem;
+
+  /* Paddings */
+  --lateral-padding-1: 0 1rem;
+  --lateral-padding-2: 0 2rem;
+  --lateral-padding-3: 0 3rem;
+  --lateral-padding-4: 0 4rem;
+  --lateral-padding-5: 0 5rem;
 
   /* Border */
-  --border: solid 2px var(--color-light);
+  --border-1: solid 1px black;
+  --border-2: solid 2px black;
+  --border-3: solid 3px black;
+  --border-4: solid 4px black;
+  --border-5: solid 5px black;
+
+  /* Border radius */
+  --border-radius-1: 0.5rem;     /* 8px */
+  --border-radius-2: 0.75rem;    /* 12px */
+  --border-radius-3: 1rem;       /* 16px */
+  --border-radius-4: 1.5rem;     /* 24px */
+  --border-radius-5: 2rem;       /* 32px */
 
   /* Shadows */
   --shadow-large: 2px 4px 10px hsl(0 0% 0% / 0.1);
   --shadow-small: 1px 3px 6px hsl(0 0% 0% / 0.1);
 }
+
+/* ========== GLOBAL ========== */
 
 *,
 *::before,
@@ -69,5 +108,3 @@
   padding: 0;
   margin: 0;
 }
-
-/* folder where we'll add our variables and global styles. */
