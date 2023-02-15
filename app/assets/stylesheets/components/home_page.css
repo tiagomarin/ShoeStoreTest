@@ -1,0 +1,28 @@
+#headline-container {
+  min-height: 100vh;
+  background-image: url("home-bg-1.jpg");
+}
+
+#headline-container__h1 {
+  color: white;
+}
+
+#headline-container__p {
+  color: white;
+}
+
+#headline-container__button {
+  padding: 1rem 2rem;
+  background-color: white;
+  color: black;
+  border: none;
+  position: relative;
+}
+
+#new-arrivals-container {
+  display: flex;
+}
+
+#new-arrivals-container__new-product-div {
+  background-color: red;
+}
