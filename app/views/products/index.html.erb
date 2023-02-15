@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Products</h1>
+<h1 style="background-color: cadetblue">Products</h1>
 
 <%= link_to "New product", new_product_path %>
 <%= link_to "Back to Home", root_path %>
@@ -9,38 +9,11 @@
   <%= link_to "Orders", user_orders_path(current_user) %>
 <% end %>
 
-<div id="products">
-  <% @products.each do |product| %>
-    <div style="background-color: cadetblue; padding: 10px; border: 1px solid black">
-      <%= render product %>
-      <% if current_user %>
-        <%= form_with model: OrderItem, url: user_order_order_items_path(@order, current_user) do |form| %>
-          <div>
-            <%= form.hidden_field :name, value: product.name %>
-          </div>
+<%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
+  <%= form.text_field :query, placeholder: "Search product", data: { action: "input->search-form#search"} %>
+  <%= form.submit "Search" %>
+<% end %>
 
-          <div>
-            <%= form.hidden_field :color, value: product.color %>
-          </div>
-          
-          <div>
-            <%= form.label :quantity, style: "display: block" %>
-            <%= form.number_field :quantity %>
-          </div>
-          
-          <div>
-            <%= form.label :size, style: "display: block" %>
-            <%= form.select :size, [5, 5.5 ,6 ,6.5 ,7 ,7.5 ,8 ,8.5 ,9 ,9.5 ,10 ,10.5 ,11 ,11.5 ,12 ,12.5 ,13 ,13.5 ,14] %>
-          </div>
-        
-          <div>
-            <%= form.submit "Add to cart" %>
-          </div>
-        <% end %>
-      <% end %>
-
-       <%= link_to "Show this product", product %>
-    </div>
-  <% end %>
+<div id="products-container">
+  <%= render "products", products: @products %>
 </div>
-
