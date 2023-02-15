@@ -1,0 +1,11 @@
+#products-container__grid {
+  display: flex;
+  background-color: green;
+}
+
+#products {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: red;
+}

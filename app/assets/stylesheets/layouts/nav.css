@@ -58,6 +58,7 @@
     background-color: green;
     height: 100%;
     align-items: center;
+    gap: 1rem;
   }
 
   #nav-container__icons {

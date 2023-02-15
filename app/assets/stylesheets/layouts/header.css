@@ -9,4 +9,11 @@
 #header-container__ul {
   display: flex;
   list-style-type: none;
+  gap: 1rem;
+}
+
+#header-container__ul li:nth-child(even) {
+  background-color: black;
+  width: 1px;
+  min-height: 100%;
 }
