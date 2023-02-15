@@ -41,8 +41,8 @@ class OrdersController < ApplicationController
 
   # PATCH/PUT /orders/1 or /orders/1.json
   def update
-    add_promo_code()
-    remove_promo_code()
+    add_promo_code
+    remove_promo_code
     respond_to do |format|
       # if @order.update(order_params)
 
@@ -65,70 +65,54 @@ class OrdersController < ApplicationController
     return unless params[:commit] == 'Apply Code'
 
     # check if code is already applied
-    if @order.promo_code_ids.empty? && @order.promo_code_ids.include?(@promo_code.id)
+    # @order.promo_code_ids.empty? &&
+    if @order.promo_code_ids.include?(@promo_code.id)
+      @promo_code_ids = @order.promo_code_ids
       redirect_to user_order_path(current_user, @order), notice: 'This code is already applied'
+    else
+      @promo_code_ids = @order.promo_code_ids << @promo_code.id
     end
 
-    promo_code_ids = @order.promo_code_ids << @promo_code.id
+    return unless @order.update(promo_code_ids: @promo_code_ids)
 
-    if @order.update(promo_code_ids:)
-      # find categories the promo_code aplied is valid for
-      valid_categories_ids = Category.joins(:promo_codes).where(promo_codes: { id: @promo_code }).map(&:id)
-      
-      promo_codes = PromoCode.where(id: @order.promo_code_ids)
+    # find categories the promo_code aplied is valid for
+    valid_categories_ids = Category.joins(:promo_codes).where(promo_codes: { id: @promo_code }).map(&:id)
+    code_discount = @promo_code.value || 0
 
-      # ==================================================================
-      # promo_code_ids => IDs of all codes applied to this order
-      # promo_codes => all promo codes OBJECTS applied to this order
-      # @promo_code => the code that was JUST APPLIED
-      # valid_categories_ids => ids of all categories that this code is valid for
-      # code_discount => the discount that will be applied to the order_item, changes for each one
-       # ==================================================================
+    # find all products that will be discounted and update the code_discount on them and total price.
+    @order_items.each do |order_item|
+      product = Product.find(order_item.product_id)
+      # check next item in cart if this doesn't have any category that is valid for this promo code
+      next unless product.category_ids.intersect?(valid_categories_ids)
+      # return if item in cart already has a bigger discount
+      next unless order_item.code_discount < code_discount
 
-      code_discount = @promo_code.value || 0
-
-      # find all products that will be discounted and update the code_discount on them and total price.
-      @order_items.each do |order_item|
-        product = Product.find(order_item.product_id)
-        # check next item in cart if this doesn't have any category that is valid for this promo code
-        next unless product.category_ids.intersect?(valid_categories_ids)
-        # return if item in cart already has a bigger discount
-        next unless order_item.code_discount < code_discount
-
-        code_discount = promo_code.value if @promo_code.value > code_discount
-
-        total_price = (product.price * order_item.quantity * (1 - (product.discount / 100)) * (1 - (code_discount / 100))).ceil(2) 
-        order_item.update!(code_discount:, total_price:)
-      end
+      code_discount = promo_code.value if @promo_code.value > code_discount
+      # calculation steps
+      price_quantity = product.price * order_item.quantity
+      product_discount = (1 - (product.discount.to_f / 100))
+      promo_code_discount = (1 - (code_discount / 100))
+      # calculate total price for this item
+      total_price = (price_quantity * product_discount * promo_code_discount).ceil(2)
+      order_item.update!(code_discount:, total_price:)
     end
   end
 
   def remove_promo_code
     return unless params[:commit] == 'Remove Code'
+
     promo_code_ids = @order.promo_code_ids.filter { |id| id != @promo_code.id }
 
-    if @order.update(promo_code_ids:)
-      valid_categories_ids = Category.joins(:promo_codes).where(promo_codes: { id: @promo_code }).map(&:id)
-      promo_codes = PromoCode.where(id: @order.promo_code_ids)
+    return unless @order.update(promo_code_ids:)
 
-      # ==================================================================
-      # promo_code_ids => IDs of all codes applied to this order
-      # promo_codes => all promo codes OBJECTS applied to this order
-      # valid_categories_ids => ids of all categories that this code is valid for
-      # code_discount => the discount that will be applied to the order_item, changes for each one
-      # ==================================================================
-      
-      # loop through all order items and update the code_discount and total_price
-      
-      @order_items.each do |order_item|
-        product = Product.find(order_item.product_id)
-        code_discount = code_discount(product, order_item, promo_codes)
-        
-        total_price = (product.price * order_item.quantity * (1 - (product.discount / 100)) * code_discount).ceil(2)
+    promo_codes = PromoCode.where(id: @order.promo_code_ids)
 
-        order_item.update!( code_discount:, total_price: )
-      end
-
+    # loop through all order items and update the code_discount and total_price
+    @order_items.each do |order_item|
+      product = Product.find(order_item.product_id)
+      code_discount = code_discount(product, promo_codes)
+      total_price = (product.price * order_item.quantity * (1 - (product.discount.to_f / 100)) * code_discount).ceil(2)
+      order_item.update!(code_discount:, total_price:)
     end
   end
 
@@ -158,21 +142,9 @@ class OrdersController < ApplicationController
   end
 
   def check_promo_code
-    unless PromoCode.exists?(title: params[:order][:promo_code])
-      redirect_to user_order_path(current_user, @order), notice: "This code doen't exist or is not valid anymore"
-    end
-  end
+    return if PromoCode.exists?(title: params[:order][:promo_code])
 
-  def code_discount(product, order_item, promo_codes)
-    code_discount = 0
-    
-    promo_codes.each do |promo_code|
-      # check if item in cart has any category that is valid for this promo code
-      if promo_code.category_ids.intersect?(product.category_ids)
-        code_discount = promo_code.value if code_discount < promo_code.value
-      end
-    end
-    1 - (code_discount.to_f / 100).ceil(2)
+    redirect_to user_order_path(current_user, @order), notice: "This code doen't exist or is not valid anymore"
   end
 
   # Only allow a list of trusted parameters through.
