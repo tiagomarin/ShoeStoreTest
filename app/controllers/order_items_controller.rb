@@ -17,13 +17,15 @@ class OrderItemsController < ApplicationController
         if quantity_requested <= (quantity_available - item_in_cart.quantity.to_i)
           # find all promo codes applied in this order
           promo_codes = PromoCode.where(id: @order.promo_code_ids)
+          code_discount = code_discount(@product, promo_codes) # call method from application_controller.rb
+
           # calculation steps:
           final_quantity = item_in_cart.quantity + quantity_requested
           price_quantity = @product.price * final_quantity
           product_discount = (1 - (@product.discount.to_f / 100))
-          code_discount = code_discount(@product, promo_codes) # call method from application_controller.rb
+          promo_code_discount = (1 - (code_discount / 100))
           # calculate the total price
-          total_price = (price_quantity * product_discount * code_discount).ceil(2)
+          total_price = (price_quantity * product_discount * promo_code_discount).ceil(2)
           # Update the item in cart
           item_in_cart.update!(quantity: final_quantity, total_price:, code_discount:)
         else

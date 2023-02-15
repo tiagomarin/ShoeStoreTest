@@ -65,8 +65,7 @@ class OrdersController < ApplicationController
     return unless params[:commit] == 'Apply Code'
 
     # check if code is already applied
-    # @order.promo_code_ids.empty? &&
-    if @order.promo_code_ids.include?(@promo_code.id)
+    if !@order.promo_code_ids.empty? && @order.promo_code_ids.include?(@promo_code.id)
       @promo_code_ids = @order.promo_code_ids
       redirect_to user_order_path(current_user, @order), notice: 'This code is already applied'
     else
@@ -75,19 +74,19 @@ class OrdersController < ApplicationController
 
     return unless @order.update(promo_code_ids: @promo_code_ids)
 
-    # find categories the promo_code aplied is valid for
+    # find categories and brands the promo_code aplied is valid for
     valid_categories_ids = Category.joins(:promo_codes).where(promo_codes: { id: @promo_code }).map(&:id)
-    code_discount = @promo_code.value || 0
+    valid_brand_ids = Brand.joins(:promo_codes).where(promo_codes: { id: @promo_code }).map(&:id)
 
-    # find all products that will be discounted and update the code_discount on them and total price.
+    # find all products that will be discounted and update the code_discount on them.
     @order_items.each do |order_item|
       product = Product.find(order_item.product_id)
       # check next item in cart if this doesn't have any category that is valid for this promo code
-      next unless product.category_ids.intersect?(valid_categories_ids)
+      next unless product.category_ids.intersect?(valid_categories_ids) || product.brand_id.in?(valid_brand_ids)
       # return if item in cart already has a bigger discount
-      next unless order_item.code_discount < code_discount
+      next unless order_item.code_discount < @promo_code.value
 
-      code_discount = promo_code.value if @promo_code.value > code_discount
+      code_discount = @promo_code.value
       # calculation steps
       price_quantity = product.price * order_item.quantity
       product_discount = (1 - (product.discount.to_f / 100))
@@ -111,7 +110,12 @@ class OrdersController < ApplicationController
     @order_items.each do |order_item|
       product = Product.find(order_item.product_id)
       code_discount = code_discount(product, promo_codes)
-      total_price = (product.price * order_item.quantity * (1 - (product.discount.to_f / 100)) * code_discount).ceil(2)
+
+      price_quantity = product.price * order_item.quantity
+      product_discount = (1 - (product.discount.to_f / 100))
+      promo_code_discount = (1 - (code_discount / 100))
+
+      total_price = (price_quantity * product_discount * promo_code_discount).ceil(2)
       order_item.update!(code_discount:, total_price:)
     end
   end

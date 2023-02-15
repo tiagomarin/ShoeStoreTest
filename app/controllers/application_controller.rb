@@ -22,11 +22,12 @@ class ApplicationController < ActionController::Base
 
     promo_codes.each do |promo_code|
       # check if item in cart has any category that is valid for this promo code
-      if promo_code.category_ids.intersect?(product.category_ids) && (code_discount < promo_code.value)
+      valid_brand_ids = Brand.joins(:promo_codes).where(promo_codes: { id: promo_code }).map(&:id)
+      if promo_code.category_ids.intersect?(product.category_ids) || product.brand_id.in?(valid_brand_ids)
         code_discount = promo_code.value
       end
     end
-    1 - (code_discount.to_f / 100).ceil(2)
+    code_discount
   end
 
   protected
