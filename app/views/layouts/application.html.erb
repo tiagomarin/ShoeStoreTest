@@ -11,7 +11,9 @@
   </head>
 
   <body>
+    <%= render "layouts/header" %>
     <%= yield %>
+
     <% if current_user %>
       <%= render 'layouts/shopping_cart_btn'  %>
     <% end %>
