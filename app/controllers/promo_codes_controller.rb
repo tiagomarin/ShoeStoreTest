@@ -68,7 +68,7 @@ class PromoCodesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def promo_code_params
-    params.require(:promo_code).permit(:title, :value, category_ids: [])
+    params.require(:promo_code).permit(:title, :value, category_ids: [], brand_ids: [])
   end
 
   # List all available categories

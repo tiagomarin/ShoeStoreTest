@@ -1,6 +1,5 @@
 class OrderItemsController < ApplicationController
   before_action :authenticate_user!
-
   def create
     @product = Product.where(name: params[:order_item][:name], color: params[:order_item][:color],
                              size: params[:order_item][:size]).take
@@ -37,6 +36,21 @@ class OrderItemsController < ApplicationController
       end
     else
       puts 'Not enough products'
+    end
+  end
+
+  def update
+    @order_item = OrderItem.find(params[:id])
+    respond_to do |format|
+      if @order_item.update!(quantity: params[:order_item][:quantity])
+        format.html do
+          redirect_to user_order_path(current_user, @order), notice: 'Quantity was successfully updated.'
+        end
+        format.json { render :show, status: :ok, location: @order_item }
+      else
+        format.html { render :show, status: :unprocessable_entity }
+        format.json { render json: @order_item.errors, status: :unprocessable_entity }
+      end
     end
   end
 

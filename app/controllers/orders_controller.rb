@@ -60,6 +60,7 @@ class OrdersController < ApplicationController
     end
   end
 
+  # rubocop:disable Metrics/CyclomaticComplexity
   def add_promo_code
     # calculate cupon discount on order
     return unless params[:commit] == 'Apply Code'
@@ -96,6 +97,7 @@ class OrdersController < ApplicationController
       order_item.update!(code_discount:, total_price:)
     end
   end
+  # rubocop:enable Metrics/CyclomaticComplexity
 
   def remove_promo_code
     return unless params[:commit] == 'Remove Code'
