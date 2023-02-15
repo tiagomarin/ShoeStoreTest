@@ -2,6 +2,13 @@
 
 <h1 style="background-color: cadetblue">Products</h1>
 
+<%= link_to "New product", new_product_path %>
+<%= link_to "Back to Home", root_path %>
+
+<% if current_user %>
+  <%= link_to "Orders", user_orders_path(current_user) %>
+<% end %>
+
 <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
   <%= form.text_field :query, placeholder: "Search product", data: { action: "input->search-form#search"} %>
   <%= form.submit "Search" %>
@@ -10,10 +17,3 @@
 <div id="products-container">
   <%= render "products", products: @products %>
 </div>
-
-<%= link_to "New product", new_product_path %>
-<%= link_to "Back to Home", root_path %>
-
-<% if current_user %>
-  <%= link_to "Orders", user_orders_path(current_user) %>
-<% end %>

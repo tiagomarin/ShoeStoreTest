@@ -3,30 +3,63 @@
 <% product = Product.find(item.product_id)%>
 
 <div style="background-color: yellow; padding: 10px; border: 1px solid black">
-  <p>
-    <strong>Product:</strong>
-    <%= product.name %>
-  </p>
+  <%= link_to product_path(product.id) do %>
+    <% if product.images.attached? %>
+      <% product.images.each do |image| %>
+        <%= image_tag image, width: "80px", height: "80px" %>
+      <% end %>
+    <% else %>
+      <%= image_tag "no-product-image.png", width: "80px", height: "80px" %>
+    <% end %>
+    <p>
+      <strong>Product:</strong>
+      <%= product.name %>
+    </p>
+  <% end %>
 
-  <p>
-    <strong>Description:</strong>
-    <%= product.description %>
-  </p>
+    <p>
+      <strong>Description:</strong>
+      <%= product.description %>
+    </p>
+    
+    <p>
+      <strong>Unit price:</strong>
+      <%= product.price %>
+    </p>
 
-  <p>
-    <strong>quantity:</strong>
-    <%= item.quantity %>
-  </p>
+    <p>
+      <strong>Product Discount:</strong>
+      <%= product.discount %>
+    </p>
 
-  <p>
-    <strong>Unit price:</strong>
-    <%= product.price %>
-  </p>
+    <p>
+      <strong>Unit price With Discount:</strong>
+      <%= unit_w_d = (product.price * (1 - (product.discount.to_f/100))).ceil(2) %>
+    </p>
 
-  <p>
-    <strong>Total price:</strong>
-    <%= item.total_price %>
-  </p>
+
+      <%= form_with model: OrderItem, url: user_order_order_item_path(current_user, @order, item), method: :patch do |form| %>
+        <div>
+          <strong>quantity:</strong>
+          <%= form.number_field :quantity, value: item.quantity %>
+          <%= form.submit "update quantity" %>
+        </div>
+      <% end %>
+
+    <p>
+      <strong>Total price With Discount:</strong>
+      <%= unit_w_d * item.quantity %>
+    </p>
+
+    <p>
+      <strong>Promo Code:</strong>
+      <%= item.code_discount %>
+    </p>
+
+    <p>
+      <strong>Total price with discount and coupon:</strong>
+      <%= item.total_price %>
+    </p>
 
   <%= button_to "Remove from shopping cart", user_order_order_item_path(current_user, @order, item), method: :delete %>
 </div>

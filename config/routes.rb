@@ -3,12 +3,13 @@ Rails.application.routes.draw do
   
   resources :users do
     resources :orders do
-      resources :order_items, only: [:create, :destroy]
+      resources :order_items, only: [:create, :update, :destroy ]
     end
   end
   resources :products
   resources :categories
   resources :brands
+  resources :promo_codes
   
   # Defines the root path route ("/")
   root "home#index"

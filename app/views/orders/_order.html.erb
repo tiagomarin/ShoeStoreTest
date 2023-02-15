@@ -8,4 +8,22 @@
     <strong>Status:</strong>
     <%= order.status %>
   </p>
+
+  <p>
+    <strong>Coupons Applied:</strong>
+    <% order.promo_codes.each do |promo_code| %>
+    <div style="display: flex; gap: 5px; background-color: #FFCCCB; padding: 5px; width: max-content;">
+      <%= promo_code.title %>
+      <%= form_for order, url: user_order_path(current_user, order) do |f| %>
+        <div class="field">
+          <%= f.hidden_field :promo_code, value: "#{promo_code.title}" %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Remove Code" %>
+        </div>
+      <% end %>
+    </div>
+    <% end %>
+  </p>
 </div>
