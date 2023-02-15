@@ -1,0 +1,31 @@
+#footer-container {
+  background-color: rgb(32, 37, 41);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  #footer-container__first-div {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #footer-container__icons {
+    display: flex;
+  }
+
+  #footer-container__second-div {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #footer-container__rights {
+    display: flex;
+  }
+
+  #footer-container__information {
+    display: flex;
+  }
+}

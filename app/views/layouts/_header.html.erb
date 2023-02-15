@@ -1,4 +1,4 @@
-<%# DESKTOP HEADER %>
+<%# DESKTOP ONLY HEADER %>
 
 <header id="header-container">
   <div>
@@ -18,12 +18,13 @@
 <nav id="nav-container">
   <span id="nav-container__logo">Logo</span>
   <ul id="nav-container__ul">
-    <li>New</li>
-    <li>Men</li>
-    <li>Women</li>
-    <li>Kids</li>
-    <li>Accessories</li>
-    <li>Sale</li>
+    <li><%= link_to "Users", users_path %></li>
+    <li><%= link_to "Products", products_path %></li>
+    <li><%= link_to "New Product", new_product_path %></li>
+    <% if current_user %>
+    <li><%= link_to "Orders", user_orders_path(current_user) %></li>
+    <li><%= link_to "New promo code", new_promo_code_path %></li>
+    <% end %>    
   </ul>
   <div id="nav-container__icons">
       <span>Icon 1</span>
@@ -35,3 +36,12 @@
     <div></div>
   </div>
 </nav>
+
+<%= link_to "Users", users_path %>
+<%= link_to "Products", products_path %>
+
+<%= link_to "New Product", new_product_path %>
+<% if current_user %>
+  <%= link_to "Orders", user_orders_path(current_user) %>
+  <%= link_to "New promo code", new_promo_code_path %>
+<% end %>

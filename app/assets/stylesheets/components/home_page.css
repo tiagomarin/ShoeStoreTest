@@ -1,6 +1,7 @@
 #headline-container {
   min-height: 100vh;
   background-image: url("home-bg-1.jpg");
+  background-size: cover;
 }
 
 #headline-container__h1 {
@@ -19,7 +20,7 @@
   position: relative;
 }
 
-/* ====================================== */ 
+/* ====================================== */
 
 #new-arrivals-container {
   background: grey;
@@ -49,12 +50,14 @@
   max-width: 300px;
   aspect-ratio: 1 / 1;
   background-color: green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #iconic-products-container {
   background-color: yellow;
   width: 100%;
-  padding: 1rem;
 }
 
 #iconic-products-container__grid {
@@ -65,6 +68,11 @@
 }
 
 #iconic-products-container__card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 2em;
   background-image: url("iconic-item1.jpeg");
   background-size: cover;
   height: 500px;

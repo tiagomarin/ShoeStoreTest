@@ -1,5 +1,5 @@
 #nav-container {
-  background-color: white;
+  background-color: blueviolet;
   position: sticky;
   display: flex;
   justify-content: space-between;
@@ -48,18 +48,6 @@
 }
 
 @media (min-width: 768px) {
-  #nav-container {
-    background-color: white;
-    position: sticky;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    top: 0;
-    height: 3rem;
-    transform: translateY(0);
-    transition: transform 0.25s ease-in-out;
-  }
-
   #nav-container.sticky {
     transform: translateY(-100%);
   }
