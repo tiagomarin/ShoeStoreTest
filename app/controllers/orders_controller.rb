@@ -64,7 +64,8 @@ class OrdersController < ApplicationController
     # calculate cupon discount on order
     return unless params[:commit] == 'Apply Code'
 
-    if !@order.promo_code_ids.empty? & @order.promo_code_ids.include?(@promo_code.id)
+    # check if code is already applied
+    if @order.promo_code_ids.empty? && @order.promo_code_ids.include?(@promo_code.id)
       redirect_to user_order_path(current_user, @order), notice: 'This code is already applied'
     end
 
@@ -120,10 +121,10 @@ class OrdersController < ApplicationController
       # loop through all order items and update the code_discount and total_price
       
       @order_items.each do |order_item|
-        code_discount = 0
-        code_discount = code_discount(order_item, promo_codes)
+        product = Product.find(order_item.product_id)
+        code_discount = code_discount(product, order_item, promo_codes)
         
-        total_price = (product.price * order_item.quantity * (1 - (product.discount / 100)) * (1 - (code_discount / 100))).ceil(2)
+        total_price = (product.price * order_item.quantity * (1 - (product.discount / 100)) * code_discount).ceil(2)
 
         order_item.update!( code_discount:, total_price: )
       end
@@ -162,14 +163,16 @@ class OrdersController < ApplicationController
     end
   end
 
-  def code_discount(order_item, promo_codes)
-    product = Product.find(order_item.product_id)
+  def code_discount(product, order_item, promo_codes)
+    code_discount = 0
+    
     promo_codes.each do |promo_code|
       # check if item in cart has any category that is valid for this promo code
       if promo_code.category_ids.intersect?(product.category_ids)
         code_discount = promo_code.value if code_discount < promo_code.value
       end
     end
+    1 - (code_discount.to_f / 100).ceil(2)
   end
 
   # Only allow a list of trusted parameters through.
