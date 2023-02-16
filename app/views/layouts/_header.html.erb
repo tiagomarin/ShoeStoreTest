@@ -14,7 +14,11 @@
     <li></li>
     <li>Join Us</li>
     <li></li>
+    <% if current_user %>
+    <li>Hello, <%= current_user.name %></li>
+    <% else %>
     <li>Sign In</li>
+    <% end%>
   </ul>
 </header>
 
@@ -32,9 +36,12 @@
     <% end %>
     <li><%= link_to "Back to Home", root_path %></li>
   </ul>
-  <div id="nav-container__icons">
-      <span>Icon 1</span>
-      <span>Icon 2</span>
+
+  <div id="nav-container__icon-text">
+    <% if current_user %>
+      <%= image_tag "icons/heart", alt: "favorites", class: "header-container-icon" %>
+      <%= link_to "Wish List", user_order_path(current_user, @order), id: "nav-container__favorites" %>
+    <% end %> 
   </div>
   <div id="nav-container__hamburger-menu">
     <div></div>

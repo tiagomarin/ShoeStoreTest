@@ -26,7 +26,7 @@
   display: none;
 }
 
-#nav-container__icons {
+#nav-container__icon-text {
   display: none;
 }
 
@@ -76,16 +76,22 @@
     padding: var(--lateral-padding-1);
     color: var(--text-color-5);
     transition: 0.1s ease-out;
+    border: 3px solid white;
   }
 
   #nav-container__ul a:hover {
     border-bottom: var(--border-3);
   }
 
-  #nav-container__icons {
+  #nav-container__icon-text {
     display: flex;
     align-items: center;
-    height: 100%;
+    gap: 0.5rem;
+  }
+
+  #nav-container__favorites {
+    text-decoration: none;
+    color: black;
   }
 
   #nav-container__hamburger-menu {
