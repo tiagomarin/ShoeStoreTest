@@ -4,6 +4,7 @@ import "controllers"
 import "./components/popUp"
 
 let lastScrollTop = 32;
+
 const nav = document.querySelector("nav")
 
 window.addEventListener("scroll", () => {

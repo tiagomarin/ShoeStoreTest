@@ -7,6 +7,7 @@
 brand1 = Brand.create!(name:"nike")
 brand2 = Brand.create!(name:"addidas")
 brands = [brand1, brand2]
+
 @category1 = Category.create!(name:"running")
 @category2 = Category.create!(name:"swimming")
 @category3 = Category.create!(name:"style")
@@ -36,6 +37,30 @@ promocode4.brand_ids = [brand2.id]
                           )
   product.category_ids = category_ids.sample(2)
 end
+
+vitorProduct = Product.create!(name: "Vitor",
+                               price: Faker::Number.number(digits: 3),
+                               description: 'so cool',
+                               size: (rand(5..14) * 2.0).round / 2.0,
+                               color: Faker::Color.color_name,
+                               gender: 'Male',
+                               brand: brands.sample,
+                               discount: (rand(0..40.0) * 2.0).round / 2.0,
+                               quantity: Faker::Number.number(digits: 2)
+)
+vitorProduct.category_ids = category_ids.sample(2)
+
+tiagoProduct = Product.create!(name: "Air Tiago",
+                               price: Faker::Number.number(digits: 3),
+                               description: 'so cool',
+                               size: (rand(5..14) * 2.0).round / 2.0,
+                               color: Faker::Color.color_name,
+                               gender: 'Male',
+                               brand: brands.sample,
+                               discount: (rand(0..40.0) * 2.0).round / 2.0,
+                               quantity: Faker::Number.number(digits: 2)
+)
+tiagoProduct.category_ids = category_ids.sample(2)
 
 User.create!(name: 'Vitor', email: 'vgm_rox@hotmail.com', password: 123321)
 User.create!(name: 'Tiago', email: 'tiago.lelinski@gmail.com', password: 123321)

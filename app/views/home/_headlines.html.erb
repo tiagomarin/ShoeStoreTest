@@ -1,11 +1,17 @@
 <div id="headline-container__product-1">
   <h1 id="headline-container__h1">VITOR JORDAN</h1>
-  <p id="headline-container__p">A key luxury piece that has versatility at its core. Challenge the status quo in Stan Smith.</p>
-  <%= link_to "Check it out!", products_path, id: "headline-container__button" %>
+  <p id="headline-container__p">Step up your game with the new Vitor Jordan sneakers - where style meets performance!</p>
+  <%= form_with(url: products_path, method: :get, data: { controller: "search-form",      turbo_frame: "products", turbo_action: "advance"}) do |form| %>
+    <%= form.hidden_field :query, value: "Vitor", data: { action: "input->search-form#search"} %>
+    <%= form.submit "Check it out!", class: "headline-container__button" %>
+  <% end %>
 </div>
 
 <div id="headline-container__product-2">
   <h1 id="headline-container__h1">AIR TIAGO</h1>
-  <p id="headline-container__p">A key luxury piece that has versatility at its core. Challenge the status quo in Stan Smith.</p>
-  <%= link_to "Check it out!", products_path, id: "headline-container__button" %>
+  <p id="headline-container__p">Experience unbeatable comfort and style with Air Tiago - the ultimate sneakers for everyday wear!</p>
+  <%= form_with(url: products_path, method: :get, data: { controller: "search-form",      turbo_frame: "products", turbo_action: "advance"}) do |form| %>
+    <%= form.hidden_field :query, value: "Tiago", data: { action: "input->search-form#search"} %>
+    <%= form.submit "Check it out!", class: "headline-container__button" %>
+  <% end %>
 </div>

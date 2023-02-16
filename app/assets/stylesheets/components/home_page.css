@@ -1,50 +1,59 @@
 #headline-container {
-  background-color: grey;
+  background-color: white;
 }
 
 #headline-container__product-1 {
-  min-height: 100vh;
+  min-height: calc(100vh - 80px);
   background-image: url("home-bg-1.jpg");
   background-size: cover;
+  background-position: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   transition: 0.5s;
+  padding: 1rem;
+  gap: 1rem;
 }
 
 #headline-container__product-2 {
-  min-height: 100vh;
+  min-height: calc(100vh - 80px);
   background-image: url("home-bg-2.jpg");
   background-size: cover;
+  background-position: center;
   flex-direction: column;
   justify-content: center;
   display: none;
   transition: 0.5s;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.headline-container__button {
+  background-color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-weight: 900;
+  font-size: 1.25em;
+  border-radius: 50px;
 }
 
 #headline-container__h1 {
   color: white;
+  font-family: var(--font-family-2);
+  font-weight: 900;
+  font-size: 4em;
+  text-shadow: 0 0 2rem black;
 }
 
 #headline-container__p {
   color: white;
 }
 
-#headline-container__button {
-  padding: 1rem 2rem;
-  background-color: white;
-  color: black;
-  border: none;
-  position: relative;
-  display: block;
-  width: fit-content;
-  text-decoration: none;
-}
-
 /* ====================================== */
 
 #new-arrivals-container {
-  background: grey;
+  background: white;
+  padding: 1rem;
 }
 
 #new-arrivals-container__carrousel-div {
@@ -56,11 +65,14 @@
 }
 
 #new-arrivals-container__new-product-div {
-  background-color: red;
   scroll-snap-align: start;
 }
 
 /* ====================================== */
+
+#main-categories-container {
+  padding: 1rem;
+}
 
 #main-categories-container__grid {
   display: flex;
@@ -73,12 +85,12 @@
   width: 300px;
   max-width: 300px;
   aspect-ratio: 1 / 1;
-  background-color: green;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   cursor: pointer;
+  overflow: hidden;
 }
 
 #main-categories-container__img {
@@ -87,11 +99,12 @@
   left: 0;
   width: 100%;
   height: 100%;
+  transition: 0.5s ease-in-out;
 }
 
 #main-categories-container__h3 {
   opacity: 0;
-  transition: 0.25s ease-in-out;
+  transition: 0.5s ease-in-out;
 }
 
 #main-categories-container__card:hover #main-categories-container__h3 {
@@ -104,13 +117,20 @@
   justify-content: center;
   align-items: center;
   color: white;
-  background: radial-gradient(rgba(0, 0, 0, 0.4), black);
+  background: radial-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8));
+  backdrop-filter: blur(4px);
   opacity: 1;
 }
 
+#main-categories-container__card:hover #main-categories-container__img {
+  transform: scale(1.05);
+}
+
+/* ====================================== */
+
 #iconic-products-container {
-  background-color: yellow;
   width: 100%;
+  padding: 0 1rem;
 }
 
 #iconic-products-container__grid {
@@ -128,10 +148,24 @@
   font-size: 2em;
   background-image: url("iconic-item1.jpeg");
   background-size: cover;
-  height: 500px;
   min-width: 100%;
+  aspect-ratio: 4 / 5;
   scroll-snap-align: start;
-  border: 5px solid black;
+  overflow: hidden;
+  position: relative;
+}
+
+#iconic-products-container__img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: 2s ease-in-out;
+}
+
+#iconic-products-container__card:hover #iconic-products-container__img {
+  transform: scale(1.05);
 }
 
 /* ====================================== */
@@ -140,6 +174,7 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  padding: 1rem 0;
 }
 
 .decoration-images-container__image {
@@ -156,6 +191,26 @@
 }
 
 @media (min-width: 768px) {
+  #headline-container__product-1 {
+    padding: 3rem;
+  }
+
+  #headline-container__product-2 {
+    padding: 3rem;
+  }
+
+  #new-arrivals-container {
+    padding: 3rem;
+  }
+
+  #main-categories-container {
+    padding: 3rem;
+  }
+
+  #iconic-products-container {
+    padding: 0 3rem;
+  }
+
   #iconic-products-container__card {
     min-width: calc(50% - 0.5rem);
   }

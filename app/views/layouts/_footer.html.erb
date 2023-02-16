@@ -1,6 +1,6 @@
 <footer id="footer-container">
   <div id="footer-container__first-div">
-    <ul>
+    <ul id="footer-container__ul">
      <li>Gift Cards</li>
      <li>Promotions</li>
      <li>Find a Store</li>
@@ -10,16 +10,18 @@
     </ul>
 
     <div id="footer-container__icons">
-      <p>ICON1</p>
-      <p>ICON2</p>
-      <p>ICON3</p>
-      <p>ICON4</p>
+      <%= image_tag "icons/linkedin", alt: "linkedin", class: "footer-container-icon" %>
+      <%= image_tag "icons/github", alt: "github", class: "footer-container-icon" %>
+      <%= image_tag "icons/instagram", alt: "instagram", class: "footer-container-icon" %>
     </div>
   </div>
 
   <div id="footer-container__second-div">
     <div id="footer-container__rights">
-      <p>United States</p>
+      <div id="footer-container__icon-text">
+        <%= image_tag "icons/globe", alt: "globe", class: "footer-container-icon" %>
+        <span>United States</span>
+      </div>
       <p>© 2023 Nike, Inc. All Rights Reserved </p>
     </div>
     <div id="footer-container__information">
