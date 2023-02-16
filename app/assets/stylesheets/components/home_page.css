@@ -230,6 +230,35 @@
   background-image: url("home-bg-2.jpeg");
 }
 
+#email-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+  justify-content: center;
+}
+
+#email-container__button {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-weight: 500;
+  font-size: 1.25em;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+#email-container input {
+  padding: 1rem 2rem;
+  font-weight: 500;
+  font-size: 1.25em;
+  border-radius: 50px;
+  transition: 0.25s;
+  outline: none;
+}
+
 @media (min-width: 768px) {
   #headline-container__product-1 {
     padding: 3rem;
@@ -253,6 +282,20 @@
 
   #iconic-products-container__card {
     min-width: calc(50% - 0.5rem);
+  }
+
+  #email-container {
+    padding: 3rem;
+  }
+
+  #email-container input:nth-child(1) {
+    border-end-end-radius: 0;
+    border-start-end-radius: 0;
+  }
+
+  #email-container input:nth-child(2) {
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
   }
 }
 
