@@ -5,7 +5,6 @@ import "./components/popUp"
 
 let lastScrollTop = 32;
 
-
 window.addEventListener("scroll", () => {
   const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
   const nav = document.querySelector("nav")
@@ -22,8 +21,8 @@ window.addEventListener("scroll", () => {
 /* ================================================= */
 
 function toggleDivs() {
-  var div1 = document.getElementById("headline-container__product-1");
-  var div2 = document.getElementById("headline-container__product-2");
+  let div1 = document.getElementById("headline-container__product-1");
+  let div2 = document.getElementById("headline-container__product-2");
   
   if (div1.style.display !== "none") {
     div1.style.display = "none";
@@ -35,3 +34,14 @@ function toggleDivs() {
 }
 
 setInterval(toggleDivs, 3000);
+
+/* ================================================= */
+
+let toggle_promo = document.getElementById("order-container__arrow-down-div");
+let hidden_promo = document.getElementById("order-container__hidden-promo");
+let promo_icon = document.querySelector(".order-container-icon");
+
+toggle_promo.addEventListener("click", () => {
+  hidden_promo.classList.toggle("show");
+  promo_icon.classList.toggle("flip");
+})

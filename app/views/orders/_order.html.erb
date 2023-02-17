@@ -1,17 +1,27 @@
-<div id="<%= dom_id order %>" style="background-color: grey; padding: 10px">
+<div id="<%= dom_id order %>" class="orders-container__order">
   <p>
     <strong>Total price:</strong>
     <%= order.order_items.sum(:total_price) %>
   </p>
 
   <p>
-    <strong>Status:</strong>
-    <%= order.status %>
+    <% if order.status == "Shopping Cart" %>
+      <div id="orders-container__green">
+        <strong>Status:</strong>
+        <%= order.status %>
+      </div>
+    <% else %>
+      <div id="orders-container__red">
+        <strong>Status:</strong>
+        <%= order.status %>
+      </div>
+    <% end %>
   </p>
 
   <p>
     <strong>Coupons Applied:</strong>
-    <% order.promo_codes.each do |promo_code| %>
+    <% if order.promo_codes.length > 0 %>
+      <% order.promo_codes.each do |promo_code| %>
     <div style="display: flex; gap: 5px; background-color: #FFCCCB; padding: 5px; width: max-content;">
       <%= promo_code.title %>
       <%= form_for order, url: user_order_path(current_user, order) do |f| %>
@@ -24,6 +34,9 @@
         </div>
       <% end %>
     </div>
+    <% end %>
+    <% else %>
+      No cupons applied
     <% end %>
   </p>
 </div>

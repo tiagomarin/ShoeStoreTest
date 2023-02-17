@@ -1,67 +1,70 @@
-<% @order_items.each do |item| %>
-
-<% product = Product.find(item.product_id)%>
-
-<div style="background-color: yellow; padding: 10px; border: 1px solid black">
-  <%= link_to product_path(product.id) do %>
-    <% if product.images.attached? %>
-      <% product.images.each do |image| %>
-        <%= image_tag image, width: "80px", height: "80px" %>
+<div id="order-container__column">
+  <% @order_items.each do |item| %>
+  <% product = Product.find(item.product_id)%>
+  
+  <div class="order-container__order-item">
+    <div>
+      <%= link_to product_path(product.id) do %>
+        <% if product.images.attached? %>
+          <% product.images.each do |image| %>
+            <%= image_tag image, id: "order-container__image" %>
+          <% end %>
+        <% else %>
+          <%= image_tag "no-product-image.png", id: "order-container__image" %>
+        <% end %>
+    </div>
+    <div>
+      <p>
+        <strong>Product:</strong>
+        <%= product.name %>
+      </p>
+        <% end %>
+      <p>
+        <strong>Description:</strong>
+        <%= product.description %>
+      </p>
+  
+      <p>
+        <strong>Unit price:</strong>
+        <%= product.price %>
+      </p>
+      <p>
+        <strong>Product Discount:</strong>
+        <%= product.discount %>
+      </p>
+      <p>
+        <strong>Unit price With Discount:</strong>
+        <%= unit_w_d = (product.price * (1 - (product.discount.to_f/100))).ceil(2) %>
+      </p>
+        <%= form_with model: OrderItem, url: user_order_order_item_path(current_user, @order, item), method: :patch do |form| %>
+          <div>
+            <strong>quantity:</strong>
+            <%= form.number_field :quantity, value: item.quantity %>
+            <%= form.submit "update quantity" %>
+          </div>
+        <% end %>
+      <p>
+        <strong>Total price With Discount:</strong>
+        <%= unit_w_d * item.quantity %>
+      </p>
+      <p>
+        <strong>Promo Code:</strong>
+        <%= item.code_discount %>
+      </p>
+      <p>
+        <strong>Total price with discount and coupon:</strong>
+        <%= item.total_price %>
+      </p>
+  
+      <% if product.quantity <= 15 %>
+        <p>
+          <%= image_tag "icons/clock", alt: "clock", class: "nav-container-icon" %>
+          <strong>Just a few left. Order soon.</strong>
+        </p>
       <% end %>
-    <% else %>
-      <%= image_tag "no-product-image.png", width: "80px", height: "80px" %>
-    <% end %>
-    <p>
-      <strong>Product:</strong>
-      <%= product.name %>
-    </p>
+
+      <%= button_to "Remove from shopping cart", user_order_order_item_path(current_user, @order, item), method: :delete %>
+      </div>
+    </div>
   <% end %>
-
-    <p>
-      <strong>Description:</strong>
-      <%= product.description %>
-    </p>
-    
-    <p>
-      <strong>Unit price:</strong>
-      <%= product.price %>
-    </p>
-
-    <p>
-      <strong>Product Discount:</strong>
-      <%= product.discount %>
-    </p>
-
-    <p>
-      <strong>Unit price With Discount:</strong>
-      <%= unit_w_d = (product.price * (1 - (product.discount.to_f/100))).ceil(2) %>
-    </p>
-
-
-      <%= form_with model: OrderItem, url: user_order_order_item_path(current_user, @order, item), method: :patch do |form| %>
-        <div>
-          <strong>quantity:</strong>
-          <%= form.number_field :quantity, value: item.quantity %>
-          <%= form.submit "update quantity" %>
-        </div>
-      <% end %>
-
-    <p>
-      <strong>Total price With Discount:</strong>
-      <%= unit_w_d * item.quantity %>
-    </p>
-
-    <p>
-      <strong>Promo Code:</strong>
-      <%= item.code_discount %>
-    </p>
-
-    <p>
-      <strong>Total price with discount and coupon:</strong>
-      <%= item.total_price %>
-    </p>
-
-  <%= button_to "Remove from shopping cart", user_order_order_item_path(current_user, @order, item), method: :delete %>
 </div>
-<% end %>
-
