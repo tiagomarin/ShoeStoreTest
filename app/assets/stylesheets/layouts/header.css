@@ -5,7 +5,8 @@
 
 @media (min-width: 768px) {
   #header-container {
-    background-color: rgb(189, 193, 210);
+    background-color: rgb(32, 37, 41);
+    color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -21,12 +22,13 @@
 
   #header-container__shopping-cart {
     text-decoration: none;
-    color: black;
+    color: white;
   }
 
   .header-container-icon {
     width: 1.25rem;
     height: 1.25rem;
+    filter: invert(1);
   }
 
   #header-container__ul {
@@ -36,7 +38,7 @@
   }
 
   #header-container__ul li:nth-child(even) {
-    background-color: black;
+    background-color: white;
     width: 1px;
     min-height: 100%;
   }

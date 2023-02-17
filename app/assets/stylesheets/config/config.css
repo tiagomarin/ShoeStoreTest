@@ -4,7 +4,7 @@
 
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 7.5px;
   height: 0;
 }
 
@@ -16,7 +16,7 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: blue;
+  background-image: linear-gradient(rgb(38, 36, 36), rgb(62, 70, 76), rgb(38, 36, 36));
   border-radius: 10px;
 }
 
@@ -115,7 +115,7 @@
 
 h2 {
   font-family: var(--font-family-2);
-  font-weight: 900;
-  font-size: 2em;
+  font-weight: 700;
+  font-size: 1.75em;
   color: rgb(30, 30, 30);
 }

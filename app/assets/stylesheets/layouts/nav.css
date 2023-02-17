@@ -20,10 +20,18 @@
   display: flex;
   align-items: center;
   height: 100%;
+  font-weight: 900;
+  font-family: var(--font-family-2);
+  letter-spacing: 0.5rem;
 }
 
 #nav-container__ul {
   display: none;
+}
+
+.nav-container-icon {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 #nav-container__icon-text {

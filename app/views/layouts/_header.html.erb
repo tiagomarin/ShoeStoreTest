@@ -25,7 +25,7 @@
 <%# MOBILE/DESKTOP NAV %>
 
 <nav id="nav-container">
-  <span id="nav-container__logo">Logo</span>
+  <span id="nav-container__logo">V&T</span>
   <ul id="nav-container__ul">
     <li><%= link_to "Users", users_path %></li>
     <li><%= link_to "Products", products_path %></li>
@@ -39,7 +39,7 @@
 
   <div id="nav-container__icon-text">
     <% if current_user %>
-      <%= image_tag "icons/heart", alt: "favorites", class: "header-container-icon" %>
+      <%= image_tag "icons/heart", alt: "favorites", class: "nav-container-icon" %>
       <%= link_to "Wish List", user_order_path(current_user, @order), id: "nav-container__favorites" %>
     <% end %> 
   </div>
