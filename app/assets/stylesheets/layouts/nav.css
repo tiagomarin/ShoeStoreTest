@@ -8,6 +8,8 @@
   height: 3rem;
   transform: translateY(0);
   transition: transform 0.25s ease-in-out;
+  z-index: 10;
+  padding: 0 1rem;
 }
 
 #nav-container.sticky {
@@ -18,14 +20,21 @@
   display: flex;
   align-items: center;
   height: 100%;
-  background-color: pink;
+  font-weight: 900;
+  font-family: var(--font-family-2);
+  letter-spacing: 0.5rem;
 }
 
 #nav-container__ul {
   display: none;
 }
 
-#nav-container__icons {
+.nav-container-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+#nav-container__icon-text {
   display: none;
 }
 
@@ -35,7 +44,6 @@
   justify-content: center;
   align-items: center;
   gap: 0.25rem;
-  background-color: red;
   height: 100%;
   aspect-ratio: 1 / 1;
 }
@@ -43,21 +51,13 @@
 #nav-container__hamburger-menu div {
   height: 2px;
   width: 1.25rem;
-  background-color: darkslategrey;
   border-radius: 50%;
+  background-color: black;
 }
 
 @media (min-width: 768px) {
   #nav-container {
-    background-color: white;
-    position: sticky;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    top: 0;
-    height: 3rem;
-    transform: translateY(0);
-    transition: transform 0.25s ease-in-out;
+    padding: 0 3rem;
   }
 
   #nav-container.sticky {
@@ -67,16 +67,39 @@
   #nav-container__ul {
     display: flex;
     list-style-type: none;
-    background-color: green;
     height: 100%;
     align-items: center;
   }
 
-  #nav-container__icons {
+  #nav-container__ul li {
+    height: 100%;
+  }
+
+  #nav-container__ul a {
+    text-decoration: none;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--lateral-padding-1);
+    color: var(--text-color-5);
+    transition: 0.1s ease-out;
+    border: 3px solid white;
+  }
+
+  #nav-container__ul a:hover {
+    border-bottom: var(--border-3);
+  }
+
+  #nav-container__icon-text {
     display: flex;
     align-items: center;
-    background-color: orange;
-    height: 100%;
+    gap: 0.5rem;
+  }
+
+  #nav-container__favorites {
+    text-decoration: none;
+    color: black;
   }
 
   #nav-container__hamburger-menu {

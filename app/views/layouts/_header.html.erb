@@ -1,33 +1,47 @@
-<%# DESKTOP HEADER %>
+<%# DESKTOP ONLY HEADER %>
 
 <header id="header-container">
-  <div>
-    <span>Icon 1</span>
-    <span>Icon 2</span>
+  <div id="header-container__icon-text">
+    <% if current_user %>
+      <%= image_tag "icons/shopping-cart", alt: "shopping-cart", class: "header-container-icon" %>
+      <%= link_to "Shopping Cart", user_order_path(current_user, @order), id: "header-container__shopping-cart" %>
+    <% end %> 
   </div>
-    <ul id="header-container__ul">
+  <ul id="header-container__ul">
     <li>Find a Store</li>
+    <li></li>
     <li>Help</li>
+    <li></li>
     <li>Join Us</li>
+    <li></li>
+    <% if current_user %>
+    <li>Hello, <%= current_user.name %></li>
+    <% else %>
     <li>Sign In</li>
+    <% end%>
   </ul>
 </header>
 
 <%# MOBILE/DESKTOP NAV %>
 
 <nav id="nav-container">
-  <span id="nav-container__logo">Logo</span>
+  <span id="nav-container__logo">V&T</span>
   <ul id="nav-container__ul">
-    <li>New</li>
-    <li>Men</li>
-    <li>Women</li>
-    <li>Kids</li>
-    <li>Accessories</li>
-    <li>Sale</li>
+    <li><%= link_to "Users", users_path %></li>
+    <li><%= link_to "Products", products_path %></li>
+    <li><%= link_to "New Product", new_product_path %></li>
+    <% if current_user %>
+    <li><%= link_to "Orders", user_orders_path(current_user) %></li>
+    <li><%= link_to "New promo code", new_promo_code_path %></li>
+    <% end %>
+    <li><%= link_to "Back to Home", root_path %></li>
   </ul>
-  <div id="nav-container__icons">
-      <span>Icon 1</span>
-      <span>Icon 2</span>
+
+  <div id="nav-container__icon-text">
+    <% if current_user %>
+      <%= image_tag "icons/heart", alt: "favorites", class: "nav-container-icon" %>
+      <%= link_to "Wish List", user_order_path(current_user, @order), id: "nav-container__favorites" %>
+    <% end %> 
   </div>
   <div id="nav-container__hamburger-menu">
     <div></div>

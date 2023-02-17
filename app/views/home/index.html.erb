@@ -1,11 +1,31 @@
-<h1>Home Page</h1>
+<section id="headline-container">
+  <%= render "home/headlines" %>
+</section>
 
-<%= link_to "Users", users_path %>
-<%= link_to "Products", products_path %>
+<section id="new-arrivals-container">
+  <h2>New Arrivals</h2>
+  <%= render "home/new-arrivals" %>
+</section>
 
-<%= link_to "New Product", new_product_path %>
-<% if current_user %>
-  <%= link_to "Orders", user_orders_path(current_user) %>
-  <%= link_to "New promo code", new_promo_code_path %>
-<% end %>
+<section id="main-categories-container">
+  <h2>Main Categories</h2>
+  <%= render "home/main-categories" %>
+</section>
 
+<section id="collection-container">
+  <h2>Fresh Air Collection</h2>
+  <%= render "home/collection" %>
+</section>
+
+<section id="iconic-products-container">
+  <h2>Iconic Products</h2>
+  <%= render "home/iconic-products" %>
+</section>
+
+<section id="decoration-images-container">
+  <%= render "home/background-images" %>
+</section>
+
+<section id="email-container">
+  <%= render "home/email" %>
+</section>

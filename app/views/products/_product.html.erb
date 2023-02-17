@@ -1,4 +1,4 @@
-<div id="<%= dom_id product %>" style="background-color: cadetblue; padding: 10px; border: 1px solid black">
+<div id="<%= dom_id product %>" class="products-container__product">
   <% if product.images.attached? %>
     <% product.images.each do |image| %>
       <%= image_tag image, width: "250px", height: "250px" %>
