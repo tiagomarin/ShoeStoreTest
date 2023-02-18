@@ -1,12 +1,21 @@
 <p style="color: green"><%= notice %></p>
 
 <section id="products-container">
+
   <div id="products-container__header">
     <h1>Products (<%= @products.count %>)</h1>
+    <div id="products-container__header-options">
+      <%= render "products/search-products" %>
+      <button id="products-container__header-filter-btn">Hide Filters</button>
+      <%= form_with(model: @product) do |form| %>
+        <%= form.label :sort, style: "display: block" %>
+        <%= form.select :sort, ["Price: High to low", "Price: Low to high", "Newest", "Highest Discount"] %>
+      <% end %>
+    </div>
   </div>
 
   <div id="products-container__grid">
-    <%= render "products/search-products" %>
+    <%= render "filters"%>
     <%= render "products", products: @products %>
   </div>
 </section>

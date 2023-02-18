@@ -1,0 +1,47 @@
+ <div id="products-container__filters">
+    <div>
+      <strong>Applied filters:</strong>
+      <ul>
+        <li>Running</li>
+        <li>Addidas</li>
+        <li>Red</li>
+      </ul> 
+    </div> 
+    <div>
+      <strong>Size:</strong>
+      <ul>
+        <% [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14].each do |size| %>
+          <li><%= size %></li>
+        <% end %>
+      </ul> 
+    </div>
+    <div>
+      <strong>Color:</strong>
+      <ul>
+        <% ["Blue", "Black", "White", "Red", "Pink", "Purple", "Orange", "Green", "Yellow", "Grey", "Cyan", "Violet", "Brown"].each do |color| %>
+          <li><%= color %></li>
+        <% end %>
+      </ul> 
+    </div>
+    <div>
+      <strong>Brand:</strong>
+      <ul>
+        <% ["Nike", "Adiddas", "Tiago", "Vitor"].each do |brand| %>
+          <li><%= brand %></li>
+        <% end %>
+      </ul> 
+    </div>
+    <div>
+      <strong>Category:</strong>
+      <ul>
+        <% ["Running", "Casual", "Gym", "Style"].each do |category| %>
+          <li><%= category %></li>
+        <% end %>
+      </ul> 
+    </div>
+    <div>
+      <strong>Price:</strong>
+      <input type="text" id="min-price" name="min-price">
+      <input type="text" id="max-price" name="max-price">
+    </div>
+  </div>

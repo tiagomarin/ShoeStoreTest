@@ -1,3 +1,4 @@
+
 #products-container__grid {
   display: flex;
   background-color: green;
@@ -13,4 +14,25 @@
 
 .products-container__product {
   background-color: blue;
+}
+
+#products-container {
+  position: relative;
+}
+
+#products-container__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+#products-container__header-options {
+  display: flex;
+  gap: var(--space-m);
+}
+
+#products-container__filters {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+  width: 30vw;
 }
