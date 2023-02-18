@@ -6,13 +6,22 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
+
     if params[:query].present?
-      @products = Product.where('lower(name) LIKE ?', "%#{params[:query].downcase}%")
-      @products |= Product.where('lower(color) LIKE ?', "%#{params[:query].downcase}%")
-      @products |= Product.where('lower(description) LIKE ?', "%#{params[:query].downcase}%")
-      @products |= Product.where('lower(gender) LIKE ?', "%#{params[:query].downcase}%")
-      @products |= Product.joins(:brand).where('lower(brands.name) LIKE ?', "%#{params[:query].downcase}%")
-      @products |= Product.joins(:category).where('lower(categories.name) LIKE ?', "%#{params[:query].downcase}%")
+      params[:query]
+      @filters = params[:filters] || []
+      @filters = @filters | params[:query].downcase.split # add the query to the filters without duplicates
+      
+      @products = []
+      # add all results from database search to @products without duplicates
+      @filters.each do |filter|
+        @products = @products | Product.where('lower(name) LIKE ?', "%#{filter}%")
+        @products = @products | Product.where('lower(color) LIKE ?', "%#{filter}%")
+        @products = @products | Product.where('lower(description) LIKE ?', "%#{filter}%")
+        @products = @products | Product.where('lower(gender) LIKE ?', "%#{filter}%")
+        @products = @products | Product.joins(:brand).where('lower(brands.name) LIKE ?', "%#{filter}%")
+        @products = @products | Product.joins(:category).where('lower(categories.name) LIKE ?', "%#{filter}%")
+      end
     else
       @products = Product.all
     end
