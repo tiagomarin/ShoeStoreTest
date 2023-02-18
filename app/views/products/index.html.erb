@@ -1,22 +1,26 @@
 <p style="color: green"><%= notice %></p>
 
-<section id="products-container">
+<section class="products-container">
 
-  <div id="products-container__header">
+  <div class="products-container__header">
     <h1>Products (<%= @products.count %>)</h1>
-    <div id="products-container__header-options">
+    <div class="products-container__header-options">
       <%= render "products/search-products" %>
-      <button id="products-container__header-filter-btn">Hide Filters</button>
-      <%= form_with(model: @product) do |form| %>
-        <%= form.label :sort, style: "display: block" %>
-        <%= form.select :sort, ["Price: High to low", "Price: Low to high", "Newest", "Highest Discount"] %>
-      <% end %>
+      <button class="products-container__header-filter-btn">Hide Filters</button>
+      <button class="products-container__header-sort-btn">Sort</button>
+      <ul class="products-container__header-sort-selection">
+        <% ["Price: High to low", "Price: Low to high", "Newest", "Highest Discount"].each do |sort| %>
+          <li><%= sort %></li>
+        <% end %>
+      </ul>
     </div>
   </div>
 
-  <div id="products-container__grid">
+  <div class="products-container__main">
     <%= render "filters"%>
-    <%= render "products", products: @products %>
+    <div class="products-container__grid filters_active">
+      <%= render "products", products: @products %>
+    </div>  
   </div>
 </section>
 

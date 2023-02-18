@@ -1,10 +1,10 @@
-<div id="<%= dom_id product %>" class="products-container__product">
+<div id="<%= dom_id product %>" class="products-container__product-card">
   <% if product.images.attached? %>
     <% product.images.each do |image| %>
-      <%= image_tag image, width: "250px", height: "250px" %>
+      <%= image_tag image%>
     <% end %>
   <% else %>
-    <%= image_tag "no-product-image.png", width: "250px", height: "250px" %>
+    <%= image_tag "no-product-image.png"%>
   <% end %>
 
   <p>

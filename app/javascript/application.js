@@ -2,6 +2,7 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import "./components/popUp"
+import "./components/products"
 
 let lastScrollTop = 32;
 

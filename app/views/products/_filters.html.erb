@@ -1,7 +1,7 @@
- <div id="products-container__filters">
+ <div class="products-container__filters filters_active">
     <div>
       <strong>Applied filters:</strong>
-      <ul>
+      <ul class="products-container__applied-codes">
         <li>Running</li>
         <li>Addidas</li>
         <li>Red</li>
@@ -9,15 +9,15 @@
     </div> 
     <div>
       <strong>Size:</strong>
-      <ul>
+      <ul class="products-container__sizes">
         <% [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14].each do |size| %>
-          <li><%= size %></li>
+          <li><button><%= size %></button></li>
         <% end %>
       </ul> 
     </div>
     <div>
       <strong>Color:</strong>
-      <ul>
+      <ul class="products-container__colors">
         <% ["Blue", "Black", "White", "Red", "Pink", "Purple", "Orange", "Green", "Yellow", "Grey", "Cyan", "Violet", "Brown"].each do |color| %>
           <li><%= color %></li>
         <% end %>
@@ -25,7 +25,7 @@
     </div>
     <div>
       <strong>Brand:</strong>
-      <ul>
+      <ul class="products-container__brands">
         <% ["Nike", "Adiddas", "Tiago", "Vitor"].each do |brand| %>
           <li><%= brand %></li>
         <% end %>
@@ -33,7 +33,7 @@
     </div>
     <div>
       <strong>Category:</strong>
-      <ul>
+      <ul class="products-container__categories">
         <% ["Running", "Casual", "Gym", "Style"].each do |category| %>
           <li><%= category %></li>
         <% end %>

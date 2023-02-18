@@ -119,3 +119,11 @@ h2 {
   font-size: 1.75em;
   color: rgb(30, 30, 30);
 }
+
+ul {
+  list-style-type: none
+}
+
+[hidden] {
+  display: none !important;
+}
