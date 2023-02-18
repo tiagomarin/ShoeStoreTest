@@ -30,6 +30,13 @@ class ApplicationController < ActionController::Base
     code_discount
   end
 
+  def calculate_total_price(product, quantity, code_discount)
+    price_quantity = product.price * quantity
+    product_discount = (1 - (product.discount.to_f / 100))
+    promo_code_discount = (1 - (code_discount / 100))
+    (price_quantity * product_discount * promo_code_discount).ceil(2)
+  end
+
   protected
 
   def configure_permitted_parameters
