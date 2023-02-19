@@ -85,11 +85,36 @@
   width: 30%;
 }
 
+.products-container__product-card-img {
+  position: relative;
+}
 .products-container__product-card img {
   width: 100%;
   aspect-ratio: 1/1; 
 }
 
+.products-container__product-card-img span {
+  position: absolute;
+  bottom: 0;
+  left: 0.2rem;
+  display: flex;
+  align-items: center;
+  padding: 0.2rem;
+}
+
+.products-container__product-card-price {
+  background-color: #fff;
+  padding: 0.2rem;
+}
+
+.products-container__product-card-price.discounted {
+  color: grey;
+  text-decoration: line-through;
+}
+
+.products-container__product-card-price.with-discount {
+  color: red;
+}
 
 @media (min-width: 768px) {
  

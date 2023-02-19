@@ -6,25 +6,24 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-
     if params[:query].present?
-      params[:query]
       @filters = params[:filters] || []
-      @filters = @filters | params[:query].downcase.split # add the query to the filters without duplicates
-      
+      @filters |= params[:query].downcase.split # add the query to the filters without duplicates
+
       @products = []
       # add all results from database search to @products without duplicates
       @filters.each do |filter|
-        @products = @products | Product.where('lower(name) LIKE ?', "%#{filter}%")
-        @products = @products | Product.where('lower(color) LIKE ?', "%#{filter}%")
-        @products = @products | Product.where('lower(description) LIKE ?', "%#{filter}%")
-        @products = @products | Product.where('lower(gender) LIKE ?', "%#{filter}%")
-        @products = @products | Product.joins(:brand).where('lower(brands.name) LIKE ?', "%#{filter}%")
-        @products = @products | Product.joins(:category).where('lower(categories.name) LIKE ?', "%#{filter}%")
+        @products |= Product.where('lower(name) LIKE ?', "%#{filter}%")
+        @products |= Product.where('lower(color) LIKE ?', "%#{filter}%")
+        @products |= Product.where('lower(description) LIKE ?', "%#{filter}%")
+        @products |= Product.where('lower(gender) LIKE ?', "%#{filter}%")
+        @products |= Product.joins(:brand).where('lower(brands.name) LIKE ?', "%#{filter}%")
+        @products |= Product.joins(:category).where('lower(categories.name) LIKE ?', "%#{filter}%")
       end
     else
       @products = Product.all
     end
+    @products = remove_duplicates(@products)
 
     if turbo_frame_request?
       render partial: 'products', locals: { products: @products }
@@ -95,6 +94,24 @@ class ProductsController < ApplicationController
 
   def set_categories
     @categories = Category.all
+  end
+
+  def remove_duplicates(products)
+    @products_no_repeat = []
+    products.each do |product|
+      name = product.name
+      brand = product.brand.name
+      description = product.description
+      color = product.color
+
+      @products_no_repeat << product unless @products_no_repeat.any? do |p|
+                                              p.name == name &&
+                                              p.brand.name == brand &&
+                                              p.description == description &&
+                                              p.color == color
+                                            end
+    end
+    @products_no_repeat
   end
 
   def set_product_categories

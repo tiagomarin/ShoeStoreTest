@@ -1,21 +1,41 @@
 <div id="<%= dom_id product %>" class="products-container__product-card">
+  <% product.discount > 0 ? priceClass = "products-container__product-card-price discounted" : priceClass = "products-container__product-card-price" %>
   <% if product.images.attached? %>
     <% product.images.each do |image| %>
-      <%= image_tag image%>
+      <div class=products-container__product-card-img>
+        <%= image_tag image%>
+        <span>
+          <p class="<%= priceClass %>">
+            <%= number_to_currency(product.price, precision: 0) %>
+          </p>
+          <% if product.discount > 0 %>
+            <p class="products-container__product-card-price with-discount">
+              <%= number_to_currency(product.price * (1 - (product.discount.to_f/100)), precision: 0) %>
+            </p>
+          <% end %>
+        </span>
+      </div>
     <% end %>
   <% else %>
-    <%= image_tag "no-product-image.png"%>
+    <div class=products-container__product-card-img>
+        <%= image_tag "no-product-image.png"%>
+        <span>
+          <p class="<%= priceClass %>">
+            <%= number_to_currency(product.price, precision: 0) %>
+          </p>
+          <% if product.discount > 0 %>
+            <p class="products-container__product-card-price with-discount">
+              <%= number_to_currency((product.price * (1 - (product.discount.to_f/100))), precision: 0) %>
+            </p>
+          <% end %>
+        </span>
+      </div>
   <% end %>
 
-  <p>
-    <strong>Name:</strong>
-    <%= product.name %>
-  </p>
 
-  <ul>
-    <strong>Brand:</strong>
-    <%= product.brand.name %>
-  </p>
+  <p><%= product.name %></p>
+  <p><%= product.brand.name %></p>
+  <p> colors: <%= color_quantity(product) %> </p>
 
   <% if @product_categories %>
     <ul>
@@ -25,43 +45,21 @@
       <% end %>
     </ul>
   <% end %>
+
   
-  <p>
-    <strong>Price:</strong>
-    <%= product.price %>
-  </p>
-
-  <p>
-    <strong>Discount:</strong>
-    <%= product.discount %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= product.description %>
-  </p>
-
-  <p>
-    <strong>quantity:</strong>
-    <%= product.quantity %>
-  </p>
-
-  <p>
-    <strong>size:</strong>
-    <%= product.size %>
-  </p>
-
-   <p>
-    <strong>color:</strong>
-    <%= product.color %>
-  </p>
-
-  <p>
-    <strong>gender:</strong>
-    <%= product.gender %>
-  </p>
   
-  <% if current_user %>
+  <% if products_show %>
+    <p>
+      <strong>Sizes:</strong>
+      <%= product.size %>
+    </p>
+    
+    <p><%= product.color %></p>
+    <p><strong>gender:</strong><%= product.gender %></p>
+
+  <% end %>
+  
+  <% if current_user && products_show %>
     <%= form_with model: OrderItem, url: user_order_order_items_path(@order, current_user) do |form| %>
       <div>
         <%= form.hidden_field :name, value: product.name %>
