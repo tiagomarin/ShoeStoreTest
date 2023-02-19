@@ -1,15 +1,19 @@
 module ProductsHelper
-  def color_quantity(product)
-    color_quantity = 0
+  # get all products with the same name, brand, description but with different colors
+  def same_product_different_colors(product)
+    same_product_different_colors = []
     name = product.name
-    brand = product.brand.name
+    brand_id = product.brand.id
     description = product.description
     color = product.color
-    Product.all.each do |p|
-      if p.name == name && p.brand.name == brand && p.description == description && p.color == color
-        color_quantity += 1
-      end
-    end
-    color_quantity
+    same_product_different_colors = Product.where(name:).where(brand_id:).where(description:).where.not(color: color)
+      # if (p.name == name &&
+      #     p.brand.name == brand &&
+      #     p.description == description &&
+      #     p.color != color)
+      #   same_product_different_color << p
+      # end
+    same_product_different_colors
   end
+
 end

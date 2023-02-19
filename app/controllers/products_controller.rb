@@ -96,6 +96,7 @@ class ProductsController < ApplicationController
     @categories = Category.all
   end
 
+  # get all products without duplicates based on size
   def remove_duplicates(products)
     @products_no_repeat = []
     products.each do |product|
@@ -121,6 +122,8 @@ class ProductsController < ApplicationController
     end
     @product_categories
   end
+
+  
 
   # Only allow a list of trusted parameters through.
   def product_params

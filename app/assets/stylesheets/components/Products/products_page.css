@@ -116,6 +116,27 @@
   color: red;
 }
 
+.products-container__color-carrousel {
+  display: flex;
+  justify-content: flex-start;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  /* scroll-snap-type: x mandatory; */
+  scroll-behavior: smooth;
+  gap: 0.5rem;
+  height: 3rem;
+  --slide-count: 5;
+}
+
+.products-container__color-carrousel-options{
+  scroll-snap-align: start;
+}
+
+.products-container__color-img {
+  height: 2.25rem;
+  aspect-ratio: 1/1;
+}
+
 @media (min-width: 768px) {
  
 }
