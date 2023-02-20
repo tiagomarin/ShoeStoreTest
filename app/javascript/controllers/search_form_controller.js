@@ -8,4 +8,8 @@ export default class extends Controller {
       this.element.requestSubmit();
     }, 200)
   }
+  
+  submit(event) {
+    this.formTarget.requestSubmit()
+  }
 }

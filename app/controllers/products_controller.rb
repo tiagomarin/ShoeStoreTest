@@ -3,6 +3,7 @@ class ProductsController < ApplicationController
   before_action :set_brands, only: %i[new edit create]
   before_action :set_categories, only: %i[new edit create]
   before_action :set_product_categories, only: %i[show update]
+  before_action :set_query, only: %i[index]
 
   # GET /products or /products.json
   def index
@@ -95,6 +96,21 @@ class ProductsController < ApplicationController
   def set_categories
     @categories = Category.all
   end
+
+
+
+
+  def set_query
+    if params[:query].present?
+      @query |= params[:query].downcase.split
+    else
+      @query= []
+    end
+  end
+
+
+
+
 
   # get all products without duplicates based on size
   def remove_duplicates(products)

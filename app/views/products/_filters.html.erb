@@ -1,4 +1,5 @@
  <div class="products-container__filters filters_active">
+
     <div>
       <strong>Applied filters:</strong>
       <ul class="products-container__applied-codes">
@@ -7,41 +8,76 @@
         <li>Red</li>
       </ul> 
     </div> 
+
     <div>
       <strong>Size:</strong>
       <ul class="products-container__sizes">
         <% [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14].each do |size| %>
-          <li><button><%= size %></button></li>
+          <li>
+          <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
+
+            <button name="query" type="submit" id="query" value=<%= size %> data-action="input->search-form#search"><%= size %> </button>
+          <% end %>
+          </li>
         <% end %>
       </ul> 
     </div>
+
     <div>
       <strong>Color:</strong>
       <ul class="products-container__colors">
         <% ["Blue", "Black", "White", "Red", "Pink", "Purple", "Orange", "Green", "Yellow", "Grey", "Cyan", "Violet", "Brown"].each do |color| %>
-          <li><%= color %></li>
+          <li>
+            <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
+              <%# ++++++++++++++++++++++++++++++++++++++ %>
+              <%# @query.include?(color)  ? @query - color : @query + color %>
+              <%#= form.hidden_field :query, value: @query %>
+              <%# ++++++++++++++++++++++++++++++++++++++ %>
+              <button name="query" type="submit" id="query" value=<%= color %> data-action="input->search-form#search"><%= color %> </button>
+            <% end %>
+          </li>
         <% end %>
       </ul> 
     </div>
+
     <div>
       <strong>Brand:</strong>
       <ul class="products-container__brands">
         <% ["Nike", "Adiddas", "Tiago", "Vitor"].each do |brand| %>
-          <li><%= brand %></li>
+          <li>
+          <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
+              <button name="query" type="submit" id="query" value=<%= brand %> data-action="input->search-form#search"><%= brand %> </button>
+          <% end %>
+          </li>
         <% end %>
       </ul> 
     </div>
+
     <div>
       <strong>Category:</strong>
       <ul class="products-container__categories">
         <% ["Running", "Casual", "Gym", "Style"].each do |category| %>
-          <li><%= category %></li>
+          <li>
+            <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
+              <button name="query" type="submit" id="query" value=<%= category %> data-action="input->search-form#search"><%= category %> </button>
+            <% end %>
+          </li>
         <% end %>
       </ul> 
     </div>
+
     <div>
       <strong>Price:</strong>
-      <input type="text" id="min-price" name="min-price">
-      <input type="text" id="max-price" name="max-price">
+      <div>
+        <span>min</span>
+        <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
+          <%= form.text_field :query, data: { action: "input->search-form#search"} %>
+        <% end %>
+        
+        <span>max</span>
+        <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
+          <%= form.text_field :query, data: { action: "input->search-form#search"} %>
+        <% end %>
+      </div>
     </div>
   </div>

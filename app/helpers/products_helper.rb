@@ -7,13 +7,5 @@ module ProductsHelper
     description = product.description
     color = product.color
     same_product_different_colors = Product.where(name:).where(brand_id:).where(description:).where.not(color: color)
-      # if (p.name == name &&
-      #     p.brand.name == brand &&
-      #     p.description == description &&
-      #     p.color != color)
-      #   same_product_different_color << p
-      # end
-    same_product_different_colors
   end
-
 end
