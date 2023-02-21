@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    if params[:query].present?
+    if params[:query].present? && params[:query] != ''
       @filters = params[:filters] || []
       @filters |= params[:query].downcase.split # add the query to the filters without duplicates
 
@@ -25,6 +25,26 @@ class ProductsController < ApplicationController
       @products = Product.all
     end
     @products = remove_duplicates(@products)
+
+    if params[:color_filter].present?
+      @products = filter_color(@products, params[:color_filter])
+    end
+
+    if params[:brand_filter].present?
+      @products = filter_brand(@products, params[:brand_filter])
+    end
+
+    if params[:category_filter].present?
+      @products = filter_category(@products, params[:category_filter])
+    end
+
+    if params[:min_price_filter].present?
+      @products = filter_min_price(@products, params[:min_price_filter])
+    end
+
+    if params[:max_price_filter].present?
+      @products = filter_max_price(@products, params[:max_price_filter])
+    end
 
     if turbo_frame_request?
       render partial: 'products', locals: { products: @products }
@@ -97,8 +117,50 @@ class ProductsController < ApplicationController
     @categories = Category.all
   end
 
+  def filter_color(products, color)
+    filtered = []
+    products_by_color = Product.where(color: color)
+    products.each do |product| 
+      filtered << product if products_by_color.include?(product)
+    end
+    filtered
+  end
 
+  def filter_brand(products, brand)
+    filtered = []
+    products_by_brand = Product.joins(:brand).where('lower(brands.name) LIKE ?', "%#{brand}%")
+    products.each do |product| 
+      filtered << product if products_by_brand.include?(product)      
+    end
+    filtered
+  end
 
+  def filter_category(products, category)
+    filtered = []
+    products_by_category = Product.joins(:category).where('lower(categories.name) LIKE ?', "%#{category}%")
+    products.each do |product| 
+      filtered << product if products_by_category.include?(product)      
+    end
+    filtered
+  end
+
+  def filter_min_price(products, min_price)
+    filtered = []
+    products_by_min_price = Product.where('price >= ?', min_price)
+    products.each do |product| 
+      filtered << product if products_by_min_price.include?(product)      
+    end
+    filtered
+  end
+
+  def filter_max_price(products, max_price)
+    filtered = []
+    products_by_max_price = Product.where('price >= ?', max_price)
+    products.each do |product| 
+      filtered << product if products_by_max_price.include?(product)      
+    end
+    filtered
+  end
 
   def set_query
     if params[:query].present?
@@ -107,10 +169,6 @@ class ProductsController < ApplicationController
       @query= []
     end
   end
-
-
-
-
 
   # get all products without duplicates based on size
   def remove_duplicates(products)
@@ -138,8 +196,6 @@ class ProductsController < ApplicationController
     end
     @product_categories
   end
-
-  
 
   # Only allow a list of trusted parameters through.
   def product_params

@@ -17,4 +17,6 @@ class Product < ApplicationRecord
   validates :discount, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
   # validates :category_id, presence: true
   validates :quantity, presence: true, numericality: { greater_than_or_equal_to: 0 }
+
+  # scope :by_color, ->(colors) { where(color: colors) }
 end
