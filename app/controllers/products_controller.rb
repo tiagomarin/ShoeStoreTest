@@ -28,7 +28,13 @@ class ProductsController < ApplicationController
     @products = remove_duplicates(@products)
 
     if params[:size_filter].present?
-      @products = filter_size(@products, params[:size_filter])
+      if params[:size_filters_applied].present?
+        size_filters_applied = params[:size_filters_applied].split.map(&:to_f)
+        size_filters_applied |= [params[:size_filter].to_f]
+        @products = filter_size(@products, size_filters_applied)
+      else
+        @products = filter_size(@products, params[:size_filter])
+      end
     end
 
     if params[:color_filter].present?
@@ -42,11 +48,23 @@ class ProductsController < ApplicationController
     end
     
     if params[:brand_filter].present?
-      @products = filter_brand(@products, params[:brand_filter])
+      if params[:brand_filters_applied].present?
+        brand_filters_applied = params[:brand_filters_applied].split
+        brand_filters_applied |= [params[:brand_filter].downcase]
+        @products = filter_brand(@products, brand_filters_applied)
+      else
+      @products = filter_brand(@products, params[:brand_filter].downcase)
+      end
     end
 
     if params[:category_filter].present?
-      @products = filter_category(@products, params[:category_filter])
+      if params[:category_filters_applied].present?
+        category_filters_applied = params[:category_filters_applied].split
+        category_filters_applied |= [params[:category_filter].downcase]
+        @products = filter_category(@products, category_filters_applied)
+      else
+        @products = filter_category(@products, params[:category_filter].downcase)
+      end
     end
 
     if params[:min_price_filter].present?
@@ -128,9 +146,9 @@ class ProductsController < ApplicationController
     @categories = Category.all
   end
 
-  def filter_size(products, size)
+  def filter_size(products, sizes)
     filtered = []
-    products_by_size = Product.where(size: size.to_f)
+    products_by_size = Product.where(size: sizes)
     products.each do |product|
       filtered << product if products_by_size.include?(product)
     end
@@ -146,21 +164,21 @@ class ProductsController < ApplicationController
     filtered
   end
 
-  def filter_brand(products, brand)
+  def filter_brand(products, brands)
     filtered = []
-    brand_id = Brand.where(name: brand.downcase).first.id
-    products_by_brand = Product.where(brand_id: brand_id)
+    brand_ids = Brand.where(name: brands).pluck(:id)
+    products_by_brand = Product.where(brand_id: brand_ids)
     products.each do |product|
       filtered << product if products_by_brand.include?(product)
     end
     filtered
   end
 
-  def filter_category(products, category_name)
+  def filter_category(products, category_names)
     filtered = []
-    category_id = Category.where(name: category_name.downcase).first.id
-    products.each do |product| 
-      filtered << product if product.category_ids.include?(category_id)      
+    category_ids = Category.where(name: category_names).pluck(:id)
+    products.each do |product|
+      filtered << product if (product.category_ids & category_ids).present?
     end
     filtered
   end

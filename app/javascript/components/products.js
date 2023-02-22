@@ -49,6 +49,13 @@ if (window.location.pathname === "/products") {
       let search = window.location.search.split(/[?&=]/)
       let query = search[2]
 
+      // get size filter from the url
+      let sizeFilter = ""
+      if (search.includes("size_filter")) {
+        let sizeFilterIndex = search.indexOf("size_filter") + 1
+        sizeFilter = search[sizeFilterIndex].toLowerCase()
+      }
+
       // get color filter from the url
       let colorFilter = ""
       if (search.includes("color_filter")) {
@@ -70,17 +77,27 @@ if (window.location.pathname === "/products") {
         categoryFilter = search[categoryIndex].toLowerCase()
       }
 
-       // add valid li element to the list of applied filters if it doesn't already exist
-       if (colorFilter !== "" && !filterExists(colorFilter)) {
-        addFilterLi(colorFilter)
-      }
-      if (brandFilter !== "" && !filterExists(brandFilter)) {
-        addFilterLi(brandFilter)
-      }
-      if (categoryFilter !== "" && !filterExists(categoryFilter)) {
-        addFilterLi(categoryFilter)
+      // get min price from the url
+      let minPriceFilter = ""
+      if (search.includes("min_price_filter")) {
+        let minPriceIndex = search.indexOf("min_price_filter") + 1
+        minPriceFilter = search[minPriceIndex]
       }
 
+      // get max price from the url
+      let maxPriceFilter = ""
+      if (search.includes("max_price_filter")) {
+        let maxPriceIndex = search.indexOf("max_price_filter") + 1
+        maxPriceFilter = search[maxPriceIndex]
+      }
+
+      // add valid li element to the list of applied filters if it doesn't already exist
+      if (sizeFilter !== "" && !filterExists(sizeFilter)) { addFilterLi(sizeFilter) }
+      if (colorFilter !== "" && !filterExists(colorFilter)) { addFilterLi(colorFilter) }
+      if (brandFilter !== "" && !filterExists(brandFilter)) { addFilterLi(brandFilter) }
+      if (categoryFilter !== "" && !filterExists(categoryFilter)) { addFilterLi(categoryFilter) }
+      if (minPriceFilter !== "" && !filterExists(minPriceFilter)) { addFilterLi(`min:${minPriceFilter}`) }
+      if (maxPriceFilter !== "" && !filterExists(maxPriceFilter)) { addFilterLi(`max:${maxPriceFilter}`) }
       // add query to be used in the search form as query when sending a reqquest that filters results
       let hiddenQuery = document.querySelectorAll(".add_query")
       hiddenQuery.forEach((element) => {
@@ -88,15 +105,58 @@ if (window.location.pathname === "/products") {
       })
       
       /* 
-      add color filter applied to be used in the search when
-      sending a reqquest that filters results based on color
+      Add filters applied to "value" in hidden fields. These values are filters that user already applied. 
+      The new filter selected will be added to the value of the hidden field (in products controller).
       */
-      let appliedColorFilters = document.querySelectorAll(".add_color_filters_applied")
+      // SIZE FILTER
+      const appliedSizeFilters = document.querySelectorAll(".add_size_filters_applied")
+      appliedSizeFilters.forEach((element) => {
+        if (element.nextElementSibling.innerText.toLowerCase() !== sizeFilter){
+          element.value += ` ${sizeFilter}`
+        }
+      })
+      // COLOR FILTER
+      const appliedColorFilters = document.querySelectorAll(".add_color_filters_applied")
       appliedColorFilters.forEach((element) => {
         if (element.nextElementSibling.innerText.toLowerCase() !== colorFilter){
           element.value += ` ${colorFilter}`
         }
       })
+
+      // BRAND FILTER
+      const appliedBrandFilters = document.querySelectorAll(".add_brand_filters_applied")
+      appliedBrandFilters.forEach((element) => {
+        if (element.nextElementSibling.innerText.toLowerCase() !== brandFilter){
+          element.value += ` ${brandFilter}`
+        }
+      })
+      // CATEGORY FILTER
+      const appliedCategoryFilters = document.querySelectorAll(".add_category_filters_applied")
+      appliedCategoryFilters.forEach((element) => {
+        if (element.nextElementSibling.innerText.toLowerCase() !== categoryFilter){
+          element.value += ` ${categoryFilter}`
+        }
+      })
+      // MIN PRICE FILTER
+      const appliedMinPriceFilters = document.querySelector(".add_min_price_filter_applied")
+      let min = parseInt(minPriceFilter)
+      let max = 0
+      if (maxPriceFilter !== ""){
+        max = parseInt(maxPriceFilter)
+      }
+      if (min < max || max === 0) {
+        appliedMinPriceFilters.value = minPriceFilter
+      }
+      // MAX PRICE FILTER
+      const appliedMaxPriceFilters = document.querySelector(".add_max_price_filter_applied")
+      max = parseInt(maxPriceFilter)
+      min = 0
+      if (minPriceFilter !== ""){
+        min = parseInt(minPriceFilter)
+      }
+      if (max > min || min === 0) {
+        appliedMaxPriceFilters.value = maxPriceFilter
+      }
     }
   }
 
