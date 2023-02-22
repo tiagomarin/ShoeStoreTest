@@ -165,7 +165,9 @@ if (window.location.pathname === "/products") {
           max = parseInt(maxPriceFilter)
         }
         if (min < max || max === 0) {
-          appliedMinPriceFilters.value = minPriceFilter
+          appliedMinPriceFilters.forEach((element) => {
+            element.value = minPriceFilter
+          })
         }
       // MAX PRICE FILTER
       const appliedMaxPriceFilters = document.querySelectorAll(".add_max_price_filter_applied")
@@ -175,7 +177,9 @@ if (window.location.pathname === "/products") {
         min = parseInt(minPriceFilter)
       }
       if (max > min || min === 0) {
-        appliedMaxPriceFilters.value = maxPriceFilter
+        appliedMaxPriceFilters.forEach((element) => {
+          element.value = maxPriceFilter
+        })
       }
     }
   }

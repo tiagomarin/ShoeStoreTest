@@ -27,14 +27,31 @@ class ProductsController < ApplicationController
     end
     @products = remove_duplicates(@products)
 
-    if params[:size_filter].present?
-      if params[:size_filters_applied].present?
+    # if params[:size_filter].present?
+    #   if params[:size_filters_applied].present?
+    #     size_filters_applied = params[:size_filters_applied].split.map(&:to_f)
+    #     size_filters_applied |= [params[:size_filter].to_f]
+    #     @products = filter_size(@products, size_filters_applied)
+    #   else
+    #     @products = filter_size(@products, params[:size_filter])
+    #   end
+    # end
+
+    if params[:size_filter].present? &&
+       params[:size_filters_applied].present? &&
+       params[:size_filters_applied] != ''
         size_filters_applied = params[:size_filters_applied].split.map(&:to_f)
         size_filters_applied |= [params[:size_filter].to_f]
         @products = filter_size(@products, size_filters_applied)
-      else
-        @products = filter_size(@products, params[:size_filter])
-      end
+    end
+
+    if params[:size_filters_applied].present? && !params[:size_filter].present?
+      @products = filter_size(@products, params[:size_filters_applied].split.map(&:to_f))
+    end
+
+    if params[:size_filter].present? &&
+       (!params[:size_filters_applied].present? || params[:size_filters_applied] != '')
+      @products = filter_size(@products, params[:size_filter].to_f)
     end
 
     if params[:color_filter].present?
@@ -45,6 +62,10 @@ class ProductsController < ApplicationController
       else
       @products = filter_color(@products, params[:color_filter].downcase)
       end
+    end
+
+    if params[:color_filters_applied].present?
+      @products = filter_color(@products, params[:color_filters_applied].split)
     end
     
     if params[:brand_filter].present?
@@ -57,6 +78,10 @@ class ProductsController < ApplicationController
       end
     end
 
+    if params[:brand_filters_applied].present?
+      @products = filter_brand(@products, params[:brand_filters_applied].split)
+    end
+
     if params[:category_filter].present?
       if params[:category_filters_applied].present?
         category_filters_applied = params[:category_filters_applied].split
@@ -67,12 +92,24 @@ class ProductsController < ApplicationController
       end
     end
 
+    if params[:category_filters_applied].present?
+      @products = filter_category(@products, params[:category_filters_applied].split)
+    end
+
     if params[:min_price_filter].present?
       @products = filter_min_price(@products, params[:min_price_filter])
     end
+
+    if params[:min_price_filters_applied].present? && params[:min_price_filters_applied] != '0'
+      @products = filter_min_price(@products, params[:min_price_filters_applied])
+    end
     
     if params[:max_price_filter].present?
-      @products = filter_max_price(@products, params[:max_price_filter])
+      @products = filter_max_price(@products, params[:max_price_filter] || params[:max_price_filters_applied])
+    end
+
+    if params[:max_price_filters_applied].present? && params[:max_price_filters_applied] != '0'
+      @products = filter_max_price(@products, params[:max_price_filters_applied])
     end
 
     if turbo_frame_request?
