@@ -51,7 +51,7 @@
     <div>
       <strong>Brand:</strong>
       <ul class="products-container__brands">
-        <% ["Nike", "Addidas", "Tiago", "Vitor"].each do |brand| %>
+        <% ["Nike", "Addidas"].each do |brand| %>
           <li>
           <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
 
@@ -74,7 +74,7 @@
     <div>
       <strong>Category:</strong>
       <ul class="products-container__categories">
-        <% ["Running", "Casual", "Gym", "Style"].each do |category| %>
+        <% ["Running", "Casual", "Gym", "Style", "Street"].each do |category| %>
           <li>
             <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
             

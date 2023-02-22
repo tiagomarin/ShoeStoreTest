@@ -133,7 +133,7 @@ class ProductsController < ApplicationController
 
   def filter_color(products, color)
     filtered = []
-    products_by_color = Product.where(color: color)
+    products_by_color = Product.where(color: color.downcase)
     products.each do |product| 
       filtered << product if products_by_color.include?(product)
     end
