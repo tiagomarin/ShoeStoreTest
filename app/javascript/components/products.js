@@ -15,9 +15,26 @@ if (window.location.pathname === "/products") {
     sortCollection.classList.toggle("sort-selection_active")
   })
 
+// ---------------------------------- Filter products begin ----------------------------------
+  // UL list that will display applied filters
+  const filtersApplied = document.querySelector(".products-container__applied-filters-list")
   // Add filter to the list of applied filters
+
+  // Check if the filter already exists in the list of applied filters
+  function filterExists(filter) {
+    let appliedFiltersNodeList = document.querySelectorAll(".products-container__header-filters-applied-item")
+    if (appliedFiltersNodeList.length === 0) {
+      return false
+    }
+    // convert NodeList to Array of innerText
+    let appliedFilters = []
+    appliedFiltersNodeList.forEach((filter) => {
+      appliedFilters.push(filter.innerText)
+    })
+    return appliedFilters.includes(filter)
+  }
+  // Add filter to the list of applied filters if it doesn't already exist
   function addFilterLi(filter) {
-    let filtersApplied = document.querySelector(".products-container__applied-filters-list")
     let li = document.createElement("li")
     li.classList.add("products-container__header-filters-applied-item")
     li.textContent = filter
@@ -30,49 +47,53 @@ if (window.location.pathname === "/products") {
     // only run if the products container has changed
     if (mutationList.length !== 0) {
       let search = window.location.search.split(/[?&=]/)
-      console.log("search: ", search)
       let query = search[2]
-      console.log("query: ", query)
 
       // get color filter from the url
-      let color_filter = ""
+      let colorFilter = ""
       if (search.includes("color_filter")) {
-        let color_filter_index = search.indexOf("color_filter") + 1
-        color_filter = search[color_filter_index].toLowerCase()
+        let colorFilterIndex = search.indexOf("color_filter") + 1
+        colorFilter = search[colorFilterIndex].toLowerCase()
       }
 
       // get brand from the url
-      let brand = ""
+      let brandFilter = ""
       if (search.includes("brand_filter")) {
-        let brand_index = search.indexOf("brand_filter") + 1
-        brand = search[brand_index].toLowerCase()
-        console.log("brand: ", brand)
+        let brandIndex = search.indexOf("brand_filter") + 1
+        brandFilter = search[brandIndex].toLowerCase()
       }
 
       // get category from the url
-      let category = ""
+      let categoryFilter = ""
       if (search.includes("category_filter")) {
-        let category_index = search.indexOf("category_filter") + 1
-        category = search[category_index].toLowerCase()
-        console.log("category: ", category)
+        let categoryIndex = search.indexOf("category_filter") + 1
+        categoryFilter = search[categoryIndex].toLowerCase()
       }
 
-      // add li element to the list of applied filters
-      if (color_filter !== "") {
-        addFilterLi(filter)
+       // add valid li element to the list of applied filters if it doesn't already exist
+       if (colorFilter !== "" && !filterExists(colorFilter)) {
+        addFilterLi(colorFilter)
       }
-      if (brand !== "") {
-        addFilterLi(brand)
+      if (brandFilter !== "" && !filterExists(brandFilter)) {
+        addFilterLi(brandFilter)
       }
-      if (category !== "") {
-        addFilterLi(category)
+      if (categoryFilter !== "" && !filterExists(categoryFilter)) {
+        addFilterLi(categoryFilter)
       }
 
-      // add query to be userd in the search form as query when sending a reqquest that filters results
+      // add query to be used in the search form as query when sending a reqquest that filters results
       let hiddenQuery = document.querySelectorAll(".add_query")
       hiddenQuery.forEach((element) => {
         element.value = query
-        console.log("element.value: ", element.value)
+      })
+      
+      /* 
+      add color filter applied to be used in the search when
+      sending a reqquest that filters results based on color
+      */
+      let appliedColorFilters = document.querySelectorAll(".add_color_filters_applied")
+      appliedColorFilters.forEach((element) => {
+        element.value += colorFilter
       })
     }
   }
@@ -85,4 +106,7 @@ if (window.location.pathname === "/products") {
 
   const observer = new MutationObserver(productsChange);
   observer.observe(productsDiv, observerOptions);
+
+// ---------------------------------- Filter products end ----------------------------------
+
 }

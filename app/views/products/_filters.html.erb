@@ -4,9 +4,9 @@
       <strong>Applied filters:</strong>
       <ul class="products-container__applied-filters-list">
         <%# these will be dinamically inserterd and deleted %>
-        <li class="products-container__header-filters-applied-item">Hard Coded 1</li>
+        <%# <li class="products-container__header-filters-applied-item">Hard Coded 1</li>
         <li class="products-container__header-filters-applied-item">Hard Coded 2</li>
-        <li class="products-container__header-filters-applied-item">Hard Coded 3</li>
+        <li class="products-container__header-filters-applied-item">Hard Coded 3</li> %>
       </ul> 
     </div> 
 
@@ -32,7 +32,6 @@
             <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
               
               <%= form.hidden_field :query , class:"add_query", value: "" %>
-
               <button 
                 name="color_filter" 
                 type="submit" 
