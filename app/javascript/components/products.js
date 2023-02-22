@@ -99,9 +99,9 @@ if (window.location.pathname === "/products") {
       if (minPriceFilter !== "" && !filterExists(minPriceFilter)) { addFilterLi(`min:${minPriceFilter}`) }
       if (maxPriceFilter !== "" && !filterExists(maxPriceFilter)) { addFilterLi(`max:${maxPriceFilter}`) }
       // add query to be used in the search form as query when sending a reqquest that filters results
-      let hiddenQuery = document.querySelectorAll(".add_query")
-      hiddenQuery.forEach((element) => {
-        element.value = query
+      let hiddenQueries = document.querySelectorAll(".add_query")
+      hiddenQueries.forEach((element) => {
+          element.value = query
       })
       
       /* 
@@ -111,14 +111,24 @@ if (window.location.pathname === "/products") {
       // SIZE FILTER
       const appliedSizeFilters = document.querySelectorAll(".add_size_filters_applied")
       appliedSizeFilters.forEach((element) => {
-        if (element.nextElementSibling.innerText.toLowerCase() !== sizeFilter){
+        let correctGrandParent = element.parentElement.parentElement.classList.contains("products-container__filter-sizes-item")
+        let siblingHasSize = element.parentElement.lastElementChild.innerText.toLowerCase() === sizeFilter
+        if (correctGrandParent && !siblingHasSize){
+          element.value += ` ${sizeFilter}`
+        }
+        if (!correctGrandParent){
           element.value += ` ${sizeFilter}`
         }
       })
       // COLOR FILTER
       const appliedColorFilters = document.querySelectorAll(".add_color_filters_applied")
       appliedColorFilters.forEach((element) => {
-        if (element.nextElementSibling.innerText.toLowerCase() !== colorFilter){
+        let correctGrandParent = element.parentElement.parentElement.classList.contains("products-container__filter-colors-item")
+        let siblingHasColor = element.parentElement.lastElementChild.innerText.toLowerCase() === colorFilter
+        if (correctGrandParent && !siblingHasColor){
+          element.value += ` ${colorFilter}`
+        }
+        if (!correctGrandParent){
           element.value += ` ${colorFilter}`
         }
       })
@@ -126,29 +136,39 @@ if (window.location.pathname === "/products") {
       // BRAND FILTER
       const appliedBrandFilters = document.querySelectorAll(".add_brand_filters_applied")
       appliedBrandFilters.forEach((element) => {
-        if (element.nextElementSibling.innerText.toLowerCase() !== brandFilter){
+        let correctGrandParent = element.parentElement.parentElement.classList.contains("products-container__filter-brands-item")
+        let siblingHasBrand = element.parentElement.lastElementChild.innerText.toLowerCase() === brandFilter
+        if (correctGrandParent && !siblingHasBrand){
+          element.value += ` ${brandFilter}`
+        }
+        if (!correctGrandParent){
           element.value += ` ${brandFilter}`
         }
       })
       // CATEGORY FILTER
       const appliedCategoryFilters = document.querySelectorAll(".add_category_filters_applied")
       appliedCategoryFilters.forEach((element) => {
-        if (element.nextElementSibling.innerText.toLowerCase() !== categoryFilter){
+        let correctGrandParent = element.parentElement.parentElement.classList.contains("products-container__filter-categories-item")
+        let siblingHasCategory = element.parentElement.lastElementChild.innerText.toLowerCase() === categoryFilter
+        if (correctGrandParent && !siblingHasCategory){
+          element.value += ` ${categoryFilter}`
+        }
+        if (!correctGrandParent){
           element.value += ` ${categoryFilter}`
         }
       })
       // MIN PRICE FILTER
-      const appliedMinPriceFilters = document.querySelector(".add_min_price_filter_applied")
-      let min = parseInt(minPriceFilter)
-      let max = 0
-      if (maxPriceFilter !== ""){
-        max = parseInt(maxPriceFilter)
-      }
-      if (min < max || max === 0) {
-        appliedMinPriceFilters.value = minPriceFilter
-      }
+      const appliedMinPriceFilters = document.querySelectorAll(".add_min_price_filter_applied")
+        let min = parseInt(minPriceFilter)
+        let max = 0
+        if (maxPriceFilter !== ""){
+          max = parseInt(maxPriceFilter)
+        }
+        if (min < max || max === 0) {
+          appliedMinPriceFilters.value = minPriceFilter
+        }
       // MAX PRICE FILTER
-      const appliedMaxPriceFilters = document.querySelector(".add_max_price_filter_applied")
+      const appliedMaxPriceFilters = document.querySelectorAll(".add_max_price_filter_applied")
       max = parseInt(maxPriceFilter)
       min = 0
       if (minPriceFilter !== ""){

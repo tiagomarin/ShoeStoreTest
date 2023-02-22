@@ -1,8 +1,4 @@
-.products-container__applied-codes {
-  
-}
-
-.products-container__sizes {
+.products-container__filter-sizes {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;

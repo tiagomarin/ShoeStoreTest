@@ -58,7 +58,7 @@
   display: none;
   flex-direction: column;
   gap: var(--space-m);
-  width: 30vw;
+  width: 20vw;
   border: 1px solid black;
 }
 .products-container__filters.filters_active {
@@ -70,7 +70,7 @@
   width: 100vw;
 }
 .products-container__grid.filters_active {
-  width: 70vw;
+  width: 80vw;
 }
 
 #products {

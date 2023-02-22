@@ -1,3 +1,12 @@
 <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
+  <%# if products_index %>
+    <%#= form.hidden_field :query , class:"add_query", value: "" %>
+    <%#= form.hidden_field :size_filters_applied , class:"add_size_filters_applied", value: "" %>
+    <%#= form.hidden_field :color_filters_applied , class:"add_color_filters_applied", value: "" %>
+    <%#= form.hidden_field :brand_filters_applied , class:"add_brand_filters_applied", value: "" %>
+    <%#= form.hidden_field :category_filters_applied , class:"add_category_filters_applied", value: "" %>
+    <%#= form.hidden_field :min_price_filters_applied , class:"add_min_price_filter_applied", value: "" %>
+    <%#= form.hidden_field :max_price_filters_applied , class:"add_max_price_filter_applied", value: "" %>
+  <%# end %>
   <%= form.text_field :query, placeholder: "Search product", data: { action: "input->search-form#search", target: "query"} %>
 <% end %>
