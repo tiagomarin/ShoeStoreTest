@@ -3,6 +3,7 @@
     <div>
       <strong>Applied filters:</strong>
       <ul class="products-container__applied-filters-list">
+        <%# these will be dinamically inserterd and deleted %>
         <li class="products-container__header-filters-applied-item">Hard Coded 1</li>
         <li class="products-container__header-filters-applied-item">Hard Coded 2</li>
         <li class="products-container__header-filters-applied-item">Hard Coded 3</li>
@@ -50,7 +51,7 @@
     <div>
       <strong>Brand:</strong>
       <ul class="products-container__brands">
-        <% ["Nike", "Adiddas", "Tiago", "Vitor"].each do |brand| %>
+        <% ["Nike", "Addidas", "Tiago", "Vitor"].each do |brand| %>
           <li>
           <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
 
@@ -100,13 +101,13 @@
         <span>min</span>
         <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
           <%= form.hidden_field :query , class:"add_query", value: "" %>
-          <%= form.text_field :min_price, data: { action: "input->search-form#search"} %>
+          <%= form.text_field :min_price_filter, data: { action: "input->search-form#search"} %>
         <% end %>
         
         <span>max</span>
         <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
           <%= form.hidden_field :query , class:"add_query", value: "" %>
-          <%= form.text_field :max_price, data: { action: "input->search-form#search"} %>
+          <%= form.text_field :max_price_filter, data: { action: "input->search-form#search"} %>
         <% end %>
       </div>
     </div>

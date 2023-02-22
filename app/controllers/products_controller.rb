@@ -15,6 +15,7 @@ class ProductsController < ApplicationController
       # add all results from database search to @products without duplicates
       @filters.each do |filter|
         @products |= Product.where('lower(name) LIKE ?', "%#{filter}%")
+        @products |= Product.where(size: filter.to_f)
         @products |= Product.where('lower(color) LIKE ?', "%#{filter}%")
         @products |= Product.where('lower(description) LIKE ?', "%#{filter}%")
         @products |= Product.where('lower(gender) LIKE ?', "%#{filter}%")
@@ -26,10 +27,14 @@ class ProductsController < ApplicationController
     end
     @products = remove_duplicates(@products)
 
+    if params[:size_filter].present?
+      @products = filter_size(@products, params[:size_filter])
+    end
+
     if params[:color_filter].present?
       @products = filter_color(@products, params[:color_filter])
     end
-
+    
     if params[:brand_filter].present?
       @products = filter_brand(@products, params[:brand_filter])
     end
@@ -41,7 +46,7 @@ class ProductsController < ApplicationController
     if params[:min_price_filter].present?
       @products = filter_min_price(@products, params[:min_price_filter])
     end
-
+    
     if params[:max_price_filter].present?
       @products = filter_max_price(@products, params[:max_price_filter])
     end
@@ -117,6 +122,15 @@ class ProductsController < ApplicationController
     @categories = Category.all
   end
 
+  def filter_size(products, size)
+    filtered = []
+    products_by_size = Product.where(size: size.to_f)
+    products.each do |product|
+      filtered << product if products_by_size.include?(product)
+    end
+    filtered
+  end
+
   def filter_color(products, color)
     filtered = []
     products_by_color = Product.where(color: color)
@@ -128,18 +142,19 @@ class ProductsController < ApplicationController
 
   def filter_brand(products, brand)
     filtered = []
-    products_by_brand = Product.joins(:brand).where('lower(brands.name) LIKE ?', "%#{brand}%")
-    products.each do |product| 
-      filtered << product if products_by_brand.include?(product)      
+    brand_id = Brand.where(name: brand.downcase).first.id
+    products_by_brand = Product.where(brand_id: brand_id)
+    products.each do |product|
+      filtered << product if products_by_brand.include?(product)
     end
     filtered
   end
 
-  def filter_category(products, category)
+  def filter_category(products, category_name)
     filtered = []
-    products_by_category = Product.joins(:category).where('lower(categories.name) LIKE ?', "%#{category}%")
+    category_id = Category.where(name: category_name.downcase).first.id
     products.each do |product| 
-      filtered << product if products_by_category.include?(product)      
+      filtered << product if product.category_ids.include?(category_id)      
     end
     filtered
   end
@@ -155,7 +170,7 @@ class ProductsController < ApplicationController
 
   def filter_max_price(products, max_price)
     filtered = []
-    products_by_max_price = Product.where('price >= ?', max_price)
+    products_by_max_price = Product.where('price <= ?', max_price)
     products.each do |product| 
       filtered << product if products_by_max_price.include?(product)      
     end
