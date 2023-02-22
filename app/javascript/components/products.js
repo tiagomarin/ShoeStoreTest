@@ -93,7 +93,9 @@ if (window.location.pathname === "/products") {
       */
       let appliedColorFilters = document.querySelectorAll(".add_color_filters_applied")
       appliedColorFilters.forEach((element) => {
-        element.value += colorFilter
+        if (element.nextElementSibling.innerText.toLowerCase() !== colorFilter){
+          element.value += ` ${colorFilter}`
+        }
       })
     }
   }

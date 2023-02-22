@@ -32,7 +32,13 @@ class ProductsController < ApplicationController
     end
 
     if params[:color_filter].present?
-      @products = filter_color(@products, params[:color_filter])
+      if params[:color_filters_applied].present?
+        color_filters_applied = params[:color_filters_applied].split
+        color_filters_applied |= [params[:color_filter].downcase]
+        @products = filter_color(@products, color_filters_applied)
+      else
+      @products = filter_color(@products, params[:color_filter].downcase)
+      end
     end
     
     if params[:brand_filter].present?
@@ -131,9 +137,9 @@ class ProductsController < ApplicationController
     filtered
   end
 
-  def filter_color(products, color)
+  def filter_color(products, colors)
     filtered = []
-    products_by_color = Product.where(color: color.downcase)
+    products_by_color = Product.where(color: colors)
     products.each do |product| 
       filtered << product if products_by_color.include?(product)
     end

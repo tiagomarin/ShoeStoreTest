@@ -32,6 +32,7 @@
             <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
               
               <%= form.hidden_field :query , class:"add_query", value: "" %>
+              <%= form.hidden_field :color_filters_applied , class:"add_color_filters_applied", value: "" %>
               <button 
                 name="color_filter" 
                 type="submit" 
