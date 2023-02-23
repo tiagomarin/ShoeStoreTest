@@ -15,7 +15,7 @@ if (window.location.pathname === "/products") {
     sortCollection.classList.toggle("sort-selection_active")
   })
 
-// ---------------------------------- Filter products begin ----------------------------------
+  // ---------------------------------- Filter products begin ----------------------------------
   // UL list that will display applied filters
   const filtersApplied = document.querySelector(".products-container__applied-filters-list")
   // Add filter to the list of applied filters
@@ -28,8 +28,8 @@ if (window.location.pathname === "/products") {
     }
     // convert NodeList to Array of innerText
     let appliedFilters = []
-    appliedFiltersNodeList.forEach((filter) => {
-      appliedFilters.push(filter.innerText)
+    appliedFiltersNodeList.forEach((appliedFilter) => {
+      appliedFilters.push(appliedFilter.innerText)
     })
     return appliedFilters.includes(filter)
   }
@@ -101,22 +101,40 @@ if (window.location.pathname === "/products") {
       // add query to be used in the search form as query when sending a reqquest that filters results
       let hiddenQueries = document.querySelectorAll(".add_query")
       hiddenQueries.forEach((element) => {
-          element.value = query
+        element.value = query
       })
-      
+
       /* 
-      Add filters applied to "value" in hidden fields. These values are filters that user already applied. 
+      Add filters_applied to "value" in hidden fields. These values are filters that user already applied. 
       The new filter selected will be added to the value of the hidden field (in products controller).
       */
+      // check if the filter already exists in the hidden field
+      function filterExistsInHiddenField(filter, hiddenField) {
+        console.log("filter: ", filter)
+        console.log("hiddenField: ", hiddenField.value)
+        let appliedFilters = hiddenField.value.split(" ")
+        console.log("appliedFilters: ", appliedFilters)
+
+        if (appliedFilters.length === 0) {
+          return false
+        }
+        return appliedFilters.includes(filter)
+      }
+
       // SIZE FILTER
       const appliedSizeFilters = document.querySelectorAll(".add_size_filters_applied")
       appliedSizeFilters.forEach((element) => {
         let correctGrandParent = element.parentElement.parentElement.classList.contains("products-container__filter-sizes-item")
         let siblingHasSize = element.parentElement.lastElementChild.innerText.toLowerCase() === sizeFilter
-        if (correctGrandParent && !siblingHasSize && sizeFilter !== ""){
+        if (correctGrandParent &&
+          !siblingHasSize &&
+          sizeFilter !== "" &&
+          !filterExistsInHiddenField(sizeFilter, element)) {
           element.value === "" ? element.value = `${sizeFilter}` : element.value += ` ${sizeFilter}`
         }
-        if (!correctGrandParent && sizeFilter !== ""){
+        if (!correctGrandParent &&
+          sizeFilter !== "" &&
+          !filterExistsInHiddenField(sizeFilter, element)) {
           element.value === "" ? element.value = `${sizeFilter}` : element.value += ` ${sizeFilter}`
         }
       })
@@ -125,10 +143,15 @@ if (window.location.pathname === "/products") {
       appliedColorFilters.forEach((element) => {
         let correctGrandParent = element.parentElement.parentElement.classList.contains("products-container__filter-colors-item")
         let siblingHasColor = element.parentElement.lastElementChild.innerText.toLowerCase() === colorFilter
-        if (correctGrandParent && !siblingHasColor && colorFilter !== ""){
+        if (correctGrandParent &&
+          !siblingHasColor &&
+          colorFilter !== "" &&
+          !filterExistsInHiddenField(colorFilter, element)) {
           element.value === "" ? element.value = `${colorFilter}` : element.value += ` ${colorFilter}`
         }
-        if (!correctGrandParent && colorFilter !== ""){
+        if (!correctGrandParent &&
+          colorFilter !== "" &&
+          !filterExistsInHiddenField(colorFilter, element)) {
           element.value === "" ? element.value = `${colorFilter}` : element.value += ` ${colorFilter}`
         }
       })
@@ -138,10 +161,15 @@ if (window.location.pathname === "/products") {
       appliedBrandFilters.forEach((element) => {
         let correctGrandParent = element.parentElement.parentElement.classList.contains("products-container__filter-brands-item")
         let siblingHasBrand = element.parentElement.lastElementChild.innerText.toLowerCase() === brandFilter
-        if (correctGrandParent && !siblingHasBrand && brandFilter !== ""){
+        if (correctGrandParent &&
+          !siblingHasBrand &&
+          brandFilter !== "" &&
+          !filterExistsInHiddenField(brandFilter, element)) {
           element.value === "" ? element.value = `${brandFilter}` : element.value += ` ${brandFilter}`
         }
-        if (!correctGrandParent && brandFilter !== ""){
+        if (!correctGrandParent &&
+          brandFilter !== "" &&
+          !filterExistsInHiddenField(brandFilter, element)) {
           element.value === "" ? element.value = `${brandFilter}` : element.value += ` ${brandFilter}`
         }
       })
@@ -150,35 +178,44 @@ if (window.location.pathname === "/products") {
       appliedCategoryFilters.forEach((element) => {
         let correctGrandParent = element.parentElement.parentElement.classList.contains("products-container__filter-categories-item")
         let siblingHasCategory = element.parentElement.lastElementChild.innerText.toLowerCase() === categoryFilter
-        if (correctGrandParent && !siblingHasCategory && categoryFilter !== ""){
-          element.value === "" ? element.value = `${categoryFilter}` :  element.value += ` ${categoryFilter}`
+        if (correctGrandParent &&
+          !siblingHasCategory &&
+          categoryFilter !== "" &&
+          !filterExistsInHiddenField(categoryFilter, element)) {
+          element.value === "" ? element.value = `${categoryFilter}` : element.value += ` ${categoryFilter}`
         }
-        if (!correctGrandParent && categoryFilter !== ""){
+        if (!correctGrandParent &&
+          categoryFilter !== "" &&
+          !filterExistsInHiddenField(categoryFilter, element)) {
           element.value === "" ? element.value = `${categoryFilter}` : element.value += ` ${categoryFilter}`
         }
       })
       // MIN PRICE FILTER
       const appliedMinPriceFilters = document.querySelectorAll(".add_min_price_filter_applied")
-        let min = parseInt(minPriceFilter)
-        let max = 0
-        if (maxPriceFilter !== ""){
-          max = parseInt(maxPriceFilter)
-        }
-        if (min < max || max === 0) {
-          appliedMinPriceFilters.forEach((element) => {
+      let min = parseInt(minPriceFilter)
+      let max = 0
+      if (maxPriceFilter !== "") {
+        max = parseInt(maxPriceFilter)
+      }
+      if (min < max || max === 0) {
+        appliedMinPriceFilters.forEach((element) => {
+          if (!filterExistsInHiddenField(minPriceFilter, element)) {
             element.value = minPriceFilter
-          })
-        }
+          }
+        })
+      }
       // MAX PRICE FILTER
       const appliedMaxPriceFilters = document.querySelectorAll(".add_max_price_filter_applied")
       max = parseInt(maxPriceFilter)
       min = 0
-      if (minPriceFilter !== ""){
+      if (minPriceFilter !== "") {
         min = parseInt(minPriceFilter)
       }
       if (max > min || min === 0) {
         appliedMaxPriceFilters.forEach((element) => {
-          element.value = maxPriceFilter
+          if (!filterExistsInHiddenField(maxPriceFilter, element)) {
+            element.value = maxPriceFilter
+          }
         })
       }
     }
@@ -193,6 +230,6 @@ if (window.location.pathname === "/products") {
   const observer = new MutationObserver(productsChange);
   observer.observe(productsDiv, observerOptions);
 
-// ---------------------------------- Filter products end ----------------------------------
+  // ---------------------------------- Filter products end ----------------------------------
 
 }
