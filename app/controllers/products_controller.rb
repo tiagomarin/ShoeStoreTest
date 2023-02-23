@@ -8,40 +8,43 @@ class ProductsController < ApplicationController
   # GET /products or /products.json
   def index
     if params[:query].present? && params[:query] != ''
-      @filters = params[:filters] || []
-      @filters |= params[:query].downcase.split # add the query to the filters without duplicates
-
+      queries = params[:query].downcase.split # split query into array of words
       @products = []
       # add all results from database search to @products without duplicates
-      @filters.each do |filter|
-        @products |= Product.where('lower(name) LIKE ?', "%#{filter}%")
-        @products |= Product.where(size: filter.to_f)
-        @products |= Product.where('lower(color) LIKE ?', "%#{filter}%")
-        @products |= Product.where('lower(description) LIKE ?', "%#{filter}%")
-        @products |= Product.where('lower(gender) LIKE ?', "%#{filter}%")
-        @products |= Product.joins(:brand).where('lower(brands.name) LIKE ?', "%#{filter}%")
-        @products |= Product.joins(:category).where('lower(categories.name) LIKE ?', "%#{filter}%")
+      queries.each do |query|
+        @products |= Product.where('lower(name) LIKE ?', "%#{query}%")
+        @products |= Product.where(size: query.to_f)
+        @products |= Product.where('lower(color) LIKE ?', "%#{query}%")
+        @products |= Product.where('lower(description) LIKE ?', "%#{query}%")
+        @products |= Product.where('lower(gender) LIKE ?', "%#{query}%")
+        @products |= Product.joins(:brand).where('lower(brands.name) LIKE ?', "%#{query}%")
+        @products |= Product.joins(:category).where('lower(categories.name) LIKE ?', "%#{query}%")
       end
     else
       @products = Product.all
     end
     @products = remove_duplicates(@products)
 
-    puts "======================================"
-    puts "size :"
-    pp params[:size_filters_applied]
-    puts "color :"
-    pp params[:color_filters_applied]
-    puts "brand :"
-    pp params[:brand_filters_applied]
-    puts "category :"
-    pp params[:category_filters_applied]
-    puts "min_price :"
-    pp params[:min_price_filters_applied]
-    puts "max_price :"
-    pp params[:max_price_filters_applied]
-    puts "======================================"
-
+    # ----------- Update filters before filter -----------
+    # based on user clicking a button to remove a filter that was applied
+    if params[:remove_size_filter].present?
+      params[:size_filters_applied] = (params[:size_filters_applied].split.map(&:to_f) - [params[:remove_size_filter].to_f]).map(&:to_i).join(' ')
+    end
+    if params[:remove_color_filter].present?
+      params[:color_filters_applied] = (params[:color_filters_applied].split - [params[:remove_color_filter].downcase]).join(' ')
+    end
+    if params[:remove_brand_filter].present?
+      params[:brand_filters_applied] = (params[:brand_filters_applied].split - [params[:remove_brand_filter].downcase]).join(' ')
+    end
+    if params[:remove_category_filter].present?
+      params[:category_filters_applied] = (params[:category_filters_applied].split - [params[:remove_category_filter].downcase]).join(' ')
+    end
+    if params[:remove_min_price_filter].present?
+      params[:min_price_filter] = nil
+    end
+    if params[:remove_max_price_filter].present?
+      params[:max_price_filter] = nil
+    end
     # ------------------ Filter by SIZE ------------------
     # both size_filter and size_filters_applied are present
     if params[:size_filter].present? &&
@@ -291,13 +294,11 @@ class ProductsController < ApplicationController
     products.each do |product|
       name = product.name
       brand = product.brand.name
-      description = product.description
       color = product.color
 
       @products_no_repeat << product unless @products_no_repeat.any? do |p|
                                               p.name == name &&
                                               p.brand.name == brand &&
-                                              p.description == description &&
                                               p.color == color
                                             end
     end

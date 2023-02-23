@@ -15,10 +15,12 @@ if (window.location.pathname === "/products") {
     sortCollection.classList.toggle("sort-selection_active")
   })
 
+  // remove li from the list of applied filters
+
   // ---------------------------------- Filter products begin ----------------------------------
   // UL list that will display applied filters
   const filtersApplied = document.querySelector(".products-container__applied-filters-list")
-  // Add filter to the list of applied filters
+
 
   // Check if the filter already exists in the list of applied filters
   function filterExists(filter) {
@@ -26,20 +28,14 @@ if (window.location.pathname === "/products") {
     if (appliedFiltersNodeList.length === 0) {
       return false
     }
-    // convert NodeList to Array of innerText
+    // convert NodeList to Array of innerTexts
     let appliedFilters = []
     appliedFiltersNodeList.forEach((appliedFilter) => {
       appliedFilters.push(appliedFilter.innerText)
     })
-    return appliedFilters.includes(filter)
+    return appliedFilters.includes(`${filter} x`)
   }
-  // Add filter to the list of applied filters if it doesn't already exist
-  function addFilterLi(filter) {
-    let li = document.createElement("li")
-    li.classList.add("products-container__header-filters-applied-item")
-    li.textContent = filter
-    filtersApplied.appendChild(li)
-  }
+
 
   // Watch for changes to the products container and update the DOM acconding to user filter choices
   const productsDiv = document.querySelector("#products")
@@ -91,13 +87,130 @@ if (window.location.pathname === "/products") {
         maxPriceFilter = search[maxPriceIndex]
       }
 
+      // get filter applied from the url
+      let sizeFiltersApplied = ""
+      let colorFiltersApplied = ""
+      let brandFiltersApplied = ""
+      let categoryFiltersApplied = ""
+      let minPriceFilterApplied = ""
+      let maxPriceFilterApplied = ""
+
+      if (search.includes("size_filters_applied")) {
+        let sizeFiltersAppliedIndex = search.indexOf("size_filters_applied") + 1
+        let lastSizeFilterIndex = search.indexOf("color_filters_applied") - 1
+        for (let i = sizeFiltersAppliedIndex; i <= lastSizeFilterIndex; i++) {
+          sizeFiltersApplied += search[i]
+        }
+      }
+
+      if (search.includes("color_filters_applied")) {
+        let colorFiltersAppliedIndex = search.indexOf("color_filters_applied") + 1
+        let lastColorFilterIndex = search.indexOf("brand_filters_applied") - 1
+        for (let i = colorFiltersAppliedIndex; i <= lastColorFilterIndex; i++) {
+          colorFiltersApplied += search[i]
+        }
+      }
+
+      if (search.includes("brand_filters_applied")) {
+        let brandFiltersAppliedIndex = search.indexOf("brand_filters_applied") + 1
+        let lastBrandFilterIndex = search.indexOf("category_filters_applied") - 1
+        for (let i = brandFiltersAppliedIndex; i <= lastBrandFilterIndex; i++) {
+          brandFiltersApplied += search[i]
+        }
+      }
+
+      if (search.includes("category_filters_applied")) {
+        let categoryFiltersAppliedIndex = search.indexOf("category_filters_applied") + 1
+        let lastCategoryFilterIndex = search.indexOf("min_price_filter_applied") - 1
+        for (let i = categoryFiltersAppliedIndex; i <= lastCategoryFilterIndex; i++) {
+          categoryFiltersApplied += search[i]
+        }
+      }
+
+      if (search.includes("min_price_filter_applied")) {
+        let minPriceFilterAppliedIndex = search.indexOf("min_price_filter_applied") + 1
+        minPriceFilterApplied += search[minPriceFilterAppliedIndex]
+      }
+      
+      if (search.includes("max_price_filter_applied")) {
+        let maxPriceFilterAppliedIndex = search.indexOf("max_price_filter_applied") + 1
+        maxPriceFilterApplied += search[maxPriceFilterAppliedIndex]
+      }
+
+      // Add filter to the list of applied filters
+      function addFilterLi(filter, filterType) {
+        let li = document.createElement("li")
+        li.classList.add("products-container__header-filters-applied-item")
+
+        // create form
+        let form = document.createElement("form")
+        form.setAttribute("data-controller", "search-form")
+        form.setAttribute("data-turbo-frame", "products")
+        form.setAttribute("data-turbo-action", "advance")
+        form.setAttribute("action", "/products")
+        form.setAttribute("accept-charset", "UTF-8")
+        form.setAttribute("method", "get")
+
+        // create hidden inputs
+        let hiddenQueries = ["query", "size_filters_applied", "color_filters_applied", "brand_filters_applied", "category_filters_applied", "min_price_filter_applied", "max_price_filter_applied"]
+        hiddenQueries.forEach((e) => {
+          let value = ''
+          switch (e) {
+            case "query":
+              value = query
+              break
+            case "size_filters_applied":
+              value = sizeFiltersApplied
+              break
+            case "color_filters_applied":
+              value = colorFiltersApplied
+              break
+            case "brand_filters_applied":
+              value = brandFiltersApplied
+              break
+            case "category_filters_applied":
+              value = categoryFiltersApplied
+              break
+            case "min_price_filter_applied":
+              value = minPriceFilterApplied
+              break
+            case "max_price_filter_applied":
+              value = maxPriceFilterApplied
+              break
+          }
+          let hiddenQuery = document.createElement("input")
+          hiddenQuery.classList.add(`add_${e}`)
+          hiddenQuery.setAttribute("value", value)
+          hiddenQuery.setAttribute("autocomplete", "off")
+          hiddenQuery.setAttribute("type", "hidden")
+          hiddenQuery.setAttribute("name", e)
+          hiddenQuery.setAttribute("id", e)
+          form.appendChild(hiddenQuery)
+        })
+
+        // append button to remove filter
+        let removeFilterBtn = document.createElement("button")
+        removeFilterBtn.setAttribute("name", `remove_${filterType}_filter`)
+        removeFilterBtn.setAttribute("type", "submit")
+        removeFilterBtn.setAttribute("value", filter)
+        removeFilterBtn.setAttribute("data-action", "click->search-form#removeFilter")
+        removeFilterBtn.classList.add("products-container__header-filters-applied-item-remove")
+        removeFilterBtn.innerText = `${filter} x`
+        form.appendChild(removeFilterBtn)
+
+        li.appendChild(form)
+        console.log("li:", li.children)
+        filtersApplied.appendChild(li)
+        console.log("filtersApplied:", filtersApplied.children)
+      }
+
       // add valid li element to the list of applied filters if it doesn't already exist
-      if (sizeFilter !== "" && !filterExists(sizeFilter)) { addFilterLi(sizeFilter) }
-      if (colorFilter !== "" && !filterExists(colorFilter)) { addFilterLi(colorFilter) }
-      if (brandFilter !== "" && !filterExists(brandFilter)) { addFilterLi(brandFilter) }
-      if (categoryFilter !== "" && !filterExists(categoryFilter)) { addFilterLi(categoryFilter) }
-      if (minPriceFilter !== "" && !filterExists(minPriceFilter)) { addFilterLi(`min:${minPriceFilter}`) }
-      if (maxPriceFilter !== "" && !filterExists(maxPriceFilter)) { addFilterLi(`max:${maxPriceFilter}`) }
+      if (sizeFilter !== "" && !filterExists(sizeFilter)) { addFilterLi(sizeFilter, "size") }
+      if (colorFilter !== "" && !filterExists(colorFilter)) { addFilterLi(colorFilter, "color") }
+      if (brandFilter !== "" && !filterExists(brandFilter)) { addFilterLi(brandFilter, "brand") }
+      if (categoryFilter !== "" && !filterExists(categoryFilter)) { addFilterLi(categoryFilter, "category") }
+      if (minPriceFilter !== "" && !filterExists(minPriceFilter)) { addFilterLi(`min:${minPriceFilter}`, "min_price") }
+      if (maxPriceFilter !== "" && !filterExists(maxPriceFilter)) { addFilterLi(`max:${maxPriceFilter}`, "max_price") }
       // add query to be used in the search form as query when sending a reqquest that filters results
       let hiddenQueries = document.querySelectorAll(".add_query")
       hiddenQueries.forEach((element) => {
@@ -110,16 +223,15 @@ if (window.location.pathname === "/products") {
       */
       // check if the filter already exists in the hidden field
       function filterExistsInHiddenField(filter, hiddenField) {
-        console.log("filter: ", filter)
-        console.log("hiddenField: ", hiddenField.value)
         let appliedFilters = hiddenField.value.split(" ")
-        console.log("appliedFilters: ", appliedFilters)
-
         if (appliedFilters.length === 0) {
           return false
         }
         return appliedFilters.includes(filter)
       }
+
+      
+
 
       // SIZE FILTER
       const appliedSizeFilters = document.querySelectorAll(".add_size_filters_applied")
