@@ -113,11 +113,11 @@ if (window.location.pathname === "/products") {
       appliedSizeFilters.forEach((element) => {
         let correctGrandParent = element.parentElement.parentElement.classList.contains("products-container__filter-sizes-item")
         let siblingHasSize = element.parentElement.lastElementChild.innerText.toLowerCase() === sizeFilter
-        if (correctGrandParent && !siblingHasSize){
-          element.value += ` ${sizeFilter}`
+        if (correctGrandParent && !siblingHasSize && sizeFilter !== ""){
+          element.value === "" ? element.value = `${sizeFilter}` : element.value += ` ${sizeFilter}`
         }
-        if (!correctGrandParent){
-          element.value += ` ${sizeFilter}`
+        if (!correctGrandParent && sizeFilter !== ""){
+          element.value === "" ? element.value = `${sizeFilter}` : element.value += ` ${sizeFilter}`
         }
       })
       // COLOR FILTER
@@ -125,11 +125,11 @@ if (window.location.pathname === "/products") {
       appliedColorFilters.forEach((element) => {
         let correctGrandParent = element.parentElement.parentElement.classList.contains("products-container__filter-colors-item")
         let siblingHasColor = element.parentElement.lastElementChild.innerText.toLowerCase() === colorFilter
-        if (correctGrandParent && !siblingHasColor){
-          element.value += ` ${colorFilter}`
+        if (correctGrandParent && !siblingHasColor && colorFilter !== ""){
+          element.value === "" ? element.value = `${colorFilter}` : element.value += ` ${colorFilter}`
         }
-        if (!correctGrandParent){
-          element.value += ` ${colorFilter}`
+        if (!correctGrandParent && colorFilter !== ""){
+          element.value === "" ? element.value = `${colorFilter}` : element.value += ` ${colorFilter}`
         }
       })
 
@@ -138,11 +138,11 @@ if (window.location.pathname === "/products") {
       appliedBrandFilters.forEach((element) => {
         let correctGrandParent = element.parentElement.parentElement.classList.contains("products-container__filter-brands-item")
         let siblingHasBrand = element.parentElement.lastElementChild.innerText.toLowerCase() === brandFilter
-        if (correctGrandParent && !siblingHasBrand){
-          element.value += ` ${brandFilter}`
+        if (correctGrandParent && !siblingHasBrand && brandFilter !== ""){
+          element.value === "" ? element.value = `${brandFilter}` : element.value += ` ${brandFilter}`
         }
-        if (!correctGrandParent){
-          element.value += ` ${brandFilter}`
+        if (!correctGrandParent && brandFilter !== ""){
+          element.value === "" ? element.value = `${brandFilter}` : element.value += ` ${brandFilter}`
         }
       })
       // CATEGORY FILTER
@@ -150,11 +150,11 @@ if (window.location.pathname === "/products") {
       appliedCategoryFilters.forEach((element) => {
         let correctGrandParent = element.parentElement.parentElement.classList.contains("products-container__filter-categories-item")
         let siblingHasCategory = element.parentElement.lastElementChild.innerText.toLowerCase() === categoryFilter
-        if (correctGrandParent && !siblingHasCategory){
-          element.value += ` ${categoryFilter}`
+        if (correctGrandParent && !siblingHasCategory && categoryFilter !== ""){
+          element.value === "" ? element.value = `${categoryFilter}` :  element.value += ` ${categoryFilter}`
         }
-        if (!correctGrandParent){
-          element.value += ` ${categoryFilter}`
+        if (!correctGrandParent && categoryFilter !== ""){
+          element.value === "" ? element.value = `${categoryFilter}` : element.value += ` ${categoryFilter}`
         }
       })
       // MIN PRICE FILTER

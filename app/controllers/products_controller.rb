@@ -27,80 +27,117 @@ class ProductsController < ApplicationController
     end
     @products = remove_duplicates(@products)
 
-    # if params[:size_filter].present?
-    #   if params[:size_filters_applied].present?
-    #     size_filters_applied = params[:size_filters_applied].split.map(&:to_f)
-    #     size_filters_applied |= [params[:size_filter].to_f]
-    #     @products = filter_size(@products, size_filters_applied)
-    #   else
-    #     @products = filter_size(@products, params[:size_filter])
-    #   end
-    # end
+    puts "======================================"
+    puts "size :"
+    pp params[:size_filters_applied]
+    puts "color :"
+    pp params[:color_filters_applied]
+    puts "brand :"
+    pp params[:brand_filters_applied]
+    puts "category :"
+    pp params[:category_filters_applied]
+    puts "min_price :"
+    pp params[:min_price_filters_applied]
+    puts "max_price :"
+    pp params[:max_price_filters_applied]
+    puts "======================================"
 
+    # ------------------ Filter by SIZE ------------------
+    # both size_filter and size_filters_applied are present
     if params[:size_filter].present? &&
-       params[:size_filters_applied].present? &&
-       params[:size_filters_applied] != ''
+       (params[:size_filters_applied].length > 0 if params[:size_filters_applied].present?)
         size_filters_applied = params[:size_filters_applied].split.map(&:to_f)
         size_filters_applied |= [params[:size_filter].to_f]
         @products = filter_size(@products, size_filters_applied)
     end
 
-    if params[:size_filters_applied].present? && !params[:size_filter].present?
+    # only size_filters_applied is present
+    if params[:size_filters_applied].present? && 
+      params[:size_filters_applied].length > 0 &&
+      !params[:size_filter].present?
       @products = filter_size(@products, params[:size_filters_applied].split.map(&:to_f))
     end
 
+    # only size_filters is present
     if params[:size_filter].present? &&
-       (!params[:size_filters_applied].present? || params[:size_filters_applied] != '')
+      !(params[:size_filters_applied].present? || params[:size_filters_applied].length > 0)
       @products = filter_size(@products, params[:size_filter].to_f)
     end
-
-    if params[:color_filter].present?
-      if params[:color_filters_applied].present?
+    # ------------------ Filter by COLOR ------------------
+    # both color_filter and color_filters_applied are present
+    if params[:color_filter].present? &&
+      (params[:color_filters_applied].length > 0 if params[:color_filters_applied].present?)
         color_filters_applied = params[:color_filters_applied].split
         color_filters_applied |= [params[:color_filter].downcase]
         @products = filter_color(@products, color_filters_applied)
-      else
-      @products = filter_color(@products, params[:color_filter].downcase)
-      end
     end
 
-    if params[:color_filters_applied].present?
+    # only color_filters_applied is present
+    if params[:color_filters_applied].present? &&
+       params[:color_filters_applied].length > 0 &&
+       !params[:color_filter].present?
       @products = filter_color(@products, params[:color_filters_applied].split)
     end
-    
-    if params[:brand_filter].present?
-      if params[:brand_filters_applied].present?
-        brand_filters_applied = params[:brand_filters_applied].split
-        brand_filters_applied |= [params[:brand_filter].downcase]
-        @products = filter_brand(@products, brand_filters_applied)
-      else
-      @products = filter_brand(@products, params[:brand_filter].downcase)
-      end
+
+    # only color_filters is present
+    if params[:color_filter].present? &&
+      !(params[:color_filters_applied].present? || params[:color_filters_applied].length > 0)
+      @products = filter_color(@products, params[:color_filter].downcase)
     end
 
-    if params[:brand_filters_applied].present?
+    # ------------------ Filter by BRAND ------------------
+    # both brand_filter and brand_filters_applied are present
+    if params[:brand_filter].present? &&
+       (params[:brand_filters_applied].length > 0 if params[:brand_filters_applied].present?)
+      brand_filters_applied = params[:brand_filters_applied].split
+      brand_filters_applied |= [params[:brand_filter].downcase]
+      @products = filter_brand(@products, brand_filters_applied)
+    end
+        
+    # only brand_filters_applied is present
+    if params[:brand_filters_applied].present? &&
+       params[:brand_filters_applied].length > 0 &&
+       !params[:brand_filter].present?
       @products = filter_brand(@products, params[:brand_filters_applied].split)
     end
 
-    if params[:category_filter].present?
-      if params[:category_filters_applied].present?
-        category_filters_applied = params[:category_filters_applied].split
-        category_filters_applied |= [params[:category_filter].downcase]
-        @products = filter_category(@products, category_filters_applied)
-      else
-        @products = filter_category(@products, params[:category_filter].downcase)
-      end
+    # only brand_filters is present
+    if params[:brand_filter].present? &&
+      !(params[:brand_filters_applied].present? || params[:brand_filters_applied].length > 0)
+      @products = filter_brand(@products, params[:brand_filter].downcase)
     end
 
-    if params[:category_filters_applied].present?
+    # ------------------ Filter by CATEGORY ------------------
+    # both category_filter and category_filters_applied are present
+    if params[:category_filter].present? &&
+       (params[:category_filters_applied].length > 0 if params[:category_filters_applied].present?)
+      category_filters_applied = params[:category_filters_applied].split
+      category_filters_applied |= [params[:category_filter].downcase]
+      @products = filter_category(@products, category_filters_applied)
+    end
+    
+    # only category_filters_applied is present
+    if params[:category_filters_applied].present? &&
+       params[:category_filters_applied].length > 0 &&
+       !params[:category_filter].present?
       @products = filter_category(@products, params[:category_filters_applied].split)
     end
+
+    # only category_filters is present
+    if params[:category_filter].present? &&
+      !(params[:category_filters_applied].present? || params[:category_filters_applied].length > 0)
+      @products = filter_category(@products, params[:category_filter].downcase)
+    end
+
+    # ------------------ Filter by PRICE ------------------
 
     if params[:min_price_filter].present?
       @products = filter_min_price(@products, params[:min_price_filter])
     end
 
-    if params[:min_price_filters_applied].present? && params[:min_price_filters_applied] != '0'
+    if params[:min_price_filters_applied].present? &&
+       params[:min_price_filters_applied].length > 0 &&
+       !params[:min_price_filter].present?
       @products = filter_min_price(@products, params[:min_price_filters_applied])
     end
     
@@ -108,7 +145,9 @@ class ProductsController < ApplicationController
       @products = filter_max_price(@products, params[:max_price_filter] || params[:max_price_filters_applied])
     end
 
-    if params[:max_price_filters_applied].present? && params[:max_price_filters_applied] != '0'
+    if params[:max_price_filters_applied].present? &&
+       params[:max_price_filters_applied].length > 0 &&
+       !params[:max_price_filter].present?
       @products = filter_max_price(@products, params[:max_price_filters_applied])
     end
 
