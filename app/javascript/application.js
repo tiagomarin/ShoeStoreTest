@@ -37,11 +37,28 @@ setInterval(toggleDivs, 3000);
 
 /* ================================================= */
 
-let toggle_promo = document.getElementById("order-container__arrow-down-div");
-let hidden_promo = document.getElementById("order-container__hidden-promo");
-let promo_icon = document.querySelector(".order-container-icon");
+window.addEventListener("click", (event) => {
+  if(event.target.className === "order-container__arrow-down-div" || event.target.className === "order-container__arrow-down-div show") {
+    event.target.nextElementSibling.classList.toggle("show");
+    event.target.classList.toggle("show");
+  }
 
-toggle_promo.addEventListener("click", () => {
-  hidden_promo.classList.toggle("show");
-  promo_icon.classList.toggle("flip");
+  if(event.target.innerHTML === "Do you have a promo code?" || event.target.className === "order-container-icon") {
+    event.target.parentElement.nextElementSibling.classList.toggle("show");
+    event.target.parentElement.classList.toggle("show");
+  }
+})
+
+/* ================================================= */
+
+window.addEventListener("click", (event) => {
+  if(event.target.className === "order-container__coupons-applied" || event.target.className === "order-container__coupons-applied show") {
+    event.target.nextElementSibling.classList.toggle("show");
+    event.target.classList.toggle("show");
+  }
+
+  if(event.target.innerHTML === "Coupons Applied" || event.target.id === "order-container__promo-icon") {
+    event.target.parentElement.nextElementSibling.classList.toggle("show");
+    event.target.parentElement.classList.toggle("show");
+  }
 })

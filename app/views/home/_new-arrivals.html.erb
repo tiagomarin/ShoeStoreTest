@@ -1,9 +1,9 @@
 <div id="new-arrivals-container__carrousel-div">
-  <% 20.times do %>
+  <% 30.times do %>
     <div id="new-arrivals-container__new-product-div">
       <div id="new-arrivals-container__image-div">
         <%= image_tag "new-arrival.png", id: "new-arrivals-container__img", alt: "new arrival shoes" %>
-        <span id="new-arrivals-container__price">U$ 250,00<span>
+        <span id="new-arrivals-container__price">$ 250,00<span>
       </div>
       <h3>
        Adicolor Classics Crop Hoodie
@@ -16,4 +16,6 @@
       </span>
     </div>
   <% end %>
+  <%= image_tag "icons/angle-down", alt: "left-arrow", class: "new-arrivals-container__left-arrow" %>
+  <%= image_tag "icons/angle-down", alt: "right-arrow", class: "new-arrivals-container__right-arrow" %>
 </div>

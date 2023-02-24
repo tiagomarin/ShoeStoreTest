@@ -13,58 +13,70 @@
           <%= image_tag "no-product-image.png", id: "order-container__image" %>
         <% end %>
     </div>
+
     <div>
-      <p>
-        <strong>Product:</strong>
+      <h3>
         <%= product.name %>
-      </p>
+      </h3>
         <% end %>
+      
       <p>
-        <strong>Description:</strong>
         <%= product.description %>
       </p>
   
       <p>
         <strong>Unit price:</strong>
-        <%= product.price %>
+        <%= number_to_currency(product.price) %>
       </p>
+
       <p>
         <strong>Product Discount:</strong>
-        <%= product.discount %>
+        <%= product.discount %>%
       </p>
+
       <p>
         <strong>Unit price With Discount:</strong>
-        <%= unit_w_d = (product.price * (1 - (product.discount.to_f/100))).ceil(2) %>
+        <%= number_to_currency(unit_w_d = (product.price * (1 - (product.discount.to_f/100))).ceil(2)) %>
       </p>
-        <%= form_with model: OrderItem, url: user_order_order_item_path(current_user, @order, item), method: :patch do |form| %>
-          <div>
-            <strong>quantity:</strong>
-            <%= form.number_field :quantity, value: item.quantity %>
-            <%= form.submit "update quantity" %>
-          </div>
-        <% end %>
+
       <p>
         <strong>Total price With Discount:</strong>
-        <%= unit_w_d * item.quantity %>
+        <%= number_to_currency(unit_w_d * item.quantity) %>
       </p>
       <p>
         <strong>Promo Code:</strong>
-        <%= item.code_discount %>
+        <%= item.code_discount %>%
       </p>
       <p>
         <strong>Total price with discount and coupon:</strong>
-        <%= item.total_price %>
+        <%= number_to_currency(item.total_price) %>
       </p>
   
       <% if product.quantity <= 15 %>
-        <p>
+        <p id="order-container__few-left">
           <%= image_tag "icons/clock", alt: "clock", class: "nav-container-icon" %>
           <strong>Just a few left. Order soon.</strong>
         </p>
       <% end %>
 
-      <%= button_to "Remove from shopping cart", user_order_order_item_path(current_user, @order, item), method: :delete %>
+      <%= form_with model: OrderItem, url: user_order_order_item_path(current_user, @order, item), method: :patch do |form| %>
+        <div>
+          <strong>Quantity:</strong>
+          <%= form.number_field :quantity, value: item.quantity, id: "order-container__quantity-input" %>
+          <%= form.submit "update", id: "order-container__quantity-button" %>
+        </div>
+      <% end %>
+
+      <div id="order-container__order-item-buttons">
+        <%= button_to user_order_order_item_path(current_user, @order, item), method: :delete, class: "order-container__order-item-button" do %>
+          <%= image_tag "icons/heart.png", class: "order-container__order-item-icon" %>
+        <% end %>
+
+        <%= button_to user_order_order_item_path(current_user, @order, item), method: :delete, class: "order-container__order-item-button" do %>
+          <%= image_tag "icons/trash.png", class: "order-container__order-item-icon" %>
+        <% end %>
       </div>
     </div>
+  </div>
   <% end %>
 </div>

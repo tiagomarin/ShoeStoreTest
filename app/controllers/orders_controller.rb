@@ -14,6 +14,13 @@ class OrdersController < ApplicationController
   # GET /orders/1 or /orders/1.json
   def show
     @render_order = false
+    @subtotal = 0
+    @discount = 0
+    @order.order_items.each do |order_item|
+      product = Product.find(order_item.product_id)
+      @subtotal += product.price * order_item.quantity
+      @discount += ((product.price * order_item.quantity) * product.discount) / 100
+    end
   end
 
   # GET /orders/new
