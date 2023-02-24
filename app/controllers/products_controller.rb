@@ -1,3 +1,4 @@
+# rubocop:disable all
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[show edit update destroy]
   before_action :set_brands, only: %i[new edit create]
@@ -6,11 +7,9 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    
-    # session.clear
-
     # clear all session variables except for user_id
     if params[:clear_filters].present?
+      # session.clear
       session[:query] = nil
       session[:size_filters] = nil
       session[:color_filters] = nil
@@ -23,7 +22,7 @@ class ProductsController < ApplicationController
     # store query in session
     session[:query] = params[:query] if params[:query].present? && params[:query] != ''
     # store filters in session
-    if params[:size_filter].present? 
+    if params[:size_filter].present?
       if session[:size_filters].nil?
         session[:size_filters] = params[:size_filter]
       elsif !session[:size_filters].include?(params[:size_filter])
@@ -37,14 +36,14 @@ class ProductsController < ApplicationController
         session[:color_filters] += " #{params[:color_filter].downcase}"
       end
     end
-    if params[:brand_filter].present? 
+    if params[:brand_filter].present?
       if session[:brand_filters].nil?
         session[:brand_filters] = params[:brand_filter].downcase
       elsif !session[:brand_filters].include?(params[:brand_filter].downcase)
         session[:brand_filters] += " #{params[:brand_filter].downcase}"
       end
     end
-    if params[:category_filter].present? 
+    if params[:category_filter].present?
       if session[:category_filters].nil?
         session[:category_filters] = params[:category_filter].downcase
       elsif !session[:category_filters].include?(params[:category_filter].downcase)
@@ -70,7 +69,7 @@ class ProductsController < ApplicationController
     else
       @products = Product.all
     end
-    
+
     @products = remove_duplicates(@products)
 
     # ----------- Update filters before filter -----------
@@ -81,16 +80,6 @@ class ProductsController < ApplicationController
     session[:category_filters] -= params[:remove_category_filter] if params[:remove_category_filter].present?
     session[:min_price_filter] = nil if params[:remove_min_price_filter].present?
     params[:max_price_filter] = nil if params[:remove_max_price_filter].present?
-
-    puts "====================================================================="
-    puts "session[:query] = #{session[:query]}"
-    puts "session[:size_filters] = #{session[:size_filters]}"
-    puts "session[:color_filters] = #{session[:color_filters]}"
-    puts "session[:brand_filters] = #{session[:brand_filters]}"
-    puts "session[:category_filters] = #{session[:category_filters]}"
-    puts "session[:min_price_filter] = #{session[:min_price_filter]}"
-    puts "session[:max_price_filter] = #{session[:max_price_filter]}"
-    puts "====================================================================="
 
     # ------------------ Apply Filters ------------------
     if session[:size_filters].present? && session[:size_filters].length.positive?

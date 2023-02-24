@@ -1,4 +1,5 @@
 const productsController = () => {
+  console.log("came here 0")
   // Hide and show filters that personalize search results
   const filtersBtn = document.querySelector(".products-container__header-filter-btn")
   const filters = document.querySelector(".products-container__filters")
@@ -16,8 +17,12 @@ const productsController = () => {
   })
 
   // ---------------------------------- Filter products begin ----------------------------------
+  // UL list that will display applied filters
+  const filtersApplied = document.querySelector(".products-container__applied-filters-list")
+
   // Check if the filter already exists in the list of applied filters
   function filterExists(filter) {
+    console.log("came here 1")
     let appliedFiltersNodeList = document.querySelectorAll(".products-container__header-filters-applied-item")
     if (appliedFiltersNodeList.length === 0) {
       return false
@@ -32,6 +37,7 @@ const productsController = () => {
 
   // Add filter to the list of applied filters
   function addFilterLi(filter, filterType) {
+    console.log("came here 2")
     let li = document.createElement("li")
     li.classList.add("products-container__header-filters-applied-item")
 
@@ -56,53 +62,28 @@ const productsController = () => {
     filtersApplied.appendChild(li)
   }
 
-  // UL list that will display applied filters
-  const filtersApplied = document.querySelector(".products-container__applied-filters-list")
 
+
+
+  // get params from url search if they are present
   let search = window.location.search.split(/[?&=]/)
-  let query = search[2]
+  console.log("search: ", search[2].toLowerCase())
 
-  // get size filter from the url
+  let query = ""
+  if (search.includes("query")) { query = search[2] }
   let sizeFilter = ""
-  if (search.includes("size_filter")) {
-    let sizeFilterIndex = search.indexOf("size_filter") + 1
-    sizeFilter = search[sizeFilterIndex].toLowerCase()
-  }
-
-  // get color filter from the url
+  if (search.includes("size_filter")) { sizeFilter = search[2].toLowerCase() }
   let colorFilter = ""
-  if (search.includes("color_filter")) {
-    let colorFilterIndex = search.indexOf("color_filter") + 1
-    colorFilter = search[colorFilterIndex].toLowerCase()
-  }
-
-  // get brand from the url
+  if (search.includes("color_filter")) { colorFilter = search[2].toLowerCase() }
+  console.log(colorFilter)
   let brandFilter = ""
-  if (search.includes("brand_filter")) {
-    let brandIndex = search.indexOf("brand_filter") + 1
-    brandFilter = search[brandIndex].toLowerCase()
-  }
-
-  // get category from the url
+  if (search.includes("brand_filter")) { brandFilter = search[2].toLowerCase() }
   let categoryFilter = ""
-  if (search.includes("category_filter")) {
-    let categoryIndex = search.indexOf("category_filter") + 1
-    categoryFilter = search[categoryIndex].toLowerCase()
-  }
-
-  // get min price from the url
+  if (search.includes("category_filter")) { categoryFilter = search[2].toLowerCase() }
   let minPriceFilter = ""
-  if (search.includes("min_price_filter")) {
-    let minPriceIndex = search.indexOf("min_price_filter") + 1
-    minPriceFilter = search[minPriceIndex]
-  }
-
-  // get max price from the url
+  if (search.includes("min_price_filter")) { minPriceFilter = search[2] }
   let maxPriceFilter = ""
-  if (search.includes("max_price_filter")) {
-    let maxPriceIndex = search.indexOf("max_price_filter") + 1
-    maxPriceFilter = search[maxPriceIndex]
-  }
+  if (search.includes("max_price_filter")) { maxPriceFilter = search[2] }
 
   // add valid li element to the list of applied filters if it doesn't already exist
   if (sizeFilter !== "" && !filterExists(sizeFilter)) { addFilterLi(sizeFilter, "size") }
