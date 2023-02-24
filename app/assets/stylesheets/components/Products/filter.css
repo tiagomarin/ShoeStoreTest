@@ -1,0 +1,11 @@
+.products-container__filter-sizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.products-container__sizes li > button {
+  border: 1px solid #ccc;
+  background-color: #fff;
+  padding: 0.3rem 0.5rem;
+}

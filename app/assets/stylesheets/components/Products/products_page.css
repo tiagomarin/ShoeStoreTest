@@ -1,0 +1,137 @@
+.products-container {
+  position: relative;
+}
+
+.products-container__header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.products-container__header-options {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+}
+
+.products-container__header-options > * {
+  height: 100%;
+}
+
+.products-container__header-options button {
+  padding: var(--lateral-padding-1);
+  border: none;
+}
+
+.products-container__header-sort-selection {
+  display: none;
+  position: absolute;
+  top: 1.6rem;
+  right: 1rem;
+  background: #000;
+  color: #fff;
+  height: 0;
+  padding: 0 18px;
+  width: auto;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.products-container__header-sort-selection.sort-selection_active {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
+.products-container__main {
+  display: flex;
+}
+
+.products-container__filters {
+  display: none;
+  flex-direction: column;
+  gap: var(--space-m);
+  width: 20vw;
+  border: 1px solid black;
+}
+
+.products-container__filters.filters_active {
+  display: flex;
+}
+
+.products-container__grid {
+  display: flex;
+  width: 100vw;
+}
+
+.products-container__grid.filters_active {
+  width: 80vw;
+}
+
+#products {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+}
+
+.products-container__product-card {
+  width: 30%;
+}
+
+.products-container__product-card-img {
+  position: relative;
+}
+
+.products-container__product-card img {
+  width: 100%;
+  aspect-ratio: 1/1;
+}
+
+.products-container__product-card-img span {
+  position: absolute;
+  bottom: 0;
+  left: 0.2rem;
+  display: flex;
+  align-items: center;
+  padding: 0.2rem;
+}
+
+.products-container__product-card-price {
+  background-color: #fff;
+  padding: 0.2rem;
+}
+
+.products-container__product-card-price.discounted {
+  color: grey;
+  text-decoration: line-through;
+}
+
+.products-container__product-card-price.with-discount {
+  color: red;
+}
+
+.products-container__color-carrousel {
+  display: flex;
+  justify-content: flex-start;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  gap: 0.5rem;
+  height: 3rem;
+
+  --slide-count: 5;
+}
+
+.products-container__color-carrousel-options {
+  scroll-snap-align: start;
+}
+
+.products-container__color-img {
+  height: 2.25rem;
+  aspect-ratio: 1/1;
+}

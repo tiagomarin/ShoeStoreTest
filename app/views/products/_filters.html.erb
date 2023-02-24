@@ -1,0 +1,110 @@
+ <div class="products-container__filters filters_active">
+
+    <div>
+      <strong>Applied filters:</strong>
+      <ul class="products-container__applied-filters-list">
+      </ul>
+      <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
+        <button 
+          name="clear_filters" 
+          type="submit"
+          id="clear_filters" 
+          value=clear_filters
+          data-action="input->search-form#search"
+          >
+          Clear Filters
+        </button>
+      <% end %>
+    </div> 
+
+    <div>
+      <strong>Size:</strong>
+      <ul class="products-container__filter-sizes">
+        <% [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14].each do |size| %>
+          <li class="products-container__filter-sizes-item">
+            <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
+              <button 
+                name="size_filter" 
+                type="submit" 
+                id="size_filter" 
+                value=<%= size %>>
+                <%= size %> 
+              </button>
+            <% end %>
+          </li>
+        <% end %>
+      </ul> 
+    </div>
+
+    <div>
+      <strong>Color:</strong>
+      <ul class="products-container__filter-colors">
+        <% ["Blue", "Black", "White", "Red", "Pink", "Purple", "Orange", "Green", "Yellow", "Grey", "Cyan", "Violet", "Brown"].each do |color| %>
+          <li class="products-container__filter-colors-item">
+            <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
+              <button 
+                name="color_filter" 
+                type="submit" 
+                id="color-filter"
+                value=<%= color %>
+                <%= color %> 
+              </button>
+            <% end %>
+          </li>
+        <% end %>
+      </ul> 
+    </div>
+
+    <div>
+      <strong>Brand:</strong>
+      <ul class="products-container__filter-brands">
+        <% ["Nike", "Addidas"].each do |brand| %>
+          <li class="products-container__filter-brands-item">
+            <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
+              <button 
+                name="brand_filter" 
+                type="submit" 
+                id="brand-filter"
+                value=<%= brand %>>
+                <%= brand %> 
+              </button>
+            <% end %>
+          </li>
+        <% end %>
+      </ul> 
+    </div>
+
+    <div>
+      <strong>Category:</strong>
+      <ul class="products-container__filter-categories">
+        <% ["Running", "Casual", "Gym", "Style", "Street"].each do |category| %>
+          <li class="products-container__filter-categories-item">
+            <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
+              <button 
+                name="category_filter" 
+                type="submit" 
+                id="category-filter"
+                value=<%= category %>>
+                <%= category %> 
+              </button>
+            <% end %>
+          </li>
+        <% end %>
+      </ul> 
+    </div>
+
+    <div class="products-container__filter-div">
+      <strong>Price:</strong>
+      <div class="products-container__filter-prices">
+        <span>min</span>
+        <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
+          <%= form.number_field :min_price_filter, data: { action: "input->search-form#search"} %>
+        <% end %>
+        
+        <span>max</span>
+        <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
+          <%= form.number_field :max_price_filter, data: { action: "input->search-form#search"} %>
+        <% end %>
+      </div>
+    </div>
+  </div>

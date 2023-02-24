@@ -127,3 +127,11 @@ h2 {
   font-size: 1.75em;
   color: var(--color-background-6);
 }
+
+ul {
+  list-style-type: none;
+}
+
+[hidden] {
+  display: none !important;
+}
