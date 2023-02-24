@@ -3,12 +3,6 @@
     <div>
       <strong>Applied filters:</strong>
       <ul class="products-container__applied-filters-list">
-        <%# these will be dinamically inserterd and deleted %>
-        <%#
-          <li class="products-container__header-filters-applied-item">Hard Coded 1</li>
-          <li class="products-container__header-filters-applied-item">Hard Coded 2</li>
-          <li class="products-container__header-filters-applied-item">Hard Coded 3</li>
-         %>
       </ul> 
     </div> 
 
@@ -18,13 +12,6 @@
         <% [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14].each do |size| %>
           <li class="products-container__filter-sizes-item">
             <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
-              <%= form.hidden_field :query , class:"add_query", value: "" %>
-              <%= form.hidden_field :size_filters_applied , class:"add_size_filters_applied", value: "" %>
-              <%= form.hidden_field :color_filters_applied , class:"add_color_filters_applied", value: "" %>
-              <%= form.hidden_field :brand_filters_applied , class:"add_brand_filters_applied", value: "" %>
-              <%= form.hidden_field :category_filters_applied , class:"add_category_filters_applied", value: "" %>
-              <%= form.hidden_field :min_price_filters_applied , class:"add_min_price_filter_applied", value: "" %>
-              <%= form.hidden_field :max_price_filters_applied , class:"add_max_price_filter_applied", value: "" %>
               <button 
                 name="size_filter" 
                 type="submit" 
@@ -45,13 +32,6 @@
         <% ["Blue", "Black", "White", "Red", "Pink", "Purple", "Orange", "Green", "Yellow", "Grey", "Cyan", "Violet", "Brown"].each do |color| %>
           <li class="products-container__filter-colors-item">
             <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
-              <%= form.hidden_field :query , class:"add_query", value: "" %>
-              <%= form.hidden_field :size_filters_applied , class:"add_size_filters_applied", value: "" %>
-              <%= form.hidden_field :color_filters_applied , class:"add_color_filters_applied", value: "" %>
-              <%= form.hidden_field :brand_filters_applied , class:"add_brand_filters_applied", value: "" %>
-              <%= form.hidden_field :category_filters_applied , class:"add_category_filters_applied", value: "" %>
-              <%= form.hidden_field :min_price_filters_applied , class:"add_min_price_filter_applied", value: "" %>
-              <%= form.hidden_field :max_price_filters_applied , class:"add_max_price_filter_applied", value: "" %>
               <button 
                 name="color_filter" 
                 type="submit" 
@@ -72,13 +52,6 @@
         <% ["Nike", "Addidas"].each do |brand| %>
           <li class="products-container__filter-brands-item">
             <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
-              <%= form.hidden_field :query , class:"add_query", value: "" %>
-              <%= form.hidden_field :size_filters_applied , class:"add_size_filters_applied", value: "" %>
-              <%= form.hidden_field :color_filters_applied , class:"add_color_filters_applied", value: "" %>
-              <%= form.hidden_field :brand_filters_applied , class:"add_brand_filters_applied", value: "" %>
-              <%= form.hidden_field :category_filters_applied , class:"add_category_filters_applied", value: "" %>
-              <%= form.hidden_field :min_price_filters_applied , class:"add_min_price_filter_applied", value: "" %>
-              <%= form.hidden_field :max_price_filters_applied , class:"add_max_price_filter_applied", value: "" %>
               <button 
                 name="brand_filter" 
                 type="submit" 
@@ -99,13 +72,6 @@
         <% ["Running", "Casual", "Gym", "Style", "Street"].each do |category| %>
           <li class="products-container__filter-categories-item">
             <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
-              <%= form.hidden_field :query , class:"add_query", value: "" %>
-              <%= form.hidden_field :size_filters_applied , class:"add_size_filters_applied", value: "" %>
-              <%= form.hidden_field :color_filters_applied , class:"add_color_filters_applied", value: "" %>
-              <%= form.hidden_field :brand_filters_applied , class:"add_brand_filters_applied", value: "" %>
-              <%= form.hidden_field :category_filters_applied , class:"add_category_filters_applied", value: "" %>
-              <%= form.hidden_field :min_price_filters_applied , class:"add_min_price_filter_applied", value: "" %>
-              <%= form.hidden_field :max_price_filters_applied , class:"add_max_price_filter_applied", value: "" %>
               <button 
                 name="category_filter" 
                 type="submit" 
@@ -125,23 +91,11 @@
       <div class="products-container__filter-prices">
         <span>min</span>
         <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
-          <%= form.hidden_field :query , class:"add_query", value: "" %>
-          <%= form.hidden_field :size_filters_applied , class:"add_size_filters_applied", value: "" %>
-          <%= form.hidden_field :color_filters_applied , class:"add_color_filters_applied", value: "" %>
-          <%= form.hidden_field :brand_filters_applied , class:"add_brand_filters_applied", value: "" %>
-          <%= form.hidden_field :category_filters_applied , class:"add_category_filters_applied", value: "" %>
-          <%= form.hidden_field :max_price_filters_applied , class:"add_max_price_filter_applied", value: "" %>
           <%= form.number_field :min_price_filter, data: { action: "input->search-form#search"} %>
         <% end %>
         
         <span>max</span>
         <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
-          <%= form.hidden_field :query , class:"add_query", value: "" %>
-          <%= form.hidden_field :size_filters_applied , class:"add_size_filters_applied", value: "" %>
-          <%= form.hidden_field :color_filters_applied , class:"add_color_filters_applied", value: "" %>
-          <%= form.hidden_field :brand_filters_applied , class:"add_brand_filters_applied", value: "" %>
-          <%= form.hidden_field :category_filters_applied , class:"add_category_filters_applied", value: "" %>
-          <%= form.hidden_field :min_price_filters_applied , class:"add_min_price_filter_applied", value: "" %>
           <%= form.number_field :max_price_filter, data: { action: "input->search-form#search"} %>
         <% end %>
       </div>

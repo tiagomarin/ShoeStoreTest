@@ -3,12 +3,59 @@ class ProductsController < ApplicationController
   before_action :set_brands, only: %i[new edit create]
   before_action :set_categories, only: %i[new edit create]
   before_action :set_product_categories, only: %i[show update]
-  before_action :set_query, only: %i[index]
 
   # GET /products or /products.json
   def index
-    if params[:query].present? && params[:query] != ''
-      queries = params[:query].downcase.split # split query into array of words
+    
+    # session.clear
+
+    # clear all session variables except for user_id
+    if params[:clear_filters].present?
+      session[:query] = nil
+      session[:size_filters] = nil
+      session[:color_filters] = nil
+      session[:brand_filters] = nil
+      session[:category_filters] = nil
+      session[:min_price_filter] = nil
+      session[:max_price_filter] = nil
+    end
+
+    # store query in session
+    session[:query] = params[:query] if params[:query].present? && params[:query] != ''
+    # store filters in session
+    if params[:size_filter].present? 
+      if session[:size_filters].nil?
+        session[:size_filters] = params[:size_filter]
+      elsif !session[:size_filters].include?(params[:size_filter])
+        session[:size_filters] += " #{params[:size_filter]}"
+      end
+    end
+    if params[:color_filter].present?
+      if session[:color_filters].nil? || session[:color_filters].empty?
+        session[:color_filters] = params[:color_filter].downcase
+      elsif !session[:color_filters].include?(params[:color_filter].downcase)
+        session[:color_filters] += " #{params[:color_filter].downcase}"
+      end
+    end
+    if params[:brand_filter].present? 
+      if session[:brand_filters].nil?
+        session[:brand_filters] = params[:brand_filter].downcase
+      elsif !session[:brand_filters].include?(params[:brand_filter].downcase)
+        session[:brand_filters] += " #{params[:brand_filter].downcase}"
+      end
+    end
+    if params[:category_filter].present? 
+      if session[:category_filters].nil?
+        session[:category_filters] = params[:category_filter].downcase
+      elsif !session[:category_filters].include?(params[:category_filter].downcase)
+        session[:category_filters] += " #{params[:category_filter].downcase}"
+      end
+    end
+    session[:min_price_filter] = params[:min_price_filter] if params[:min_price_filter].present?
+    session[:max_price_filter] = params[:max_price_filter] if params[:max_price_filter].present?
+
+    if params[:query].present? && session[:query] != ''
+      queries = session[:query].downcase.split # split query into array of words
       @products = []
       # add all results from database search to @products without duplicates
       queries.each do |query|
@@ -23,135 +70,47 @@ class ProductsController < ApplicationController
     else
       @products = Product.all
     end
+    
     @products = remove_duplicates(@products)
 
     # ----------- Update filters before filter -----------
     # based on user clicking a button to remove a filter that was applied
-    if params[:remove_size_filter].present?
-      params[:size_filters_applied] = (params[:size_filters_applied].split.map(&:to_f) - [params[:remove_size_filter].to_f]).map(&:to_i).join(' ')
-    end
-    if params[:remove_color_filter].present?
-      params[:color_filters_applied] = (params[:color_filters_applied].split - [params[:remove_color_filter].downcase]).join(' ')
-    end
-    if params[:remove_brand_filter].present?
-      params[:brand_filters_applied] = (params[:brand_filters_applied].split - [params[:remove_brand_filter].downcase]).join(' ')
-    end
-    if params[:remove_category_filter].present?
-      params[:category_filters_applied] = (params[:category_filters_applied].split - [params[:remove_category_filter].downcase]).join(' ')
-    end
-    if params[:remove_min_price_filter].present?
-      params[:min_price_filter] = nil
-    end
-    if params[:remove_max_price_filter].present?
-      params[:max_price_filter] = nil
-    end
-    # ------------------ Filter by SIZE ------------------
-    # both size_filter and size_filters_applied are present
-    if params[:size_filter].present? &&
-       (params[:size_filters_applied].length > 0 if params[:size_filters_applied].present?)
-        size_filters_applied = params[:size_filters_applied].split.map(&:to_f)
-        size_filters_applied |= [params[:size_filter].to_f]
-        @products = filter_size(@products, size_filters_applied)
+    session[:size_filters] -= params[:remove_size_filter] if params[:remove_size_filter].present?
+    session[:color_filters] -= params[:remove_color_filter] if params[:remove_color_filter].present?
+    session[:brand_filters] -= params[:remove_brand_filter] if params[:remove_brand_filter].present?
+    session[:category_filters] -= params[:remove_category_filter] if params[:remove_category_filter].present?
+    session[:min_price_filter] = nil if params[:remove_min_price_filter].present?
+    params[:max_price_filter] = nil if params[:remove_max_price_filter].present?
+
+    puts "====================================================================="
+    puts "session[:query] = #{session[:query]}"
+    puts "session[:size_filters] = #{session[:size_filters]}"
+    puts "session[:color_filters] = #{session[:color_filters]}"
+    puts "session[:brand_filters] = #{session[:brand_filters]}"
+    puts "session[:category_filters] = #{session[:category_filters]}"
+    puts "session[:min_price_filter] = #{session[:min_price_filter]}"
+    puts "session[:max_price_filter] = #{session[:max_price_filter]}"
+    puts "====================================================================="
+
+    # ------------------ Apply Filters ------------------
+    if session[:size_filters].present? && session[:size_filters].length.positive?
+      @products = filter_size(@products, session[:size_filters].split.map(&:to_f))
     end
 
-    # only size_filters_applied is present
-    if params[:size_filters_applied].present? && 
-      params[:size_filters_applied].length > 0 &&
-      !params[:size_filter].present?
-      @products = filter_size(@products, params[:size_filters_applied].split.map(&:to_f))
+    if session[:color_filters].present? && session[:color_filters].length.positive?
+      @products = filter_color(@products, session[:color_filters].split)
     end
-
-    # only size_filters is present
-    if params[:size_filter].present? &&
-      !(params[:size_filters_applied].present? || params[:size_filters_applied].length > 0)
-      @products = filter_size(@products, params[:size_filter].to_f)
+    if session[:brand_filters].present? && session[:brand_filters].length.positive?
+      @products = filter_brand(@products, session[:brand_filters].split)
     end
-    # ------------------ Filter by COLOR ------------------
-    # both color_filter and color_filters_applied are present
-    if params[:color_filter].present? &&
-      (params[:color_filters_applied].length > 0 if params[:color_filters_applied].present?)
-        color_filters_applied = params[:color_filters_applied].split
-        color_filters_applied |= [params[:color_filter].downcase]
-        @products = filter_color(@products, color_filters_applied)
+    if session[:category_filters].present? && session[:category_filters].length.positive?
+      @products = filter_category(@products, session[:category_filters].split)
     end
-
-    # only color_filters_applied is present
-    if params[:color_filters_applied].present? &&
-       params[:color_filters_applied].length > 0 &&
-       !params[:color_filter].present?
-      @products = filter_color(@products, params[:color_filters_applied].split)
+    if session[:min_price_filters].present? && session[:min_price_filters].length.positive?
+      @products = filter_min_price(@products, session[:min_price_filters].split.map(&:to_f))
     end
-
-    # only color_filters is present
-    if params[:color_filter].present? &&
-      !(params[:color_filters_applied].present? || params[:color_filters_applied].length > 0)
-      @products = filter_color(@products, params[:color_filter].downcase)
-    end
-
-    # ------------------ Filter by BRAND ------------------
-    # both brand_filter and brand_filters_applied are present
-    if params[:brand_filter].present? &&
-       (params[:brand_filters_applied].length > 0 if params[:brand_filters_applied].present?)
-      brand_filters_applied = params[:brand_filters_applied].split
-      brand_filters_applied |= [params[:brand_filter].downcase]
-      @products = filter_brand(@products, brand_filters_applied)
-    end
-        
-    # only brand_filters_applied is present
-    if params[:brand_filters_applied].present? &&
-       params[:brand_filters_applied].length > 0 &&
-       !params[:brand_filter].present?
-      @products = filter_brand(@products, params[:brand_filters_applied].split)
-    end
-
-    # only brand_filters is present
-    if params[:brand_filter].present? &&
-      !(params[:brand_filters_applied].present? || params[:brand_filters_applied].length > 0)
-      @products = filter_brand(@products, params[:brand_filter].downcase)
-    end
-
-    # ------------------ Filter by CATEGORY ------------------
-    # both category_filter and category_filters_applied are present
-    if params[:category_filter].present? &&
-       (params[:category_filters_applied].length > 0 if params[:category_filters_applied].present?)
-      category_filters_applied = params[:category_filters_applied].split
-      category_filters_applied |= [params[:category_filter].downcase]
-      @products = filter_category(@products, category_filters_applied)
-    end
-    
-    # only category_filters_applied is present
-    if params[:category_filters_applied].present? &&
-       params[:category_filters_applied].length > 0 &&
-       !params[:category_filter].present?
-      @products = filter_category(@products, params[:category_filters_applied].split)
-    end
-
-    # only category_filters is present
-    if params[:category_filter].present? &&
-      !(params[:category_filters_applied].present? || params[:category_filters_applied].length > 0)
-      @products = filter_category(@products, params[:category_filter].downcase)
-    end
-
-    # ------------------ Filter by PRICE ------------------
-
-    if params[:min_price_filter].present?
-      @products = filter_min_price(@products, params[:min_price_filter])
-    end
-
-    if params[:min_price_filters_applied].present? &&
-       params[:min_price_filters_applied].length > 0 &&
-       !params[:min_price_filter].present?
-      @products = filter_min_price(@products, params[:min_price_filters_applied])
-    end
-    
-    if params[:max_price_filter].present?
-      @products = filter_max_price(@products, params[:max_price_filter] || params[:max_price_filters_applied])
-    end
-
-    if params[:max_price_filters_applied].present? &&
-       params[:max_price_filters_applied].length > 0 &&
-       !params[:max_price_filter].present?
-      @products = filter_max_price(@products, params[:max_price_filters_applied])
+    if session[:max_price_filter].present? && session[:max_price_filters].length.positive?
+      @products = filter_max_price(@products, session[:max_price_filters].split.map(&:to_f))
     end
 
     if turbo_frame_request?
@@ -237,7 +196,7 @@ class ProductsController < ApplicationController
   def filter_color(products, colors)
     filtered = []
     products_by_color = Product.where(color: colors)
-    products.each do |product| 
+    products.each do |product|
       filtered << product if products_by_color.include?(product)
     end
     filtered
@@ -265,8 +224,8 @@ class ProductsController < ApplicationController
   def filter_min_price(products, min_price)
     filtered = []
     products_by_min_price = Product.where('price >= ?', min_price)
-    products.each do |product| 
-      filtered << product if products_by_min_price.include?(product)      
+    products.each do |product|
+      filtered << product if products_by_min_price.include?(product)
     end
     filtered
   end
@@ -274,18 +233,10 @@ class ProductsController < ApplicationController
   def filter_max_price(products, max_price)
     filtered = []
     products_by_max_price = Product.where('price <= ?', max_price)
-    products.each do |product| 
-      filtered << product if products_by_max_price.include?(product)      
+    products.each do |product|
+      filtered << product if products_by_max_price.include?(product)
     end
     filtered
-  end
-
-  def set_query
-    if params[:query].present?
-      @query |= params[:query].downcase.split
-    else
-      @query= []
-    end
   end
 
   # get all products without duplicates based on size
