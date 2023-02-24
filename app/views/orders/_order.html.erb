@@ -1,29 +1,49 @@
-<div id="<%= dom_id order %>" style="background-color: grey; padding: 10px">
+<div id="<%= dom_id order %>" class="orders-container__order">
+  <p>
+    <% if order.status == "Shopping Cart" %>
+      <div id="orders-container__green">
+        <strong>Status:</strong>
+        <%= order.status %>
+      </div>
+    <% else %>
+      <div id="orders-container__red">
+        <strong>Status:</strong>
+        <%= order.status %>
+      </div>
+    <% end %>
+  </p>
+
+  <p>
+    <strong>Order #</strong>
+    <%= order.id %>
+  </p>
+
   <p>
     <strong>Total price:</strong>
-    <%= order.order_items.sum(:total_price) %>
+    <%= number_to_currency(order.order_items.sum(:total_price)) %>
   </p>
 
   <p>
-    <strong>Status:</strong>
-    <%= order.status %>
-  </p>
+    <% if order.promo_codes.length > 0 %>
+      <div class="order-container__coupons-applied">
+        <strong>Coupons Applied</strong>
+        <%= image_tag "icons/angle-down.png", id: "order-container__promo-icon" %>
+      </div>
 
-  <p>
-    <strong>Coupons Applied:</strong>
-    <% order.promo_codes.each do |promo_code| %>
-    <div style="display: flex; gap: 5px; background-color: #FFCCCB; padding: 5px; width: max-content;">
-      <%= promo_code.title %>
-      <%= form_for order, url: remove_promo_code_user_order_path(current_user, order) do |f| %>
-        <div class="field">
+      <div class="orders-container__promo-codes-div">
+      <% order.promo_codes.each do |promo_code| %>
+        <div class="orders-container__promo-code">
+        <%= promo_code.title %>
+        <%= form_for order, url: user_order_path(current_user, order) do |f| %>
           <%= f.hidden_field :promo_code, value: "#{promo_code.title}" %>
+          <%= f.submit "Remove Code", class: "orders-container__remove-promo-button" %>
+        <% end %>
         </div>
-
-        <div class="actions">
-          <%= f.submit "Remove Code" %>
-        </div>
-      <% end %>
-    </div>
+        <% end %>
+      </div>
+    <% else %>
+      <strong>Coupons Applied:</strong>
+      No coupons applied
     <% end %>
   </p>
 </div>

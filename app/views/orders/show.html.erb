@@ -1,39 +1,63 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @order %>
+<section id="order-container">
+  <%= render @order %>
 
-<%= render "orders/order_items" %>
-
-<button>Add Code</button>
-
-<div style="background-color: WhiteSmoke; padding:20px; border: 1px solid black; margin: 10px 0">
-  <%= form_for @order, url: add_promo_code_user_order_path(current_user, @order) do |f| %>
-      <div class="field">
-        <%= f.text_field :promo_code, value: "" %>
+  <div id="order-container__grid">
+    <%= render "orders/order_items" %>
+    <div id="order-container__summary">
+      <h3>Summary</h3>
+      <div id="order-container__summary-information">
+        <div class="order-container__arrow-down-div">
+          <p>Do you have a promo code?</p>
+          <%= image_tag "icons/angle-down", alt: "arrow down", class: "order-container-icon" %>
+        </div>
+        <div id="order-container__hidden-promo">
+            <%= form_for @order, url: user_order_path(current_user, @order) do |f| %>
+              <%= f.text_field :promo_code, value: "", id: "order-container__summary-promo-input", placeholder: "Insert coupon" %>
+          
+              <%= f.submit "Apply Code", id: "order-container__summary-promo-button" %>
+            <% end %>
+          </div>
+        <div class="order-container__summary-space-between">
+          <p>Subtotal</p>
+          <p><%= number_to_currency(@subtotal) %></p>
+        </div>
+        <div class="order-container__summary-space-between">
+          <p>Discount</p>
+          <p><%= number_to_currency(@discount) %></p>
+        </div>
+        <div class="order-container__summary-space-between">
+          <p>Cupom</p>
+          <p><%= number_to_currency(@coupons_discount) %></p>
+        </div>
+        <hr>
+        <div class="order-container__summary-space-between">
+          <p>Total</p>
+          <p><%= number_to_currency(@order.order_items.sum(:total_price)) %></p>
+        </div>
+        <hr>
+        <% if @order.status == "Shopping Cart" %>
+          <%= form_for @order, url: user_order_path(current_user, @order) do |f| %>
+            <div class="field">
+              <%= f.hidden_field :status, value: "Purchased" %>
+            </div>
+            <div class="actions">
+              <%= f.submit "CHECKOUT", id: "order-container__checkout-button" %>
+            </div>
+          <% end %>
+        <% end %>
       </div>
-
-      <div class="actions">
-        <%= f.submit "Apply Code" %>
-      </div>
-  <% end %>
-</div>
-
-<% if @order.status == "Shopping Cart" %>
-  <%= form_for @order, url: user_order_path(current_user, @order) do |f| %>
-    <div class="field">
-      <%= f.hidden_field :status, value: "Purchased" %>
     </div>
-
-    <div class="actions">
-      <%= f.submit "PAY" %>
-    </div>
-  <% end %>
-<% end %>
-
-<div>
-  <%= link_to "Edit this order", edit_user_order_path(current_user, @order) %> |
-  <%= button_to "Destroy this order", user_order_path(current_user, @order), method: :delete %>
-  <%# verify if adm's gonna be able to destroy or not %>
-</div>
-
-<%= link_to "Promo Codes", promo_codes_path %>
+  </div>
+  
+  <div id="order-container__administrator-buttons">
+    <%= link_to "Promo Codes", promo_codes_path, class: "order-container__button" %>
+    <%= link_to "Edit this order", edit_user_order_path(current_user, @order), class: "order-container__button" %>
+    <%= button_to "Destroy this order", user_order_path(current_user, @order), method: :delete, class: "order-container__button" %>
+    <%# verify if adm's gonna be able to destroy or not %>
+  </div>
+  
+  <h2>You might also like</h2>
+  <%= render "home/new-arrivals" %>
+</section>

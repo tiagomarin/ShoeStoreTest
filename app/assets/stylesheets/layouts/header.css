@@ -1,28 +1,28 @@
 #header-container {
   display: none;
-  padding: 0 1rem;
+  padding: var(--lateral-padding-1);
 }
 
 @media (min-width: 768px) {
   #header-container {
-    background-color: rgb(32, 37, 41);
-    color: white;
+    background-color: var(--color-background-5);
+    color: var(--color-background-1);
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 2rem;
-    padding: 0 3rem;
+    padding: var(--lateral-padding-3);
   }
 
   #header-container__icon-text {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--gap-0);
   }
 
   #header-container__shopping-cart {
     text-decoration: none;
-    color: white;
+    color: var(--color-background-1);
   }
 
   .header-container-icon {
@@ -34,11 +34,11 @@
   #header-container__ul {
     display: flex;
     list-style-type: none;
-    gap: 1rem;
+    gap: var(--gap-1);
   }
 
   #header-container__ul li:nth-child(even) {
-    background-color: white;
+    background-color: var(--color-background-1);
     width: 1px;
     min-height: 100%;
   }

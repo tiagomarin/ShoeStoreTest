@@ -7,12 +7,16 @@ class ProductsController < ApplicationController
   # GET /products or /products.json
   def index
     if params[:query].present?
-      @products = Product.where('lower(name) LIKE ?', "%#{params[:query].downcase}%")
-      @products |= Product.where('lower(color) LIKE ?', "%#{params[:query].downcase}%")
-      @products |= Product.where('lower(description) LIKE ?', "%#{params[:query].downcase}%")
-      @products |= Product.where('lower(gender) LIKE ?', "%#{params[:query].downcase}%")
-      @products |= Product.joins(:brand).where('lower(brands.name) LIKE ?', "%#{params[:query].downcase}%")
-      @products |= Product.joins(:category).where('lower(categories.name) LIKE ?', "%#{params[:query].downcase}%")
+      queries = params[:query].downcase.split # split query into
+      @products = []
+      queries.each do |query|
+        @products |= Product.where('lower(name) LIKE ?', "%#{query}%")
+        @products |= Product.where('lower(color) LIKE ?', "%#{query}%")
+        @products |= Product.where('lower(description) LIKE ?', "%#{query}%")
+        @products |= Product.where('lower(gender) LIKE ?', "%#{query}%")
+        @products |= Product.joins(:brand).where('lower(brands.name) LIKE ?', "%#{query}%")
+        @products |= Product.joins(:category).where('lower(categories.name) LIKE ?', "%#{query}%")
+      end
     else
       @products = Product.all
     end
