@@ -50,8 +50,12 @@ class ProductsController < ApplicationController
         session[:category_filters] += " #{params[:category_filter].downcase}"
       end
     end
-    session[:min_price_filter] = params[:min_price_filter] if params[:min_price_filter].present?
-    session[:max_price_filter] = params[:max_price_filter] if params[:max_price_filter].present?
+    session[:min_price_filter] = params[:min_price_filter] if params[:min_price_filter].present? && params[:min_price_filter] != ''
+    puts "params min price: #{params[:min_price_filter]}"
+    puts "session min price: #{session[:min_price_filter]}"
+    session[:max_price_filter] = params[:max_price_filter] if params[:max_price_filter].present? && params[:max_price_filter] != ''
+    puts "params max price: #{params[:max_price_filter]}"
+    puts "session max price: #{session[:max_price_filter]}"
 
     if params[:query].present? && session[:query] != ''
       queries = session[:query].downcase.split # split query into array of words
@@ -95,11 +99,13 @@ class ProductsController < ApplicationController
     if session[:category_filters].present? && session[:category_filters].length.positive?
       @products = filter_category(@products, session[:category_filters].split)
     end
-    if session[:min_price_filters].present? && session[:min_price_filters].length.positive?
-      @products = filter_min_price(@products, session[:min_price_filters].split.map(&:to_f))
+    puts "session min price filters: #{session[:min_price_filter]}"
+    if session[:min_price_filter].present? && session[:min_price_filter].length.positive?
+      @products = filter_min_price(@products, session[:min_price_filter].split.map(&:to_f))
     end
-    if session[:max_price_filter].present? && session[:max_price_filters].length.positive?
-      @products = filter_max_price(@products, session[:max_price_filters].split.map(&:to_f))
+    puts "session max price filter: #{session[:max_price_filter]}"
+    if session[:max_price_filter].present? && session[:max_price_filter].length.positive?
+      @products = filter_max_price(@products, session[:max_price_filter].split.map(&:to_f))
     end
 
     if turbo_frame_request?
