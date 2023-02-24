@@ -17,16 +17,10 @@ class OrderItemsController < ApplicationController
           # find all promo codes applied in this order
           promo_codes = PromoCode.where(id: @order.promo_code_ids)
           code_discount = code_discount(@product, promo_codes) # call method from application_controller.rb
-
-          # calculation steps:
-          final_quantity = item_in_cart.quantity + quantity_requested
-          price_quantity = @product.price * final_quantity
-          product_discount = (1 - (@product.discount.to_f / 100))
-          promo_code_discount = (1 - (code_discount / 100))
-          # calculate the total price
-          total_price = (price_quantity * product_discount * promo_code_discount).ceil(2)
+          quantity = item_in_cart.quantity + quantity_requested
+          total_price = calculate_total_price(@product, quantity, code_discount) # call method from app_controller.rb
           # Update the item in cart
-          item_in_cart.update!(quantity: final_quantity, total_price:, code_discount:)
+          item_in_cart.update!(quantity:, total_price:, code_discount:)
         else
           puts 'Not enough products'
         end
@@ -41,8 +35,11 @@ class OrderItemsController < ApplicationController
 
   def update
     @order_item = OrderItem.find(params[:id])
+    total_price = calculate_total_price(@order_item.product, params[:order_item][:quantity].to_i,
+                                        @order_item.code_discount)
+
     respond_to do |format|
-      if @order_item.update!(quantity: params[:order_item][:quantity])
+      if @order_item.update!(quantity: params[:order_item][:quantity], total_price:)
         format.html do
           redirect_to user_order_path(current_user, @order), notice: 'Quantity was successfully updated.'
         end
