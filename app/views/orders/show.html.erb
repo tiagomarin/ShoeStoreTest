@@ -13,7 +13,7 @@
           <%= image_tag "icons/angle-down", alt: "arrow down", class: "order-container-icon" %>
         </div>
         <div id="order-container__hidden-promo">
-            <%= form_for @order, url: user_order_path(current_user, @order) do |f| %>
+            <%= form_for @order, url: add_promo_code_user_order_path(current_user, @order) do |f| %>
               <%= f.text_field :promo_code, value: "", id: "order-container__summary-promo-input", placeholder: "Insert coupon" %>
           
               <%= f.submit "Apply Code", id: "order-container__summary-promo-button" %>

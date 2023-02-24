@@ -34,7 +34,7 @@
       <% order.promo_codes.each do |promo_code| %>
         <div class="orders-container__promo-code">
         <%= promo_code.title %>
-        <%= form_for order, url: user_order_path(current_user, order) do |f| %>
+        <%= form_for order, url: remove_promo_code_user_order_path(current_user, order) do |f| %>
           <%= f.hidden_field :promo_code, value: "#{promo_code.title}" %>
           <%= f.submit "Remove Code", class: "orders-container__remove-promo-button" %>
         <% end %>
