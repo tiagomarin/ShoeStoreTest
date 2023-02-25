@@ -16,7 +16,7 @@
       <% end %>
 
       <%# list of size filters applied (display none by default)%>
-      <ul class="products-container__filter-sizes">
+      <ul class="products-container__applied-filter-sizes">
         <% [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14].each do |size| %>
           <li class="applied-filters">
             <%= form_with(url: products_path, method: :get, data: { controller: "search-form" , turbo_frame: "products", turbo_action: "advance"}) do |form| %>
@@ -35,7 +35,7 @@
       </ul>
 
       <%# list of color filters applied (display none by default)%>
-      <ul class="products-container__filter-colors">
+      <ul class="products-container__applied-filter-colors">
         <% ["Blue", "Black", "White", "Red", "Pink", "Purple", "Orange", "Green", "Yellow", "Grey", "Cyan", "Violet", "Brown"].each do |color| %>
           <li class="applied-filters">
             <%= form_with(url: products_path, method: :get, data: { controller: "search-form" , turbo_frame: "products", turbo_action: "advance"}) do |form| %>
@@ -54,7 +54,7 @@
       </ul>
       
       <%# list of brand filters applied (display none by default)%>
-      <ul class="products-container__filter-brands">
+      <ul class="products-container__applied-filter-brands">
         <% ["Nike", "Addidas"].each do |brand| %>
           <li class="applied-filters">
             <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
@@ -72,7 +72,7 @@
         <% end %>
       </ul>
       <%# list of category filters applied (display none by default)%>
-      <ul class="products-container__filter-brands">
+      <ul class="products-container__applied-filter-categories">
         <% ["Running", "Casual", "Gym", "Style", "Street"].each do |category| %>
           <li class="applied-filters">
             <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
@@ -90,12 +90,12 @@
         <% end %>
       </ul>
       <%# list of price filters applied (display none by default)%>
-      <ul class="products-container__filter-brands">
+      <ul class="products-container__applied-filter-prices">
         <li id="min-price-filter-applied" class="applied-filters">
           <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
             <button 
               name="remove_min_price_filter" 
-              id="remove_min_price_filter" 
+              id="remove-min-price-filter" 
               value="0"
               type="submit"
               class="applied-filters-btns"
@@ -109,7 +109,7 @@
           <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
             <button 
               name="remove_max_price_filter" 
-              id="remove_max_price_filter" 
+              id="remove-max-price-filter" 
               value=0
               type="submit"
               class="applied-filters-btns"
@@ -219,7 +219,7 @@
         <span>max</span>
         <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
           <%= form.number_field :max_price_filter%>
-          <%= form.submit "filter", id:"min-price-filter-btn", data: { action: "click->search-form#search"} %>
+          <%= form.submit "filter", id:"max-price-filter-btn", data: { action: "click->search-form#search"} %>
         <% end %>
       </div>
     </div>
