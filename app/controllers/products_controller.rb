@@ -78,7 +78,12 @@ class ProductsController < ApplicationController
 
     # ----------- Update filters before filter -----------
     # based on user clicking a button to remove a filter that was applied
-    session[:size_filters] -= params[:remove_size_filter] if params[:remove_size_filter].present?
+    if session[:size_filters].present? && params[:remove_size_filter].present?
+      size_filters = session[:size_filters].split.map(&:to_f)
+      filter_to_remove = params[:remove_size_filter].to_f
+      filtered = size_filters.filter { |size| size != filter_to_remove }
+      session[:size_filters] = filtered.join(' ')
+    end
     session[:color_filters] -= params[:remove_color_filter] if params[:remove_color_filter].present?
     session[:brand_filters] -= params[:remove_brand_filter] if params[:remove_brand_filter].present?
     session[:category_filters] -= params[:remove_category_filter] if params[:remove_category_filter].present?
@@ -107,8 +112,14 @@ class ProductsController < ApplicationController
     if session[:max_price_filter].present? && session[:max_price_filter].length.positive?
       @products = filter_max_price(@products, session[:max_price_filter].split.map(&:to_f))
     end
-
+    
     if turbo_frame_request?
+      @size_filters = session[:size_filters].split if session[:size_filters].present?
+      @color_filters = session[:color_filters].split if session[:color_filters].present?
+      @brand_filters = session[:brand_filters].split if session[:brand_filters].present?
+      @category_filters = session[:category_filters].split if session[:category_filters].present?
+      @min_price_filter = session[:min_price_filter].split.map(&:to_f) if session[:min_price_filter].present?
+      @max_price_filter = session[:max_price_filter].split.map(&:to_f) if session[:max_price_filter].present?
       render partial: 'products', locals: { products: @products }
     else
       render :index

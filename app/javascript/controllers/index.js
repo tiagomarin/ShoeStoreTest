@@ -11,5 +11,5 @@ eagerLoadControllersFrom("controllers", application)
 // lazyLoadControllersFrom("controllers", application)
 
 // Controller to toggle visibility of elements
-// import VisibilityController from "./visibility_controller"
-// application.register("visibility", VisibilityController)
+import VisibilityController from "./visibility_controller"
+application.register("visibility", VisibilityController)

@@ -9,3 +9,15 @@
   background-color: #fff;
   padding: 0.3rem 0.5rem;
 }
+
+.applied-filters {
+  display: none;
+}
+
+.applied-filters.active {
+  display: block;
+}
+
+.options-to-filter.active {
+  background-color: lightblue;
+}
