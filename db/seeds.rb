@@ -68,41 +68,43 @@ tiagoProduct = Product.create!(name: "Tiago Jordan",
 )
 tiagoProduct.category_ids = category_ids.sample(2)
 
-yo_shoe_black = Product.create!(name: "YoShoe",
+5.times do 
+  yo_shoe_black = Product.create!(name: "YoShoe",
+                                  price: 100,
+                                  description: 'Best shoe ever',
+                                  size: (rand(5..14) * 2.0).round / 2.0,
+                                  color: 'black',
+                                  gender: 'male',
+                                  brand: brand2,
+                                  discount: 0,
+                                  quantity: 100
+  )
+  yo_shoe_black.category_ids = category_ids.sample(2)
+
+  yo_shoe_blue = Product.create!(name: "YoShoe",
                                 price: 100,
                                 description: 'Best shoe ever',
-                                size: 5,
-                                color: 'black',
+                                size: (rand(5..14) * 2.0).round / 2.0,
+                                color: 'blue',
                                 gender: 'male',
                                 brand: brand2,
                                 discount: 0,
                                 quantity: 100
-)
-yo_shoe_black.category_ids = category_ids.sample(2)
+  )
+  yo_shoe_blue.category_ids = category_ids.sample(2)
 
-yo_shoe_blue = Product.create!(name: "YoShoe",
-                               price: 100,
-                               description: 'Best shoe ever',
-                               size: 5,
-                               color: 'blue',
-                               gender: 'male',
-                               brand: brand2,
-                               discount: 0,
-                               quantity: 100
-)
-yo_shoe_blue.category_ids = category_ids.sample(2)
-
-yo_shoe_red = Product.create!(name: "YoShoe",
-                              price: 100,
-                              description: 'Best shoe ever',
-                              size: 5,
-                              color: 'red',
-                              gender: 'male',
-                              brand: brand2,
-                              discount: 0,
-                              quantity: 100
-)
-yo_shoe_red.category_ids = category_ids.sample(2)
+  yo_shoe_red = Product.create!(name: "YoShoe",
+                                price: 100,
+                                description: 'Best shoe ever',
+                                size: (rand(5..14) * 2.0).round / 2.0,
+                                color: 'red',
+                                gender: 'male',
+                                brand: brand2,
+                                discount: 0,
+                                quantity: 100
+  )
+  yo_shoe_red.category_ids = category_ids.sample(2)
+end
 
 User.create!(name: 'Vitor', email: 'vgm_rox@hotmail.com', password: 123321)
 User.create!(name: 'Tiago', email: 'tiago.lelinski@gmail.com', password: 123321)

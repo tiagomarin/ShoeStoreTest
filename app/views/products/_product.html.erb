@@ -40,29 +40,21 @@
 
 
 
-    <% if product.name == "YoShoe" %>
-      <div class="products-container__color-carrousel">
-        <% same_product_different_colors(product).map do |p|%>
-          <div id="products-container__color-carrousel-options">
-            <% if p.images.attached? %>
-              <%= link_to(p) do %>
-                <%= image_tag p.images[0], class: "products-container__color-img", alt: "put name and color of product"%>
-              <% end %>  
+    <div class="products-container__color-carrousel">
+      <% same_product_different_colors(product).map do |p|%>
+        <div id="products-container__color-carrousel-options">
+          <% if p.images.attached? %>
+            <%= link_to(p) do %>
+              <%= image_tag p.images[0], class: "products-container__color-img", alt: "put name and color of product"%>
+            <% end %>  
+          <% else %>
+            <%= link_to(p) do %>
+              <%= image_tag "no-product-image.png", class: "products-container__color-img", alt: "put name and color of product"%>
             <% end %>
-          </div>
-        <% end %>
-      </div>
-    <%# REMOVE THIS AFTER DATABASE IS COMPLETE WITH IMAGES %>
-    <% else %>
-
-      <div class="products-container__color-carrousel">
-        <% 8.times do %>
-          <%= image_tag "new-arrival.png", class: "products-container__color-img", alt: "put name and color of product"%>
-        <% end %>
-      </div>
-
-    <% end %>
-    <%# REMOVE THIS AFTER DATABASE IS COMPLETE WITH IMAGES %>  
+          <% end %>
+        </div>
+      <% end %>
+    </div>
 
 
     <% if @product_categories %>
@@ -76,10 +68,13 @@
     
     <% if products_show %>
       <p>
-        <strong>Sizes:</strong>
-        <%= product.size %>
+        <strong>Sizes sizes_available:</strong>
+        <%# show option of sizes%>
+        <% sizes_available(product).each do |e| %>
+          <%= e.size %>
+        <% end %>
       </p>
-      
+      <strong>Color:</strong>
       <p><%= product.color %></p>
       <p><strong>gender:</strong><%= product.gender %></p>
 
@@ -102,7 +97,7 @@
             
         <div>
           <%= form.label :size, style: "display: block" %>
-          <%= form.select :size, [5, 5.5 ,6 ,6.5 ,7 ,7.5 ,8 ,8.5 ,9 ,9.5 ,10 ,10.5 ,11 ,11.5 ,12 ,12.5 ,13 ,13.5 ,14] %>
+          <%= form.select :size, sizes_available(product).map(&:size) %>
         </div>
           
         <div>
