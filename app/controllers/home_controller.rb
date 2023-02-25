@@ -1,3 +1,5 @@
 class HomeController < ApplicationController
-  def index; end
+  def index
+    @new_arrivals = Product.last(10)
+  end
 end

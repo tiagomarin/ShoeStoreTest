@@ -21,19 +21,18 @@ window.addEventListener("scroll", () => {
 
 /* ================================================= */
 
-function toggleDivs() {
-  let div1 = document.getElementById("headline-container__product-1");
-  let div2 = document.getElementById("headline-container__product-2");
+setInterval(() => {
+  let headline_product_1 = document.getElementById("headline-container__product-1");
+  let headline_product_2 = document.getElementById("headline-container__product-2");
   
-  if (div1.style.display !== "none") {
-    div1.style.display = "none";
-    div2.style.display = "flex";
+  if (headline_product_1.style.display !== "none") {
+    headline_product_1.style.display = "none";
+    headline_product_2.style.display = "flex";
   } else {
-    div1.style.display = "flex";
-    div2.style.display = "none";
+    headline_product_1.style.display = "flex";
+    headline_product_2.style.display = "none";
   }
-}
-setInterval(toggleDivs, 3000);
+}, 3000);
 
 /* ================================================= */
 

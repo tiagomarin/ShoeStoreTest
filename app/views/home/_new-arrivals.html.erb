@@ -1,21 +1,22 @@
 <div id="new-arrivals-container__carrousel-div">
-  <% 30.times do %>
+  <% @new_arrivals.each do |product| %>
     <div id="new-arrivals-container__new-product-div">
       <div id="new-arrivals-container__image-div">
-        <%= image_tag "new-arrival.png", id: "new-arrivals-container__img", alt: "new arrival shoes" %>
-        <span id="new-arrivals-container__price">$ 250,00<span>
+        <%= image_tag "YoShoe_blue.jpg", id: "new-arrivals-container__img", alt: "new arrival shoes" %>
+        <span id="new-arrivals-container__price"><%= number_to_currency(product.price) %><span>
       </div>
       <h3>
-       Adicolor Classics Crop Hoodie
+       <%= product.name %>
       </h3>
       <p id="new-arrivals-container__product-description">
-        Women's Original
+        <%= product.description %>
       </p>
       <span>
         <em>New</em>
       </span>
     </div>
   <% end %>
+
   <%= image_tag "icons/angle-down", alt: "left-arrow", class: "new-arrivals-container__left-arrow" %>
   <%= image_tag "icons/angle-down", alt: "right-arrow", class: "new-arrivals-container__right-arrow" %>
 </div>

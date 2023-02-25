@@ -4,7 +4,7 @@
 
 #headline-container__product-1 {
   min-height: calc(100vh - 80px);
-  background-image: url("VitorShoes.png");
+  background-image: url("VitorTest3.png");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -17,7 +17,7 @@
 
 #headline-container__product-2 {
   min-height: calc(100vh - 80px);
-  background-image: url("home-bg-2.jpg");
+  background-image: url("VitorTest2.png");
   background-size: cover;
   background-position: center;
   flex-direction: column;
@@ -29,7 +29,8 @@
 }
 
 .headline-container__button {
-  background-color: var(--color-background-1);
+  background-image: linear-gradient(to right, rgb(18, 18, 19), rgb(32, 32, 32), rgb(32, 32, 33), rgb(18, 18, 19));
+  color: var(--color-text-1);
   border: none;
   padding: 1rem 2rem;
   font-weight: 500;
@@ -37,19 +38,22 @@
   border-radius: var(--border-radius-6);
   cursor: pointer;
   transition: 0.25s;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
 }
 
 .headline-container__button:hover {
   transform: scale(1.02);
   background-color: var(--color-background-2);
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+  color: var(--color-text-1);
+  filter: invert(1);
+  box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.1);
 }
 
 #headline-container__h1 {
   color: var(--color-background-1);
-  font-family: var(--font-family-2);
-  font-weight: 900;
-  font-size: 4em;
+  font-family: var(--font-family-3);
+  font-weight: 100;
+  font-size: 2em;
   text-shadow: 0 0 1rem var(--color-background-6);
 }
 
@@ -294,7 +298,10 @@
   color: var(--color-background-1);
   font-family: var(--font-family-2);
   font-weight: 900;
-  text-shadow: 0 0 2rem var(--color-background-6);
+  text-shadow:
+    0 0 1rem black,
+    0 0 2rem black,
+    0 0 3rem black;
 }
 
 #iconic-products-container__card:hover #iconic-products-container__img {
@@ -312,15 +319,19 @@
 
 .decoration-images-container__image {
   width: 100%;
-  height: 3rem;
+  height: 6rem;
   background-image: url("home-bg-1.jpeg");
   background-attachment: fixed;
   background-size: cover;
   box-shadow: inset 0 0 25px var(--color-background-6);
 }
 
-.decoration-images-container__image:nth-last-child(odd) {
+.decoration-images-container__image:nth-last-child(2) {
   background-image: url("home-bg-2.jpeg");
+}
+
+.decoration-images-container__image:nth-last-child(3) {
+  background-image: url("iconic1.png");
 }
 
 /* ====================================== */
@@ -363,6 +374,10 @@
   background-color: var(--color-background-2);
 }
 
+#email-container input:hover {
+  background-color: rgb(206, 206, 206);
+}
+
 @media (min-width: 768px) {
   #headline-container__product-1 {
     padding: var(--padding-3);
@@ -370,6 +385,10 @@
 
   #headline-container__product-2 {
     padding: var(--padding-3);
+  }
+
+  #headline-container__h1 {
+    font-size: 4em;
   }
 
   #new-arrivals-container {

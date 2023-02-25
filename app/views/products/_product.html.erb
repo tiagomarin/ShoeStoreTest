@@ -32,38 +32,21 @@
         </div>
     <% end %>
 
-
     <p><%= product.name %></p>
     <p><%= product.brand.name %></p>
     <p> colors: <%= same_product_different_colors(product).length + 1  %> </p>
 
-
-
-
-    <% if product.name == "YoShoe" %>
-      <div class="products-container__color-carrousel">
-        <% same_product_different_colors(product).map do |p|%>
-          <div id="products-container__color-carrousel-options">
-            <% if p.images.attached? %>
-              <%= link_to(p) do %>
-                <%= image_tag p.images[0], class: "products-container__color-img", alt: "put name and color of product"%>
-              <% end %>  
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-    <%# REMOVE THIS AFTER DATABASE IS COMPLETE WITH IMAGES %>
-    <% else %>
-
-      <div class="products-container__color-carrousel">
-        <% 8.times do %>
-          <%= image_tag "new-arrival.png", class: "products-container__color-img", alt: "put name and color of product"%>
-        <% end %>
-      </div>
-
-    <% end %>
-    <%# REMOVE THIS AFTER DATABASE IS COMPLETE WITH IMAGES %>  
-
+    <div class="products-container__color-carrousel">
+      <% same_product_different_colors(product).map do |p|%>
+        <div id="products-container__color-carrousel-options">
+          <% if p.images.attached? %>
+            <%= link_to(p) do %>
+              <%= image_tag p.images[0], class: "products-container__color-img", alt: "put name and color of product"%>
+            <% end %>  
+          <% end %>
+        </div>
+      <% end %>
+    </div>
 
     <% if @product_categories %>
       <ul>
