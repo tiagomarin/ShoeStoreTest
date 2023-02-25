@@ -273,20 +273,20 @@
   align-items: center;
   color: var(--color-background-1);
   font-size: 2em;
-  background-image: url("iconic-item1.jpeg");
   background-size: cover;
   min-width: 100%;
   aspect-ratio: 16 / 9;
   scroll-snap-align: start;
   overflow: hidden;
   position: relative;
+  background-color: var(--color-background-2);
 }
 
 #iconic-products-container__img {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  min-width: 100%;
   height: 100%;
   transition: 2s ease-in-out;
 }
@@ -302,10 +302,6 @@
     0 0 1rem black,
     0 0 2rem black,
     0 0 3rem black;
-}
-
-#iconic-products-container__card:hover #iconic-products-container__img {
-  transform: scale(1.05);
 }
 
 /* ====================================== */

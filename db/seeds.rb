@@ -109,3 +109,48 @@ vitor = User.create!(name: 'Vitor', email: 'vgm_rox@hotmail.com', password: 1233
 vitor.avatar.attach(io: File.open("#{Rails.root}/app/assets/images/iconic2.png"), filename: 'iconic2.png')
 tiago = User.create!(name: 'Tiago', email: 'tiago.lelinski@gmail.com', password: 123321)
 tiago.avatar.attach(io: File.open("#{Rails.root}/app/assets/images/iconic2.png"), filename: 'iconic2.png')
+
+# Iconic Products
+
+iconic_product_1 = Product.create!(name: "React",
+  price: Faker::Number.number(digits: 3),
+  description: 'so cool',
+  size: sizes.sample,
+  color: colors.sample,
+  gender: 'Male',
+  brand: brands.sample,
+  discount: (rand(0..40.0) * 2.0).round / 2.0,
+  quantity: Faker::Number.number(digits: 2)
+)
+iconic_product_1.images.attach(io: File.open("#{Rails.root}/app/assets/images/reacticonic.png"), filename: 'reacticonic.png')
+iconic_product_1.category_ids = category_ids.sample(2)
+
+iconic_product_2 = Product.create!(name: "Rails",
+  price: Faker::Number.number(digits: 3),
+  description: 'so cool',
+  size: sizes.sample,
+  color: colors.sample,
+  gender: 'Male',
+  brand: brands.sample,
+  discount: (rand(0..40.0) * 2.0).round / 2.0,
+  quantity: Faker::Number.number(digits: 2)
+)
+iconic_product_2.images.attach(io: File.open("#{Rails.root}/app/assets/images/railsiconic.png"), filename: 'railsiconic.png')
+iconic_product_2.category_ids = category_ids.sample(2)
+
+iconic_product_3 = Product.create!(name: "JavaScript",
+  price: Faker::Number.number(digits: 3),
+  description: 'so cool',
+  size: sizes.sample,
+  color: colors.sample,
+  gender: 'Male',
+  brand: brands.sample,
+  discount: (rand(0..40.0) * 2.0).round / 2.0,
+  quantity: Faker::Number.number(digits: 2)
+)
+iconic_product_3.images.attach(io: File.open("#{Rails.root}/app/assets/images/javascripticonic.png"), filename: 'javascripticonic.png')
+iconic_product_3.category_ids = category_ids.sample(2)
+
+iconic_1 = Iconic.create!(product: iconic_product_1)
+iconic_2 = Iconic.create!(product: iconic_product_2)
+iconic_3 = Iconic.create!(product: iconic_product_3)
