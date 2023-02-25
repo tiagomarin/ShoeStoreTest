@@ -129,13 +129,25 @@ class ProductsController < ApplicationController
       @products = filter_max_price(@products, session[:max_price_filter].split.map(&:to_f))
     end
     
+    # sort products
+    session[:sort] = 'newest' if session[:sort].nil?
+
+    if params[:sort_high_to_low].present?
+      session[:sort] = 'high_to_low'
+    end
+    if params[:sort_low_to_high].present?
+      session[:sort] = 'low_to_high'
+    end
+    if params[:sort_newest].present?
+      session[:sort] = 'newest'
+    end
+    if params[:sort_highest_discount].present?
+      session[:sort] = 'highest_discount'
+    end
+
+    @products = sort_products(@products, session[:sort])
+
     if turbo_frame_request?
-      @size_filters = session[:size_filters].split if session[:size_filters].present?
-      @color_filters = session[:color_filters].split if session[:color_filters].present?
-      @brand_filters = session[:brand_filters].split if session[:brand_filters].present?
-      @category_filters = session[:category_filters].split if session[:category_filters].present?
-      @min_price_filter = session[:min_price_filter].split.map(&:to_f) if session[:min_price_filter].present?
-      @max_price_filter = session[:max_price_filter].split.map(&:to_f) if session[:max_price_filter].present?
       render partial: 'products', locals: { products: @products }
     else
       render :index
@@ -276,6 +288,19 @@ class ProductsController < ApplicationController
                                             end
     end
     @products_no_repeat
+  end
+
+  def sort_products(products, sort)
+    case sort
+    when 'high_to_low'
+      products.sort_by(&:price).reverse
+    when 'low_to_high'
+      products.sort_by(&:price)
+    when 'newest'
+      products.sort_by(&:created_at).reverse
+    when 'highest_discount'
+      products.sort_by(&:discount).reverse
+    end
   end
 
   def set_product_categories
