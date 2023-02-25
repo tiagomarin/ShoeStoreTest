@@ -1,27 +1,19 @@
+window.addEventListener("click", (event) => {
+  // Show and hide modal for adding new brand and new category
 const brandModal = document.querySelector("#brand-modal")
 const categoryModal = document.querySelector("#category-modal")
-
-document.querySelectorAll(".open-modal").forEach( button => 
-  button.addEventListener( "click" , (e) => {
-    if (e.target.innerHTML === "New Brand") {
-      brandModal.classList.add("show")
-    }
-    if (e.target.innerHTML === "New Category") {
-      categoryModal.classList.add("show")
-    }
-  })
-)
-
-document.querySelectorAll(".close-modal").forEach( button => 
-  button.addEventListener( "click" , (e) => {
-    if (e.target.parentElement.id === "brand-modal") {
-      brandModal.classList.remove("show")
-    }
-    if (e.target.parentElement.id === "category-modal") {
-      categoryModal.classList.remove("show")
-    }
-  })
-)
-
+  if (event.target.innerHTML === "New Brand") {
+    brandModal.classList.toggle("show")
+  }
+  if (event.target.innerHTML === "New Category") {
+    categoryModal.classList.toggle("show")
+  }
+  if (event.target.parentElement.id === "brand-modal") {
+    brandModal.classList.remove("show")
+  }
+  if (event.target.parentElement.id === "category-modal") {
+    categoryModal.classList.remove("show")
+  }
+})
 
 
