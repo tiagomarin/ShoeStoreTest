@@ -64,6 +64,7 @@ window.addEventListener("click", (event) => {
 })
 
 /* ================================================= */
+
 window.addEventListener("click", (event) => {
   // clicked on a button to add a filter
   if (event.target.className === "options-to-filter") {
@@ -74,20 +75,21 @@ window.addEventListener("click", (event) => {
     })
     event.target.classList.toggle("active");
   }
-  // change value and text of the button when a min price filter is applied
-  if (event.target.id = "min_price-filter-btn") {
-    let minPriceApplied = document.getElementById("min-price-filter-applied")
-    minPriceApplied.value = event.previousElementSibling.value;
-    minPriceApplied.innerHTML = event.previousElementSibling.value;
-    minPriceApplied.classList.toggle("active")
-  }
-  // change value and text of the button when a max price filter is applied
-  if (event.target.id = "max_price-filter-btn") {
-    let maxPriceApplied = document.getElementById("max-price-filter-applied")
-    maxPriceApplied.value = event.previousElementSibling.value;
-    maxPriceApplied.innerHTML = event.previousElementSibling.value;
-    maxPriceApplied.classList.toggle("active")
-  }
+  // // change value and text of the button when a min price filter is applied
+  // if (event.target.id = "min_price-filter-btn") {
+  //   let minPriceApplied = document.getElementById("min-price-filter-applied")
+  //   minPriceApplied.value = event.previousElementSibling.value;
+  //   minPriceApplied.innerHTML = event.previousElementSibling.value;
+  //   minPriceApplied.classList.toggle("active")
+  // }
+  // // change value and text of the button when a max price filter is applied
+  // if (event.target.id = "max_price-filter-btn") {
+  //   let maxPriceApplied = document.getElementById("max-price-filter-applied")
+  //   maxPriceApplied.value = event.previousElementSibling.value;
+  //   maxPriceApplied.innerHTML = event.previousElementSibling.value;
+  //   maxPriceApplied.classList.toggle("active")
+  // }
+  
   // clicked on a button to remove a filter
   if (event.target.className === "applied-filters-btns") {
     document.querySelectorAll(".options-to-filter.active").forEach((e) => {
@@ -97,16 +99,16 @@ window.addEventListener("click", (event) => {
     })
     event.target.parentElement.parentElement.classList.toggle("active");
   }
-  // clicked on button to remove min price filter applied
-  if (event.target.id === "min-price-filter-applied-btn") {
-    let minPriceApplied = document.getElementById("min-price-filter-applied")
-    minPriceApplied.classList.toggle("active")
-  }
-  // clicked on button to remove max price filter applied
-  if (event.target.id === "max-price-filter-applied-btn") {
-    let maxPriceApplied = document.getElementById("max-price-filter-applied")
-    maxPriceApplied.classList.toggle("active")
-  }
+  // // clicked on button to remove min price filter applied
+  // if (event.target.id === "min-price-filter-applied-btn") {
+  //   let minPriceApplied = document.getElementById("min-price-filter-applied")
+  //   minPriceApplied.classList.toggle("active")
+  // }
+  // // clicked on button to remove max price filter applied
+  // if (event.target.id === "max-price-filter-applied-btn") {
+  //   let maxPriceApplied = document.getElementById("max-price-filter-applied")
+  //   maxPriceApplied.classList.toggle("active")
+  // }
 
   // clicked on a button to clear all filter
   if (event.target.id === "clear_filters") {

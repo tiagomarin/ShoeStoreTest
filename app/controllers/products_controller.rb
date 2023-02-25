@@ -78,17 +78,33 @@ class ProductsController < ApplicationController
 
     # ----------- Update filters before filter -----------
     # based on user clicking a button to remove a filter that was applied
+
     if session[:size_filters].present? && params[:remove_size_filter].present?
       size_filters = session[:size_filters].split.map(&:to_f)
       filter_to_remove = params[:remove_size_filter].to_f
       filtered = size_filters.filter { |size| size != filter_to_remove }
       session[:size_filters] = filtered.join(' ')
     end
-    session[:color_filters] -= params[:remove_color_filter] if params[:remove_color_filter].present?
-    session[:brand_filters] -= params[:remove_brand_filter] if params[:remove_brand_filter].present?
-    session[:category_filters] -= params[:remove_category_filter] if params[:remove_category_filter].present?
+    if session[:color_filters].present? && params[:remove_color_filter].present?
+      color_filters = session[:color_filters].split
+      filter_to_remove = params[:remove_color_filter].downcase
+      filtered = color_filters.filter { |color| color != filter_to_remove }
+      session[:color_filters] = filtered.join(' ')
+    end
+    if session[:brand_filters].present? && params[:remove_brand_filter].present?
+      brand_filters = session[:brand_filters].split
+      filter_to_remove = params[:remove_brand_filter].downcase
+      filtered = brand_filters.filter { |brand| brand != filter_to_remove }
+      session[:brand_filters] = filtered.join(' ')
+    end
+    if session[:category_filters].present? && params[:remove_category_filter].present?
+      category_filters = session[:category_filters].split
+      filter_to_remove = params[:remove_category_filter].downcase
+      filtered = category_filters.filter { |category| category != filter_to_remove }
+      session[:category_filters] = filtered.join(' ')
+    end
     session[:min_price_filter] = nil if params[:remove_min_price_filter].present?
-    params[:max_price_filter] = nil if params[:remove_max_price_filter].present?
+    session[:max_price_filter] = nil if params[:remove_max_price_filter].present?
 
     # ------------------ Apply Filters ------------------
     if session[:size_filters].present? && session[:size_filters].length.positive?
