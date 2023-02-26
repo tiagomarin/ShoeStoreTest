@@ -222,7 +222,7 @@
 }
 
 #collection-container__h3 {
-  font-size: 4em;
+  font-size: 3em;
   font-weight: 900;
   letter-spacing: -5px;
   font-family: var(--font-family-2);
@@ -353,6 +353,13 @@
   align-items: center;
 }
 
+#email-container__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
 #email-container__button {
   background-color: var(--color-background-6);
   color: var(--color-background-1);
@@ -424,6 +431,10 @@
     padding: var(--padding-3);
   }
 
+  #collection-container__h3 {
+    font-size: 4em;
+  }
+
   #collection-container__grid {
     display: flex;
   }
@@ -442,6 +453,12 @@
 
   #email-container {
     padding: var(--padding-3);
+  }
+
+  #email-container__form {
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.25rem;
   }
 
   #email-container input:nth-child(1) {
