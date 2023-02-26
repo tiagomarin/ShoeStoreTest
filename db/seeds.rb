@@ -122,6 +122,7 @@ iconic_product_1 = Product.create!(name: "React",
   discount: (rand(0..40.0) * 2.0).round / 2.0,
   quantity: Faker::Number.number(digits: 2)
 )
+iconic_product_1.images.attach(io: File.open("#{Rails.root}/app/assets/images/reacticonicsquare.png"), filename: 'reacticonicsquare.png')
 iconic_product_1.images.attach(io: File.open("#{Rails.root}/app/assets/images/reacticonic.png"), filename: 'reacticonic.png')
 iconic_product_1.category_ids = category_ids.sample(2)
 
@@ -135,6 +136,7 @@ iconic_product_2 = Product.create!(name: "Rails",
   discount: (rand(0..40.0) * 2.0).round / 2.0,
   quantity: Faker::Number.number(digits: 2)
 )
+iconic_product_2.images.attach(io: File.open("#{Rails.root}/app/assets/images/railsiconicsquare.png"), filename: 'railsiconicsquare.png')
 iconic_product_2.images.attach(io: File.open("#{Rails.root}/app/assets/images/railsiconic.png"), filename: 'railsiconic.png')
 iconic_product_2.category_ids = category_ids.sample(2)
 
@@ -148,6 +150,7 @@ iconic_product_3 = Product.create!(name: "JavaScript",
   discount: (rand(0..40.0) * 2.0).round / 2.0,
   quantity: Faker::Number.number(digits: 2)
 )
+iconic_product_3.images.attach(io: File.open("#{Rails.root}/app/assets/images/javascripticonicsquare.png"), filename: 'javascripticonicsquare.png')
 iconic_product_3.images.attach(io: File.open("#{Rails.root}/app/assets/images/javascripticonic.png"), filename: 'javascripticonic.png')
 iconic_product_3.category_ids = category_ids.sample(2)
 

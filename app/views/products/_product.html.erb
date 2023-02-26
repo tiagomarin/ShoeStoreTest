@@ -1,21 +1,19 @@
   <div id="<%= dom_id product %>" class="products-container__product-card">
     <% product.discount > 0 ? priceClass = "products-container__product-card-price discounted" : priceClass = "products-container__product-card-price" %>
     <% if product.images.attached? %>
-      <% product.images.each do |image| %>
-        <div class=products-container__product-card-img>
-          <%= image_tag image%>
-          <span>
-            <p class="<%= priceClass %>">
-              <%= number_to_currency(product.price, precision: 0) %>
+      <div class=products-container__product-card-img>
+        <%= image_tag product.images[0] %>
+        <span>
+          <p class="<%= priceClass %>">
+            <%= number_to_currency(product.price, precision: 0) %>
+          </p>
+          <% if product.discount > 0 %>
+            <p class="products-container__product-card-price with-discount">
+              <%= number_to_currency(product.price * (1 - (product.discount.to_f/100)), precision: 0) %>
             </p>
-            <% if product.discount > 0 %>
-              <p class="products-container__product-card-price with-discount">
-                <%= number_to_currency(product.price * (1 - (product.discount.to_f/100)), precision: 0) %>
-              </p>
-            <% end %>
-          </span>
-        </div>
-      <% end %>
+          <% end %>
+        </span>
+      </div>
     <% else %>
       <div class=products-container__product-card-img>
           <%= image_tag "no-product-image.png"%>

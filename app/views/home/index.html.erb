@@ -19,10 +19,11 @@
 
 <section id="iconic-products-container">
   <h2>Iconic Products</h2>
-  <%= render "iconics/iconic" %>
-  <%= render "iconics/form", iconic: @iconic1 %>
-  <%= render "iconics/form", iconic: @iconic2 %>
-  <%= render "iconics/form", iconic: @iconic3 %>
+  <div id="iconic-products-container__grid">
+    <%= render "iconics/iconic", iconic: @iconic1 %>
+    <%= render "iconics/iconic", iconic: @iconic2 %>
+    <%= render "iconics/iconic", iconic: @iconic3 %>
+  </div>
 </section>
 
 <section id="decoration-images-container">
