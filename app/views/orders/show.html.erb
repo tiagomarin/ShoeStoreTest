@@ -39,12 +39,8 @@
         <hr>
         <% if @order.status == "Shopping Cart" %>
           <%= form_for @order, url: user_order_path(current_user, @order) do |f| %>
-            <div class="field">
-              <%= f.hidden_field :status, value: "Purchased" %>
-            </div>
-            <div class="actions">
-              <%= f.submit "CHECKOUT", id: "order-container__checkout-button" %>
-            </div>
+            <%= f.hidden_field :status, value: "Purchased" %>
+            <%= f.submit "CHECKOUT", id: "order-container__checkout-button" %>
           <% end %>
         <% end %>
       </div>
