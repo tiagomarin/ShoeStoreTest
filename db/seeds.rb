@@ -33,12 +33,13 @@ promocode2.category_ids = [@category2.id]
 promocode3.category_ids = category_ids
 promocode4.brand_ids = [brand1.id]
 promocode5.brand_ids = [brand2.id]
+size = 5
 
 5.times do
   product = Product.create!(name: "Nike Air",
                             price: Faker::Number.number(digits: 3),
                             description: 'so cool',
-                            size: sizes.sample,
+                            size: size += 1,
                             color: "black",
                             gender: genders.sample,
                             brand: brand1,
@@ -48,12 +49,12 @@ promocode5.brand_ids = [brand2.id]
   product.images.attach(io: File.open("#{Rails.root}/app/assets/images/YoShoe_black.jpg"), filename: 'YoShoe_black.jpg')
   product.category_ids = category_ids.sample(2)
 end
-
+size = 5
 5.times do
   product = Product.create!(name: "Nike Air",
                             price: Faker::Number.number(digits: 3),
                             description: 'so cool',
-                            size: sizes.sample,
+                            size:  size += 1,
                             color: "blue",
                             gender: genders.sample,
                             brand: brand1,
@@ -63,12 +64,12 @@ end
   product.images.attach(io: File.open("#{Rails.root}/app/assets/images/YoShoe_blue.jpg"), filename: 'YoShoe_blue.jpg')
   product.category_ids = category_ids.sample(2)
 end
-
+size = 5
 5.times do
   product = Product.create!(name: "Nike Air",
                             price: Faker::Number.number(digits: 3),
                             description: 'so cool',
-                            size: sizes.sample,
+                            size:  size += 1,
                             color: "red",
                             gender: genders.sample,
                             brand: brand1,
