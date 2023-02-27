@@ -2,6 +2,15 @@
   position: relative;
 }
 
+h1 {
+  font-size: var(--font-size-1);
+  font-weight: 500;
+  display: none;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
 .products-container__header {
   position: relative;
   display: flex;
@@ -40,6 +49,46 @@
   transition: all 0.5s ease;
 }
 
+.products-container__header-filter-btn {
+  background-color: var(--color-background-1);
+  color: var(--color-text-5);
+  border: none;
+  padding: 1rem 2rem;
+  font-weight: 500;
+  font-size: 1em;
+  border-radius: var(--border-radius-6);
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.products-container__header-filter-btn:hover {
+  transform: scale(1.01);
+}
+
+.products-container__header-filter-btn:active {
+  color: var(--color-text-2);
+}
+
+.products-container__header-sort-btn {
+  background-color: var(--color-background-1);
+  color: var(--color-text-5);
+  border: none;
+  padding: 1rem 2rem;
+  font-weight: 500;
+  font-size: 1em;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.products-container__header-sort-btn:hover {
+  transform: scale(1.01);
+}
+
+.products-container__header-sort-btn:active {
+  background-color: var(--color-background-5);
+  color: var(--color-text-2);
+}
+
 .products-container__header-sort-selection.sort-selection_active {
   display: flex;
   flex-direction: column;
@@ -56,24 +105,23 @@
 }
 
 .products-container__filters {
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: var(--space-m);
-  width: 20vw;
-  border: 1px solid black;
+  padding: 1rem;
 }
 
 .products-container__filters.filters_active {
-  display: flex;
+  display: none;
 }
 
 .products-container__grid {
-  display: flex;
+  display: none;
   width: 100vw;
 }
 
 .products-container__grid.filters_active {
-  width: 80vw;
+  display: flex;
 }
 
 #products {
@@ -85,7 +133,7 @@
 }
 
 .products-container__product-card {
-  width: 30%;
+  width: 40%;
 }
 
 .products-container__product-card-img {
@@ -139,4 +187,33 @@
 .products-container__color-img {
   height: 2.25rem;
   aspect-ratio: 1/1;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    display: block;
+  }
+
+  .products-container__filters {
+    display: none;
+    width: 30%;
+  }
+
+  .products-container__filters.filters_active {
+    display: flex;
+  }
+
+  .products-container__grid {
+    display: flex;
+    width: 100%;
+  }
+
+  .products-container__grid.filters_active {
+    display: flex;
+    width: 70%;
+  }
+
+  .products-container__product-card {
+    width: 30%;
+  }
 }
