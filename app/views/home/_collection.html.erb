@@ -1,15 +1,15 @@
 <%= image_tag "collection.png", id: "collection-container__image", alt: "collection-banner" %>
 <div id="collection-container__grid">
   <h3 id="collection-container__h3">REACH FURTHER</h3>
-  <p id="collection-container__p">Elevate your energy in Fresh Shoes that move and breathe  with you.</p>
+  <p id="collection-container__p">Elevate your energy in Software Shoes that move and breathe  with you.</p>
   <div id="collection-container__buttons-flex">
     <%= form_with(url: products_path, method: :get, data: { controller: "search-form",          turbo_frame: "products", turbo_action: "advance"}) do |form| %>
       <%= form.hidden_field :query, value: "Male", data: { action: "input->search-form#search"} %>
-      <%= form.submit "Shop Men's Fresh Air", class: "collection-container__button" %>
+      <%= form.submit "Shop Men's Microverse", class: "collection-container__button" %>
     <% end %>
     <%= form_with(url: products_path, method: :get, data: { controller: "search-form",          turbo_frame: "products", turbo_action: "advance"}) do |form| %>
       <%= form.hidden_field :query, value: "Female", data: { action: "input->search-form#search"} %>
-      <%= form.submit "Shop Women's Fresh Air", class: "collection-container__button" %>
+      <%= form.submit "Shop Women's Microverse", class: "collection-container__button" %>
     <% end %>
   </div>
 </div>

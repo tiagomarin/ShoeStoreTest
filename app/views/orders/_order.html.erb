@@ -18,6 +18,13 @@
     <%= order.id %>
   </p>
 
+  <% if order.status === "Purchased" %>
+    <p>
+      <strong>UTC:</strong>
+      <%= order.date.strftime("%B %d, %Y %I:%M:%S %p") %>
+    </p>
+  <% end %>
+
   <p>
     <strong>Total price:</strong>
     <%= number_to_currency(order.order_items.sum(:total_price)) %>

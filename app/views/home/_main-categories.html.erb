@@ -1,12 +1,28 @@
 <div id="main-categories-container__grid">
-  <% 8.times do %>
-    <div id="main-categories-container__card">
-      <%= image_tag "iconic1.png", id: "iconic-products-container__img", alt: "iconic-product" %>
-      
-      <%= form_with(url: products_path, method: :get, data: { controller: "search-form",      turbo_frame: "products", turbo_action: "advance"}) do |form| %>
-        <%= form.hidden_field :query, value: "Vitor", data: { action: "input->search-form#search"} %>
-        <%= form.submit "Check it out!", class: "main-categories-container__button" %>
-      <% end %>
-    </div>
-  <% end %>
+  <div id="main-categories-container__card">
+    <%= image_tag "category1.jpg", id: "iconic-products-container__img", alt: "iconic-product" %>
+    
+    <%= form_with(url: products_path, method: :get, data: { controller: "search-form",      turbo_frame: "products", turbo_action: "advance"}) do |form| %>
+      <%= form.hidden_field :query, value: "gym", data: { action: "input->search-form#search"} %>
+      <%= form.submit "Gym", class: "main-categories-container__button" %>
+    <% end %>
+  </div>
+
+  <div id="main-categories-container__card">
+    <%= image_tag "category2.jpg", id: "iconic-products-container__img", alt: "iconic-product" %>
+    
+    <%= form_with(url: products_path, method: :get, data: { controller: "search-form",      turbo_frame: "products", turbo_action: "advance"}) do |form| %>
+      <%= form.hidden_field :query, value: "casual", data: { action: "input->search-form#search"} %>
+      <%= form.submit "Casual", class: "main-categories-container__button" %>
+    <% end %>
+  </div>
+
+  <div id="main-categories-container__card">
+    <%= image_tag "category3.jpg", id: "iconic-products-container__img", alt: "iconic-product" %>
+    
+    <%= form_with(url: products_path, method: :get, data: { controller: "search-form",      turbo_frame: "products", turbo_action: "advance"}) do |form| %>
+      <%= form.hidden_field :query, value: "running", data: { action: "input->search-form#search"} %>
+      <%= form.submit "Running", class: "main-categories-container__button" %>
+    <% end %>
+  </div>
 </div>

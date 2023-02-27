@@ -1,7 +1,7 @@
 <footer id="footer-container">
   <div id="footer-container__first-div">
     <div id="footer-container__ul-flex">
-      <ul class="footer-container__ul">
+      <ul class="footer-container__ul-fixed">
        <li>Gift Cards</li>
        <li>Promotions</li>
        <li>Find a Store</li>
@@ -9,22 +9,32 @@
        <li>Become a Member</li>
        <li>Send Us Feedback</li>
       </ul>
-      <ul class="footer-container__ul">
-       <li>Gift Cards</li>
-       <li>Promotions</li>
-       <li>Find a Store</li>
-       <li>Sign Up for Email</li>
-       <li>Become a Member</li>
-       <li>Send Us Feedback</li>
-      </ul>
-      <ul class="footer-container__ul">
-       <li>Gift Cards</li>
-       <li>Promotions</li>
-       <li>Find a Store</li>
-       <li>Sign Up for Email</li>
-       <li>Become a Member</li>
-       <li>Send Us Feedback</li>
-      </ul>
+      <div id="footer-container__flex-column">
+        <div class="footer-container__arrow-down-div"> 
+          <p class="footer-container__accordion">Get Help</p>
+          <%= image_tag "icons/angle-down", alt: "arrow down", class: "footer-container-icon" %>
+        </div>
+        <ul class="footer-container__ul">
+          <li>Order Status</li>
+          <li>Shipping and Delivery</li>
+          <li>Returns</li>
+          <li>Payment Options</li>
+          <li>Contact Us</li>
+        </ul>
+      </div>
+      <div id="footer-container__flex-column">
+        <div class="footer-container__arrow-down-div"> 
+          <p class="footer-container__accordion">About Us</p>
+          <%= image_tag "icons/angle-down", alt: "arrow down", class: "footer-container-icon" %>
+        </div>
+        <ul class="footer-container__ul">
+          <li>News</li>
+          <li>Careers</li>
+          <li>Investors</li>
+          <li>Purpose</li>
+          <li>Sustainability</li>
+        </ul>
+      </div>
     </div>
 
     <div id="footer-container__icons">

@@ -23,6 +23,8 @@ class OrdersController < ApplicationController
       @discount += ((product.price * order_item.quantity) * product.discount) / 100
       @coupons_discount += ((product.price * order_item.quantity) * order_item.code_discount) / 100
     end
+    # Recent added products
+    @new_arrivals = Product.last(10)
   end
 
   # GET /orders/new
@@ -52,7 +54,7 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to user_order_path(current_user, @order), notice: 'Order was successfully updated.' }
+        format.html { redirect_to user_orders_path(current_user), notice: 'Order was successfully updated.' }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -159,7 +161,7 @@ class OrdersController < ApplicationController
   def order_params
     params
       .require(:order)
-      .permit(:status, :promo_code_ids)
+      .permit(:status, :date, :promo_code_ids)
       .with_defaults(status: 'Shopping Cart', promo_code_ids: [])
   end
 end

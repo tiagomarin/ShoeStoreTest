@@ -1,0 +1,16 @@
+<%= form_with(model: iconic, id: "iconic-products-container__form") do |form| %>
+  <% if iconic.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(iconic.errors.count, "error") %> prohibited this iconic from being saved:</h2>
+      <ul>
+        <% iconic.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.select :iconic, @products.map {|product| [product.name, product.id]} %>
+
+  <%= form.submit "Update Iconic #{iconic.id}", id: "iconic-products-container__submit" %>
+<% end %>
