@@ -111,7 +111,6 @@ tiago = User.create!(name: 'Tiago', email: 'tiago.lelinski@gmail.com', password:
 tiago.avatar.attach(io: File.open("#{Rails.root}/app/assets/images/iconic2.png"), filename: 'iconic2.png')
 
 # Iconic Products
-
 iconic_product_1 = Product.create!(name: "React",
   price: Faker::Number.number(digits: 3),
   description: 'so cool',

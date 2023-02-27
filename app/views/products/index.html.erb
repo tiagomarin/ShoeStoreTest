@@ -3,14 +3,31 @@
 <section class="products-container">
 
   <div class="products-container__header">
-    <h1>Products (<%= @products.count %>)</h1>
+    <h1>Results (<%= @products.count %>)</h1>
     <div class="products-container__header-options">
       <%= render "products/search-products" %>
       <button class="products-container__header-filter-btn">Hide Filters</button>
       <button class="products-container__header-sort-btn">Sort</button>
       <ul class="products-container__header-sort-selection">
-        <% ["Price: High to low", "Price: Low to high", "Newest", "Highest Discount"].each do |sort| %>
-          <li><%= sort %></li>
+        <% [
+            {string:"Price: High to low", value: "sort_high_to_low"},
+            {string:"Price: Low to high", value: "sort_low_to_high"},
+            {string:"Newest", value: "sort_newest"},
+            {string:"Highest Discount", value: "sort_highest_discount"}
+           ].each do |sort| %>
+          <li>
+           <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
+              <button 
+                name=<%= sort[:value] %>
+                type="submit" 
+                id=<%= sort[:value] %>
+                value=<%= sort[:value] %>
+                class="products-container__header-sort-selection-item"
+              >
+                <%= sort[:string] %>
+              </button>
+            <% end %>
+          </li>
         <% end %>
       </ul>
     </div>

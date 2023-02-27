@@ -41,6 +41,10 @@
             <%= link_to(p) do %>
               <%= image_tag p.images[0], class: "products-container__color-img", alt: "put name and color of product"%>
             <% end %>  
+          <% else %>
+            <%= link_to(p) do %>
+              <%= image_tag "no-product-image.png", class: "products-container__color-img", alt: "put name and color of product"%>
+            <% end %>
           <% end %>
         </div>
       <% end %>
@@ -57,10 +61,21 @@
     
     <% if products_show %>
       <p>
-        <strong>Sizes:</strong>
-        <%= product.size %>
+        <strong>Sizes sizes_available:</strong>
+        <%# show option of sizes%>
+        <ul class="sizes-available">
+          <% sizes_available = sizes_available(product).map(&:size) %>
+            <% [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14].each do |size| %>
+            <% if sizes_available.include?(size) %>
+              <li class="size-available"><%= size %></li>
+            <% else %>
+              <li><%= size %></li>
+            <% end %>
+
+          <% end %>
+        </ul>
       </p>
-      
+      <strong>Color:</strong>
       <p><%= product.color %></p>
       <p><strong>gender:</strong><%= product.gender %></p>
 
@@ -83,7 +98,7 @@
             
         <div>
           <%= form.label :size, style: "display: block" %>
-          <%= form.select :size, [5, 5.5 ,6 ,6.5 ,7 ,7.5 ,8 ,8.5 ,9 ,9.5 ,10 ,10.5 ,11 ,11.5 ,12 ,12.5 ,13 ,13.5 ,14] %>
+          <%= form.select :size, sizes_available(product).map(&:size) %>
         </div>
           
         <div>

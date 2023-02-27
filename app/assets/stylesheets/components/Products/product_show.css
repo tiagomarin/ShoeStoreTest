@@ -1,0 +1,18 @@
+.sizes-available {
+  display: flex;
+  width: 300px;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.sizes-available > * {
+  width: 50px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  color: #ccc;
+}
+
+.sizes-available > *.size-available {
+  border: 1px solid black;
+  color: black;
+}

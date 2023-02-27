@@ -2,6 +2,7 @@
 import "@hotwired/turbo-rails"
 import "./components/addNewProductBrandCategoryPopUp"
 import "./components/products"
+import "./components/products-filter"
 import "controllers"
 
 let lastScrollTop = 32;
@@ -45,7 +46,7 @@ window.addEventListener("click", (event) => {
     event.target.classList.toggle("show");
   }
 
-  if(event.target.innerHTML === "Do you have a promo code?" || event.target.className === "order-container-icon") {
+  if (event.target.innerHTML === "Do you have a promo code?" || event.target.className === "order-container-icon") {
     event.target.parentElement.nextElementSibling.classList.toggle("show");
     event.target.parentElement.classList.toggle("show");
   }
@@ -56,7 +57,7 @@ window.addEventListener("click", (event) => {
     event.target.classList.toggle("show");
   }
 
-  if(event.target.innerHTML === "Coupons Applied" || event.target.id === "order-container__promo-icon") {
+  if (event.target.innerHTML === "Coupons Applied" || event.target.id === "order-container__promo-icon") {
     event.target.parentElement.nextElementSibling.classList.toggle("show");
     event.target.parentElement.classList.toggle("show");
   }

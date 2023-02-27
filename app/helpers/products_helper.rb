@@ -3,8 +3,16 @@ module ProductsHelper
   def same_product_different_colors(product)
     name = product.name
     brand_id = product.brand.id
-    description = product.description
+    size = product.size
     color = product.color
-    Product.where(name:).where(brand_id:).where(description:).where.not(color:)
+    Product.where(name:).where(brand_id:).where(size:).where.not(color:)
+  end
+
+  def sizes_available(product)
+    name = product.name
+    brand_id = product.brand.id
+    color = product.color
+    size = product.size
+    Product.where(name:).where(brand_id:).where(color:).where.not(size:)
   end
 end
