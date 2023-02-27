@@ -1,0 +1,9 @@
+<div id="iconic-products-container__card">
+  <%= render "iconics/form", iconic: iconic %>
+  <% if iconic.product.images.length > 1 %>
+    <%= image_tag iconic.product.images[1], id: "iconic-products-container__img", alt: "iconic-product" %>
+  <% else %>
+    <%= image_tag iconic.product.images[0], id: "iconic-products-container__img", alt: "iconic-product" %>
+  <% end %>
+  <p id="iconic-products-container__text"><%= iconic.product.name %></p>
+</div>

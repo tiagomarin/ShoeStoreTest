@@ -45,6 +45,11 @@
   border: none;
   background-color: var(--color-background-2);
   padding: 0.5rem;
+  outline-color: var(--color-background-4);
+}
+
+#nav-container__search-bar:hover {
+  background-color: rgb(206, 206, 206);
 }
 
 #nav-container__hamburger-menu {
