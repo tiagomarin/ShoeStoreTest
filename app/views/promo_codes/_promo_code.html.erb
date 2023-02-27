@@ -1,31 +1,28 @@
-<div id="<%= dom_id promo_code %>">
+<div id="coupons-container__header-information">
   <p>
-    <strong>Title:</strong>
+    <strong>Coupon:</strong>
     <%= promo_code.title %>
   </p>
-
   <p>
-    <strong>Value:</strong>
-    <%= promo_code.value %>
+    <strong>Promotion:</strong>
+    <%= promo_code.value.to_i %>
+    <span>%</span>
   </p>
+</div>
 
-  <p>
-    <h2>Applicable to:</h2>
-    <% unless promo_code.categories.empty?  %>
-      <h3>categories:</h3>
-      <ul>
-      <% promo_code.categories.each do |category| %>
-        <li><%= category.name %></li>
-      <% end %>
+<div id="coupons-container__applicable-to">
+  <h3>Applicable to:</h3>
+  <% unless promo_code.categories.empty?  %>
+    <ul>
+    <% promo_code.categories.each do |category| %>
+      <li>- <%= category.name %></li>
     <% end %>
+  <% end %>
 
-    <% unless promo_code.brands.empty? %>
-      <h3>brands:</h3>
-      <ul>
-      <% promo_code.brands.each do |brand| %>
-        <li><%= brand.name %></li>
-      <% end %>
+  <% unless promo_code.brands.empty? %>
+    <ul>
+    <% promo_code.brands.each do |brand| %>
+      <li>- <%= brand.name %></li>
     <% end %>
-  </p>
-
+  <% end %>
 </div>

@@ -33,14 +33,18 @@
         </div>
         <hr>
         <div class="order-container__summary-space-between">
+          <% total_price = @order.order_items.sum(:total_price) %>
           <p>Total</p>
-          <p><%= number_to_currency(@order.order_items.sum(:total_price)) %></p>
+          <p><%= number_to_currency(total_price) %></p>
         </div>
         <hr>
-        <% if @order.status == "Shopping Cart" %>
+        <% if @order.status == "Shopping Cart" && total_price > 0 %>
           <%= form_for @order, url: user_order_path(current_user, @order) do |f| %>
             <%= f.hidden_field :status, value: "Purchased" %>
+            <%= f.hidden_field :date, value: DateTime.current %>
             <%= f.submit "CHECKOUT", id: "order-container__checkout-button" %>
+          <% else %>
+          
           <% end %>
         <% end %>
       </div>

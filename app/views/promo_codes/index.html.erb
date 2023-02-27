@@ -1,20 +1,14 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Promo codes</h1>
 
-<%= link_to "New promo code", new_promo_code_path %>
-<%= link_to "Back to products", products_path %>
-<% if current_user %>
-  <%= link_to "Orders", user_orders_path(current_user) %>
-<% end %>
-
-<div id="promo_codes">
-  <% @promo_codes.each do |promo_code| %>
-    <div>
-      <%= render promo_code %>
-      <p>
-        <%= link_to "Show this promo code", promo_code %>
-      </p>
-    </div>
-  <% end %>
+<div id="coupons-container">
+  <h2>Promo codes</h2>
+  
+  <div id="coupons-container__grid">
+    <% @promo_codes.each do |promo_code| %>
+      <div id="coupons-container__card">
+        <%= render promo_code %>
+      </div>
+    <% end %>
+  </div>
 </div>

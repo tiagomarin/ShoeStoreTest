@@ -3,6 +3,11 @@
   padding: var(--lateral-padding-1);
 }
 
+#header-container__logout {
+  text-decoration: none;
+  color: var(--color-background-1);
+}
+
 @media (min-width: 768px) {
   #header-container {
     background-color: var(--color-background-5);
