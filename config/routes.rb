@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :brands
   resources :promo_codes
   resources :iconics
+  resources :collaborators, only: [:index]
   
   # Defines the root path route ("/")
   root "home#index"

@@ -15,7 +15,6 @@
         <div id="order-container__hidden-promo">
             <%= form_for @order, url: add_promo_code_user_order_path(current_user, @order) do |f| %>
               <%= f.text_field :promo_code, value: "", id: "order-container__summary-promo-input", placeholder: "Insert coupon" %>
-          
               <%= f.submit "Apply Code", id: "order-container__summary-promo-button" %>
             <% end %>
           </div>
@@ -43,9 +42,9 @@
             <%= f.hidden_field :status, value: "Purchased" %>
             <%= f.hidden_field :date, value: DateTime.current %>
             <%= f.submit "CHECKOUT", id: "order-container__checkout-button" %>
-          <% else %>
-          
           <% end %>
+        <% else %>
+          <%= link_to "Shop Now", products_path, id: "order-container__checkout-button" %>
         <% end %>
       </div>
     </div>
@@ -53,9 +52,7 @@
   
   <div id="order-container__administrator-buttons">
     <%= link_to "Promo Codes", promo_codes_path, class: "order-container__button" %>
-    <%= link_to "Edit this order", edit_user_order_path(current_user, @order), class: "order-container__button" %>
     <%= button_to "Destroy this order", user_order_path(current_user, @order), method: :delete, class: "order-container__button" %>
-    <%# verify if adm's gonna be able to destroy or not %>
   </div>
   
   <h2>You might also like</h2>

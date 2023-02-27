@@ -16,12 +16,6 @@
   gap: var(--gap-1);
 }
 
-#coupons-container__header-information {
-}
-
-#coupons-container__applicable-to {
-}
-
 @media (min-width: 768px) {
   #coupons-container {
     padding: var(--padding-3);

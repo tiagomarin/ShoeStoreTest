@@ -238,6 +238,8 @@
   border-radius: var(--border-radius-6);
   cursor: pointer;
   transition: 0.25s;
+  text-decoration: none;
+  text-align: center;
 }
 
 #order-container__checkout-button:hover {

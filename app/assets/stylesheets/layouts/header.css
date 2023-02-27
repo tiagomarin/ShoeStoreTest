@@ -3,9 +3,13 @@
   padding: var(--lateral-padding-1);
 }
 
-#header-container__logout {
+.header-container__links {
   text-decoration: none;
   color: var(--color-background-1);
+}
+
+.header-container__links:hover {
+  color: var(--color-background-3);
 }
 
 @media (min-width: 768px) {
