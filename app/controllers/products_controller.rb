@@ -5,6 +5,10 @@ class ProductsController < ApplicationController
   before_action :set_categories, only: %i[new edit create]
   before_action :set_product_categories, only: %i[show update]
 
+  def admin_products
+    @products = Product.all
+  end
+  
   # GET /products or /products.json
   def index
     # clear all session variables except for user_id

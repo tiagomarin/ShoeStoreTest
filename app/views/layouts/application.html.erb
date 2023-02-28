@@ -11,9 +11,17 @@
   </head>
 
   <body>
-    <%= render "layouts/header" %>
-    <%= yield %>
-    <%= render "layouts/footer" %>
+    <%# if current_user.role === "admin" %>
+      <%= render "layouts/admin_dashboard" %>
+    <%# else %>
+      <%#= render "layouts/header" %>
+      <%#= yield %>
+      <%#= render "layouts/footer" %>
+    <%# end %>
+
+
+
+
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>

@@ -8,6 +8,14 @@ Rails.application.routes.draw do
       resources :order_items, only: [:create, :update, :destroy ]
     end
   end
+
+  get 'admin/products', to: 'products#admin_products'
+  get 'admin/categories', to: 'categories#admin_categories'
+  get 'admin/brands', to: 'brands#admin_brands'
+  get 'admin/promo_codes', to: 'promo_codes#admin_promo_codes'
+  get 'admin/iconics', to: 'iconics#admin_iconics'
+  get 'admin/users', to: 'users#admin_users'
+  get 'admin/orders', to: 'orders#admin_orders'
   
   resources :products
   resources :categories

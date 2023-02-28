@@ -1,0 +1,21 @@
+#admin-dashboard {
+  display: flex;
+}
+
+/* SIDE BAR */
+#admin-nav-container {
+  width: 25%;
+}
+
+#admin-nav-container__links-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-nav-container__link {
+  display: flex;
+}
+
+.admin-nav-container__link-icon {
+  height: 20px;
+}
