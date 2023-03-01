@@ -1,0 +1,118 @@
+.admin-products-container__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: var(--space-m) 0;
+}
+
+.admin-products-container__header-nav {
+  display: flex;
+  gap: 1rem;
+}
+
+#admin-products-container__new-product-button {
+  background-color: var(--color-background-6);
+  color: var(--color-background-1);
+  border: none;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  font-size: var(--font-size-xs);
+  border-radius: var(--border-radius-6);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+table {
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: normal;
+  border: none;
+  border-collapse: collapse;
+  width: 100%;
+  white-space: nowrap;
+  background-color: white;;
+}
+
+table th {
+  background-color: var(--color-4);
+  color: var(--color-1);
+}
+
+table td,
+table th {
+  text-align: center;
+  padding: 8px;
+}
+
+table td {
+  border-right: 1px solid #f8f8f8;
+  font-size: 12px;
+}
+
+table thead th {
+  color: #fff;
+  background: #4fc3a1;
+}
+
+table thead th:nth-child(odd) {
+  color: #fff;
+  background: #324960;
+}
+
+table tr:nth-child(even) {
+  background: var(--color-1);
+}
+
+.admin-products-table__img {
+  height: 3rem;
+  width: 3rem;
+}
+
+.admin-products-table__delete-icon,
+.admin-products-table__show-icon {
+  height: 1rem;
+}
+
+/* POP UP */
+#admin-products-table__delete-product-popup-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+#admin-products-table__delete-product-popup-wrap.show {
+  display: flex;
+}
+
+#admin-products-table__delete-product-popup {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  background-color: white;
+  padding: var(--padding-3) var(--padding-2) var(--padding-2) var(--padding-2);
+  border-radius: var(--border-radius-5);
+}
+
+#admin-products-table__delete-product-popup-close {
+  position: absolute;
+  top: var(--space-m);
+  right: var(--padding-2);
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+#admin-products-table__delete-product-popup-close-icon {
+  height: var(--font-size-xxs);
+}

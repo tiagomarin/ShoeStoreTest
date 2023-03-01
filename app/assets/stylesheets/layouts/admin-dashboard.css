@@ -4,7 +4,7 @@
 
 /* SIDE BAR */
 #admin-nav-container {
-  width: 25%;
+  width: 20%;
 }
 
 #admin-nav-container__links-list {
@@ -16,6 +16,14 @@
   display: flex;
 }
 
+.admin-nav-container__logo {
+  height: 50px;
+  width: 50px;
+}
 .admin-nav-container__link-icon {
   height: 20px;
+}
+
+/* MAIN CONTENT */
+.admin-products-container {
 }
