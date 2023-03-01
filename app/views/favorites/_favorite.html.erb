@@ -1,7 +1,16 @@
-<div id="<%= dom_id favorite %>">
-  <p>
-    <strong>Index:</strong>
-    <%= favorite.index %>
-  </p>
+<div id="favorites-container__card">
+  <%= image_tag favorite.product.images[0], id: "favorites-container__image" %>
+  <div id="favorites-container__information">
 
+    <h3><%= favorite.product.name %></h3>
+    <div>
+      <p><%= favorite.product.description %></p>
+      <em>
+        <p>- <%= favorite.product.brand.name.capitalize %></p>
+      </em>
+    </div>
+
+
+    <%= link_to "Check it out", product_path(favorite.product), id: "favorites-container__show-button" %>
+  </div>
 </div>

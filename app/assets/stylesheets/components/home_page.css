@@ -109,6 +109,8 @@
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
+  border: none;
+  cursor: pointer;
 }
 
 .new-arrivals-container-icon {
@@ -121,7 +123,7 @@
 
 .new-arrivals-container__left-arrow {
   position: absolute;
-  background-color: rgba(128, 128, 128, 0.4);
+  background-color: rgba(128, 128, 128, 0.2);
   border-radius: var(--border-radius-6);
   left: 1.5rem;
   transform: translate3d(0, 100px, 0) rotate(90deg);
@@ -301,6 +303,11 @@
   position: relative;
 }
 
+#iconic-products-container__link {
+  display: flex;
+  flex-direction: column;
+}
+
 #iconic-products-container__form {
   display: flex;
   align-items: center;
@@ -434,10 +441,12 @@
 
   .new-arrivals-container__left-arrow {
     left: 3.5rem;
+    cursor: pointer;
   }
 
   .new-arrivals-container__right-arrow {
     right: 3.5rem;
+    cursor: pointer;
   }
 
   #main-categories-container {

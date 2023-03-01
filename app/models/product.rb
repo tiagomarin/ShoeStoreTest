@@ -2,9 +2,11 @@ class Product < ApplicationRecord
   has_many :order_items, dependent: :destroy
   has_many_attached :images
   belongs_to :brand
-  has_many :favorites
   # belongs_to :category
   has_and_belongs_to_many :category
+
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_by, through: :favorites, source: :user
 
   validates :name, presence: true,
                    length: { maximum: 30, too_long: '%<count>s characters is the maximum allowed' }

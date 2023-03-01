@@ -5,8 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   #   has_many :order, dependent: :destroy
   has_many :orders, dependent: :destroy
-  has_many :favorites
   has_one_attached :avatar
+
+  has_many :favorites
+  has_many :favorite_products, through: :favorites, source: :product
 
   validates :name, presence: true, uniqueness: true,
                    length: { maximum: 30, too_long: '%<count>s characters is the maximum allowed' }

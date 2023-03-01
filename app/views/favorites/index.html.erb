@@ -1,9 +1,11 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Favorites</h1>
-
-<div id="favorites">
-  <% @favorites.each do |favorite| %>
-    <%= render favorite %>
-  <% end %>
-</div>
+<section id="favorites-container">
+  <h2>Favorite Products</h2>
+  
+  <div id="favorites-container__grid">
+    <% @favorites.each do |favorite| %>
+      <%= render favorite %>
+    <% end %>
+  </div>
+</section>

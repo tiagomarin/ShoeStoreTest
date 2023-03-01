@@ -79,4 +79,26 @@ window.addEventListener("click", (event) => {
   }
 })
 
-/* ------------------ */
+/* ================================================= */
+
+const newArrivalsCarrousel = document.getElementById("new-arrivals-container__carrousel-div");
+const scrollLeftBtn = document.querySelector(".new-arrivals-container__left-arrow");
+const scrollRightBtn = document.querySelector(".new-arrivals-container__right-arrow");
+
+window.addEventListener("click", (e) => {
+  // Scroll left
+  if(e.target === scrollLeftBtn) {
+    newArrivalsCarrousel.scrollBy({
+      left: -500,
+      behavior: "smooth",
+    });
+  }
+
+  // Scroll right
+  if(e.target === scrollRightBtn) {
+    newArrivalsCarrousel.scrollBy({
+      left: 500,
+      behavior: "smooth",
+    });
+  }
+});

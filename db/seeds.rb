@@ -130,36 +130,42 @@ size = 5
   product.category_ids = category_ids.sample(2)
 end
 
-vitorProduct = Product.create!(name: "Air Vitor",
-                               price: Faker::Number.number(digits: 3),
-                               description: 'so cool',
-                               size: sizes.sample,
-                               color: colors.sample,
-                               gender: 'Male',
-                               brand: brand1,
-                               discount: (rand(0..40.0) * 2.0).round / 2.0,
-                               quantity: Faker::Number.number(digits: 2)
-)
-vitorProduct.images.attach(io: File.open("#{Rails.root}/app/assets/images/headline_products/VitorSquare.png"), filename: 'ProductVitor.png')
-vitorProduct.category_ids = category_ids.sample(2)
+size = 5
+5.times do
+  product = Product.create!(name: "Air Vitor",
+                            price: Faker::Number.number(digits: 3),
+                            description: 'Nike Classic shoes feature a timeless design with superior quality and comfort, available in a variety of styles and colors.',
+                            size:  size += 1,
+                            color: "blue",
+                            gender: genders.sample,
+                            brand: brand1,
+                            discount: (rand(0..40.0) * 2.0).round / 2.0,
+                            quantity: Faker::Number.number(digits: 2),
+                          )
+  product.images.attach(io: File.open("#{Rails.root}/app/assets/images/headline_products/VitorSquare.png"), filename: 'VitorSquare.png')
+  product.category_ids = category_ids.sample(2)
+end
 
-tiagoProduct = Product.create!(name: "Tiago Jordan",
-                               price: Faker::Number.number(digits: 3),
-                               description: 'so cool',
-                               size: sizes.sample,
-                               color: colors.sample,
-                               gender: 'Male',
-                               brand: brands2,
-                               discount: (rand(0..40.0) * 2.0).round / 2.0,
-                               quantity: Faker::Number.number(digits: 2)
-)
-tiagoProduct.images.attach(io: File.open("#{Rails.root}/app/assets/images/headline_products/TiagoSquare.png"), filename: 'ProductTiago.png')
-tiagoProduct.category_ids = category_ids.sample(2)
+size = 5
+5.times do
+  product = Product.create!(name: "Tiago Max Air",
+                            price: Faker::Number.number(digits: 3),
+                            description: 'Addidas Classic shoes feature a timeless design with superior quality and comfort, available in a variety of styles and colors.',
+                            size:  size += 1,
+                            color: "red",
+                            gender: genders.sample,
+                            brand: brand2,
+                            discount: (rand(0..40.0) * 2.0).round / 2.0,
+                            quantity: Faker::Number.number(digits: 2),
+                          )
+  product.images.attach(io: File.open("#{Rails.root}/app/assets/images/headline_products/TiagoSquare.png"), filename: 'TiagoSquare.png')
+  product.category_ids = category_ids.sample(2)
+end
 
 vitor = User.create!(name: 'Vitor', email: 'vgm_rox@hotmail.com', password: 123321)
-vitor.avatar.attach(io: File.open("#{Rails.root}/app/assets/images/iconic2.png"), filename: 'iconic2.png')
+vitor.avatar.attach(io: File.open("#{Rails.root}/app/assets/images/collaborators/CollaboratorVitor.jpg"), filename: 'CollaboratorVitor.jpg')
 tiago = User.create!(name: 'Tiago', email: 'tiago.lelinski@gmail.com', password: 123321)
-tiago.avatar.attach(io: File.open("#{Rails.root}/app/assets/images/iconic2.png"), filename: 'iconic2.png')
+tiago.avatar.attach(io: File.open("#{Rails.root}/app/assets/images/collaborators/CollaboratorTiago.jpg"), filename: 'CollaboratorTiago.jpg')
 
 # Iconic Products
 iconic_product_1 = Product.create!(name: "React",

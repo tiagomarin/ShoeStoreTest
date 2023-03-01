@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       patch 'remove_promo_code', on: :member
       resources :order_items, only: [:create, :update, :destroy ]
     end
-    resources :favorites, only: [:index, :create, :update, :destroy]
+    resources :favorites, only: [:index, :create, :destroy]
   end
   
   resources :products
