@@ -1,39 +1,39 @@
 <nav id="admin-nav-container">
-  <ul id=admin-nav-container__links-list>
-    <%= image_tag "icons/heart.png", class:"admin-nav-container__logo"%>
-      <li class="admin-nav-container__link">
+  <%= image_tag "icons/heart.png", class:"admin-nav-container__logo"%>
+  <ul id="admin-nav-container__ul">
+      <li class="admin-nav-container__li">
         <%= image_tag "icons/heart.png", class:"admin-nav-container__link-icon"%>
-        <%= link_to "Orders", admin_orders_path() %>
+        <%= link_to "Orders", admin_orders_path(), class: "admin-nav-container__link" %>
       </li>
 
-      <li class="admin-nav-container__link">
+      <li class="admin-nav-container__li">
         <%= image_tag "icons/heart.png", class:"admin-nav-container__link-icon"%>
-        <%= link_to "Products", admin_products_path() %>
+        <%= link_to "Products", admin_products_path(), class: "admin-nav-container__link" %>
       </li>
 
-      <li class="admin-nav-container__link">
+      <li class="admin-nav-container__li">
         <%= image_tag "icons/heart.png", class:"admin-nav-container__link-icon"%>
-        <%= link_to "Categories", admin_categories_path() %>
+        <%= link_to "Categories", admin_categories_path(), class: "admin-nav-container__link" %>
       </li>
 
-      <li class="admin-nav-container__link">
+      <li class="admin-nav-container__li">
         <%= image_tag "icons/heart.png", class:"admin-nav-container__link-icon"%>
-        <%= link_to "Brands", admin_brands_path() %>
+        <%= link_to "Brands", admin_brands_path(), class: "admin-nav-container__link" %>
       </li>
 
-      <li class="admin-nav-container__link">
+      <li class="admin-nav-container__li">
         <%= image_tag "icons/heart.png", class:"admin-nav-container__link-icon"%>
-        <%= link_to "Promo Codes", admin_promo_codes_path() %>
+        <%= link_to "Promo Codes", admin_promo_codes_path(), class: "admin-nav-container__link" %>
       </li>
 
-      <li class="admin-nav-container__link">
+      <li class="admin-nav-container__li">
         <%= image_tag "icons/heart.png", class:"admin-nav-container__link-icon"%>
-        <%= link_to "Iconics", admin_iconics_path() %>
+        <%= link_to "Iconics", admin_iconics_path(), class: "admin-nav-container__link" %>
       </li>
 
-      <li class="admin-nav-container__link">
+      <li class="admin-nav-container__li">
         <%= image_tag "icons/heart.png", class:"admin-nav-container__link-icon"%>
-        <%= link_to "Users", admin_users_path()  %>
+        <%= link_to "Users", admin_users_path(), class: "admin-nav-container__link"  %>
       </li>
   </ul>
 </nav>

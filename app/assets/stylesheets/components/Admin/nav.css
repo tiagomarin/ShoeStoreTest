@@ -1,0 +1,26 @@
+#admin-nav-container {
+  padding: var(--padding-1);
+  background-color: var(--color-background-2);
+}
+
+#admin-nav-container__ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-1);
+}
+
+.admin-nav-container__li {
+  display: flex;
+  gap: var(--gap-1);
+  text-decoration: none;
+}
+
+.admin-nav-container__link {
+  text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  #admin-nav-container {
+    padding: var(--padding-3);
+  }
+}
