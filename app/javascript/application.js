@@ -78,3 +78,5 @@ window.addEventListener("click", (event) => {
     event.target.classList.toggle("show");
   }
 })
+
+/* ------------------ */

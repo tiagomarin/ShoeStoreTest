@@ -91,6 +91,8 @@
   /* Gap */
   --gap-0: 0.5rem;
   --gap-1: 1rem;
+  --gap-2: 2rem;
+  --gap-3: 3rem;
 
   /* Border */
   --border-1: solid 1px var(--color-background-6);

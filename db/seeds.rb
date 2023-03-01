@@ -33,42 +33,60 @@ promocode2.category_ids = [@category2.id]
 promocode3.category_ids = category_ids
 promocode4.brand_ids = [brand1.id]
 promocode5.brand_ids = [brand2.id]
-size = 5
 
+size = 5
 5.times do
-  product = Product.create!(name: "Nike Air",
+  product = Product.create!(name: "Addidas Classic",
                             price: Faker::Number.number(digits: 3),
-                            description: 'so cool',
+                            description: 'Adidas Classic shoes feature a timeless design with superior quality and comfort, available in a variety of styles and colors.',
                             size: size += 1,
                             color: "black",
                             gender: genders.sample,
-                            brand: brand1,
+                            brand: brand2,
                             discount: (rand(0..40.0) * 2.0).round / 2.0,
                             quantity: Faker::Number.number(digits: 2),
                           )
-  product.images.attach(io: File.open("#{Rails.root}/app/assets/images/YoShoe_black.jpg"), filename: 'YoShoe_black.jpg')
+  product.images.attach(io: File.open("#{Rails.root}/app/assets/images/addidas_products/addidas1.jpg"), filename: 'addidas1.jpg')
   product.category_ids = category_ids.sample(2)
 end
+
 size = 5
 5.times do
-  product = Product.create!(name: "Nike Air",
+  product = Product.create!(name: "Addidas Classic",
                             price: Faker::Number.number(digits: 3),
-                            description: 'so cool',
+                            description: 'Adidas Classic shoes feature a timeless design with superior quality and comfort, available in a variety of styles and colors.',
                             size:  size += 1,
                             color: "blue",
                             gender: genders.sample,
-                            brand: brand1,
+                            brand: brand2,
                             discount: (rand(0..40.0) * 2.0).round / 2.0,
                             quantity: Faker::Number.number(digits: 2),
                           )
-  product.images.attach(io: File.open("#{Rails.root}/app/assets/images/YoShoe_blue.jpg"), filename: 'YoShoe_blue.jpg')
+  product.images.attach(io: File.open("#{Rails.root}/app/assets/images/addidas_products/addidas2.jpg"), filename: 'addidas2.jpg')
   product.category_ids = category_ids.sample(2)
 end
+
 size = 5
 5.times do
-  product = Product.create!(name: "Nike Air",
+  product = Product.create!(name: "Addidas Classic",
                             price: Faker::Number.number(digits: 3),
-                            description: 'so cool',
+                            description: 'Adidas Classic shoes feature a timeless design with superior quality and comfort, available in a variety of styles and colors.',
+                            size:  size += 1,
+                            color: "red",
+                            gender: genders.sample,
+                            brand: brand2,
+                            discount: (rand(0..40.0) * 2.0).round / 2.0,
+                            quantity: Faker::Number.number(digits: 2),
+                          )
+  product.images.attach(io: File.open("#{Rails.root}/app/assets/images/addidas_products/addidas3.jpg"), filename: 'addidas3.jpg')
+  product.category_ids = category_ids.sample(2)
+end
+
+size = 5
+5.times do
+  product = Product.create!(name: "Nike NXS",
+                            price: Faker::Number.number(digits: 3),
+                            description: 'Nike NXS shoes feature a timeless design with superior quality and comfort, available in a variety of styles and colors.',
                             size:  size += 1,
                             color: "red",
                             gender: genders.sample,
@@ -76,7 +94,39 @@ size = 5
                             discount: (rand(0..40.0) * 2.0).round / 2.0,
                             quantity: Faker::Number.number(digits: 2),
                           )
-  product.images.attach(io: File.open("#{Rails.root}/app/assets/images/YoShoe_red.jpg"), filename: 'YoShoe_red.jpg')
+  product.images.attach(io: File.open("#{Rails.root}/app/assets/images/nike_products/nike1.png"), filename: 'nike1.png')
+  product.category_ids = category_ids.sample(2)
+end
+
+size = 5
+5.times do
+  product = Product.create!(name: "Nike Classic",
+                            price: Faker::Number.number(digits: 3),
+                            description: 'Nike Classic shoes feature a timeless design with superior quality and comfort, available in a variety of styles and colors.',
+                            size:  size += 1,
+                            color: "white",
+                            gender: genders.sample,
+                            brand: brand1,
+                            discount: (rand(0..40.0) * 2.0).round / 2.0,
+                            quantity: Faker::Number.number(digits: 2),
+                          )
+  product.images.attach(io: File.open("#{Rails.root}/app/assets/images/nike_products/nike2.png"), filename: 'nike2.png')
+  product.category_ids = category_ids.sample(2)
+end
+
+size = 5
+5.times do
+  product = Product.create!(name: "Nike Classic",
+                            price: Faker::Number.number(digits: 3),
+                            description: 'Nike Classic shoes feature a timeless design with superior quality and comfort, available in a variety of styles and colors.',
+                            size:  size += 1,
+                            color: "black",
+                            gender: genders.sample,
+                            brand: brand1,
+                            discount: (rand(0..40.0) * 2.0).round / 2.0,
+                            quantity: Faker::Number.number(digits: 2),
+                          )
+  product.images.attach(io: File.open("#{Rails.root}/app/assets/images/nike_products/nike3.png"), filename: 'nike3.png')
   product.category_ids = category_ids.sample(2)
 end
 
@@ -86,11 +136,11 @@ vitorProduct = Product.create!(name: "Air Vitor",
                                size: sizes.sample,
                                color: colors.sample,
                                gender: 'Male',
-                               brand: brands.sample,
+                               brand: brand1,
                                discount: (rand(0..40.0) * 2.0).round / 2.0,
                                quantity: Faker::Number.number(digits: 2)
 )
-vitorProduct.images.attach(io: File.open("#{Rails.root}/app/assets/images/iconic3.png"), filename: 'iconic3.png')
+vitorProduct.images.attach(io: File.open("#{Rails.root}/app/assets/images/headline_products/VitorSquare.png"), filename: 'ProductVitor.png')
 vitorProduct.category_ids = category_ids.sample(2)
 
 tiagoProduct = Product.create!(name: "Tiago Jordan",
@@ -99,11 +149,11 @@ tiagoProduct = Product.create!(name: "Tiago Jordan",
                                size: sizes.sample,
                                color: colors.sample,
                                gender: 'Male',
-                               brand: brands.sample,
+                               brand: brands2,
                                discount: (rand(0..40.0) * 2.0).round / 2.0,
                                quantity: Faker::Number.number(digits: 2)
 )
-tiagoProduct.images.attach(io: File.open("#{Rails.root}/app/assets/images/iconic2.png"), filename: 'iconic2.png')
+tiagoProduct.images.attach(io: File.open("#{Rails.root}/app/assets/images/headline_products/TiagoSquare.png"), filename: 'ProductTiago.png')
 tiagoProduct.category_ids = category_ids.sample(2)
 
 vitor = User.create!(name: 'Vitor', email: 'vgm_rox@hotmail.com', password: 123321)
@@ -122,8 +172,8 @@ iconic_product_1 = Product.create!(name: "React",
   discount: (rand(0..40.0) * 2.0).round / 2.0,
   quantity: Faker::Number.number(digits: 2)
 )
-iconic_product_1.images.attach(io: File.open("#{Rails.root}/app/assets/images/reacticonicsquare.png"), filename: 'reacticonicsquare.png')
-iconic_product_1.images.attach(io: File.open("#{Rails.root}/app/assets/images/reacticonic.png"), filename: 'reacticonic.png')
+iconic_product_1.images.attach(io: File.open("#{Rails.root}/app/assets/images/iconics/IconicSquare3.png"), filename: 'IconicSquare3.png')
+iconic_product_1.images.attach(io: File.open("#{Rails.root}/app/assets/images/iconics/reacticonic.png"), filename: 'reacticonic.png')
 iconic_product_1.category_ids = category_ids.sample(2)
 
 iconic_product_2 = Product.create!(name: "Rails",
@@ -136,8 +186,8 @@ iconic_product_2 = Product.create!(name: "Rails",
   discount: (rand(0..40.0) * 2.0).round / 2.0,
   quantity: Faker::Number.number(digits: 2)
 )
-iconic_product_2.images.attach(io: File.open("#{Rails.root}/app/assets/images/railsiconicsquare.png"), filename: 'railsiconicsquare.png')
-iconic_product_2.images.attach(io: File.open("#{Rails.root}/app/assets/images/railsiconic.png"), filename: 'railsiconic.png')
+iconic_product_2.images.attach(io: File.open("#{Rails.root}/app/assets/images/iconics/IconicSquare1.png"), filename: 'IconicSquare1.png')
+iconic_product_2.images.attach(io: File.open("#{Rails.root}/app/assets/images/iconics/railsiconic.png"), filename: 'railsiconic.png')
 iconic_product_2.category_ids = category_ids.sample(2)
 
 iconic_product_3 = Product.create!(name: "JavaScript",
@@ -150,8 +200,8 @@ iconic_product_3 = Product.create!(name: "JavaScript",
   discount: (rand(0..40.0) * 2.0).round / 2.0,
   quantity: Faker::Number.number(digits: 2)
 )
-iconic_product_3.images.attach(io: File.open("#{Rails.root}/app/assets/images/javascripticonicsquare.png"), filename: 'javascripticonicsquare.png')
-iconic_product_3.images.attach(io: File.open("#{Rails.root}/app/assets/images/javascripticonic.png"), filename: 'javascripticonic.png')
+iconic_product_3.images.attach(io: File.open("#{Rails.root}/app/assets/images/iconics/IconicSquare2.png"), filename: 'IconicSquare2.png')
+iconic_product_3.images.attach(io: File.open("#{Rails.root}/app/assets/images/iconics/javascripticonic.png"), filename: 'javascripticonic.png')
 iconic_product_3.category_ids = category_ids.sample(2)
 
 iconic_1 = Iconic.create!(product: iconic_product_1)

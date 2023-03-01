@@ -126,7 +126,7 @@ h1 {
 
 #products {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 1rem;
   width: 100%;
@@ -196,7 +196,7 @@ h1 {
 
   .products-container__filters {
     display: none;
-    width: 30%;
+    width: 20%;
   }
 
   .products-container__filters.filters_active {

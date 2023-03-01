@@ -108,7 +108,7 @@
   #nav-container__icon-text {
     display: flex;
     align-items: center;
-    gap: var(--gap-0);
+    gap: var(--gap-2);
   }
 
   #nav-container__favorites {

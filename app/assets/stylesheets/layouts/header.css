@@ -1,6 +1,7 @@
 #header-container {
   display: none;
   padding: var(--lateral-padding-1);
+  font-size: 0.75em;
 }
 
 .header-container__links {
@@ -27,17 +28,6 @@
     display: flex;
     align-items: center;
     gap: var(--gap-0);
-  }
-
-  #header-container__shopping-cart {
-    text-decoration: none;
-    color: var(--color-background-1);
-  }
-
-  .header-container-icon {
-    width: 1.25rem;
-    height: 1.25rem;
-    filter: invert(1);
   }
 
   #header-container__ul {

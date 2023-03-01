@@ -1,8 +1,12 @@
 <div id="new-arrivals-container__carrousel-div">
   <% @new_arrivals.each do |product| %>
+    <%= link_to product_path(product) do %>
     <div id="new-arrivals-container__new-product-div">
       <div id="new-arrivals-container__image-div">
-        <%= image_tag "YoShoe_blue.jpg", id: "new-arrivals-container__img", alt: "new arrival shoes" %>
+        <%= image_tag product.images[0], id: "new-arrivals-container__img", alt: "new arrival shoes" %>
+        <%= link_to user_favorites_path(current_user), id: "new-arrivals-container__link-favorite" do %>
+          <%= image_tag "icons/heart", alt: "favorite", class: "new-arrivals-container-icon" %>
+        <% end %>
         <span id="new-arrivals-container__price"><%= number_to_currency(product.price) %><span>
       </div>
       <h3>
@@ -15,6 +19,7 @@
         <em>New</em>
       </span>
     </div>
+    <% end %>
   <% end %>
 
   <%= image_tag "icons/angle-down", alt: "left-arrow", class: "new-arrivals-container__left-arrow" %>
