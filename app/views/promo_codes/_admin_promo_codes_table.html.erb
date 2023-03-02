@@ -1,0 +1,27 @@
+<table>
+    <thead>
+        <th>ID</th>
+        <th>TITLE</th>
+        <th>DISCOUNT</th>
+        <th>APPLICABLE TO</th>
+    </thead>
+
+    <tbody>
+      <% promo_codes.each do |promo_code| %>
+        <tr>
+          <td><%= promo_code.id %></td>
+          <td><%= promo_code.title %></td>
+          <td><%= promo_code.value.to_i %>%</td>
+          <% if promo_codes.length > 0 %>
+          <td>
+            <% promo_codes.each do |promo_code| %>
+              <%= promo_code.title %>
+            <% end %>
+          </td>
+          <% else %>
+            <td>no promotions</td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+</table>

@@ -1,7 +1,7 @@
 # rubocop:disable all
 class ProductsController < ApplicationController
   include FilterProducts
-  before_action :authenticate_user!, only: %i[new edit create update destroy admin_products]
+  before_action :authenticate_user!, only: %i[new edit create update destroy]
   before_action :set_product, only: %i[show edit update]
   before_action :set_brands, only: %i[new edit create admin_products]
   before_action :set_categories, only: %i[new edit create]

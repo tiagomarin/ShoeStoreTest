@@ -1,11 +1,11 @@
-.admin-categories-container {
+.admin-promo-codes-container {
   padding: var(--padding-1);
   height: 100vh;
   overflow: auto;
   width: 100%;
 }
 
-#admin-categories-container__new-category-button {
+#admin-promo-codes-container__new-promo-code-button {
   background-color: var(--color-background-6);
   color: var(--color-background-1);
   border: none;
@@ -19,7 +19,7 @@
   display: block;
 }
 
-#admin-categories-container__new-category-button:hover {
+#admin-promo-codes-container__new-promo-code-button:hover {
   background-color: var(--color-background-2);
   color: var(--color-background-6);
 }

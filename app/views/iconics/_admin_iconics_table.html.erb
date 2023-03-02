@@ -1,0 +1,43 @@
+<table>
+    <thead>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>IMAGE (SQUARE)</th>
+        <th>IMAGE (RECTANGLE)</th>
+    </thead>
+
+    <tbody>
+      <% iconics.each do |iconic| %>
+        <tr>
+          <td><%= iconic.id %></td>
+          <td><%= iconic.product.name %></td>
+          <td>
+              <%= form_with model: Iconic, url: iconic_path(iconic), method: :patch, class: "image-form" do |form| %>
+                <%= form.label :images, class: "image-label" do %>
+                  <% if iconic.product.images[0] %>
+                    <%= image_tag iconic.product.images[0], class: "admin-iconics-table__img image-image" %>
+                  <% else %>
+                    <%= image_tag "no-iconic-image.png", class: "admin-iconics-table__img image-image" %>
+                  <% end %>
+                  <%= form.file_field :images, multiple: true, class: "image-select" %>
+                <% end %>
+                <%= form.submit "✔️", class: "image-submit" %>
+              <% end %>
+          </td>
+          <td>
+              <%= form_with model: Iconic, url: iconic_path(iconic), method: :patch, class: "image-form" do |form| %>
+                <%= form.label :images, class: "image-label" do %>
+                  <% if iconic.product.images[1] %>
+                    <%= image_tag iconic.product.images[1], class: "admin-iconics-table__img image-image" %>
+                  <% else %>
+                    <%= image_tag "no-iconic-image.png", class: "admin-iconics-table__img image-image" %>
+                  <% end %>
+                  <%= form.file_field :images, multiple: true, class: "image-select" %>
+                <% end %>
+                <%= form.submit "✔️", class: "image-submit" %>
+              <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+</table>

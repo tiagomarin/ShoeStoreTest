@@ -14,7 +14,7 @@ class BrandsController < ApplicationController
 
     respond_to do |format|
       if @brand.save
-        format.html { redirect_to new_product_path, notice: 'Brand was successfully created.' }
+        format.html { redirect_to admin_brands_path, notice: 'Brand was successfully created.' }
         format.json { render :show, status: :created, location: @brand }
       else
         format.html { redirect_to new_product_path, notice: 'Brand already exist.' }

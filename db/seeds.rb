@@ -4,9 +4,9 @@
 # PromoCode.destroy.all
 # User.destroy.all
 
-vitor = User.create!(name: 'Vitor', role: 'admin',email: 'vgm_rox@hotmail.com', password: 123321)
+vitor = User.create!(name: 'Vitor', address: "Brazil", role: 'admin',email: 'vgm_rox@hotmail.com', password: 123321)
 vitor.avatar.attach(io: File.open("#{Rails.root}/app/assets/images/collaborators/CollaboratorVitor.jpg"), filename: 'CollaboratorVitor.jpg')
-tiago = User.create!(name: 'Tiago', role: 'admin', email: 'tiago.lelinski@gmail.com', password: 123321)
+tiago = User.create!(name: 'Tiago', address: "Brazil", role: 'admin', email: 'tiago.lelinski@gmail.com', password: 123321)
 tiago.avatar.attach(io: File.open("#{Rails.root}/app/assets/images/collaborators/CollaboratorTiago.jpg"), filename: 'CollaboratorTiago.jpg')
 
 vitor = User.create!(name: 'TestUser', email: 'test@test.com', password: 123321)

@@ -1,0 +1,10 @@
+.admin-orders-container {
+  padding: var(--padding-1);
+  height: 100vh;
+  overflow: auto;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  /* 123 */
+}

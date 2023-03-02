@@ -1,2 +1,5 @@
-<%= render "layouts/admin_nav" %>
-<h1>ADMIN BRANDS</h1>
+<div class="admin-brands-container">
+  <%= link_to "New Brand", new_brand_path(), id:"admin-brands-container__new-brand-button" %>
+
+  <%= render "admin_brands_table", brands: @brands %>
+</div>

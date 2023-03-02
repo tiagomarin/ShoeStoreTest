@@ -90,7 +90,7 @@ window.addEventListener("click", (e) => {
   // Scroll left
   if(e.target === scrollLeftBtn) {
     newArrivalsCarrousel.scrollBy({
-      left: -500,
+      left: -750,
       behavior: "smooth",
     });
   }
@@ -98,7 +98,7 @@ window.addEventListener("click", (e) => {
   // Scroll right
   if(e.target === scrollRightBtn) {
     newArrivalsCarrousel.scrollBy({
-      left: 500,
+      left: 750,
       behavior: "smooth",
     });
   }

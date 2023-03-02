@@ -6,13 +6,12 @@
     </thead>
 
     <tbody>
-      <% categories.each do |category| %>
+      <% brands.each do |brand| %>
         <tr>
-          <td><%= category.id %></td>
-          <td><%= category.name %></td>
-          <td><%= category.products.count %></td>
+          <td><%= brand.id %></td>
+          <td><%= brand.name %></td>
+          <td><%= brand.products.count %></td>
         </tr>
       <% end %>
     </tbody>
 </table>
-

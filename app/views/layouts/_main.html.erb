@@ -1,3 +1,10 @@
-<main>
-  <%= yield %>
-</main>
+<% if admin_path() %>
+  <main id="admin-dashboard-container">
+    <%= render "layouts/admin_nav" %>
+    <%= yield %>
+  </main>
+<% else%>
+  <main>
+    <%= yield %>
+  </main>
+<% end %>

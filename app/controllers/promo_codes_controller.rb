@@ -29,7 +29,7 @@ class PromoCodesController < ApplicationController
 
     respond_to do |format|
       if @promo_code.save
-        format.html { redirect_to promo_code_url(@promo_code), notice: 'Promo code was successfully created.' }
+        format.html { redirect_to admin_promo_codes_path, notice: 'Promo code was successfully created.' }
         format.json { render :show, status: :created, location: @promo_code }
       else
         format.html { render :new, status: :unprocessable_entity }

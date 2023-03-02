@@ -1,24 +1,7 @@
 <div class="admin-products-container">
-  <%= render "layouts/admin_nav" %>
-  <div>
-    <div class="admin-products-container__header">
-      <div class="admin-products-container__header-nav">
-        <p>Products</p>
-        <p class="admin-products-container__header-nav">
-          / New Product
-        </p>
-        <p class="admin-products-container__header-nav">
-          / ...
-        </p>
-      </div>
-      <%= link_to "New Product", new_product_path(), id:"admin-products-container__new-product-button" %>
-    </div>
+  <%= link_to "New Product", new_product_path(), id:"admin-products-container__new-product-button" %>
 
-    <%= paginate @products %>
-
+  <%= paginate @products %>
     <%= render "admin_products_table", products: @products %>
-
-    <%= paginate @products %>
-  </div>
-
+  <%= paginate @products %>
 </div>
