@@ -9,6 +9,14 @@ Rails.application.routes.draw do
     end
     resources :favorites, only: [:index, :create, :destroy]
   end
+
+  get 'admin/products', to: 'products#admin_products'
+  get 'admin/categories', to: 'categories#admin_categories'
+  get 'admin/brands', to: 'brands#admin_brands'
+  get 'admin/promo_codes', to: 'promo_codes#admin_promo_codes'
+  get 'admin/iconics', to: 'iconics#admin_iconics'
+  get 'admin/users', to: 'users#admin_users'
+  get 'admin/orders', to: 'orders#admin_orders'
   
   resources :products
   resources :categories

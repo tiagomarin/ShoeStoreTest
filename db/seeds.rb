@@ -9,7 +9,7 @@ brand2 = Brand.create!(name:"addidas")
 brand3 = Brand.create!(name: "puma")
 brands = [brand1, brand2, brand3]
 
-colors = ["blue", "black", "white", "red", "pink", "purple", "prange", "green", "yellow", "grey", "cyan", "violet", "brown"]
+colors = ["blue", "black", "white", "red", "pink", "purple", "orange", "green", "yellow", "grey", "cyan", "violet", "brown"]
 
 @category1 = Category.create!(name:"running")
 @category2 = Category.create!(name:"casual")

@@ -1,6 +1,10 @@
 class BrandsController < ApplicationController
   before_action :authenticate_user!
 
+  def admin_brands
+    @brands = Brand.all
+  end
+
   def new
     @brand = Brand.new
   end

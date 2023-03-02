@@ -8,6 +8,7 @@ module ProductsHelper
     Product.where(name:).where(brand_id:).where(size:).where.not(color:)
   end
 
+  # get all products with the same name, brand, description but with different sizes
   def sizes_available(product)
     name = product.name
     brand_id = product.brand.id

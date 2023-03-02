@@ -1,6 +1,10 @@
 class IconicsController < ApplicationController
   before_action :set_iconic, only: %i[update]
 
+  def admin_iconics
+    @iconics = Iconic.all
+  end
+
   # PATCH/PUT /iconics/1 or /iconics/1.json
   def update
     product = Product.find(params[:iconic][:iconic])

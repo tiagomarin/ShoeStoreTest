@@ -1,9 +1,11 @@
-require 'json'
-
 class PromoCodesController < ApplicationController
   before_action :set_promo_code, only: %i[show edit update destroy]
   before_action :set_categories, only: %i[new edit]
   before_action :set_brands, only: %i[new edit]
+
+  def admin_promo_codes
+    @promo_codes = PromoCode.all
+  end
 
   # GET /promo_codes or /promo_codes.json
   def index

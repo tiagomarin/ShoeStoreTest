@@ -5,6 +5,10 @@ class OrdersController < ApplicationController
   before_action :check_promo_code, only: %i[add_promo_code remove_promo_code]
   before_action :authenticate_user!
 
+  def admin_orders
+    @orders = Order.all
+  end
+
   # GET /orders or /orders.json
   def index
     # @orders = Order.all
