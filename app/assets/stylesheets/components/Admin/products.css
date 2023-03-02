@@ -228,27 +228,10 @@
 }
 
 /* image */
-.image-hide {
+.image-form {
   display: flex;
-  gap: var(--gap-0);
   align-items: center;
-  position: relative;
-}
-
-.image-hide.hide {
-  display: none;
-}
-
-.image-label {
-  position: absolute;
-  bottom: 0.25rem;
-  left: 0.25rem;
-  background-color: white;
-  padding-bottom: -10px;
-}
-
-.image-form.show {
-  display: flex;
+  gap: var(--gap-1);
 }
 
 .image-select {
@@ -261,6 +244,10 @@
 
 .image-submit.show {
   display: flex;
+}
+
+.image-image {
+  cursor: pointer;
 }
 
 @media (min-width: 768px) {

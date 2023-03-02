@@ -103,14 +103,7 @@ window.addEventListener("click", event => {
   }
 
   // open edit product image input
-  if(event.target.className === "admin-products-table__edit-icon image-edit") {
+  if(event.target.className === "admin-products-table__img image-image") {
     event.target.parentElement.nextElementSibling.classList.add("show")
-    event.target.parentElement.classList.add("hide")
-  }
-
-  // close edit product image input
-  if(event.target.className === "image-submit") {
-    event.target.parentElement.nextElementSibling.classList.remove("show")
-    event.target.parentElement.classList.remove("hide")
   }
 })

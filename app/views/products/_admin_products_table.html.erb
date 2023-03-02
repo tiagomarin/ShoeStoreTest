@@ -18,19 +18,17 @@
         <tr>
           <td><%= product.id %></td>
           <td>
-            <div class="image-hide">
-              <% if product.images[0] %>
-                <%= image_tag product.images[0], class:"admin-products-table__img" %>
-              <% end %>
-
-              <%= form_with model: Product, url: product_path(product), method: :patch do |form| %>
+              <%= form_with model: Product, url: product_path(product), method: :patch, class: "image-form" do |form| %>
                 <%= form.label :images, class: "image-label" do %>
-                  <%= image_tag "icons/edit", class:"admin-products-table__edit-icon image-edit" %>
+                  <% if product.images[0] %>
+                    <%= image_tag product.images[0], class:"admin-products-table__img image-image" %>
+                  <% else %>
+                    <%= image_tag "no-product-image.png", class: "admin-products-table__img image-image" %>
+                  <% end %>
                   <%= form.file_field :images, multiple: true, class: "image-select" %>
                 <% end %>
-                <%= form.submit "update", class: "image-submit" %>
+                <%= form.submit "✔️", class: "image-submit" %>
               <% end %>
-            </div>
           </td>
           <td>
             <div class="name-hide">
