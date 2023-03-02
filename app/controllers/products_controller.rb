@@ -21,7 +21,7 @@ class ProductsController < ApplicationController
      @products = remove_duplicates(@products)
      @products = apply_filters(@products)
      @products = sort_products(@products)
-     @all_products = Product.all
+     @all_products = Product.all.page(params[:page])
 
     if turbo_frame_request?
       render partial: 'products', locals: { products: @products }
