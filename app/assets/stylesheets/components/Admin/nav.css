@@ -19,10 +19,7 @@
 }
 
 .admin-nav-container__li {
-  display: flex;
-  gap: var(--gap-1);
-  text-decoration: none;
-  padding: 0.5rem 3rem;
+  /* loading */
 }
 
 .admin-nav-container__li:hover {
@@ -34,6 +31,11 @@
   text-decoration: none;
   color: black;
   font-weight: 700;
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem 3rem;
+  display: flex;
+  gap: 2rem;
 }
 
 .admin-nav-container__li:hover .admin-nav-container__link,

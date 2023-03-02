@@ -17,7 +17,21 @@
         <% product.discount > 0 ? priceClass = "products-container__product-card-price discounted" : priceClass = "products-container__product-card-price" %>
         <tr>
           <td><%= product.id %></td>
-          <td><%= image_tag product.images[0], class:"admin-products-table__img" %></td>
+          <td>
+            <div class="image-hide">
+              <% if product.images[0] %>
+                <%= image_tag product.images[0], class:"admin-products-table__img" %>
+              <% end %>
+
+              <%= form_with model: Product, url: product_path(product), method: :patch do |form| %>
+                <%= form.label :images, class: "image-label" do %>
+                  <%= image_tag "icons/edit", class:"admin-products-table__edit-icon image-edit" %>
+                  <%= form.file_field :images, multiple: true, class: "image-select" %>
+                <% end %>
+                <%= form.submit "update", class: "image-submit" %>
+              <% end %>
+            </div>
+          </td>
           <td>
             <div class="name-hide">
               <%= image_tag "icons/edit", class:"admin-products-table__edit-icon name-edit" %>

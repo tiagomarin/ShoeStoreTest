@@ -1,8 +1,8 @@
 # rubocop:disable all
 class ProductsController < ApplicationController
   include FilterProducts
-  before_action :authenticate_user!, only: %i[new edit create update destroy]
-  before_action :set_product, only: %i[show edit update destroy]
+  before_action :authenticate_user!, only: %i[new edit create update destroy admin_products]
+  before_action :set_product, only: %i[show edit update]
   before_action :set_brands, only: %i[new edit create admin_products]
   before_action :set_categories, only: %i[new edit create]
   before_action :set_product_categories, only: %i[show update]
@@ -83,7 +83,7 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        #format.html { redirect_to product_url(@product), notice: 'Product was successfully updated.' }
+        # format.html { redirect_to product_url(@product), notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit, status: :unprocessable_entity }

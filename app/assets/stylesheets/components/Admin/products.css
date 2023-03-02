@@ -227,6 +227,42 @@
   display: flex;
 }
 
+/* image */
+.image-hide {
+  display: flex;
+  gap: var(--gap-0);
+  align-items: center;
+  position: relative;
+}
+
+.image-hide.hide {
+  display: none;
+}
+
+.image-label {
+  position: absolute;
+  bottom: 0.25rem;
+  left: 0.25rem;
+  background-color: white;
+  padding-bottom: -10px;
+}
+
+.image-form.show {
+  display: flex;
+}
+
+.image-select {
+  display: none;
+}
+
+.image-submit {
+  display: none;
+}
+
+.image-submit.show {
+  display: flex;
+}
+
 @media (min-width: 768px) {
   .admin-products-container {
     padding: var(--padding-3);
