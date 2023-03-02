@@ -13,7 +13,7 @@
     </thead>
 
     <tbody>
-      <% @products.each do |product| %>
+      <% products.each do |product| %>
         <% product.discount > 0 ? priceClass = "products-container__product-card-price discounted" : priceClass = "products-container__product-card-price" %>
         <tr>
           <td><%= product.id %></td>
@@ -92,7 +92,7 @@
             <button id="admin-products-table__delete-product-button" type="button">
               <%= image_tag "icons/trash", class:"admin-products-table__delete-icon" %>
             </button>
-            <%= link_to image_tag("icons/show", class:"admin-products-table__show-icon"), product, id:"admin-products-table__show-product-button" %>
+            <%= link_to image_tag("icons/show", class: "admin-products-table__show-icon"), product, id:"admin-products-table__show-product-button" %>
               
           </td>
         </tr>

@@ -36,6 +36,11 @@
   height: 1rem;
 }
 
+#admin-products-table__delete-product-button {
+  border: none;
+  background-color: transparent;
+}
+
 /* POP UP */
 #admin-products-table__delete-product-popup-wrap {
   position: fixed;
