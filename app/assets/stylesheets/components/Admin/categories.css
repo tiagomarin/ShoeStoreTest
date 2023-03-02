@@ -1,0 +1,36 @@
+.admin-categories-container {
+  padding: var(--padding-1);
+  height: 100vh;
+  overflow: auto;
+  width: 100%;
+}
+
+.admin-categories-container__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.admin-categories-container__header-nav {
+  display: flex;
+  gap: 1rem;
+}
+
+#admin-categories-container__new-category-button {
+  background-color: var(--color-background-6);
+  color: var(--color-background-1);
+  border: none;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  font-size: var(--font-size-xs);
+  border-radius: var(--border-radius-6);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  .admin-categories-container {
+    padding: var(--padding-3);
+  }
+}

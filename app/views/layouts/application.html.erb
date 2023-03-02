@@ -12,9 +12,9 @@
 
   <body>
     <%# if current_user.role === "admin" %>
+      <%= render "layouts/header" %>
       <%= render "layouts/admin_dashboard" %>
     <%# else %>
-      <%#= render "layouts/header" %>
       <%#= yield %>
       <%#= render "layouts/footer" %>
 

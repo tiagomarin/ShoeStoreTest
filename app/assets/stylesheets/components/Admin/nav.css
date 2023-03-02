@@ -19,12 +19,32 @@
 }
 
 .admin-nav-container__li {
-  /* loading */
+  position: relative;
+}
+
+.admin-nav-container__li-ul {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background-color: red;
+}
+
+.admin-nav-container__li:hover .admin-nav-container__li-ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-nav-container__li-ul li {
+  padding: 0.5rem;
+}
+
+.admin-nav-container__li-ul li:hover {
+  background-color: blue;
 }
 
 .admin-nav-container__li:hover {
   background-color: darkcyan;
-  color: white;
 }
 
 .admin-nav-container__link {
@@ -38,8 +58,7 @@
   gap: 2rem;
 }
 
-.admin-nav-container__li:hover .admin-nav-container__link,
-.admin-nav-container__li:hover .admin-nav-container__link-icon {
+.admin-nav-container__li:hover .admin-nav-container__link {
   filter: invert(1);
 }
 

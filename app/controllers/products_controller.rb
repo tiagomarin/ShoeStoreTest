@@ -8,20 +8,7 @@ class ProductsController < ApplicationController
   before_action :set_product_categories, only: %i[show update]
 
   def admin_products
-     # when user clicks on a clear all filters button
-     clear_filters()
-     # when user clicks on a filter button
-     save_filter_in_session()
-     # when user clicks on a remove filter button
-     update_filters_stored_in_session()
- 
-     # when user search for something in search bar
-     @products = search_products()
- 
-     @products = remove_duplicates(@products)
-     @products = apply_filters(@products)
-     @products = sort_products(@products)
-     @all_products = Product.all.page(params[:page])
+     @products = Product.all.page(params[:page])
 
     if turbo_frame_request?
       render partial: 'products', locals: { products: @products }

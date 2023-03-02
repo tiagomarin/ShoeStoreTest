@@ -12,12 +12,10 @@
     <%= link_to "New Product", new_product_path(), id:"admin-products-container__new-product-button" %>
   </div>
 
-  <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
-    <%= form.text_field :query, placeholder: "Search product", data: { action: "input->search-form#search", target: "query"} %>
-  <% end %>
+  <%= paginate @products %>
 
-  <%= paginate @all_products %>
-  <%= render "admin_products_table", products: @all_products %>
-  <%= paginate @all_products %>
+  <%= render "admin_products_table", products: @products %>
+
+  <%= paginate @products %>
 
 </div>

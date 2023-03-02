@@ -1,3 +1,5 @@
+# rubocop:disable all
+
 module FilterProducts
   def clear_filters
     return unless params[:clear_filters].present?
@@ -71,6 +73,7 @@ module FilterProducts
     else
       @products = Product.all
     end
+    @products
   end
 
   # get all products without duplicates based on size
