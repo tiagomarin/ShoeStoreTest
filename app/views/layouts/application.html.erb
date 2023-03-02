@@ -11,13 +11,9 @@
   </head>
 
   <body>
-    <%# if current_user.role === "admin" %>
-      <%= render "layouts/header" %>
-      <%= render "layouts/admin_dashboard" %>
-    <%# else %>
-      <%#= yield %>
-      <%#= render "layouts/footer" %>
-
+      <%= render "layouts/header" unless admin_path() %>
+    <%= yield %>
+    <%= render "layouts/footer" unless admin_path() %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
   </body>

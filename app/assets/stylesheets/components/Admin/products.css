@@ -1,4 +1,5 @@
 .admin-products-container {
+  display: flex;
   padding: var(--padding-1);
   height: 100vh;
   overflow: auto;

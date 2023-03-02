@@ -4,6 +4,13 @@
 # PromoCode.destroy.all
 # User.destroy.all
 
+vitor = User.create!(name: 'Vitor', role: 'admin',email: 'vgm_rox@hotmail.com', password: 123321)
+vitor.avatar.attach(io: File.open("#{Rails.root}/app/assets/images/collaborators/CollaboratorVitor.jpg"), filename: 'CollaboratorVitor.jpg')
+tiago = User.create!(name: 'Tiago', role: 'admin', email: 'tiago.lelinski@gmail.com', password: 123321)
+tiago.avatar.attach(io: File.open("#{Rails.root}/app/assets/images/collaborators/CollaboratorTiago.jpg"), filename: 'CollaboratorTiago.jpg')
+
+vitor = User.create!(name: 'TestUser', email: 'test@test.com', password: 123321)
+
 brand1 = Brand.create!(name:"nike")
 brand2 = Brand.create!(name:"addidas")
 brand3 = Brand.create!(name: "puma")
@@ -162,10 +169,6 @@ size = 5
   product.category_ids = category_ids.sample(2)
 end
 
-vitor = User.create!(name: 'Vitor', email: 'vgm_rox@hotmail.com', password: 123321)
-vitor.avatar.attach(io: File.open("#{Rails.root}/app/assets/images/collaborators/CollaboratorVitor.jpg"), filename: 'CollaboratorVitor.jpg')
-tiago = User.create!(name: 'Tiago', email: 'tiago.lelinski@gmail.com', password: 123321)
-tiago.avatar.attach(io: File.open("#{Rails.root}/app/assets/images/collaborators/CollaboratorTiago.jpg"), filename: 'CollaboratorTiago.jpg')
 
 # Iconic Products
 iconic_product_1 = Product.create!(name: "React",
