@@ -29,6 +29,7 @@
 
 #nav-container__ul {
   display: none;
+  font-weight: 600;
 }
 
 .nav-container-icon {
@@ -108,7 +109,7 @@
   #nav-container__icon-text {
     display: flex;
     align-items: center;
-    gap: var(--gap-0);
+    gap: var(--gap-2);
   }
 
   #nav-container__favorites {

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       patch 'remove_promo_code', on: :member
       resources :order_items, only: [:create, :update, :destroy ]
     end
+    resources :favorites, only: [:index, :create, :destroy]
   end
   
   resources :products
@@ -15,6 +16,8 @@ Rails.application.routes.draw do
   resources :promo_codes
   resources :iconics
   resources :collaborators, only: [:index]
+
+  get '/toggle_favorite', to: 'favorites#toggle_favorite'
   
   # Defines the root path route ("/")
   root "home#index"

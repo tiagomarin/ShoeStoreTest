@@ -45,6 +45,14 @@
   transform: rotate(180deg);
 }
 
+.footer-container__icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  filter: invert(0.75);
+  transition: 0.5s;
+  cursor: pointer;
+}
+
 .footer-container__ul {
   list-style-type: none;
   display: none;

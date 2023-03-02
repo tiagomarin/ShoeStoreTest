@@ -5,6 +5,9 @@ class Product < ApplicationRecord
   # belongs_to :category
   has_and_belongs_to_many :category
 
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_by, through: :favorites, source: :user
+
   validates :name, presence: true,
                    length: { maximum: 30, too_long: '%<count>s characters is the maximum allowed' }
   validates :price, presence: true,

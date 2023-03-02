@@ -2,19 +2,16 @@
 
 <header id="header-container">
   <div id="header-container__icon-text">
-    <% if current_user %>
-      <%= image_tag "icons/shopping-cart", alt: "shopping-cart", class: "header-container-icon" %>
-      <%= link_to "Shopping Cart", user_order_path(current_user, @order), id: "header-container__shopping-cart" %>
-    <% end %> 
+    e-commerce
   </div>
   <ul id="header-container__ul">
     <% if current_user %>
-    <li>Hello, <%= current_user.name %></li>
+    <li class="header-container__links">Hello, <%= current_user.name %></li>
     <% else %>
-    <li>Anything</li>
+    <li class="header-container__links">Anything</li>
     <% end%>
     <li></li>
-    <li>Help</li>
+    <li class="header-container__links">Help</li>
     <li></li>
     <li><%= link_to "Meet Us", collaborators_path, class: "header-container__links" %></li>
     <li></li>
@@ -47,8 +44,15 @@
     <% end %>
 
     <% if current_user %>
-      <%= image_tag "icons/heart", alt: "favorites", class: "nav-container-icon" %>
-      <%= link_to "Wish List", user_order_path(current_user, @order), id: "nav-container__favorites" %>
+      <%= link_to user_favorites_path(current_user), id: "nav-container__favorites" do %>
+        <%= image_tag "icons/heart", alt: "favorites", class: "nav-container-icon" %>
+      <% end %>
+    <% end %> 
+
+    <% if current_user %>
+      <%= link_to user_order_path(current_user, @order), id: "nav-container__shopping-cart" do %>
+        <%= image_tag "icons/shopping-cart", alt: "shopping-cart", class: "nav-container-icon" %>
+      <% end %>
     <% end %> 
   </div>
   <div id="nav-container__hamburger-menu">

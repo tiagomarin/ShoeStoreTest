@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_25_211537) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_28_005814) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -71,6 +71,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_25_211537) do
     t.bigint "promo_code_id", null: false
     t.index ["category_id", "promo_code_id"], name: "index_categories_promo_codes_on_category_id_and_promo_code_id"
     t.index ["promo_code_id", "category_id"], name: "index_categories_promo_codes_on_promo_code_id_and_category_id"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.bigint "product_id", null: false
+    t.index ["product_id"], name: "index_favorites_on_product_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "iconics", force: :cascade do |t|
@@ -143,6 +152,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_25_211537) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "favorites", "products"
+  add_foreign_key "favorites", "users"
   add_foreign_key "iconics", "products"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
