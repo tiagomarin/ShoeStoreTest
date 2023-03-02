@@ -18,31 +18,4 @@ class Product < ApplicationRecord
   validates :discount, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
   # validates :category_id, presence: true
   validates :quantity, presence: true, numericality: { greater_than_or_equal_to: 0 }
-
-  # FILTER_PARAMS = %i[
-  #                     clear_filters
-  #                     query
-  #                     size_filters
-  #                     color_filters
-  #                     brand_filters
-  #                     category_filters
-  #                     min_price_filter
-  #                     max_price_filter
-  #                     remove_size_filter
-  #                     remove_color_filter
-  #                     remove_brand_filter
-  #                     remove_category_filter
-  #                     remove_min_price_filter
-  #                     remove_max_price_filter
-  #                   ].freeze
-
-  # scope :by_name, ->(name) { where('name LIKE ?', "%#{name}%") }
-  # scope :by_size, ->(size) { where(size: size.to_f) }
-  # scope :by_color, ->(color) { where('color LIKE ?', "%#{color}%") }
-  # scope :by_brand, ->(brand) { where('brand_id LIKE ?', "%#{brand}%") }
-  # scope :by_gender, ->(gender) { where('gender_id LIKE ?', "%#{gender}%") }
-  # scope :by_category, ->(category) { joins(:category).where('category_id LIKE ?', "%#{category}%") }
-  # scope :by_brand, ->(brand) { joins(:brand).where('brand_id LIKE ?', "%#{brand}%") }
-  # scope :by_min_price, ->(min_price) { where('price >= ?', min_price.to_f) }
-  # scope :by_max_price, ->(max_price) { where('price <= ?', max_price.to_f) }
 end
