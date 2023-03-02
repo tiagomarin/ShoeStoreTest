@@ -1,39 +1,39 @@
 <nav id="admin-nav-container">
-  <h3>V&T e-commrece</h3>
-  <ul id="admin-nav-container__ul">
-      <li class="admin-nav-container__li">
-        <%= image_tag "icons/shopping-cart.png", class:"admin-nav-container__link-icon"%>
-        <%= link_to "Orders", admin_orders_path(), class: "admin-nav-container__link" %>
-      </li>
-
-      <li class="admin-nav-container__li">
-        <%= image_tag "icons/shoes.png", class:"admin-nav-container__link-icon"%>
-        <%= link_to "Products", admin_products_path(), class: "admin-nav-container__link" %>
-      </li>
-
-      <li class="admin-nav-container__li">
-        <%= image_tag "icons/categories.png", class:"admin-nav-container__link-icon"%>
-        <%= link_to "Categories", admin_categories_path(), class: "admin-nav-container__link" %>
-      </li>
-
-      <li class="admin-nav-container__li">
-        <%= image_tag "icons/brands.png", class:"admin-nav-container__link-icon"%>
-        <%= link_to "Brands", admin_brands_path(), class: "admin-nav-container__link" %>
-      </li>
-
-      <li class="admin-nav-container__li">
-        <%= image_tag "icons/coupons.png", class:"admin-nav-container__link-icon"%>
-        <%= link_to "Promo Codes", admin_promo_codes_path(), class: "admin-nav-container__link" %>
-      </li>
-
-      <li class="admin-nav-container__li">
-        <%= image_tag "icons/iconics.png", class:"admin-nav-container__link-icon"%>
-        <%= link_to "Iconics", admin_iconics_path(), class: "admin-nav-container__link" %>
-      </li>
-
-      <li class="admin-nav-container__li">
-        <%= image_tag "icons/users.png", class:"admin-nav-container__link-icon"%>
-        <%= link_to "Users", admin_users_path(), class: "admin-nav-container__link"  %>
-      </li>
-  </ul>
+  <div>
+    <h3 id="admin-nav-container__logo">V&T e-commrece</h3>
+    <ul id="admin-nav-container__ul">
+        <li class="admin-nav-container__li">
+          <%= image_tag "icons/shopping-cart.png", class:"admin-nav-container__link-icon"%>
+          <%= link_to "Orders", admin_orders_path(), class: "admin-nav-container__link" %>
+        </li>
+        <li class="admin-nav-container__li">
+          <%= image_tag "icons/shoes.png", class:"admin-nav-container__link-icon"%>
+          <%= link_to "Products", admin_products_path(), class: "admin-nav-container__link" %>
+        </li>
+        <li class="admin-nav-container__li">
+          <%= image_tag "icons/categories.png", class:"admin-nav-container__link-icon"%>
+          <%= link_to "Categories", admin_categories_path(), class: "admin-nav-container__link" %>
+        </li>
+        <li class="admin-nav-container__li">
+          <%= image_tag "icons/brands.png", class:"admin-nav-container__link-icon"%>
+          <%= link_to "Brands", admin_brands_path(), class: "admin-nav-container__link" %>
+        </li>
+        <li class="admin-nav-container__li">
+          <%= image_tag "icons/coupons.png", class:"admin-nav-container__link-icon"%>
+          <%= link_to "Promo Codes", admin_promo_codes_path(), class: "admin-nav-container__link" %>
+        </li>
+        <li class="admin-nav-container__li">
+          <%= image_tag "icons/iconics.png", class:"admin-nav-container__link-icon"%>
+          <%= link_to "Iconics", admin_iconics_path(), class: "admin-nav-container__link" %>
+        </li>
+        <li class="admin-nav-container__li">
+          <%= image_tag "icons/users.png", class:"admin-nav-container__link-icon"%>
+          <%= link_to "Users", admin_users_path(), class: "admin-nav-container__link"  %>
+        </li>
+    </ul>
+  </div>
+  <div>
+    <div id="admin-nav-container__hide">Hide</div>
+    <div id="admin-nav-container__show-store">Show Store</div>
+  </div>
 </nav>

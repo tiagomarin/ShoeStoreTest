@@ -1,5 +1,8 @@
 .admin-products-container {
   padding: var(--padding-1);
+  height: 100vh;
+  overflow: auto;
+  width: 100%;
 }
 
 .admin-products-container__header {
