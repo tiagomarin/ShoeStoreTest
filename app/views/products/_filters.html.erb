@@ -35,18 +35,18 @@
           </li>
         <% end %>
 
-        <% ["Blue", "Black", "White", "Red", "Pink", "Purple", "Orange", "Green", "Yellow", "Grey", "Cyan", "Violet", "Brown"].each do |color| %>
+        <% colors.each do |color| %>
           <li class="applied-filters">
             <%= form_with(url: products_path, method: :get, data: { controller: "search-form" , turbo_frame: "products", turbo_action: "advance"}) do |form| %>
               <button 
                 name="remove_color_filter" 
                 id="remove_color_filter" 
-                value=<%= color.downcase %>
+                value=<%= color.name.downcase %>
                 type="submit"
                 class="applied-filters-btns"
               >
                 <%= image_tag "icons/x", alt:"remove filter", class:"applied-filters-btns-x" %>
-                <%= color %> 
+                <%= color.name %> 
               </button>
             <% end %>
           </li>
@@ -143,14 +143,14 @@
     <div>
       <p>Color:</p>
       <ul class="products-container__filter-colors">
-        <% ["Blue", "Black", "White", "Red", "Pink", "Purple", "Orange", "Green", "Yellow", "Grey", "Cyan", "Violet", "Brown"].each do |color| %>
+        <% colors.each do |color| %>
           <li class="products-container__filter-colors-item">
             <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
               <button 
                 name="color_filter" 
                 type="submit" 
                 id="color-filter"
-                value=<%= color.downcase %>
+                value=<%= color.name.downcase %>
                 class="options-to-filter"
               >
               </button>

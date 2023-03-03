@@ -34,7 +34,7 @@
   </div>
 
   <div class="products-container__main">
-    <%= render "filters"%>
+    <%= render "filters", colors: @colors %>
     <div class="products-container__grid filters_active">
       <%= render "products", products: @products %>
     </div>  

@@ -1,6 +1,6 @@
 <nav id="admin-nav-container">
   <div>
-    <h3 id="admin-nav-container__logo">V&T Dashboard</h3>
+    <h3 id="admin-nav-container__logo">Dashboard</h3>
     <ul id="admin-nav-container__ul">
         <li class="admin-nav-container__li">
           <%= link_to admin_products_path(), class: "admin-nav-container__link" do %>
@@ -33,6 +33,12 @@
           <% end %>
         </li>
         <li class="admin-nav-container__li">
+          <%= link_to admin_colors_path(), class: "admin-nav-container__link" do %>
+            <%= image_tag "icons/brands.png", class:"admin-nav-container__link-icon"%>
+            <p>Colors</p>
+          <% end %>
+        </li>
+        <li class="admin-nav-container__li">
           <%= link_to admin_promo_codes_path(), class: "admin-nav-container__link" do %>
             <%= image_tag "icons/coupons.png", class:"admin-nav-container__link-icon" %>
             <p>Coupons</p>
@@ -61,7 +67,7 @@
   <div>
     <div id="admin-nav-container__hide">Hide</div>
     <div id="admin-nav-container__show-store">
-      <%= link_to "Visit Store", root_path %>
+      <%= link_to "Visit Store", root_path, id: "admin-nav-container__show-store-link" %>
     </div>
   </div>
 </nav>

@@ -4,19 +4,31 @@
 # PromoCode.destroy.all
 # User.destroy.all
 
-vitor = User.create!(name: 'Vitor', address: "Brazil", role: 'admin',email: 'vgm_rox@hotmail.com', password: 123321)
-vitor.avatar.attach(io: File.open("#{Rails.root}/app/assets/images/collaborators/CollaboratorVitor.jpg"), filename: 'CollaboratorVitor.jpg')
-tiago = User.create!(name: 'Tiago', address: "Brazil", role: 'admin', email: 'tiago.lelinski@gmail.com', password: 123321)
-tiago.avatar.attach(io: File.open("#{Rails.root}/app/assets/images/collaborators/CollaboratorTiago.jpg"), filename: 'CollaboratorTiago.jpg')
+vitor = User.create!(name: 'Vitor', address: "Brazil", role: 'admin',email: 'vgm_rox@hotmail.com', password: 123321).avatar.attach(io: File.open("#{Rails.root}/app/assets/images/collaborators/CollaboratorVitor.jpg"), filename: 'CollaboratorVitor.jpg')
 
-vitor = User.create!(name: 'TestUser', email: 'test@test.com', password: 123321)
+tiago = User.create!(name: 'Tiago', address: "Brazil", role: 'admin', email: 'tiago.lelinski@gmail.com', password: 123321).avatar.attach(io: File.open("#{Rails.root}/app/assets/images/collaborators/CollaboratorTiago.jpg"), filename: 'CollaboratorTiago.jpg')
 
-brand1 = Brand.create!(name:"nike")
-brand2 = Brand.create!(name:"addidas")
-brand3 = Brand.create!(name: "puma")
-brands = [brand1, brand2, brand3]
+User.create!(name: 'TestUser', email: 'test@test.com', password: 123321)
 
-colors = ["blue", "black", "white", "red", "pink", "purple", "orange", "green", "yellow", "grey", "cyan", "violet", "brown"]
+nike = Brand.create!(name:"nike")
+addidas = Brand.create!(name:"addidas")
+puma = Brand.create!(name: "puma")
+brands = [nike, addidas, puma]
+
+blue = Color.create!(name: "blue")
+black = Color.create!(name: "black")
+white = Color.create!(name: "white")
+red = Color.create!(name: "red")
+pink = Color.create!(name: "pink")
+purple = Color.create!(name: "purple")
+orange = Color.create!(name: "orange")
+green = Color.create!(name: "green")
+yellow = Color.create!(name: "yellow")
+grey = Color.create!(name: "grey")
+cyan = Color.create!(name: "cyan")
+violet = Color.create!(name: "violet")
+brown = Color.create!(name: "brown")
+colors = [blue, black, white, red, pink, purple, orange, green, yellow, grey, cyan, violet, brown]
 
 @category1 = Category.create!(name:"running")
 @category2 = Category.create!(name:"casual")
@@ -38,8 +50,8 @@ promocode5 = PromoCode.create!(title:"ADDIDAS15", value: 15)
 promocode1.category_ids = [@category1.id]
 promocode2.category_ids = [@category2.id]
 promocode3.category_ids = category_ids
-promocode4.brand_ids = [brand1.id]
-promocode5.brand_ids = [brand2.id]
+promocode4.brand_ids = [nike.id]
+promocode5.brand_ids = [addidas.id]
 
 decoration1 = Decoration.create!(name: "Background1")
 decoration1.avatar.attach(io: File.open("#{Rails.root}/app/assets/images/backgrounds/background1.jpeg"), filename: 'background1.jpeg')
@@ -56,9 +68,9 @@ size = 5
                             price: Faker::Number.number(digits: 3),
                             description: 'Adidas Classic shoes feature a timeless design with superior quality and comfort, available in a variety of styles and colors.',
                             size: size += 1,
-                            color: "black",
+                            color: black,
                             gender: genders.sample,
-                            brand: brand2,
+                            brand: addidas,
                             discount: (rand(0..40.0) * 2.0).round / 2.0,
                             quantity: Faker::Number.number(digits: 2),
                           )
@@ -72,9 +84,9 @@ size = 5
                             price: Faker::Number.number(digits: 3),
                             description: 'Adidas Classic shoes feature a timeless design with superior quality and comfort, available in a variety of styles and colors.',
                             size:  size += 1,
-                            color: "blue",
+                            color: blue,
                             gender: genders.sample,
-                            brand: brand2,
+                            brand: addidas,
                             discount: (rand(0..40.0) * 2.0).round / 2.0,
                             quantity: Faker::Number.number(digits: 2),
                           )
@@ -88,9 +100,9 @@ size = 5
                             price: Faker::Number.number(digits: 3),
                             description: 'Adidas Classic shoes feature a timeless design with superior quality and comfort, available in a variety of styles and colors.',
                             size:  size += 1,
-                            color: "red",
+                            color: red,
                             gender: genders.sample,
-                            brand: brand2,
+                            brand: addidas,
                             discount: (rand(0..40.0) * 2.0).round / 2.0,
                             quantity: Faker::Number.number(digits: 2),
                           )
@@ -104,9 +116,9 @@ size = 5
                             price: Faker::Number.number(digits: 3),
                             description: 'Nike NXS shoes feature a timeless design with superior quality and comfort, available in a variety of styles and colors.',
                             size:  size += 1,
-                            color: "red",
+                            color: red,
                             gender: genders.sample,
-                            brand: brand1,
+                            brand: nike,
                             discount: (rand(0..40.0) * 2.0).round / 2.0,
                             quantity: Faker::Number.number(digits: 2),
                           )
@@ -120,9 +132,9 @@ size = 5
                             price: Faker::Number.number(digits: 3),
                             description: 'Nike Classic shoes feature a timeless design with superior quality and comfort, available in a variety of styles and colors.',
                             size:  size += 1,
-                            color: "white",
+                            color: white,
                             gender: genders.sample,
-                            brand: brand1,
+                            brand: nike,
                             discount: (rand(0..40.0) * 2.0).round / 2.0,
                             quantity: Faker::Number.number(digits: 2),
                           )
@@ -136,9 +148,9 @@ size = 5
                             price: Faker::Number.number(digits: 3),
                             description: 'Nike Classic shoes feature a timeless design with superior quality and comfort, available in a variety of styles and colors.',
                             size:  size += 1,
-                            color: "black",
+                            color: black,
                             gender: genders.sample,
-                            brand: brand1,
+                            brand: nike,
                             discount: (rand(0..40.0) * 2.0).round / 2.0,
                             quantity: Faker::Number.number(digits: 2),
                           )
@@ -152,9 +164,9 @@ size = 5
                             price: Faker::Number.number(digits: 3),
                             description: 'Nike Classic shoes feature a timeless design with superior quality and comfort, available in a variety of styles and colors.',
                             size:  size += 1,
-                            color: "blue",
+                            color: blue,
                             gender: genders.sample,
-                            brand: brand1,
+                            brand: nike,
                             discount: (rand(0..40.0) * 2.0).round / 2.0,
                             quantity: Faker::Number.number(digits: 2),
                           )
@@ -168,9 +180,9 @@ size = 5
                             price: Faker::Number.number(digits: 3),
                             description: 'Addidas Classic shoes feature a timeless design with superior quality and comfort, available in a variety of styles and colors.',
                             size:  size += 1,
-                            color: "red",
+                            color: red,
                             gender: genders.sample,
-                            brand: brand2,
+                            brand: addidas,
                             discount: (rand(0..40.0) * 2.0).round / 2.0,
                             quantity: Faker::Number.number(digits: 2),
                           )
@@ -184,7 +196,7 @@ iconic_product_1 = Product.create!(name: "React",
   price: Faker::Number.number(digits: 3),
   description: 'so cool',
   size: sizes.sample,
-  color: colors.sample,
+  color: cyan,
   gender: 'Male',
   brand: brands.sample,
   discount: (rand(0..40.0) * 2.0).round / 2.0,
@@ -198,7 +210,7 @@ iconic_product_2 = Product.create!(name: "Rails",
   price: Faker::Number.number(digits: 3),
   description: 'so cool',
   size: sizes.sample,
-  color: colors.sample,
+  color: red,
   gender: 'Male',
   brand: brands.sample,
   discount: (rand(0..40.0) * 2.0).round / 2.0,
@@ -212,7 +224,7 @@ iconic_product_3 = Product.create!(name: "JavaScript",
   price: Faker::Number.number(digits: 3),
   description: 'so cool',
   size: sizes.sample,
-  color: colors.sample,
+  color: yellow,
   gender: 'Male',
   brand: brands.sample,
   discount: (rand(0..40.0) * 2.0).round / 2.0,

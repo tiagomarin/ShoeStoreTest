@@ -4,6 +4,7 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!, only: %i[new edit create update destroy]
   before_action :set_product, only: %i[show edit update]
   before_action :set_brands, only: %i[new edit create admin_products]
+  before_action :set_colors, only: %i[index new edit create admin_products]
   before_action :set_categories, only: %i[new edit create]
   before_action :set_product_categories, only: %i[show update]
 
@@ -28,7 +29,6 @@ class ProductsController < ApplicationController
 
     # when user search for something in search bar
     @products = search_products()
-
     @products = remove_duplicates(@products)
     @products = apply_filters(@products)
     @products = sort_products(@products)
@@ -95,6 +95,10 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+  def set_colors
+    @colors = Color.all
+  end
+
   def set_brands
     @brands = Brand.all
   end
@@ -122,7 +126,7 @@ class ProductsController < ApplicationController
 
   def filter_color(products, colors)
     filtered = []
-    products_by_color = Product.where(color: colors)
+    products_by_color = Product.where(color_id: colors)
     products.each do |product|
       filtered << product if products_by_color.include?(product)
     end
@@ -170,8 +174,8 @@ class ProductsController < ApplicationController
   def product_params
     params
       .require(:product)
-      .permit(:name, :price, :description, :size, :color, :gender,
-              :brand_id, :discount, :quantity, images:
+      .permit(:name, :price, :description, :size, :gender,
+              :brand_id, :color_id, :discount, :quantity, images:
                [], category_ids: [])
       .with_defaults(discount: 0)
   end

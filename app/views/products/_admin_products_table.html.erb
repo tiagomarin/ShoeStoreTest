@@ -63,10 +63,10 @@
           <td>
             <div class="set-hide">
               <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
-              <%= product.color.capitalize %>
+              <%= product.color.name.capitalize %>
             </div>
             <%= form_with model: Product, url: product_path(product), method: :patch, class: "set-form" do |form| %>
-              <%= form.select :color, ["Blue", "Black", "White", "Red", "Pink", "Purple", "Orange", "Green", "Yellow", "Grey", "Cyan", "Violet", "Brown"], value: product.color %>
+              <%= form.select :color_id, @colors.map { |color| [color.name, color.id]}, value: product.color.name %>
               <%= form.submit "update", class: "set-submit" %>
             <% end %>
           </td>
