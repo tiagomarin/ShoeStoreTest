@@ -1,0 +1,29 @@
+<table>
+    <thead>
+        <th>ID</th>
+        <th>BACKGROUNDS</th>
+        <th>IMAGE</th>
+    </thead>
+
+    <tbody>
+      <% decorations.each do |decoration| %>
+        <tr>
+          <td><%= decoration.id %></td>
+          <td><%= decoration.name %></td>
+          <td>
+              <%= form_with model: Decoration, url: decoration_path(decoration), method: :patch, class: "image-form" do |form| %>
+                <%= form.label :avatar, class: "image-label" do %>
+                  <% if decoration.avatar.attached? %>
+                    <%= image_tag decoration.avatar, class: "admin-products-table__img image-image" %>
+                  <% else %>
+                    <%= image_tag "no-product-image.png", class: "admin-products-table__img image-image" %>
+                  <% end %>
+                  <%= form.file_field :avatar, class: "image-select" %>
+                <% end %>
+                <%= form.submit "✔️", class: "image-submit" %>
+              <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+</table>

@@ -17,15 +17,15 @@ Rails.application.routes.draw do
   get 'admin/iconics', to: 'iconics#admin_iconics'
   get 'admin/users', to: 'users#admin_users'
   get 'admin/orders', to: 'orders#admin_orders'
+  get 'admin/decorations', to: 'decorations#admin_decorations'
   
   resources :products
   resources :categories
   resources :brands
   resources :promo_codes
   resources :iconics
+  resources :decorations
   resources :collaborators, only: [:index]
-
-  get '/toggle_favorite', to: 'favorites#toggle_favorite'
   
   # Defines the root path route ("/")
   root "home#index"

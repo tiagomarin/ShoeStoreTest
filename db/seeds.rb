@@ -41,6 +41,15 @@ promocode3.category_ids = category_ids
 promocode4.brand_ids = [brand1.id]
 promocode5.brand_ids = [brand2.id]
 
+decoration1 = Decoration.create!(name: "Background1")
+decoration1.avatar.attach(io: File.open("#{Rails.root}/app/assets/images/backgrounds/background1.jpeg"), filename: 'background1.jpeg')
+
+decoration2 = Decoration.create!(name: "Background2")
+decoration2.avatar.attach(io: File.open("#{Rails.root}/app/assets/images/backgrounds/background2.jpeg"), filename: 'background2.jpeg')
+
+decoration3 = Decoration.create!(name: "Background3")
+decoration3.avatar.attach(io: File.open("#{Rails.root}/app/assets/images/backgrounds/background3.png"), filename: 'background3.png')
+
 size = 5
 5.times do
   product = Product.create!(name: "Addidas Classic",
