@@ -1,7 +1,10 @@
 class IconicsController < ApplicationController
+  include FilterProducts
   before_action :set_iconic, only: %i[update]
 
   def admin_iconics
+    @products = Product.all
+    @products = remove_duplicates(@products)
     @iconics = Iconic.all
   end
 

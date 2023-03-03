@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_category, only: %i[update]
 
   def admin_categories
     @categories = Category.all
@@ -23,7 +24,23 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def update
+    respond_to do |format|
+      if @category.update(category_params)
+        # format.html { redirect_to category_url(@category), notice: 'Product was successfully updated.' }
+        format.json { render :show, status: :ok, location: @category }
+      else
+        format.html { render :show, status: :unprocessable_entity }
+        format.json { render json: @category.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
+
+  def set_category
+    @category = Category.find(params[:id])
+  end
 
   def category_params
     params.require(:category).permit(:name)

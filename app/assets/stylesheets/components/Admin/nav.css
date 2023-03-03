@@ -28,7 +28,7 @@
   position: absolute;
   top: 0;
   left: 100%;
-  background-color: red;
+  background-color: white;
 }
 
 .admin-nav-container__li:hover .admin-nav-container__li-ul {
@@ -41,7 +41,7 @@
 }
 
 .admin-nav-container__li-ul li:hover {
-  background-color: blue;
+  background-color: lightblue;
 }
 
 .admin-nav-container__li:hover {

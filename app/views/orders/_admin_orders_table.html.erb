@@ -3,6 +3,7 @@
         <th>ID</th>
         <th>IMAGE</th>
         <th>USER</th>
+        <th>USER ID</th>
         <th>STATUS</th>
         <th>DATE</th>
         <th>PRODUCTS</th>
@@ -21,6 +22,7 @@
             <% end %>
           </td>
           <td><%= order.user.name %></td>
+          <td><%= order.user.id %></td>
           <td><%= order.status %></td>
           <td><%= order.date %></td>
           <% if order.order_items.length > 0 %>
