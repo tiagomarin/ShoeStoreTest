@@ -29,6 +29,8 @@
   top: 0;
   left: 100%;
   background-color: white;
+  border: 1px solid lightblue;
+  border-left: none;
 }
 
 .admin-nav-container__li:hover .admin-nav-container__li-ul {
@@ -37,7 +39,7 @@
 }
 
 .admin-nav-container__li-ul li {
-  padding: 0.5rem;
+  padding: 1rem;
 }
 
 .admin-nav-container__li-ul li:hover {
@@ -54,7 +56,7 @@
   font-weight: 700;
   width: 100%;
   height: 100%;
-  padding: 0.5rem 1rem;
+  padding: 1rem;
   display: flex;
   gap: 2rem;
 }

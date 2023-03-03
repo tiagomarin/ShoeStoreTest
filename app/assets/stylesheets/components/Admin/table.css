@@ -16,7 +16,7 @@ table th {
 
 table td,
 table th {
-  text-align: center;
+  text-align: left;
   padding: 8px;
 }
 
@@ -36,5 +36,5 @@ table thead th:nth-child(odd) {
 }
 
 table tr:nth-child(even) {
-  background: var(--color-1);
+  background: var(--color-background-2);
 }
