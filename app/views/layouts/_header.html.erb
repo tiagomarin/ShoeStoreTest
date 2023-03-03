@@ -6,7 +6,7 @@
   </div>
   <ul id="header-container__ul">
     <% if current_user %>
-    <li class="header-container__links">Hello, <%= current_user.name %></li>
+  <li class="header-container__links"><%= link_to "Hello, #{current_user.name}", edit_user_path(current_user), class: "header-container__links", method: :patch %></li>
     <% else %>
     <li class="header-container__links">Anything</li>
     <% end%>

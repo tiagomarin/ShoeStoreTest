@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 100%;
+  min-width: 100%;
 }
 
 #admin-nav-container__logo {
@@ -78,5 +78,14 @@
 }
 
 @media (min-width: 768px) {
-  /* loading */
+  #admin-nav-container {
+    background-color: var(--color-background-2);
+    border-right: 1px solid lightblue;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: unset;
+    width: 100%;
+  }
 }

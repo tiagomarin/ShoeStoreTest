@@ -3,7 +3,7 @@ class BrandsController < ApplicationController
   before_action :set_brand, only: %i[update]
 
   def admin_brands
-    @brands = Brand.all
+    @brands = Brand.all.order(id: :asc)
   end
 
   def new

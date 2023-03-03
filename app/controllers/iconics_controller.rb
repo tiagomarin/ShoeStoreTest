@@ -26,6 +26,6 @@ class IconicsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_iconic
-    @iconic = Iconic.find(params[:id])
+    @iconic = Iconic.find(params[:id]).order(id: :asc)
   end
 end

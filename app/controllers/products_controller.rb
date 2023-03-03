@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
   before_action :set_product_categories, only: %i[show update]
 
   def admin_products
-     @products = Product.all.page(params[:page])
+     @products = Product.all.page(params[:page]).order(id: :asc)
 
     if turbo_frame_request?
       render partial: 'products', locals: { products: @products }

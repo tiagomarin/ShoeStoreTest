@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: %i[update]
 
   def admin_categories
-    @categories = Category.all
+    @categories = Category.all.order(id: :asc)
   end
 
   def new

@@ -2,7 +2,7 @@ class DecorationsController < ApplicationController
   before_action :set_decoration, only: %i[ show edit update destroy ]
 
   def admin_decorations
-    @decorations = Decoration.all
+    @decorations = Decoration.all.order(id: :asc)
   end
 
   # PATCH/PUT /decorations/1 or /decorations/1.json

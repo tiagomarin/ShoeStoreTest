@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
 
   def admin_orders
-    @orders = Order.all
+    @orders = Order.all.order(id: :asc)
   end
 
   # GET /orders or /orders.json
