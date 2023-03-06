@@ -14,6 +14,12 @@
             <li>Option3</li>
           </ul>
         </li>
+                <li class="admin-nav-container__li">
+          <%= link_to admin_users_path(), class: "admin-nav-container__link" do %>
+            <%= image_tag "icons/users.png", class:"admin-nav-container__link-icon"%>
+            <p>Users</p>
+          <% end %>
+        </li>
         <li class="admin-nav-container__li">
           <%= link_to admin_orders_path(), class: "admin-nav-container__link" do %>
             <%= image_tag "icons/shopping-cart.png", class:"admin-nav-container__link-icon"%>
@@ -39,6 +45,12 @@
           <% end %>
         </li>
         <li class="admin-nav-container__li">
+          <%= link_to admin_sizes_path(), class: "admin-nav-container__link" do %>
+            <%= image_tag "icons/brands.png", class:"admin-nav-container__link-icon"%>
+            <p>Sizes</p>
+          <% end %>
+        </li>
+        <li class="admin-nav-container__li">
           <%= link_to admin_promo_codes_path(), class: "admin-nav-container__link" do %>
             <%= image_tag "icons/coupons.png", class:"admin-nav-container__link-icon" %>
             <p>Coupons</p>
@@ -48,12 +60,6 @@
           <%= link_to admin_iconics_path(), class: "admin-nav-container__link" do %>
             <%= image_tag "icons/iconics.png", class:"admin-nav-container__link-icon"%>
             <p>Iconics</p>
-          <% end %>
-        </li>
-        <li class="admin-nav-container__li">
-          <%= link_to admin_users_path(), class: "admin-nav-container__link" do %>
-            <%= image_tag "icons/users.png", class:"admin-nav-container__link-icon"%>
-            <p>Users</p>
           <% end %>
         </li>
         <li class="admin-nav-container__li">

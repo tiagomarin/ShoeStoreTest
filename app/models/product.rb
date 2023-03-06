@@ -10,6 +10,7 @@ class Product < ApplicationRecord
 
   belongs_to :brand
   belongs_to :color
+  belongs_to :size
   # belongs_to :category
   has_and_belongs_to_many :category
 
@@ -21,7 +22,7 @@ class Product < ApplicationRecord
   validates :price, presence: true,
                     numericality: { greater_than_or_equal_to: 0 }
   validates :description, length: { maximum: 200, too_long: '%<count>s characters is the maximum allowed' }
-  validates :size, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :size, presence: true
   validates :color, presence: true
   validates :gender, presence: true
   validates :brand_id, presence: true

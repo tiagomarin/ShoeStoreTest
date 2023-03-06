@@ -17,6 +17,7 @@ module ApplicationHelper
       current_page?(admin_users_path) ||
       current_page?(admin_orders_path) ||
       current_page?(admin_decorations_path) ||
-      current_page?(admin_colors_path)
+      current_page?(admin_colors_path) ||
+      current_page?(admin_sizes_path)
   end
 end

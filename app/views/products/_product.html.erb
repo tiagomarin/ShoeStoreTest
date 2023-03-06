@@ -34,7 +34,7 @@
     <p><%= product.name %></p>
     <p><%= product.brand.name %></p>
     <strong>SIZE: </strong>
-    <p><%= product.size %></p>
+    <p><%= product.size.number %></p>
     <p> colors: <%= same_product_different_colors(product).length + 1  %> </p>
 
     <div class="products-container__color-carrousel">
@@ -68,11 +68,11 @@
         <%# show option of sizes%>
         <ul class="sizes-available">
           <% sizes_available = sizes_available(product).map(&:size) %>
-            <% [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14].each do |size| %>
+            <% @sizes.each do |size| %>
             <% if sizes_available.include?(size) %>
-              <li class="size-available"><%= size %></li>
+              <li class="size-available"><%= size.number %></li>
             <% else %>
-              <li><%= size %></li>
+              <li><%= size.number %></li>
             <% end %>
 
           <% end %>

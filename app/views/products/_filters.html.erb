@@ -18,18 +18,18 @@
       </div>
 
       <ul class="products-container__applied-filter-sizes">
-        <% [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14].each do |size| %>
+        <% @sizes.each do |size| %>
           <li class="applied-filters">
             <%= form_with(url: products_path, method: :get, data: { controller: "search-form" , turbo_frame: "products", turbo_action: "advance"}) do |form| %>
               <button 
                 name="remove_size_filter" 
                 id="remove_size_filter" 
-                value=<%= size %>
+                value=<%= size.number %>
                 type="submit"
                 class="applied-filters-btns"
               >
                 <%= image_tag "icons/x", alt:"remove filter", class:"applied-filters-btns-x" %>
-                <%= size %> 
+                <%= size.number %> 
               </button>
             <% end %>
           </li>
@@ -122,16 +122,16 @@
     <div>
       <p>Size:</p>
       <ul class="products-container__filter-sizes">
-        <% [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14].each do |size| %>
+        <% @sizes.each do |size| %>
           <li class="products-container__filter-sizes-item">
             <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
               <button 
                 name="size_filter"
                 id="size_filter" 
-                value=<%= size %>
+                value=<%= size.number %>
                 class="options-to-filter"
               >
-                <%= size %> 
+                <%= size.number %> 
                 
               </button>
             <% end %>

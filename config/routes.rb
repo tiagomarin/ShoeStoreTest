@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'admin/categories', to: 'categories#admin_categories'
   get 'admin/brands', to: 'brands#admin_brands'
   get 'admin/colors', to: 'colors#admin_colors'
+  get 'admin/sizes', to: 'sizes#admin_sizes'
   get 'admin/promo_codes', to: 'promo_codes#admin_promo_codes'
   get 'admin/iconics', to: 'iconics#admin_iconics'
   get 'admin/users', to: 'users#admin_users'
@@ -24,6 +25,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :brands
   resources :colors
+  resources :sizes
   resources :promo_codes
   resources :iconics
   resources :decorations
