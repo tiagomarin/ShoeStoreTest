@@ -19,6 +19,7 @@ module ApplicationHelper
       current_page?(admin_decorations_path) ||
       current_page?(admin_colors_path) ||
       current_page?(admin_sizes_path) ||
-      current_page?(admin_genders_path)
+      current_page?(admin_genders_path) ||
+      current_page?(admin_archived_path)
   end
 end

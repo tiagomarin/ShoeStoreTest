@@ -3,10 +3,10 @@ class ProductsController < ApplicationController
   include FilterProducts
   before_action :authenticate_user!, only: %i[new edit create update destroy]
   before_action :set_product, only: %i[show edit update]
-  before_action :set_brands, only: %i[new edit create admin_products]
-  before_action :set_colors, only: %i[index new edit create admin_products]
-  before_action :set_sizes, only: %i[index show new edit create admin_products]
-  before_action :set_genders, only: %i[index new edit create admin_products]
+  before_action :set_brands, only: %i[new edit create admin_products admin_archived]
+  before_action :set_colors, only: %i[index new edit create admin_products admin_archived]
+  before_action :set_sizes, only: %i[index show new edit create admin_products admin_archived]
+  before_action :set_genders, only: %i[index new edit create admin_products admin_archived]
   before_action :set_categories, only: %i[new edit create]
   before_action :set_product_categories, only: %i[show update]
 
@@ -17,6 +17,16 @@ class ProductsController < ApplicationController
       render partial: 'products', locals: { products: @products }
     else
       render :admin_products
+    end
+  end
+
+  def admin_archived
+    @products = Product.where(archived: true).all.page(params[:page]).order(id: :asc)
+
+    if turbo_frame_request?
+      render partial: 'products', locals: { products: @products }
+    else
+      render :admin_archived
     end
   end
   
@@ -187,7 +197,7 @@ class ProductsController < ApplicationController
     params
       .require(:product)
       .permit(:archived, :name, :price, :description,
-              :brand_id, :color_id, :size_id, :gender_id, :discount, :quantity, :image1, :image2, :image3, :image4, :image5, :iconicImage, category_ids: [])
+              :brand_id, :color_id, :size_id, :gender_id, :archived, :discount, :quantity, :image1, :image2, :image3, :image4, :image5, :iconicImage, category_ids: [])
       .with_defaults(discount: 0)
   end
 end

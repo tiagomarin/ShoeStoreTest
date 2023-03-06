@@ -94,27 +94,42 @@
             <% end %>
           </td>
           <td>
-            <button id="admin-products-table__delete-product-button" type="button">
-              <%= image_tag "icons/trash", class:"admin-products-table__delete-icon" %>
-            </button>
             <%= link_to image_tag("icons/show", class: "admin-products-table__show-icon"), product, id:"admin-products-table__show-product-button" %>
+
+            <% if product.archived %>
+              <button class="admin-products-table__delete-product-button" type="button">
+                <%= image_tag "icons/restore", class:"admin-products-table__delete-icon" %>
+              </button>
+            <% else %>
+              <button class="admin-products-table__delete-product-button" type="button">
+                <%= image_tag "icons/trash", class:"admin-products-table__delete-icon" %>
+              </button>
+            <% end %>
               
+            <%# modals PopUps %>
+            <div class="admin-products-table__delete-product-popup-wrap">
+              <div class="admin-products-table__delete-product-popup">
+                <button class="admin-products-table__delete-product-popup-close">
+                  <%= image_tag "icons/x", class: "admin-products-table__delete-product-popup-close-icon" %>
+                </button>
+                <% if product.archived %>
+                  <p>Are you sure you want to restore this product?</p>
+                <% else %>
+                  <p>Are you sure you want to delete this product?</p>
+                  <p>You still have <%= product.quantity %> available in your stock</p>
+                <% end %>
+                <%= form_with model: Product, url: product_path(product), method: :patch do |form| %>
+                  <%= form.hidden_field :archived, value: !product.archived %>
+                  <% if product.archived %>
+                    <%= form.submit "Yes, restore it", class: "admin-products-table__confirm-delete-button" %>
+                  <% else %>
+                    <%= form.submit "Yes, delete it", class: "admin-products-table__confirm-delete-button" %>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
           </td>
         </tr>
-        <%# modals PopUps %>
-        <div id="admin-products-table__delete-product-popup-wrap">
-          <div id="admin-products-table__delete-product-popup">
-            <button id="admin-products-table__delete-product-popup-close">
-              <%= image_tag "icons/x", id:"admin-products-table__delete-product-popup-close-icon" %>
-            </button>
-            <p>Are you sure you want to delete this product?</p>
-            <p>You still have <%= product.quantity %> available in your stock</p>
-            <%= form_with model: Product, url: product_path(product), method: :patch do |form| %>
-                  <%= form.hidden_field :archived, value: !product.archived %>
-                  <%= form.submit "Yes, delete it" %>
-            <% end %>
-          </div>
-        </div>
       <% end %>
     </tbody>
 </table>

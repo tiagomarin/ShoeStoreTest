@@ -1,0 +1,5 @@
+<div class="admin-products-container">
+  <%= paginate @products %>
+    <%= render "admin_products_table", products: @products %>
+  <%= paginate @products %>
+</div>

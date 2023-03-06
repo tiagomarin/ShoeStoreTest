@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
 
   get 'admin/products', to: 'products#admin_products'
+  get 'admin/archived', to: 'products#admin_archived'
   get 'admin/categories', to: 'categories#admin_categories'
   get 'admin/brands', to: 'brands#admin_brands'
   get 'admin/colors', to: 'colors#admin_colors'
