@@ -128,6 +128,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_03_171017) do
   end
 
   create_table "products", force: :cascade do |t|
+    t.boolean "archived", default: false
     t.string "name"
     t.decimal "price"
     t.string "description"

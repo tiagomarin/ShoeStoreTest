@@ -62,16 +62,16 @@ module FilterProducts
       @products = []
       # add all results from database search to @products without duplicates
       queries.each do |query|
-        @products |= Product.where('lower(name) LIKE ?', "%#{query}%")
-        @products |= Product.where(size: query.to_f)
-        @products |= Product.where('lower(description) LIKE ?', "%#{query}%")
-        @products |= Product.where('lower(gender) LIKE ?', "%#{query}%")
-        @products |= Product.joins(:brand).where('lower(brands.name) LIKE ?', "%#{query}%")
-        @products |= Product.joins(:color).where('lower(colors.name) LIKE ?', "%#{query}%")
-        @products |= Product.joins(:category).where('lower(categories.name) LIKE ?', "%#{query}%")
+        @products |= Product.where(archived: false).where('lower(name) LIKE ?', "%#{query}%")
+        @products |= Product.where(archived: false).where(size: query.to_f)
+        @products |= Product.where(archived: false).where('lower(description) LIKE ?', "%#{query}%")
+        @products |= Product.where(archived: false).where('lower(gender) LIKE ?', "%#{query}%")
+        @products |= Product.where(archived: false).joins(:brand).where('lower(brands.name) LIKE ?', "%#{query}%")
+        @products |= Product.where(archived: false).joins(:color).where('lower(colors.name) LIKE ?', "%#{query}%")
+        @products |= Product.where(archived: false).joins(:category).where('lower(categories.name) LIKE ?', "%#{query}%")
       end
     else
-      @products = Product.all
+      @products = Product.where(archived: false)
     end
     @products
   end

@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
   before_action :set_product_categories, only: %i[show update]
 
   def admin_products
-     @products = Product.all.page(params[:page]).order(id: :asc)
+     @products = Product.where(archived: false).all.page(params[:page]).order(id: :asc)
 
     if turbo_frame_request?
       render partial: 'products', locals: { products: @products }
@@ -175,7 +175,7 @@ class ProductsController < ApplicationController
   def product_params
     params
       .require(:product)
-      .permit(:name, :price, :description, :size, :gender,
+      .permit(:archived, :name, :price, :description, :size, :gender,
               :brand_id, :color_id, :discount, :quantity, :image1, :image2, :image3, :image4, :image5, :iconicImage, category_ids: [])
       .with_defaults(discount: 0)
   end
