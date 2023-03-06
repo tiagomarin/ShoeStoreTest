@@ -39,6 +39,7 @@
             <% spent += order.order_items.sum(:total_price) %>
           <% end %>
           <td><%= number_to_currency(spent) %></td>
+          <td></td>
         </tr>
       <% end %>
     </tbody>

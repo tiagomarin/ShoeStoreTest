@@ -1,8 +1,9 @@
   <div id="<%= dom_id product %>" class="products-container__product-card">
     <% product.discount > 0 ? priceClass = "products-container__product-card-price discounted" : priceClass = "products-container__product-card-price" %>
-    <% if product.images.attached? %>
+
+    <% if product.image1.attached? %>
       <div class=products-container__product-card-img>
-        <%= image_tag product.images[0] %>
+        <%= image_tag product.image1 %>
         <span>
           <p class="<%= priceClass %>">
             <%= number_to_currency(product.price, precision: 0) %>
@@ -39,9 +40,9 @@
     <div class="products-container__color-carrousel">
       <% same_product_different_colors(product).map do |p|%>
         <div id="products-container__color-carrousel-options">
-          <% if p.images.attached? %>
+          <% if p.image1.attached? %>
             <%= link_to(p) do %>
-              <%= image_tag p.images[0], class: "products-container__color-img", alt: "put name and color of product"%>
+              <%= image_tag p.image1, class: "products-container__color-img", alt: "put name and color of product"%>
             <% end %>  
           <% else %>
             <%= link_to(p) do %>

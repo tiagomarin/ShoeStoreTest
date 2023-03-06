@@ -126,7 +126,8 @@ class ProductsController < ApplicationController
 
   def filter_color(products, colors)
     filtered = []
-    products_by_color = Product.where(color_id: colors)
+    color_ids = Color.where(name: colors).pluck(:id)
+    products_by_color = Product.where(color_id: color_ids)
     products.each do |product|
       filtered << product if products_by_color.include?(product)
     end
@@ -175,8 +176,7 @@ class ProductsController < ApplicationController
     params
       .require(:product)
       .permit(:name, :price, :description, :size, :gender,
-              :brand_id, :color_id, :discount, :quantity, images:
-               [], category_ids: [])
+              :brand_id, :color_id, :discount, :quantity, :image1, :image2, :image3, :image4, :image5, :iconicImage, category_ids: [])
       .with_defaults(discount: 0)
   end
 end

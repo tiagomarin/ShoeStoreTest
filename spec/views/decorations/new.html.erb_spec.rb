@@ -1,18 +1,17 @@
 require 'rails_helper'
 
-RSpec.describe "decorations/new", type: :view do
+RSpec.describe 'decorations/new', type: :view do
   before(:each) do
     assign(:decoration, Decoration.new(
-      name: "MyString"
-    ))
+                          name: 'MyString'
+                        ))
   end
 
-  it "renders new decoration form" do
+  it 'renders new decoration form' do
     render
 
-    assert_select "form[action=?][method=?]", decorations_path, "post" do
-
-      assert_select "input[name=?]", "decoration[name]"
+    assert_select 'form[action=?][method=?]', decorations_path, 'post' do
+      assert_select 'input[name=?]', 'decoration[name]'
     end
   end
 end

@@ -1,3 +1,4 @@
+# rubocop:disable all
 module ApplicationHelper
   def products_index
     controller_name == 'products' && action_name == 'index'

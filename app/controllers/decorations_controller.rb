@@ -1,5 +1,5 @@
 class DecorationsController < ApplicationController
-  before_action :set_decoration, only: %i[ show edit update destroy ]
+  before_action :set_decoration, only: %i[show edit update destroy]
 
   def admin_decorations
     @decorations = Decoration.all.order(id: :asc)
@@ -9,7 +9,7 @@ class DecorationsController < ApplicationController
   def update
     respond_to do |format|
       if @decoration.update(decoration_params)
-        format.html { redirect_to decoration_url(@decoration), notice: "Decoration was successfully updated." }
+        format.html { redirect_to decoration_url(@decoration), notice: 'Decoration was successfully updated.' }
         format.json { render :show, status: :ok, location: @decoration }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -19,13 +19,14 @@ class DecorationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_decoration
-      @decoration = Decoration.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def decoration_params
-      params.require(:decoration).permit(:name, :avatar)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_decoration
+    @decoration = Decoration.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def decoration_params
+    params.require(:decoration).permit(:name, :avatar)
+  end
 end

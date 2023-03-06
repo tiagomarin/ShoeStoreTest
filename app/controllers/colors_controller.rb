@@ -1,5 +1,5 @@
 class ColorsController < ApplicationController
-  before_action :set_color, only: %i[ show edit update destroy ]
+  before_action :set_color, only: %i[show edit update destroy]
 
   def admin_colors
     @colors = Color.all.order(id: :asc)
@@ -11,8 +11,7 @@ class ColorsController < ApplicationController
   end
 
   # GET /colors/1 or /colors/1.json
-  def show
-  end
+  def show; end
 
   # GET /colors/new
   def new
@@ -20,8 +19,7 @@ class ColorsController < ApplicationController
   end
 
   # GET /colors/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /colors or /colors.json
   def create
@@ -29,7 +27,7 @@ class ColorsController < ApplicationController
 
     respond_to do |format|
       if @color.save
-        format.html { redirect_to admin_colors_path, notice: "Color was successfully created." }
+        format.html { redirect_to admin_colors_path, notice: 'Color was successfully created.' }
         format.json { render :show, status: :created, location: @color }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -56,19 +54,20 @@ class ColorsController < ApplicationController
     @color.destroy
 
     respond_to do |format|
-      format.html { redirect_to colors_url, notice: "Color was successfully destroyed." }
+      format.html { redirect_to colors_url, notice: 'Color was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_color
-      @color = Color.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def color_params
-      params.require(:color).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_color
+    @color = Color.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def color_params
+    params.require(:color).permit(:name)
+  end
 end

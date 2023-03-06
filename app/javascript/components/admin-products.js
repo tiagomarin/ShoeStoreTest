@@ -29,9 +29,4 @@ window.addEventListener("click", event => {
     event.target.parentElement.nextElementSibling.classList.remove("show")
     event.target.parentElement.classList.remove("hide")
   }
-
-  // open image selector
-  if(event.target.className === "admin-products-table__img image-image") {
-    event.target.parentElement.nextElementSibling.classList.add("show")
-  }
 })

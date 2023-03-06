@@ -12,94 +12,92 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe "/colors", type: :request do
-  
+RSpec.describe '/colors', type: :request do
   # This should return the minimal set of attributes required to create a valid
   # Color. As you add validations to Color, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  let(:valid_attributes) do
+    skip('Add a hash of attributes valid for your model')
+  end
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let(:invalid_attributes) do
+    skip('Add a hash of attributes invalid for your model')
+  end
 
-  describe "GET /index" do
-    it "renders a successful response" do
+  describe 'GET /index' do
+    it 'renders a successful response' do
       Color.create! valid_attributes
       get colors_url
       expect(response).to be_successful
     end
   end
 
-  describe "GET /show" do
-    it "renders a successful response" do
+  describe 'GET /show' do
+    it 'renders a successful response' do
       color = Color.create! valid_attributes
       get color_url(color)
       expect(response).to be_successful
     end
   end
 
-  describe "GET /new" do
-    it "renders a successful response" do
+  describe 'GET /new' do
+    it 'renders a successful response' do
       get new_color_url
       expect(response).to be_successful
     end
   end
 
-  describe "GET /edit" do
-    it "renders a successful response" do
+  describe 'GET /edit' do
+    it 'renders a successful response' do
       color = Color.create! valid_attributes
       get edit_color_url(color)
       expect(response).to be_successful
     end
   end
 
-  describe "POST /create" do
-    context "with valid parameters" do
-      it "creates a new Color" do
-        expect {
+  describe 'POST /create' do
+    context 'with valid parameters' do
+      it 'creates a new Color' do
+        expect do
           post colors_url, params: { color: valid_attributes }
-        }.to change(Color, :count).by(1)
+        end.to change(Color, :count).by(1)
       end
 
-      it "redirects to the created color" do
+      it 'redirects to the created color' do
         post colors_url, params: { color: valid_attributes }
         expect(response).to redirect_to(color_url(Color.last))
       end
     end
 
-    context "with invalid parameters" do
-      it "does not create a new Color" do
-        expect {
+    context 'with invalid parameters' do
+      it 'does not create a new Color' do
+        expect do
           post colors_url, params: { color: invalid_attributes }
-        }.to change(Color, :count).by(0)
+        end.to change(Color, :count).by(0)
       end
 
-    
+
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post colors_url, params: { color: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
     end
   end
 
-  describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+  describe 'PATCH /update' do
+    context 'with valid parameters' do
+      let(:new_attributes) do
+        skip('Add a hash of attributes valid for your model')
+      end
 
-      it "updates the requested color" do
+      it 'updates the requested color' do
         color = Color.create! valid_attributes
         patch color_url(color), params: { color: new_attributes }
         color.reload
-        skip("Add assertions for updated state")
+        skip('Add assertions for updated state')
       end
 
-      it "redirects to the color" do
+      it 'redirects to the color' do
         color = Color.create! valid_attributes
         patch color_url(color), params: { color: new_attributes }
         color.reload
@@ -107,26 +105,24 @@ RSpec.describe "/colors", type: :request do
       end
     end
 
-    context "with invalid parameters" do
-    
+    context 'with invalid parameters' do
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
         color = Color.create! valid_attributes
         patch color_url(color), params: { color: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
     end
   end
 
-  describe "DELETE /destroy" do
-    it "destroys the requested color" do
+  describe 'DELETE /destroy' do
+    it 'destroys the requested color' do
       color = Color.create! valid_attributes
-      expect {
+      expect do
         delete color_url(color)
-      }.to change(Color, :count).by(-1)
+      end.to change(Color, :count).by(-1)
     end
 
-    it "redirects to the colors list" do
+    it 'redirects to the colors list' do
       color = Color.create! valid_attributes
       delete color_url(color)
       expect(response).to redirect_to(colors_url)

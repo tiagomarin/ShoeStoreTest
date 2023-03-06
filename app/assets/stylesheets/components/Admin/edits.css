@@ -20,26 +20,3 @@
 .set-form.show {
   display: flex;
 }
-
-/* image */
-.image-form {
-  display: flex;
-  align-items: center;
-  gap: var(--gap-1);
-}
-
-.image-select {
-  display: none;
-}
-
-.image-submit {
-  display: none;
-}
-
-.image-submit.show {
-  display: flex;
-}
-
-.image-image {
-  cursor: pointer;
-}

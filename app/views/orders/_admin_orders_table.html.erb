@@ -8,6 +8,7 @@
         <th>DATE</th>
         <th>PRODUCTS</th>
         <th>TOTAL PRICE</th>
+        <th>ACTIONS</th>
     </thead>
 
     <tbody>
@@ -35,6 +36,7 @@
           <td>empty</td>
           <% end%>
           <td><%= number_to_currency(order.order_items.sum(:total_price)) %></td>
+          <td></td>
         </tr>
       <% end %>
     </tbody>

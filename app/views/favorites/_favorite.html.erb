@@ -1,5 +1,9 @@
 <div id="favorites-container__card">
-  <%= image_tag favorite.product.images[0], id: "favorites-container__image" %>
+  <% if favorite.product.image1.attached? %>
+    <%= image_tag favorite.product.image1, id: "favorites-container__image"%>
+  <% else %>
+    <%= image_tag "no-product-image.png", id: "favorites-container__image" %>
+  <% end %>
   <div id="favorites-container__information">
 
     <h3><%= favorite.product.name %></h3>
