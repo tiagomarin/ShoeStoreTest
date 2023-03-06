@@ -3,14 +3,25 @@
         <th>ID</th>
         <th>NAME</th>
         <th>PRODUCTS</th>
+        <th>ACTIONS</th>
     </thead>
 
     <tbody>
       <% categories.each do |category| %>
         <tr>
           <td><%= category.id %></td>
-          <td><%= category.name %></td>
+          <td>
+            <div class="set-hide">
+              <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
+              <%= category.name %>
+            </div>
+            <%= form_with model: Category, url: category_path(category), method: :patch, class: "set-form" do |form| %>
+              <%= form.text_field :name, value: category.name %>
+              <%= form.submit "update", class: "set-submit" %>
+            <% end %>          
+          </td>
           <td><%= category.products.count %></td>
+          <td></td>
         </tr>
       <% end %>
     </tbody>

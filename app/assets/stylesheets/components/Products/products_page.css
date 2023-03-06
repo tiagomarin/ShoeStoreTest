@@ -102,6 +102,7 @@ h1 {
 
 .products-container__main {
   display: flex;
+  width: 100%;
 }
 
 .products-container__filters {
@@ -117,7 +118,7 @@ h1 {
 
 .products-container__grid {
   display: none;
-  width: 100vw;
+  width: 100%;
 }
 
 .products-container__grid.filters_active {

@@ -1,0 +1,28 @@
+<table>
+    <thead>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>PRODUCTS</th>
+        <th>ACTIONS</th>
+    </thead>
+
+    <tbody>
+      <% colors.each do |color| %>
+        <tr>
+          <td><%= color.id %></td>
+          <td>
+            <div class="set-hide">
+              <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
+              <%= color.name %>
+            </div>
+            <%= form_with model: Color, url: color_path(color), method: :patch, class: "set-form" do |form| %>
+              <%= form.text_field :name, value: color.name %>
+              <%= form.submit "update", class: "set-submit" %>
+            <% end %>          
+          </td>
+          <td><%= color.products.count %></td>
+          <td></td>
+        </tr>
+      <% end %>
+    </tbody>
+</table>

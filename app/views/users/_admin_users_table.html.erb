@@ -7,6 +7,7 @@
         <th>ROLE</th>
         <th>E-MAIL</th>
         <th>SHOP</th>
+        <th>ACTIONS</th>
     </thead>
 
     <tbody>
@@ -22,13 +23,23 @@
           </td>
           <td><%= user.name %></td>
           <td><%= user.address %></td>
-          <td><%= user.role %></td>
+          <td>
+            <div class="set-hide">
+              <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
+              <%= user.role %>
+            </div>
+            <%= form_with model: User, url: user_path(user), method: :patch, class: "set-form" do |form| %>
+              <%= form.select :role, ["admin", "customer"], value: user.role %>
+              <%= form.submit "update", class: "set-submit" %>
+            <% end %>
+          </td>
           <td><%= user.email %></td>
           <% spent = 0 %>
           <% user.orders.each do |order| %>
             <% spent += order.order_items.sum(:total_price) %>
           <% end %>
           <td><%= number_to_currency(spent) %></td>
+          <td></td>
         </tr>
       <% end %>
     </tbody>

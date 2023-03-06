@@ -64,10 +64,10 @@ module FilterProducts
       queries.each do |query|
         @products |= Product.where('lower(name) LIKE ?', "%#{query}%")
         @products |= Product.where(size: query.to_f)
-        @products |= Product.where('lower(color) LIKE ?', "%#{query}%")
         @products |= Product.where('lower(description) LIKE ?', "%#{query}%")
         @products |= Product.where('lower(gender) LIKE ?', "%#{query}%")
         @products |= Product.joins(:brand).where('lower(brands.name) LIKE ?', "%#{query}%")
+        @products |= Product.joins(:color).where('lower(colors.name) LIKE ?', "%#{query}%")
         @products |= Product.joins(:category).where('lower(categories.name) LIKE ?', "%#{query}%")
       end
     else
@@ -83,7 +83,7 @@ module FilterProducts
       products_no_repeat << product unless products_no_repeat.any? do |p|
                                              p.name == product.name &&
                                              p.brand.name == product.brand.name &&
-                                             p.color == product.color
+                                             p.color.name == product.color.name
                                            end
     end
     products_no_repeat

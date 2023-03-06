@@ -357,18 +357,9 @@
 .decoration-images-container__image {
   width: 100%;
   height: 6rem;
-  background-image: url("backgrounds/background1.jpeg");
   background-attachment: fixed;
   background-size: cover;
   box-shadow: inset 0 0 25px var(--color-background-6);
-}
-
-.decoration-images-container__image:nth-last-child(2) {
-  background-image: url("backgrounds/background2.jpeg");
-}
-
-.decoration-images-container__image:nth-last-child(3) {
-  background-image: url("backgrounds/background3.png");
 }
 
 /* ====================================== */

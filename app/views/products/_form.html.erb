@@ -33,7 +33,7 @@
 
   <div>
     <%= form.label :color, style: "display: block" %>
-    <%= form.select :color, ["blue", "black", "white", "red", "pink", "purple", "orange", "green", "yellow", "grey", "cyan", "violet", "brown"] %>
+    <%= form.select :color, @colors %>
   </div>
 
   <div>
@@ -62,8 +62,8 @@
   </div>
 
   <div>
-    <%= form.label :images, style: "display: block" %>
-    <%= form.file_field :images, multiple: true %>
+    <%= form.label :image1, style: "display: block" %>
+    <%= form.file_field :image1 %>
   </div>
 
   <div>

@@ -1,13 +1,7 @@
 <nav id="admin-nav-container">
   <div>
-    <h3 id="admin-nav-container__logo">V&T e-commrece</h3>
+    <h3 id="admin-nav-container__logo">Dashboard</h3>
     <ul id="admin-nav-container__ul">
-        <li class="admin-nav-container__li">
-          <%= link_to admin_orders_path(), class: "admin-nav-container__link" do %>
-            <%= image_tag "icons/shopping-cart.png", class:"admin-nav-container__link-icon"%>
-            <p>Orders</p>
-          <% end %>
-        </li>
         <li class="admin-nav-container__li">
           <%= link_to admin_products_path(), class: "admin-nav-container__link" do %>
             <%= image_tag "icons/shoes.png", class:"admin-nav-container__link-icon"%>
@@ -21,6 +15,12 @@
           </ul>
         </li>
         <li class="admin-nav-container__li">
+          <%= link_to admin_orders_path(), class: "admin-nav-container__link" do %>
+            <%= image_tag "icons/shopping-cart.png", class:"admin-nav-container__link-icon"%>
+            <p>Orders</p>
+          <% end %>
+        </li>
+        <li class="admin-nav-container__li">
           <%= link_to admin_categories_path(), class: "admin-nav-container__link" do %>
             <%= image_tag "icons/categories.png", class:"admin-nav-container__link-icon"%>
             <p>Categories</p>
@@ -30,6 +30,12 @@
           <%= link_to admin_brands_path(), class: "admin-nav-container__link" do %>
             <%= image_tag "icons/brands.png", class:"admin-nav-container__link-icon"%>
             <p>Brands</p>
+          <% end %>
+        </li>
+        <li class="admin-nav-container__li">
+          <%= link_to admin_colors_path(), class: "admin-nav-container__link" do %>
+            <%= image_tag "icons/brands.png", class:"admin-nav-container__link-icon"%>
+            <p>Colors</p>
           <% end %>
         </li>
         <li class="admin-nav-container__li">
@@ -50,12 +56,18 @@
             <p>Users</p>
           <% end %>
         </li>
+        <li class="admin-nav-container__li">
+          <%= link_to admin_decorations_path(), class: "admin-nav-container__link" do %>
+            <%= image_tag "icons/background.png", class:"admin-nav-container__link-icon"%>
+            <p>Decorations</p>
+          <% end %>
+        </li>
     </ul>
   </div>
   <div>
     <div id="admin-nav-container__hide">Hide</div>
     <div id="admin-nav-container__show-store">
-      <%= link_to "Visit Store", root_path %>
+      <%= link_to "Visit Store", root_path, id: "admin-nav-container__show-store-link" %>
     </div>
   </div>
 </nav>

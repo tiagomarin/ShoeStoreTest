@@ -4,11 +4,12 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!, only: %i[new edit create update destroy]
   before_action :set_product, only: %i[show edit update]
   before_action :set_brands, only: %i[new edit create admin_products]
+  before_action :set_colors, only: %i[index new edit create admin_products]
   before_action :set_categories, only: %i[new edit create]
   before_action :set_product_categories, only: %i[show update]
 
   def admin_products
-     @products = Product.all.page(params[:page])
+     @products = Product.all.page(params[:page]).order(id: :asc)
 
     if turbo_frame_request?
       render partial: 'products', locals: { products: @products }
@@ -28,7 +29,6 @@ class ProductsController < ApplicationController
 
     # when user search for something in search bar
     @products = search_products()
-
     @products = remove_duplicates(@products)
     @products = apply_filters(@products)
     @products = sort_products(@products)
@@ -70,7 +70,7 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        # format.html { redirect_to product_url(@product), notice: 'Product was successfully updated.' }
+        # format.html { redirect_to admin_products_path(), notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -93,6 +93,10 @@ class ProductsController < ApplicationController
 
   def set_product
     @product = Product.find(params[:id])
+  end
+
+  def set_colors
+    @colors = Color.all
   end
 
   def set_brands
@@ -122,7 +126,8 @@ class ProductsController < ApplicationController
 
   def filter_color(products, colors)
     filtered = []
-    products_by_color = Product.where(color: colors)
+    color_ids = Color.where(name: colors).pluck(:id)
+    products_by_color = Product.where(color_id: color_ids)
     products.each do |product|
       filtered << product if products_by_color.include?(product)
     end
@@ -170,9 +175,8 @@ class ProductsController < ApplicationController
   def product_params
     params
       .require(:product)
-      .permit(:name, :price, :description, :size, :color, :gender,
-              :brand_id, :discount, :quantity, images:
-               [], category_ids: [])
+      .permit(:name, :price, :description, :size, :gender,
+              :brand_id, :color_id, :discount, :quantity, :image1, :image2, :image3, :image4, :image5, :iconicImage, category_ids: [])
       .with_defaults(discount: 0)
   end
 end

@@ -5,6 +5,8 @@
   overflow: auto;
   width: 100%;
   padding: var(--padding-1);
+  gap: 1rem;
+  align-items: flex-end;
 }
 
 #admin-products-container__new-product-button {
@@ -28,7 +30,6 @@
 
 .admin-products-table__img {
   height: 3rem;
-  width: 3rem;
 }
 
 .admin-products-table__delete-icon,
@@ -82,54 +83,6 @@
 
 #admin-products-table__delete-product-popup-close-icon {
   height: var(--font-size-xxs);
-}
-
-/* EDITS */
-
-.admin-products-table__edit-icon {
-  height: 0.75rem;
-  cursor: pointer;
-}
-
-.set-hide {
-  display: flex;
-  gap: var(--gap-0);
-  align-items: center;
-}
-
-.set-hide.hide {
-  display: none;
-}
-
-.set-form {
-  display: none;
-}
-
-.set-form.show {
-  display: flex;
-}
-
-/* image */
-.image-form {
-  display: flex;
-  align-items: center;
-  gap: var(--gap-1);
-}
-
-.image-select {
-  display: none;
-}
-
-.image-submit {
-  display: none;
-}
-
-.image-submit.show {
-  display: flex;
-}
-
-.image-image {
-  cursor: pointer;
 }
 
 @media (min-width: 768px) {

@@ -1,3 +1,4 @@
+# rubocop:disable all
 module ApplicationHelper
   def products_index
     controller_name == 'products' && action_name == 'index'
@@ -14,6 +15,8 @@ module ApplicationHelper
       current_page?(admin_promo_codes_path) ||
       current_page?(admin_iconics_path) ||
       current_page?(admin_users_path) ||
-      current_page?(admin_orders_path)
+      current_page?(admin_orders_path) ||
+      current_page?(admin_decorations_path) ||
+      current_page?(admin_colors_path)
   end
 end

@@ -10,6 +10,9 @@ class HomeController < ApplicationController
 
     # All products
     @products = remove_duplicates(Product.all)
+
+    # Decorations
+    @decorations = Decoration.all
   end
 
   private

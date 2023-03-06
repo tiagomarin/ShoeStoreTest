@@ -4,7 +4,7 @@ class PromoCodesController < ApplicationController
   before_action :set_brands, only: %i[new edit]
 
   def admin_promo_codes
-    @promo_codes = PromoCode.all
+    @promo_codes = PromoCode.all.order(id: :asc)
   end
 
   # GET /promo_codes or /promo_codes.json

@@ -30,6 +30,7 @@
     <%= number_to_currency(order.order_items.sum(:total_price)) %>
   </p>
 
+  <% if order.status == "Shopping Cart" %>
   <p>
     <% if order.promo_codes.length > 0 %>
       <div class="order-container__coupons-applied">
@@ -53,4 +54,5 @@
       No coupons applied
     <% end %>
   </p>
+  <% end %>
 </div>

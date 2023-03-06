@@ -14,5 +14,8 @@
 
 .sizes-available > *.size-available {
   border: 1px solid black;
-  color: black;
+  background-color: var(--color-background-6);
+  color: var(--color-background-1);
+  box-shadow: inset 0 0 5px black;
+  cursor: pointer;
 }

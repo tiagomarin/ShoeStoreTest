@@ -1,8 +1,15 @@
 class Product < ApplicationRecord
   paginates_per 10
   has_many :order_items, dependent: :destroy
-  has_many_attached :images
+  has_one_attached :image1
+  has_one_attached :image2
+  has_one_attached :image3
+  has_one_attached :image4
+  has_one_attached :image5
+  has_one_attached :iconicImage
+
   belongs_to :brand
+  belongs_to :color
   # belongs_to :category
   has_and_belongs_to_many :category
 

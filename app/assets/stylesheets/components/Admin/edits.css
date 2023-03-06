@@ -1,0 +1,22 @@
+.admin-products-table__edit-icon {
+  height: 0.75rem;
+  cursor: pointer;
+}
+
+.set-hide {
+  display: flex;
+  gap: var(--gap-0);
+  align-items: center;
+}
+
+.set-hide.hide {
+  display: none;
+}
+
+.set-form {
+  display: none;
+}
+
+.set-form.show {
+  display: flex;
+}
