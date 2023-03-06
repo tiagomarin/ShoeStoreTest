@@ -36,10 +36,10 @@
           <td>
             <div class="set-hide">
               <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
-              <%= product.gender.capitalize %>
+              <%= product.gender.name.capitalize %>
             </div>
             <%= form_with model: Product, url: product_path(product), method: :patch, class: "set-form" do |form| %>
-              <%= form.select :gender, ["Male", "Female", "Other"], value: product.gender %>
+              <%= form.select :gender_id, @genders.map { |gender| [gender.name, gender.id]}, value: product.gender.name %>
               <%= form.submit "update", class: "set-submit" %>
             <% end %>
           </td>

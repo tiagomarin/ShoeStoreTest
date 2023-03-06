@@ -51,6 +51,12 @@
           <% end %>
         </li>
         <li class="admin-nav-container__li">
+          <%= link_to admin_genders_path(), class: "admin-nav-container__link" do %>
+            <%= image_tag "icons/brands.png", class:"admin-nav-container__link-icon"%>
+            <p>Genders</p>
+          <% end %>
+        </li>
+        <li class="admin-nav-container__li">
           <%= link_to admin_promo_codes_path(), class: "admin-nav-container__link" do %>
             <%= image_tag "icons/coupons.png", class:"admin-nav-container__link-icon" %>
             <p>Coupons</p>

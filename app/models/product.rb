@@ -11,6 +11,7 @@ class Product < ApplicationRecord
   belongs_to :brand
   belongs_to :color
   belongs_to :size
+  belongs_to :gender
   # belongs_to :category
   has_and_belongs_to_many :category
 

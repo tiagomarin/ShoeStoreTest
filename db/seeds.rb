@@ -61,7 +61,12 @@ style = Category.create!(name:"style")
 street = Category.create!(name:"street")
 category_ids = [running.id, casual.id, gym.id, style.id, street.id]
 
-genders = ["unissex", "male", "female", "other"]
+# Genders
+unisex = Gender.create!(name: "Unisex")
+male = Gender.create!(name: "Male")
+female = Gender.create!(name: "Female")
+other = Gender.create!(name: "Other")
+genders = [unisex, male, female, other]
 
 # Coupons
 promocode1 = PromoCode.create!(title:"RUN10", value: 10)
@@ -78,9 +83,7 @@ promocode5.brand_ids = [addidas.id]
 
 # Decorations (Home backgrounds)
 decoration1 = Decoration.create!(name: "Background1").avatar.attach(io: File.open("#{Rails.root}/app/assets/images/backgrounds/background1.jpeg"), filename: 'background1.jpeg')
-
 decoration2 = Decoration.create!(name: "Background2").avatar.attach(io: File.open("#{Rails.root}/app/assets/images/backgrounds/background2.jpeg"), filename: 'background2.jpeg')
-
 decoration3 = Decoration.create!(name: "Background3").avatar.attach(io: File.open("#{Rails.root}/app/assets/images/backgrounds/background3.png"), filename: 'background3.png')
 
 5.times do
@@ -203,14 +206,13 @@ end
   product.category_ids = category_ids.sample(2)
 end
 
-
 # Iconic Products
 iconic_product_1 = Product.create!(name: "Rails",
   price: Faker::Number.number(digits: 3),
-  description: 'so cool',
+  description: 'This shoe is a stylish and comfortable choice with its sleek design and cushioned sole, perfect for any occasion.',
   size: sizes.sample,
   color: red,
-  gender: 'Male',
+  gender: genders.sample,
   brand: brands.sample,
   discount: (rand(0..40.0) * 2.0).round / 2.0,
   quantity: Faker::Number.number(digits: 2)
@@ -221,10 +223,10 @@ iconic_product_1.category_ids = category_ids.sample(2)
 
 iconic_product_2 = Product.create!(name: "JavaScript",
   price: Faker::Number.number(digits: 3),
-  description: 'so cool',
+  description: 'This shoe is a stylish and comfortable choice with its sleek design and cushioned sole, perfect for any occasion.',
   size: sizes.sample,
   color: yellow,
-  gender: 'Male',
+  gender: genders.sample,
   brand: brands.sample,
   discount: (rand(0..40.0) * 2.0).round / 2.0,
   quantity: Faker::Number.number(digits: 2)
@@ -235,10 +237,10 @@ iconic_product_2.category_ids = category_ids.sample(2)
 
 iconic_product_3 = Product.create!(name: "React",
   price: Faker::Number.number(digits: 3),
-  description: 'so cool',
+  description: 'This shoe is a stylish and comfortable choice with its sleek design and cushioned sole, perfect for any occasion.',
   size: sizes.sample,
   color: cyan,
-  gender: 'Male',
+  gender: genders.sample,
   brand: brands.sample,
   discount: (rand(0..40.0) * 2.0).round / 2.0,
   quantity: Faker::Number.number(digits: 2)
@@ -247,6 +249,7 @@ iconic_product_3.image1.attach(io: File.open("#{Rails.root}/app/assets/images/ic
 iconic_product_3.iconicImage.attach(io: File.open("#{Rails.root}/app/assets/images/iconics/reacticonic.png"), filename: 'reacticonic.png')
 iconic_product_3.category_ids = category_ids.sample(2)
 
+# Iconic products (Home page)
 iconic_1 = Iconic.create!(product: iconic_product_1)
 iconic_2 = Iconic.create!(product: iconic_product_2)
 iconic_3 = Iconic.create!(product: iconic_product_3)

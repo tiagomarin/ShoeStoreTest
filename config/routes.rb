@@ -20,12 +20,14 @@ Rails.application.routes.draw do
   get 'admin/users', to: 'users#admin_users'
   get 'admin/orders', to: 'orders#admin_orders'
   get 'admin/decorations', to: 'decorations#admin_decorations'
-  
+  get 'admin/genders', to: 'genders#admin_genders'
+
   resources :products
   resources :categories
   resources :brands
   resources :colors
   resources :sizes
+  resources :genders
   resources :promo_codes
   resources :iconics
   resources :decorations
