@@ -19,7 +19,13 @@
 
       <ul class="products-container__applied-filter-sizes">
         <% @sizes.each do |size| %>
-          <li class="applied-filters">
+          <% if @size_filters.present? %>
+            <% @size_filters.include?(size.number.to_s) ? li_class = "applied-filters active" : li_class = "applied-filters" %>
+          <% else %>
+            <% li_class = "applied-filters" %>
+          <% end %>
+
+          <li class="<%= li_class %>">
             <%= form_with(url: products_path, method: :get, data: { controller: "search-form" , turbo_frame: "products", turbo_action: "advance"}) do |form| %>
               <button 
                 name="remove_size_filter" 

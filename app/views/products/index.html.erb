@@ -35,9 +35,12 @@
 
   <div class="products-container__main">
     <%= render "filters", colors: @colors %>
-    <div class="products-container__grid filters_active">
-      <%= render "products", products: @products %>
-    </div>  
+    <div>
+      <%= paginate @products %>
+      <div class="products-container__grid filters_active">
+        <%= render "products", products: @products %>
+      </div>  
+    </div>
   </div>
 </section>
 

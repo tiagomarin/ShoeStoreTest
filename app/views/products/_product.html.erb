@@ -35,10 +35,10 @@
     <p><%= product.brand.name %></p>
     <strong>SIZE: </strong>
     <p><%= product.size.number %></p>
-    <p> colors: <%= same_product_different_colors(product).length + 1  %> </p>
+    <p> colors: <%= same_product_different_colors(product, @products).length + 1  %> </p>
 
     <div class="products-container__color-carrousel">
-      <% same_product_different_colors(product).map do |p|%>
+      <% same_product_different_colors(product, @products).map do |p|%>
         <div id="products-container__color-carrousel-options">
           <% if p.image1.attached? %>
             <%= link_to(p) do %>

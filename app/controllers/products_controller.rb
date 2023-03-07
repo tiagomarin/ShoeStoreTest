@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
   before_action :set_product_categories, only: %i[show update]
 
   def admin_products
-     @products = Product.where(archived: false).all.page(params[:page]).order(id: :asc)
+     @products = Product.where(archived: false).all.page(params[:page]).order(id: :asc).per(20)
 
     if turbo_frame_request?
       render partial: 'products', locals: { products: @products }
@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
   end
 
   def admin_archived
-    @products = Product.where(archived: true).all.page(params[:page]).order(id: :asc)
+    @products = Product.where(archived: true).all.page(params[:page]).order(id: :asc).per(20)
 
     if turbo_frame_request?
       render partial: 'products', locals: { products: @products }
@@ -44,7 +44,10 @@ class ProductsController < ApplicationController
     @products = search_products()
     @products = apply_filters(@products)
     @products = remove_duplicates(@products)
-    @products = sort_products(@products)
+    @products = Kaminari.paginate_array(sort_products(@products)).page(params[:page]).per(18)
+    
+    # send info to the view with filters that are applied so buttons to remove filter will be displayed
+    @size_filters = session[:size_filters].split if session[:size_filters].present?    
 
     if turbo_frame_request?
       render partial: 'products', locals: { products: @products }

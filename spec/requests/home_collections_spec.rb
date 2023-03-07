@@ -76,7 +76,6 @@ RSpec.describe '/home_collections', type: :request do
         end.to change(HomeCollection, :count).by(0)
       end
 
-
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post home_collections_url, params: { home_collection: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
