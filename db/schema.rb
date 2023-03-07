@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_06_181446) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_07_172100) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -73,6 +73,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_06_181446) do
     t.index ["promo_code_id", "category_id"], name: "index_categories_promo_codes_on_promo_code_id_and_category_id"
   end
 
+  create_table "collections", force: :cascade do |t|
+    t.string "name", default: "No Collection"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "colors", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -98,6 +104,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_06_181446) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "home_collections", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "collection_id", null: false
+    t.index ["collection_id"], name: "index_home_collections_on_collection_id"
   end
 
   create_table "iconics", force: :cascade do |t|
@@ -138,9 +151,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_06_181446) do
     t.string "name"
     t.decimal "price"
     t.string "description"
-    t.decimal "size"
-    t.string "color"
-    t.string "gender"
     t.integer "discount"
     t.integer "quantity"
     t.datetime "created_at", null: false
@@ -149,7 +159,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_06_181446) do
     t.bigint "color_id", null: false
     t.bigint "size_id", null: false
     t.bigint "gender_id", null: false
+    t.bigint "collection_id", null: false
     t.index ["brand_id"], name: "index_products_on_brand_id"
+    t.index ["collection_id"], name: "index_products_on_collection_id"
     t.index ["color_id"], name: "index_products_on_color_id"
     t.index ["gender_id"], name: "index_products_on_gender_id"
     t.index ["size_id"], name: "index_products_on_size_id"
@@ -187,11 +199,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_06_181446) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "favorites", "products"
   add_foreign_key "favorites", "users"
+  add_foreign_key "home_collections", "collections"
   add_foreign_key "iconics", "products"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "brands"
+  add_foreign_key "products", "collections"
   add_foreign_key "products", "colors"
   add_foreign_key "products", "genders"
   add_foreign_key "products", "sizes"

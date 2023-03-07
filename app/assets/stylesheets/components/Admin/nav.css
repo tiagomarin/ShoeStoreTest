@@ -38,18 +38,6 @@
   flex-direction: column;
 }
 
-.admin-nav-container__li-ul li {
-  padding: 0.75rem;
-}
-
-.admin-nav-container__li-ul li:hover {
-  background-color: lightblue;
-}
-
-.admin-nav-container__li:hover {
-  background-color: white;
-}
-
 .admin-nav-container__link {
   text-decoration: none;
   color: black;
@@ -61,9 +49,18 @@
   gap: 2rem;
 }
 
+.admin-nav-container__li-ul li:hover .admin-nav-container__link {
+  background-color: lightblue;
+  clip-path: unset;
+}
+
+.admin-nav-container__li:hover {
+  background-color: white;
+}
+
 .admin-nav-container__link:hover {
   background-color: #4fc3a1;
-  clip-path: polygon(0% 0%, 100% 0, 95% 50%, 100% 100%, 0% 100%);
+  clip-path: unset;
   color: white;
 }
 
@@ -93,5 +90,10 @@
     justify-content: space-between;
     min-width: unset;
     width: 100%;
+  }
+
+  .admin-nav-container__link:hover {
+    clip-path: unset;
+    clip-path: polygon(0% 0%, 100% 0, 95% 50%, 100% 100%, 0% 100%);
   }
 }

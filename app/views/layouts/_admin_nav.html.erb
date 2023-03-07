@@ -9,12 +9,14 @@
           <% end %>
 
           <ul class="admin-nav-container__li-ul">
-            <li>Option1</li>
-            <li>Option2</li>
-            <li>Option3</li>
+            <li>
+              <%= link_to admin_archived_path(), class: "admin-nav-container__link" do %>
+                <p>Archived</p>
+                <% end %>
+            </li>
           </ul>
         </li>
-                <li class="admin-nav-container__li">
+        <li class="admin-nav-container__li">
           <%= link_to admin_users_path(), class: "admin-nav-container__link" do %>
             <%= image_tag "icons/users.png", class:"admin-nav-container__link-icon"%>
             <p>Users</p>
@@ -75,10 +77,17 @@
           <% end %>
         </li>
         <li class="admin-nav-container__li">
-          <%= link_to admin_archived_path(), class: "admin-nav-container__link" do %>
+          <%= link_to admin_collections_path(), class: "admin-nav-container__link" do %>
             <%= image_tag "icons/background.png", class:"admin-nav-container__link-icon"%>
-            <p>Archived</p>
+            <p>Collections</p>
           <% end %>
+          <ul class="admin-nav-container__li-ul">
+            <li>
+              <%= link_to admin_collection_home_path(), class: "admin-nav-container__link" do %>
+                <p>Home</p>
+              <% end %>
+            </li>
+          </ul>
         </li>
     </ul>
   </div>

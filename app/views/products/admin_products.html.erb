@@ -1,7 +1,6 @@
 <div class="admin-products-container">
   <%= link_to "New Product", new_product_path(), id:"admin-products-container__new-product-button" %>
 
-  <%= paginate @products %>
-    <%= render "admin_products_table", products: @products %>
+  <%= render "admin_products_table", products: @products %>
   <%= paginate @products %>
 </div>

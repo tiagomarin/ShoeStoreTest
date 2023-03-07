@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   get 'admin/orders', to: 'orders#admin_orders'
   get 'admin/decorations', to: 'decorations#admin_decorations'
   get 'admin/genders', to: 'genders#admin_genders'
+  get 'admin/collections', to: 'collections#admin_collections'
+  get 'admin/collection_home', to: 'home_collections#admin_home_collection'
 
   resources :products
   resources :categories
@@ -29,6 +31,8 @@ Rails.application.routes.draw do
   resources :colors
   resources :sizes
   resources :genders
+  resources :collections
+  resources :home_collections
   resources :promo_codes
   resources :iconics
   resources :decorations

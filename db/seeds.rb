@@ -68,6 +68,20 @@ female = Gender.create!(name: "Female")
 other = Gender.create!(name: "Other")
 genders = [unisex, male, female, other]
 
+# Collections
+microverse = Collection.create!(name: "Microverse")
+microverse.collectionImage.attach(io: File.open("#{Rails.root}/app/assets/images/collections/collection1.png"), filename: 'collection1.png')
+no_collection = Collection.create!(name: "No Collection")
+no_collection.collectionImage.attach(io: File.open("#{Rails.root}/app/assets/images/no-product-image-16-9.jpg"), filename: 'no-product-image-16-9.jpg')
+winter = Collection.create!(name: "Winter")
+winter.collectionImage.attach(io: File.open("#{Rails.root}/app/assets/images/no-product-image-16-9.jpg"), filename: 'no-product-image-16-9.jpg')
+summer = Collection.create!(name: "Summer")
+summer.collectionImage.attach(io: File.open("#{Rails.root}/app/assets/images/no-product-image-16-9.jpg"), filename: 'no-product-image-16-9.jpg')
+collections = [microverse, no_collection, summer, winter]
+
+# Home Collection
+home_collection = HomeCollection.create!(collection: microverse)
+
 # Coupons
 promocode1 = PromoCode.create!(title:"RUN10", value: 10)
 promocode2 = PromoCode.create!(title:"GYM10", value: 10)
@@ -94,6 +108,7 @@ decoration3 = Decoration.create!(name: "Background3").avatar.attach(io: File.ope
                             color: black,
                             gender: genders.sample,
                             brand: addidas,
+                            collection: no_collection,
                             discount: (rand(0..40.0) * 2.0).round / 2.0,
                             quantity: Faker::Number.number(digits: 2),
                           )
@@ -109,6 +124,7 @@ end
                             color: blue,
                             gender: genders.sample,
                             brand: addidas,
+                            collection: no_collection,
                             discount: (rand(0..40.0) * 2.0).round / 2.0,
                             quantity: Faker::Number.number(digits: 2),
                           )
@@ -124,6 +140,7 @@ end
                             color: red,
                             gender: genders.sample,
                             brand: addidas,
+                            collection: no_collection,
                             discount: (rand(0..40.0) * 2.0).round / 2.0,
                             quantity: Faker::Number.number(digits: 2),
                           )
@@ -139,6 +156,7 @@ end
                             color: red,
                             gender: genders.sample,
                             brand: nike,
+                            collection: no_collection,
                             discount: (rand(0..40.0) * 2.0).round / 2.0,
                             quantity: Faker::Number.number(digits: 2),
                           )
@@ -154,6 +172,7 @@ end
                             color: white,
                             gender: genders.sample,
                             brand: nike,
+                            collection: no_collection,
                             discount: (rand(0..40.0) * 2.0).round / 2.0,
                             quantity: Faker::Number.number(digits: 2),
                           )
@@ -169,10 +188,284 @@ end
                             color: black,
                             gender: genders.sample,
                             brand: nike,
+                            collection: no_collection,
                             discount: (rand(0..40.0) * 2.0).round / 2.0,
                             quantity: Faker::Number.number(digits: 2),
                           )
   product.image1.attach(io: File.open("#{Rails.root}/app/assets/images/nike_products/nike3.png"), filename: 'nike3.png')
+  product.category_ids = category_ids.sample(2)
+end
+
+5.times do
+  product = Product.create!(name: "Nike Air Max 90",
+                            price: Faker::Number.number(digits: 3),
+                            description: 'Nothing as fly, nothing as comfortable, nothing as proven. The Nike Air Max 90 stays true to its OG running roots with the iconic Waffle sole, stitched overlays and classic TPU details. Classic colors celebrate your fresh look while Max Air cushioning adds comfort to the journey.',
+                            size:  sizes.sample,
+                            color: black,
+                            gender: genders.sample,
+                            brand: nike,
+                            collection: no_collection,
+                            discount: (rand(0..40.0) * 2.0).round / 2.0,
+                            quantity: Faker::Number.number(digits: 2),
+                          )
+  product.image1.attach(io: File.open("#{Rails.root}/app/assets/images/nike_products/nike14.png"), filename: 'nike14.png')
+  product.category_ids = category_ids.sample(2)
+end
+
+5.times do
+  product = Product.create!(name: "Nike Air Max 90",
+                            price: Faker::Number.number(digits: 3),
+                            description: 'Nothing as fly, nothing as comfortable, nothing as proven. The Nike Air Max 90 stays true to its OG running roots with the iconic Waffle sole, stitched overlays and classic TPU details. Classic colors celebrate your fresh look while Max Air cushioning adds comfort to the journey.',
+                            size:  sizes.sample,
+                            color: grey,
+                            gender: genders.sample,
+                            brand: nike,
+                            collection: no_collection,
+                            discount: (rand(0..40.0) * 2.0).round / 2.0,
+                            quantity: Faker::Number.number(digits: 2),
+                          )
+  product.image1.attach(io: File.open("#{Rails.root}/app/assets/images/nike_products/nike13.png"), filename: 'nike13.png')
+  product.category_ids = category_ids.sample(2)
+end
+
+5.times do
+  product = Product.create!(name: "Nike Air Max 90",
+                            price: Faker::Number.number(digits: 3),
+                            description: 'Nothing as fly, nothing as comfortable, nothing as proven. The Nike Air Max 90 stays true to its OG running roots with the iconic Waffle sole, stitched overlays and classic TPU details. Classic colors celebrate your fresh look while Max Air cushioning adds comfort to the journey.',
+                            size:  sizes.sample,
+                            color: black,
+                            gender: genders.sample,
+                            brand: nike,
+                            collection: no_collection,
+                            discount: (rand(0..40.0) * 2.0).round / 2.0,
+                            quantity: Faker::Number.number(digits: 2),
+                          )
+  product.image1.attach(io: File.open("#{Rails.root}/app/assets/images/nike_products/nike12.png"), filename: 'nike12.png')
+  product.category_ids = category_ids.sample(2)
+end
+
+5.times do
+  product = Product.create!(name: "Nike Air Max 90",
+                            price: Faker::Number.number(digits: 3),
+                            description: 'Nothing as fly, nothing as comfortable, nothing as proven. The Nike Air Max 90 stays true to its OG running roots with the iconic Waffle sole, stitched overlays and classic TPU details. Classic colors celebrate your fresh look while Max Air cushioning adds comfort to the journey.',
+                            size:  sizes.sample,
+                            color: white,
+                            gender: genders.sample,
+                            brand: nike,
+                            collection: no_collection,
+                            discount: (rand(0..40.0) * 2.0).round / 2.0,
+                            quantity: Faker::Number.number(digits: 2),
+                          )
+  product.image1.attach(io: File.open("#{Rails.root}/app/assets/images/nike_products/nike11.png"), filename: 'nike11.png')
+  product.category_ids = category_ids.sample(2)
+end
+
+5.times do
+  product = Product.create!(name: "Nike Air Max 270",
+                            price: Faker::Number.number(digits: 3),
+                            description: 'Nike\'s first lifestyle Air Max brings you style, comfort and big attitude in the Nike Air Max 270. The design draws inspiration from Air Max icons, showcasing Nike\'s greatest innovation with its large window and fresh array of colors.',
+                            size:  sizes.sample,
+                            color: green,
+                            gender: genders.sample,
+                            brand: nike,
+                            collection: no_collection,
+                            discount: (rand(0..40.0) * 2.0).round / 2.0,
+                            quantity: Faker::Number.number(digits: 2),
+                          )
+  product.image1.attach(io: File.open("#{Rails.root}/app/assets/images/nike_products/nike15.png"), filename: 'nike15.png')
+  product.category_ids = category_ids.sample(2)
+end
+
+5.times do
+  product = Product.create!(name: "Nike Air Max 270",
+                            price: Faker::Number.number(digits: 3),
+                            description: 'Nike\'s first lifestyle Air Max brings you style, comfort and big attitude in the Nike Air Max 270. The design draws inspiration from Air Max icons, showcasing Nike\'s greatest innovation with its large window and fresh array of colors.',
+                            size:  sizes.sample,
+                            color: blue,
+                            gender: genders.sample,
+                            brand: nike,
+                            collection: no_collection,
+                            discount: (rand(0..40.0) * 2.0).round / 2.0,
+                            quantity: Faker::Number.number(digits: 2),
+                          )
+  product.image1.attach(io: File.open("#{Rails.root}/app/assets/images/nike_products/nike16.png"), filename: 'nike16.png')
+  product.category_ids = category_ids.sample(2)
+end
+
+5.times do
+  product = Product.create!(name: "Nike Air Max 270",
+                            price: Faker::Number.number(digits: 3),
+                            description: 'Nike\'s first lifestyle Air Max brings you style, comfort and big attitude in the Nike Air Max 270. The design draws inspiration from Air Max icons, showcasing Nike\'s greatest innovation with its large window and fresh array of colors.',
+                            size: sizes.sample,
+                            color: white,
+                            gender: genders.sample,
+                            brand: nike,
+                            collection: no_collection,
+                            discount: (rand(0..40.0) * 2.0).round / 2.0,
+                            quantity: Faker::Number.number(digits: 2),
+                          )
+  product.image1.attach(io: File.open("#{Rails.root}/app/assets/images/nike_products/nike17.png"), filename: 'nike17.png')
+  product.category_ids = category_ids.sample(2)
+end
+
+5.times do
+  product = Product.create!(name: "Nike Air Max 270",
+                            price: Faker::Number.number(digits: 3),
+                            description: 'Nike\'s first lifestyle Air Max brings you style, comfort and big attitude in the Nike Air Max 270. The design draws inspiration from Air Max icons, showcasing Nike\'s greatest innovation with its large window and fresh array of colors.',
+                            size: sizes.sample,
+                            color: red,
+                            gender: genders.sample,
+                            brand: nike,
+                            collection: no_collection,
+                            discount: (rand(0..40.0) * 2.0).round / 2.0,
+                            quantity: Faker::Number.number(digits: 2),
+                          )
+  product.image1.attach(io: File.open("#{Rails.root}/app/assets/images/nike_products/nike18.png"), filename: 'nike18.png')
+  product.category_ids = category_ids.sample(2)
+end
+
+5.times do
+  product = Product.create!(name: "Nike Air Max 270",
+                            price: Faker::Number.number(digits: 3),
+                            description: 'Nike\'s first lifestyle Air Max brings you style, comfort and big attitude in the Nike Air Max 270. The design draws inspiration from Air Max icons, showcasing Nike\'s greatest innovation with its large window and fresh array of colors.',
+                            size: sizes.sample,
+                            color: black,
+                            gender: genders.sample,
+                            brand: nike,
+                            collection: no_collection,
+                            discount: (rand(0..40.0) * 2.0).round / 2.0,
+                            quantity: Faker::Number.number(digits: 2),
+                          )
+  product.image1.attach(io: File.open("#{Rails.root}/app/assets/images/nike_products/nike19.png"), filename: 'nike19.png')
+  product.category_ids = category_ids.sample(2)
+end
+
+5.times do
+  product = Product.create!(name: "Nike Invincible 3",
+                            price: Faker::Number.number(digits: 3),
+                            description: 'With maximum cushioning to support every mile, the Invincible 3 gives you our highest level of comfort underfoot to help you stay on your feet today, tomorrow and beyond. Designed to help keep you on the run, it’s super supportive and bouncy, so that you can propel down your preferred path and come back for your next run feeling ready and reinvigorated.',
+                            size: sizes.sample,
+                            color: white,
+                            gender: genders.sample,
+                            brand: nike,
+                            collection: no_collection,
+                            discount: (rand(0..40.0) * 2.0).round / 2.0,
+                            quantity: Faker::Number.number(digits: 2),
+                          )
+  product.image1.attach(io: File.open("#{Rails.root}/app/assets/images/nike_products/nike20.png"), filename: 'nike20.png')
+  product.category_ids = category_ids.sample(2)
+end
+
+5.times do
+  product = Product.create!(name: "Nike Invincible 3",
+                            price: Faker::Number.number(digits: 3),
+                            description: 'With maximum cushioning to support every mile, the Invincible 3 gives you our highest level of comfort underfoot to help you stay on your feet today, tomorrow and beyond. Designed to help keep you on the run, it’s super supportive and bouncy, so that you can propel down your preferred path and come back for your next run feeling ready and reinvigorated.',
+                            size: sizes.sample,
+                            color: blue,
+                            gender: genders.sample,
+                            brand: nike,
+                            collection: no_collection,
+                            discount: (rand(0..40.0) * 2.0).round / 2.0,
+                            quantity: Faker::Number.number(digits: 2),
+                          )
+  product.image1.attach(io: File.open("#{Rails.root}/app/assets/images/nike_products/nike21.png"), filename: 'nike21.png')
+  product.category_ids = category_ids.sample(2)
+end
+
+5.times do
+  product = Product.create!(name: "Nike Invincible 3",
+                            price: Faker::Number.number(digits: 3),
+                            description: 'With maximum cushioning to support every mile, the Invincible 3 gives you our highest level of comfort underfoot to help you stay on your feet today, tomorrow and beyond. Designed to help keep you on the run, it’s super supportive and bouncy, so that you can propel down your preferred path and come back for your next run feeling ready and reinvigorated.',
+                            size: sizes.sample,
+                            color: black,
+                            gender: genders.sample,
+                            brand: nike,
+                            collection: no_collection,
+                            discount: (rand(0..40.0) * 2.0).round / 2.0,
+                            quantity: Faker::Number.number(digits: 2),
+                          )
+  product.image1.attach(io: File.open("#{Rails.root}/app/assets/images/nike_products/nike22.png"), filename: 'nike22.png')
+  product.category_ids = category_ids.sample(2)
+end
+
+5.times do
+  product = Product.create!(name: "Nike Air Max Scorpion Flyknit",
+                            price: Faker::Number.number(digits: 3),
+                            description: 'We looked into the future and it\'s gonna be comfy. Featuring a "point-loaded" Air unit (cushioning that forms to your every step), the Air Max Scorpion Flyknit delivers a futuristic sensation. And because looks count, we\'ve crafted the upper with incredibly soft chenille-like fabric.',
+                            size: sizes.sample,
+                            color: green,
+                            gender: genders.sample,
+                            brand: nike,
+                            collection: no_collection,
+                            discount: (rand(0..40.0) * 2.0).round / 2.0,
+                            quantity: Faker::Number.number(digits: 2),
+                          )
+  product.image1.attach(io: File.open("#{Rails.root}/app/assets/images/nike_products/nike23.png"), filename: 'nike23.png')
+  product.category_ids = category_ids.sample(2)
+end
+
+5.times do
+  product = Product.create!(name: "Nike Air Max Scorpion Flyknit",
+                            price: Faker::Number.number(digits: 3),
+                            description: 'We looked into the future and it\'s gonna be comfy. Featuring a "point-loaded" Air unit (cushioning that forms to your every step), the Air Max Scorpion Flyknit delivers a futuristic sensation. And because looks count, we\'ve crafted the upper with incredibly soft chenille-like fabric.',
+                            size: sizes.sample,
+                            color: black,
+                            gender: genders.sample,
+                            brand: nike,
+                            collection: no_collection,
+                            discount: (rand(0..40.0) * 2.0).round / 2.0,
+                            quantity: Faker::Number.number(digits: 2),
+                          )
+  product.image1.attach(io: File.open("#{Rails.root}/app/assets/images/nike_products/nike24.png"), filename: 'nike24.png')
+  product.category_ids = category_ids.sample(2)
+end
+
+5.times do
+  product = Product.create!(name: "Nike Air Max Scorpion Flyknit",
+                            price: Faker::Number.number(digits: 3),
+                            description: 'We looked into the future and it\'s gonna be comfy. Featuring a "point-loaded" Air unit (cushioning that forms to your every step), the Air Max Scorpion Flyknit delivers a futuristic sensation. And because looks count, we\'ve crafted the upper with incredibly soft chenille-like fabric.',
+                            size: sizes.sample,
+                            color: grey,
+                            gender: genders.sample,
+                            brand: nike,
+                            collection: no_collection,
+                            discount: (rand(0..40.0) * 2.0).round / 2.0,
+                            quantity: Faker::Number.number(digits: 2),
+                          )
+  product.image1.attach(io: File.open("#{Rails.root}/app/assets/images/nike_products/nike25.png"), filename: 'nike25.png')
+  product.category_ids = category_ids.sample(2)
+end
+
+5.times do
+  product = Product.create!(name: "Nike Air Max Scorpion Flyknit",
+                            price: Faker::Number.number(digits: 3),
+                            description: 'We looked into the future and it\'s gonna be comfy. Featuring a "point-loaded" Air unit (cushioning that forms to your every step), the Air Max Scorpion Flyknit delivers a futuristic sensation. And because looks count, we\'ve crafted the upper with incredibly soft chenille-like fabric.',
+                            size: sizes.sample,
+                            color: white,
+                            gender: genders.sample,
+                            brand: nike,
+                            collection: no_collection,
+                            discount: (rand(0..40.0) * 2.0).round / 2.0,
+                            quantity: Faker::Number.number(digits: 2),
+                          )
+  product.image1.attach(io: File.open("#{Rails.root}/app/assets/images/nike_products/nike26.png"), filename: 'nike26.png')
+  product.category_ids = category_ids.sample(2)
+end
+
+5.times do
+  product = Product.create!(name: "Nike Air Max Scorpion Flyknit",
+                            archived: true,
+                            price: Faker::Number.number(digits: 3),
+                            description: 'We looked into the future and it\'s gonna be comfy. Featuring a "point-loaded" Air unit (cushioning that forms to your every step), the Air Max Scorpion Flyknit delivers a futuristic sensation. And because looks count, we\'ve crafted the upper with incredibly soft chenille-like fabric.',
+                            size: sizes.sample,
+                            color: white,
+                            gender: genders.sample,
+                            brand: nike,
+                            collection: no_collection,
+                            discount: (rand(0..40.0) * 2.0).round / 2.0,
+                            quantity: Faker::Number.number(digits: 2),
+                          )
+  product.image1.attach(io: File.open("#{Rails.root}/app/assets/images/nike_products/nike26.png"), filename: 'nike26.png')
   product.category_ids = category_ids.sample(2)
 end
 
@@ -184,6 +477,7 @@ end
                             color: blue,
                             gender: genders.sample,
                             brand: nike,
+                            collection: microverse,
                             discount: (rand(0..40.0) * 2.0).round / 2.0,
                             quantity: Faker::Number.number(digits: 2),
                           )
@@ -199,6 +493,7 @@ end
                             color: red,
                             gender: genders.sample,
                             brand: addidas,
+                            collection: microverse,
                             discount: (rand(0..40.0) * 2.0).round / 2.0,
                             quantity: Faker::Number.number(digits: 2),
                           )
@@ -214,6 +509,7 @@ iconic_product_1 = Product.create!(name: "Rails",
   color: red,
   gender: genders.sample,
   brand: brands.sample,
+  collection: microverse,
   discount: (rand(0..40.0) * 2.0).round / 2.0,
   quantity: Faker::Number.number(digits: 2)
 )
@@ -228,6 +524,7 @@ iconic_product_2 = Product.create!(name: "JavaScript",
   color: yellow,
   gender: genders.sample,
   brand: brands.sample,
+  collection: microverse,
   discount: (rand(0..40.0) * 2.0).round / 2.0,
   quantity: Faker::Number.number(digits: 2)
 )
@@ -242,6 +539,7 @@ iconic_product_3 = Product.create!(name: "React",
   color: cyan,
   gender: genders.sample,
   brand: brands.sample,
+  collection: microverse,
   discount: (rand(0..40.0) * 2.0).round / 2.0,
   quantity: Faker::Number.number(digits: 2)
 )

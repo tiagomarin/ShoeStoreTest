@@ -67,7 +67,8 @@ module FilterProducts
         @products |= Product.where(archived: false).joins(:brand).where('lower(brands.name) LIKE ?', "%#{query}%")
         @products |= Product.where(archived: false).joins(:color).where('lower(colors.name) LIKE ?', "%#{query}%")
         @products |= Product.where(archived: false).joins(:gender).where('lower(genders.name) LIKE ?', "%#{query}%")
-        @products |= Product.where(archived: false).joins(:size).where('sizes.number LIKE ?', "%#{query}%")
+        @products |= Product.where(archived: false).joins(:size).where('sizes.number = ?', query.to_f)
+        @products |= Product.where(archived: false).joins(:collection).where('lower(collections.name) LIKE ?', "%#{query}%")
         @products |= Product.where(archived: false).joins(:category).where('lower(categories.name) LIKE ?', "%#{query}%")
       end
     else

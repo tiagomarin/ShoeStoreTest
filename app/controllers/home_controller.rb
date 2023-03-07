@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
     # Recent added products
-    @new_arrivals = remove_duplicates(Product.last(30))
+    @new_arrivals = remove_duplicates(Product.last(60))
 
     # Fixed iconic items
     @iconic1 = Iconic.find(1)
@@ -10,6 +10,9 @@ class HomeController < ApplicationController
 
     # All products
     @products = remove_duplicates(Product.all)
+
+    # Collection
+    @home_collection = HomeCollection.first
 
     # Decorations
     @decorations = Decoration.all

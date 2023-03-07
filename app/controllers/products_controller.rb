@@ -7,6 +7,7 @@ class ProductsController < ApplicationController
   before_action :set_colors, only: %i[index new edit create admin_products admin_archived]
   before_action :set_sizes, only: %i[index show new edit create admin_products admin_archived]
   before_action :set_genders, only: %i[index new edit create admin_products admin_archived]
+  before_action :set_collections, only: %i[index new edit create admin_products admin_archived]
   before_action :set_categories, only: %i[new edit create]
   before_action :set_product_categories, only: %i[show update]
 
@@ -123,6 +124,10 @@ class ProductsController < ApplicationController
     @genders = Gender.all
   end
 
+  def set_collections
+    @collections = Collection.all
+  end
+
   def set_categories
     @categories = Category.all
   end
@@ -197,7 +202,7 @@ class ProductsController < ApplicationController
     params
       .require(:product)
       .permit(:archived, :name, :price, :description,
-              :brand_id, :color_id, :size_id, :gender_id, :archived, :discount, :quantity, :image1, :image2, :image3, :image4, :image5, :iconicImage, category_ids: [])
+              :brand_id, :color_id, :size_id, :gender_id, :collection_id, :archived, :discount, :quantity, :image1, :image2, :image3, :image4, :image5, :iconicImage, :collectionImage, category_ids: [])
       .with_defaults(discount: 0)
   end
 end

@@ -6,7 +6,6 @@
   width: 100%;
   padding: var(--padding-1);
   gap: 1rem;
-  align-items: flex-end;
 }
 
 #admin-products-container__new-product-button {
@@ -15,17 +14,19 @@
   border: none;
   padding: 0.5rem 1rem;
   font-weight: 500;
-  font-size: var(--font-size-xs);
-  border-radius: var(--border-radius-6);
+  font-size: var(--font-size-xl);
   cursor: pointer;
   text-decoration: none;
   width: fit-content;
   display: block;
+  position: fixed;
+  bottom: 1rem;
+  right: 1.5rem;
+  transition: 0.25s;
 }
 
 #admin-products-container__new-product-button:hover {
-  background-color: var(--color-background-2);
-  color: var(--color-background-6);
+  background-color: #4fc3a1;
 }
 
 .admin-products-table__img {
@@ -93,6 +94,12 @@
   padding: var(--padding-1);
   border-radius: var(--border-radius-3);
   border: none;
+  transition: 0.25s;
+}
+
+.admin-products-table__confirm-delete-button:hover {
+  background-color: var(--color-background-2);
+  color: var(--color-background-6);
 }
 
 @media (min-width: 768px) {

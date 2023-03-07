@@ -7,6 +7,7 @@
         <th>SIZE</th>
         <th>COLOR</th>
         <th>BRAND</th>
+        <th>COLLECTION</th>
         <th>QUANTITIY</th>
         <th>PRICE</th>
         <th>ACTIONS</th>
@@ -70,6 +71,16 @@
             </div>
             <%= form_with model: Product, url: product_path(product), method: :patch, class: "set-form" do |form| %>
               <%= form.select :brand_id, @brands.map { |brand| [brand.name, brand.id]}, value: product.brand.name %>
+              <%= form.submit "update", class: "set-submit" %>
+            <% end %>
+          </td>
+          <td>
+            <div class="set-hide">
+              <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
+              <%= product.collection.name.capitalize %>
+            </div>
+            <%= form_with model: Product, url: product_path(product), method: :patch, class: "set-form" do |form| %>
+              <%= form.select :collection_id, @collections.map { |collection| [collection.name, collection.id]}, value: product.collection.name %>
               <%= form.submit "update", class: "set-submit" %>
             <% end %>
           </td>
