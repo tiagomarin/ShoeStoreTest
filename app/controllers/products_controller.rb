@@ -42,8 +42,8 @@ class ProductsController < ApplicationController
 
     # when user search for something in search bar
     @products = search_products()
-    @products = remove_duplicates(@products)
     @products = apply_filters(@products)
+    @products = remove_duplicates(@products)
     @products = sort_products(@products)
 
     if turbo_frame_request?
