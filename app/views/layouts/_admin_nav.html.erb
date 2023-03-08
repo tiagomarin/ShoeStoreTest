@@ -33,6 +33,13 @@
             <%= image_tag "icons/categories.png", class:"admin-nav-container__link-icon"%>
             <p>Categories</p>
           <% end %>
+          <ul class="admin-nav-container__li-ul">
+            <li>
+              <%= link_to admin_category_home_path(), class: "admin-nav-container__link" do %>
+                <p>HomeCategory</p>
+              <% end %>
+            </li>
+          </ul>
         </li>
         <li class="admin-nav-container__li">
           <%= link_to admin_brands_path(), class: "admin-nav-container__link" do %>
@@ -84,7 +91,7 @@
           <ul class="admin-nav-container__li-ul">
             <li>
               <%= link_to admin_collection_home_path(), class: "admin-nav-container__link" do %>
-                <p>Home</p>
+                <p>HomeCollection</p>
               <% end %>
             </li>
           </ul>

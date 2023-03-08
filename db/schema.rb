@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_07_172100) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_08_173957) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -106,6 +106,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_172100) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "home_categories", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "category_id", null: false
+    t.index ["category_id"], name: "index_home_categories_on_category_id"
+  end
+
   create_table "home_collections", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -199,6 +206,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_172100) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "favorites", "products"
   add_foreign_key "favorites", "users"
+  add_foreign_key "home_categories", "categories"
   add_foreign_key "home_collections", "collections"
   add_foreign_key "iconics", "products"
   add_foreign_key "order_items", "orders"

@@ -53,20 +53,28 @@ size13_5 = Size.create!(number: 13.5)
 size14 = Size.create!(number: 14)
 sizes = [size5, size5_5, size6, size6_5, size7, size7_5, size8, size8_5, size9, size9_5, size10, size10_5, size11, size11_5, size12, size12_5, size13, size13_5, size14]
 
-# Categories
-running = Category.create!(name:"running")
-casual = Category.create!(name:"casual")
-gym = Category.create!(name:"gym")
-style = Category.create!(name:"style")
-street = Category.create!(name:"street")
-category_ids = [running.id, casual.id, gym.id, style.id, street.id]
-
 # Genders
 unisex = Gender.create!(name: "Unisex")
 male = Gender.create!(name: "Male")
 female = Gender.create!(name: "Female")
 other = Gender.create!(name: "Other")
 genders = [unisex, male, female, other]
+
+# Categories
+running = Category.create!(name:"running")
+running.categoryImage.attach(io: File.open("#{Rails.root}/app/assets/images/categories/category1.jpg"), filename: 'category1.jpg')
+casual = Category.create!(name:"casual")
+casual.categoryImage.attach(io: File.open("#{Rails.root}/app/assets/images/categories/category2.jpg"), filename: 'category2.jpg')
+gym = Category.create!(name:"gym")
+gym.categoryImage.attach(io: File.open("#{Rails.root}/app/assets/images/categories/category3.jpg"), filename: 'category3.jpg')
+style = Category.create!(name:"style")
+street = Category.create!(name:"street")
+category_ids = [running.id, casual.id, gym.id, style.id, street.id]
+
+# Home Categories
+home_category_running = HomeCategory.create!(category: running)
+home_category_casual = HomeCategory.create!(category: casual)
+home_category_gym = HomeCategory.create!(category: gym)
 
 # Collections
 microverse = Collection.create!(name: "Microverse")

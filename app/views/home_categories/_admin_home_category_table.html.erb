@@ -2,26 +2,24 @@
     <thead>
         <th>ID</th>
         <th>IMAGE</th>
-        <th>NAME</th>
-        <th>PRODUCTS</th>
+        <th>CATEGORY</th>
         <th>ACTIONS</th>
     </thead>
 
     <tbody>
-      <% categories.each do |category| %>
         <tr>
-          <td><%= category.id %></td>
+          <td><%= home_category.id %></td>
           <td>
             <% if current_page?(admin_category_home_path) %>
-              <% if category.categoryImage.attached? %>
-                <%= image_tag category.categoryImage, class: "admin-iconics-table__img image-image" %>
+              <% if home_category.category.categoryImage.attached? %>
+                <%= image_tag home_category.category.categoryImage, class: "admin-iconics-table__img image-image" %>
               <% else %>
                 <%= image_tag "no-product-image-16-9.jpg", class: "admin-iconics-table__img image-image" %>
               <% end %>
             <% else %>
-              <%= form_with(model: category, url: category_path(category), method: :patch) do |form| %>
-                <% if category.categoryImage.attached? %>
-                  <%= image_tag category.categoryImage, class: "admin-iconics-table__img image-image" %>
+              <%= form_with model: HomeCategory, url: home_category_path(home_category), method: :patch, class: "set-form" do |form| %>
+                <% if home_category.category.categoryImage.attached? %>
+                  <%= image_tag home_category.category.categoryImage, class: "admin-iconics-table__img image-image" %>
                 <% else %>
                   <%= image_tag "no-product-image-16-9.jpg", class: "admin-iconics-table__img image-image" %>
                 <% end %>              
@@ -33,17 +31,14 @@
           <td>
             <div class="set-hide">
               <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
-              <%= category.name %>
+              <%= home_category.category.name %>
             </div>
-            <%= form_with model: Category, url: category_path(category), method: :patch, class: "set-form" do |form| %>
-              <%= form.text_field :name, value: category.name %>
+            <%= form_with model: HomeCategory, url: home_category_path(home_category), method: :patch, class: "set-form" do |form| %>
+              <%= form.select :category_id, @categories.map { |category| [category.name, category.id]}, value: home_category.category.name %>
               <%= form.submit "update", class: "set-submit" %>
             <% end %>          
           </td>
-          <td><%= category.products.count %></td>
           <td></td>
         </tr>
-      <% end %>
     </tbody>
 </table>
-
