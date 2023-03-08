@@ -1,0 +1,31 @@
+<%= form_with(model: collection) do |form| %>
+  <% if collection.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(collection.errors.count, "error") %> prohibited this collection from being saved:</h2>
+
+      <ul>
+        <% collection.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <% if collection.collectionImage.attached? %>
+      <%= image_tag collection.collectionImage, class: "admin-iconics-table__img image-image" %>
+    <% else %>
+      <%= image_tag "no-product-image-16-9.jpg", class: "admin-iconics-table__img image-image" %>
+    <% end %>  
+    <%= form.file_field :collectionImage, accept: "image/jpeg,image/png" %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

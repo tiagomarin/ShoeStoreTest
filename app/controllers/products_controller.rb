@@ -3,18 +3,31 @@ class ProductsController < ApplicationController
   include FilterProducts
   before_action :authenticate_user!, only: %i[new edit create update destroy]
   before_action :set_product, only: %i[show edit update]
-  before_action :set_brands, only: %i[new edit create admin_products]
-  before_action :set_colors, only: %i[index new edit create admin_products]
+  before_action :set_brands, only: %i[new edit create admin_products admin_archived]
+  before_action :set_colors, only: %i[index new edit create admin_products admin_archived]
+  before_action :set_sizes, only: %i[index show new edit create admin_products admin_archived]
+  before_action :set_genders, only: %i[index new edit create admin_products admin_archived]
+  before_action :set_collections, only: %i[index new edit create admin_products admin_archived]
   before_action :set_categories, only: %i[new edit create]
   before_action :set_product_categories, only: %i[show update]
 
   def admin_products
-     @products = Product.all.page(params[:page]).order(id: :asc)
+     @products = Product.where(archived: false).all.page(params[:page]).order(id: :asc).per(20)
 
     if turbo_frame_request?
       render partial: 'products', locals: { products: @products }
     else
       render :admin_products
+    end
+  end
+
+  def admin_archived
+    @products = Product.where(archived: true).all.page(params[:page]).order(id: :asc).per(20)
+
+    if turbo_frame_request?
+      render partial: 'products', locals: { products: @products }
+    else
+      render :admin_archived
     end
   end
   
@@ -29,9 +42,12 @@ class ProductsController < ApplicationController
 
     # when user search for something in search bar
     @products = search_products()
-    @products = remove_duplicates(@products)
     @products = apply_filters(@products)
-    @products = sort_products(@products)
+    @products = remove_duplicates(@products)
+    @products = Kaminari.paginate_array(sort_products(@products)).page(params[:page]).per(18)
+    
+    # send info to the view with filters that are applied so buttons to remove filter will be displayed
+    @size_filters = session[:size_filters].split if session[:size_filters].present?    
 
     if turbo_frame_request?
       render partial: 'products', locals: { products: @products }
@@ -103,6 +119,18 @@ class ProductsController < ApplicationController
     @brands = Brand.all
   end
 
+  def set_sizes
+    @sizes = Size.all
+  end
+
+  def set_genders
+    @genders = Gender.all
+  end
+
+  def set_collections
+    @collections = Collection.all
+  end
+
   def set_categories
     @categories = Category.all
   end
@@ -117,7 +145,8 @@ class ProductsController < ApplicationController
 
   def filter_size(products, sizes)
     filtered = []
-    products_by_size = Product.where(size: sizes)
+    size_ids = Size.where(number: sizes).pluck(:id)
+    products_by_size = Product.where(size_id: size_ids)
     products.each do |product|
       filtered << product if products_by_size.include?(product)
     end
@@ -175,8 +204,8 @@ class ProductsController < ApplicationController
   def product_params
     params
       .require(:product)
-      .permit(:name, :price, :description, :size, :gender,
-              :brand_id, :color_id, :discount, :quantity, :image1, :image2, :image3, :image4, :image5, :iconicImage, category_ids: [])
+      .permit(:archived, :name, :price, :description,
+              :brand_id, :color_id, :size_id, :gender_id, :collection_id, :archived, :discount, :quantity, :image1, :image2, :image3, :image4, :image5, :iconicImage, :collectionImage, category_ids: [])
       .with_defaults(discount: 0)
   end
 end

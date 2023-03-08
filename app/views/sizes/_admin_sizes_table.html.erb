@@ -1,0 +1,28 @@
+<table>
+    <thead>
+        <th>ID</th>
+        <th>SIZE</th>
+        <th>PRODUCTS</th>
+        <th>ACTIONS</th>
+    </thead>
+
+    <tbody>
+      <% sizes.each do |size| %>
+        <tr>
+          <td><%= size.id %></td>
+          <td>
+            <div class="set-hide">
+              <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
+              <%= size.number %>
+            </div>
+            <%= form_with model: Size, url: size_path(size), method: :patch, class: "set-form" do |form| %>
+              <%= form.number_field :number, step: 0.5, min: 0, value: size.number %>
+              <%= form.submit "update", class: "set-submit" %>
+            <% end %>                   
+          </td>
+          <td><%= size.products.count %></td>
+          <td></td>
+        </tr>
+      <% end %>
+    </tbody>
+</table>

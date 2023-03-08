@@ -1,0 +1,5 @@
+<div class="admin-sizes-container">
+  <%= link_to "New Size", new_size_path(), id:"admin-sizes-container__new-size-button" %>
+
+  <%= render "admin_sizes_table", sizes: @sizes %>
+</div>

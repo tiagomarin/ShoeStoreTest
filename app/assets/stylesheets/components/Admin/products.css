@@ -6,7 +6,6 @@
   width: 100%;
   padding: var(--padding-1);
   gap: 1rem;
-  align-items: flex-end;
 }
 
 #admin-products-container__new-product-button {
@@ -15,17 +14,19 @@
   border: none;
   padding: 0.5rem 1rem;
   font-weight: 500;
-  font-size: var(--font-size-xs);
-  border-radius: var(--border-radius-6);
+  font-size: var(--font-size-xl);
   cursor: pointer;
   text-decoration: none;
   width: fit-content;
   display: block;
+  position: fixed;
+  bottom: 1rem;
+  right: 1.5rem;
+  transition: 0.25s;
 }
 
 #admin-products-container__new-product-button:hover {
-  background-color: var(--color-background-2);
-  color: var(--color-background-6);
+  background-color: #4fc3a1;
 }
 
 .admin-products-table__img {
@@ -37,13 +38,14 @@
   height: 1rem;
 }
 
-#admin-products-table__delete-product-button {
+.admin-products-table__delete-product-button {
   border: none;
   background-color: transparent;
+  cursor: pointer;
 }
 
 /* POP UP */
-#admin-products-table__delete-product-popup-wrap {
+.admin-products-table__delete-product-popup-wrap {
   position: fixed;
   top: 0;
   left: 0;
@@ -56,11 +58,11 @@
   align-items: center;
 }
 
-#admin-products-table__delete-product-popup-wrap.show {
+.admin-products-table__delete-product-popup-wrap.show {
   display: flex;
 }
 
-#admin-products-table__delete-product-popup {
+.admin-products-table__delete-product-popup {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -69,10 +71,10 @@
   gap: 1rem;
   background-color: white;
   padding: var(--padding-3) var(--padding-2) var(--padding-2) var(--padding-2);
-  border-radius: var(--border-radius-5);
+  border-radius: var(--border-radius-3);
 }
 
-#admin-products-table__delete-product-popup-close {
+.admin-products-table__delete-product-popup-close {
   position: absolute;
   top: var(--space-m);
   right: var(--padding-2);
@@ -81,8 +83,23 @@
   background: none;
 }
 
-#admin-products-table__delete-product-popup-close-icon {
+.admin-products-table__delete-product-popup-close-icon {
   height: var(--font-size-xxs);
+}
+
+.admin-products-table__confirm-delete-button {
+  cursor: pointer;
+  background-color: var(--color-background-6);
+  color: var(--color-background-1);
+  padding: var(--padding-1);
+  border-radius: var(--border-radius-3);
+  border: none;
+  transition: 0.25s;
+}
+
+.admin-products-table__confirm-delete-button:hover {
+  background-color: var(--color-background-2);
+  color: var(--color-background-6);
 }
 
 @media (min-width: 768px) {

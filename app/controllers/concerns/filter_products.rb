@@ -62,16 +62,17 @@ module FilterProducts
       @products = []
       # add all results from database search to @products without duplicates
       queries.each do |query|
-        @products |= Product.where('lower(name) LIKE ?', "%#{query}%")
-        @products |= Product.where(size: query.to_f)
-        @products |= Product.where('lower(description) LIKE ?', "%#{query}%")
-        @products |= Product.where('lower(gender) LIKE ?', "%#{query}%")
-        @products |= Product.joins(:brand).where('lower(brands.name) LIKE ?', "%#{query}%")
-        @products |= Product.joins(:color).where('lower(colors.name) LIKE ?', "%#{query}%")
-        @products |= Product.joins(:category).where('lower(categories.name) LIKE ?', "%#{query}%")
+        @products |= Product.where(archived: false).where('lower(name) LIKE ?', "%#{query}%")
+        @products |= Product.where(archived: false).where('lower(description) LIKE ?', "%#{query}%")
+        @products |= Product.where(archived: false).joins(:brand).where('lower(brands.name) LIKE ?', "%#{query}%")
+        @products |= Product.where(archived: false).joins(:color).where('lower(colors.name) LIKE ?', "%#{query}%")
+        @products |= Product.where(archived: false).joins(:gender).where('lower(genders.name) LIKE ?', "%#{query}%")
+        @products |= Product.where(archived: false).joins(:size).where('sizes.number = ?', query.to_f)
+        @products |= Product.where(archived: false).joins(:collection).where('lower(collections.name) LIKE ?', "%#{query}%")
+        @products |= Product.where(archived: false).joins(:category).where('lower(categories.name) LIKE ?', "%#{query}%")
       end
     else
-      @products = Product.all
+      @products = Product.where(archived: false)
     end
     @products
   end
@@ -133,7 +134,7 @@ module FilterProducts
   # ------------------ Apply Filters ------------------
   def apply_filters(products)
     if session[:size_filters].present? && session[:size_filters].length.positive?
-      products = filter_size(products, session[:size_filters].split.map(&:to_f))
+      products = filter_size(products, session[:size_filters].split)
     end
 
     if session[:color_filters].present? && session[:color_filters].length.positive?

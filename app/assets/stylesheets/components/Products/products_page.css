@@ -1,5 +1,6 @@
 .products-container {
   position: relative;
+  padding: 1rem;
 }
 
 h1 {
@@ -16,7 +17,6 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 1rem;
 }
 
 .products-container__header-options {
@@ -109,7 +109,6 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: var(--space-m);
-  padding: 1rem;
 }
 
 .products-container__filters.filters_active {
@@ -144,6 +143,7 @@ h1 {
 .products-container__product-card img {
   width: 100%;
   aspect-ratio: 1/1;
+  object-fit: cover;
 }
 
 .products-container__product-card-img span {
@@ -191,6 +191,11 @@ h1 {
 }
 
 @media (min-width: 768px) {
+  .products-container {
+    padding: 3rem;
+    padding-top: 0;
+  }
+
   h1 {
     display: block;
   }

@@ -1,0 +1,5 @@
+<div class="admin-genders-container">
+  <%= link_to "New Gender", new_gender_path(), id:"admin-genders-container__new-gender-button" %>
+
+  <%= render "admin_genders_table", genders: @genders %>
+</div>

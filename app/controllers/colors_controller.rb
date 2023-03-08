@@ -1,17 +1,9 @@
 class ColorsController < ApplicationController
-  before_action :set_color, only: %i[show edit update destroy]
+  before_action :set_color, only: %i[edit update destroy]
 
   def admin_colors
     @colors = Color.all.order(id: :asc)
   end
-
-  # GET /colors or /colors.json
-  def index
-    @colors = Color.all
-  end
-
-  # GET /colors/1 or /colors/1.json
-  def show; end
 
   # GET /colors/new
   def new

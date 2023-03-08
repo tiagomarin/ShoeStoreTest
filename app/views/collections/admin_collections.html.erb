@@ -1,0 +1,5 @@
+<div class="admin-collections-container">
+  <%= link_to "New Collection", new_collection_path(), id:"admin-collections-container__new-collection-button" %>
+
+  <%= render "admin_collections_table", collections: @collections %>
+</div>

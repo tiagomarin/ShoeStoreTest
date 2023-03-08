@@ -95,6 +95,7 @@
   background-color: var(--color-background-4);
   width: 250px;
   aspect-ratio: 1 / 1;
+  object-fit: cover;
 }
 
 #new-arrivals-container__price {
@@ -356,10 +357,14 @@
 
 .decoration-images-container__image {
   width: 100%;
-  height: 6rem;
+  height: 4rem;
   background-attachment: fixed;
   background-size: cover;
-  box-shadow: inset 0 0 25px var(--color-background-6);
+  background-position: center;
+  box-shadow:
+    inset 0 0 5px var(--color-background-6),
+    inset 0 0 25px var(--color-background-6),
+    inset 0 0 50px var(--color-background-6);
 }
 
 /* ====================================== */

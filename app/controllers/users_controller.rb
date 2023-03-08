@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def admin_users
-    @users = User.all.order(id: :asc)
+    @users = User.all.page(params[:page]).order(id: :asc)
   end
 
   # GET /users or /users.json

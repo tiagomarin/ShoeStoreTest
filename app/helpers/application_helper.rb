@@ -9,7 +9,7 @@ module ApplicationHelper
   end
 
   def admin_path
-    current_page?(admin_products_path) ||
+      current_page?(admin_products_path) ||
       current_page?(admin_categories_path) ||
       current_page?(admin_brands_path) ||
       current_page?(admin_promo_codes_path) ||
@@ -17,6 +17,11 @@ module ApplicationHelper
       current_page?(admin_users_path) ||
       current_page?(admin_orders_path) ||
       current_page?(admin_decorations_path) ||
-      current_page?(admin_colors_path)
+      current_page?(admin_colors_path) ||
+      current_page?(admin_sizes_path) ||
+      current_page?(admin_genders_path) ||
+      current_page?(admin_archived_path) ||
+      current_page?(admin_collections_path) ||
+      current_page?(admin_collection_home_path)
   end
 end
