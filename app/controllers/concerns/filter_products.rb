@@ -23,6 +23,13 @@ module FilterProducts
         session[:size_filters] += " #{params[:size_filter]}"
       end
     end
+    if params[:gender_filter].present?
+      if session[:gender_filters].nil? || session[:gender_filters].empty?
+        session[:gender_filters] = params[:gender_filter].downcase
+      elsif !session[:gender_filters].include?(params[:gender_filter].downcase)
+        session[:gender_filters] += " #{params[:gender_filter].downcase}"
+      end
+    end
     if params[:color_filter].present?
       if session[:color_filters].nil? || session[:color_filters].empty?
         session[:color_filters] = params[:color_filter].downcase
