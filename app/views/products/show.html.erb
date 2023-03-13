@@ -33,7 +33,7 @@
 
 
   <div class="product-show-container__side">
-    <h1><%= @product.name %></h1>
+    <h1 class="products-show-container__product-name"><%= @product.name %></h1>
     <% if @product_categories %>
       <ul class="product-show-container__categories">
         <li><%= @product.gender.name %></li>
@@ -44,45 +44,90 @@
         <% end %>
       </ul>
     <% end %>
-      <p>
-        <strong>Select size</strong>
-        <%# show option of sizes%>
-        <ul class="sizes-available">
-          <% sizes_available = sizes_available(@product).map(&:size).map(&:number) %>
-            <% @sizes.each do |size| %>
-              <% if sizes_available.include?(size.number) %>
-                <li class="size-available"><%= size.number %></li>
-              <% else %>
-                <li><%= size.number %></li>
-              <% end %>
+
+    <p><%= @product.description %></p>
+
+    <div>
+      <strong>Select size</strong>
+      <%# show option of sizes%>
+      <ul class="products-show-container__sizes">
+        <% sizes_available = sizes_available(@product).map(&:size).map(&:number) %>
+          <% @sizes.each do |size| %>
+            <% if sizes_available.include?(size.number) %>
+              <li class="products-show-container__size-available"><%= size.number %></li>
+            <% else %>
+              <li><%= size.number %></li>
             <% end %>
-        </ul>
-      </p>
-      
-      
-    
-    
-      <%= form_with model: OrderItem, url: user_order_order_items_path(@order, current_user) do |form| %>
-        <%= form.hidden_field :name, value: @product.name %>
-        <%= form.hidden_field :color, value: @product.color %>
-        <%= form.hidden_field :size %>
+          <% end %>
+      </ul>
+    </div>
 
-            
+      
+
+      <%# change quantity %>
+      <%# <div>
+        <strong>Quantity</strong>
         <div>
-          <%= form.label :quantity, style: "display: block" %>
-          <%= form.number_field :quantity %>
+          <button 
+            type="button"
+            id="products-show-container__quantity-btn-minus"
+            class="products-show-container__quantity-btn"
+          >
+            -
+          </button>
+          <input type="number" class="products-show-container__quantity-input" value="1">
+          <button 
+            type="button"
+            id="products-show-container__quantity-btn-plus"
+            class="products-show-container__quantity-btn"
+          >
+            +
+          </button>
         </div>
+      </div> %>
 
-        <div>
-          <% if current_user %>
-            <%= form.submit "Add to cart", id:"add-to-cart-btn-unlogged", class:"products-show-container__add-to-cart-btn" %>
-          <% else %>
-            <button type="button" class="products-show-container__add-to-cart-btn">"Add to cart"</button>
+      <% if current_user %>
+        <%= form_with model: OrderItem, url: user_order_order_items_path(@order, current_user) do |form| %>
+          <%= form.hidden_field :name, value: @product.name %>
+          <%= form.hidden_field :color, value: @product.color.name %>
+          <%= form.hidden_field :size %>
+          <%= form.hidden_field :quantity, value: 1%>
+          <%= form.submit "Add to cart", class:"products-show-container__add-to-cart-btn" %>
+        <% end %>
+      <% else %>
+        <button type="button" id="add-to-cart-btn-unlogged" class="products-show-container__add-to-cart-btn">"Add to cart"</button>
+      <% end %>
+
+      <% if current_user %>
+        <% current_user.favorite_products.include?(@product) ? 
+          unfavorite_button_class = "show" :
+          unfavorite_button_class = ""
+        %>
+        <% current_user.favorite_products.include?(@product) ? 
+          favorite_button_class = "" :
+          favorite_button_class = "show"
+        %>
+
+        <%# button to remove from favorites will be hidden if product not in favorites %>
+        <div id="products-show-container__unfavorite-div" class="<%= unfavorite_button_class %>" >
+          <%= button_to user_favorite_path(current_user, @product.id), method: :delete, id:"remove-from-favorites-form", class:"products-show-container__unfavorite-product-button" do %>
+            <span>Unfavorite</span>
+            <%= image_tag "icons/heart2", alt: "favorite", class: "new-arrivals-container-icon" %>
           <% end %>
         </div>
+
+        <%# button to add to favorites will be hidden if product is already favorited %>
+        <div id="products-show-container__favorite-div" class="<%= favorite_button_class %>">
+          <%= button_to user_favorites_path(current_user, product_id: @product.id), method: :post, id:"add-to-favorites-form", class:"products-show-container__favorite-product-button" do %>
+            <span>Favorite</span>
+            <%= image_tag "icons/heart", alt: "favorite", class: "products-show-container__heart-icon" %>
+          <% end %>
+        </div>
+      <% else %>
+        <%# button in case user is not logged in %>
+        <button type="button" id="add-to-favorites-btn-unlogged" class="products-show-container__add-to-cart-btn">"Favorite"</button> 
       <% end %>
   </div>  
 </div>
-
 
 <%= link_to "Back to products", products_path %>
