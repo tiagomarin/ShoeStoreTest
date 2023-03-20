@@ -1,0 +1,47 @@
+<table>
+    <thead>
+        <th>ID</th>
+        <th>TITLE</th>
+        <th>DISCOUNT</th>
+        <th>APPLICABLE TO</th>
+        <th>ACTIONS</th>
+    </thead>
+
+    <tbody>
+      <% promo_codes.each do |promo_code| %>
+        <tr>
+          <td><%= promo_code.id %></td>
+          <td><%= promo_code.title %></td>
+          <td><%= promo_code.value.to_i %>%</td>
+          <td>
+            <% if promo_codes.length > 0 %>
+              <button class="admin-products-table__delete-product-button" type="button">
+                <%= image_tag "icons/edit", class:"admin-products-table__delete-icon" %>
+              </button>
+            <% else %>
+              <button class="admin-products-table__delete-product-button" type="button">
+                empty
+              </button>
+            <% end %>
+              
+            <%# modals PopUps %>
+            <div class="admin-products-table__delete-product-popup-wrap">
+              <div class="admin-products-table__delete-product-popup">
+                <button class="admin-products-table__delete-product-popup-close">
+                  <%= image_tag "icons/x", class: "admin-products-table__delete-product-popup-close-icon" %>
+                </button>
+
+                <div>
+                  <% promo_codes.each do |promo_code| %>
+                    <p><%= promo_code.title %></p>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+</table>

@@ -1,0 +1,43 @@
+<table>
+    <thead>
+        <th>ID</th>
+        <th>IMAGE</th>
+        <th>USER</th>
+        <th>USER ID</th>
+        <th>STATUS</th>
+        <th>DATE</th>
+        <th>PRODUCTS</th>
+        <th>TOTAL PRICE</th>
+        <th>ACTIONS</th>
+    </thead>
+
+    <tbody>
+      <% orders.each do |order| %>
+        <tr>
+          <td><%= order.id %></td>
+          <td>
+            <% if order.user.avatar.attached? %>
+                <%= image_tag order.user.avatar, class: "admin-users-table__img" %>
+            <% else %>
+                <%= image_tag "no-image-user.png", class: "admin-users-table__img" %>
+            <% end %>
+          </td>
+          <td><%= order.user.name %></td>
+          <td><%= order.user.id %></td>
+          <td><%= order.status %></td>
+          <td><%= order.date %></td>
+          <% if order.order_items.length > 0 %>
+          <td>
+            <% order.order_items.each do |item| %>
+              <%= item.product.name %>
+            <% end %>
+          </td>
+          <% else %>
+          <td>empty</td>
+          <% end%>
+          <td><%= number_to_currency(order.order_items.sum(:total_price)) %></td>
+          <td></td>
+        </tr>
+      <% end %>
+    </tbody>
+</table>

@@ -1,0 +1,28 @@
+<table>
+    <thead>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>PRODUCTS</th>
+        <th>ACTIONS</th>
+    </thead>
+
+    <tbody>
+      <% brands.each do |brand| %>
+        <tr>
+          <td><%= brand.id %></td>
+          <td>
+            <div class="set-hide">
+              <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
+              <%= brand.name %>
+            </div>
+            <%= form_with model: Brand, url: brand_path(brand), method: :patch, class: "set-form" do |form| %>
+              <%= form.text_field :name, value: brand.name %>
+              <%= form.submit "update", class: "set-submit" %>
+            <% end %>          
+          </td>
+          <td><%= brand.products.count %></td>
+          <td></td>
+        </tr>
+      <% end %>
+    </tbody>
+</table>

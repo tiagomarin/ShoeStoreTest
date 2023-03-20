@@ -1,0 +1,102 @@
+<%= form_with(model: product) do |form| %>
+  <% if product.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+        <% product.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :price, style: "display: block" %>
+    <%= form.number_field :price %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div>
+    <%= form.label :size, style: "display: block" %>
+    <%= form.select :size, @sizes %>
+  </div>
+
+  <div>
+    <%= form.label :color, style: "display: block" %>
+    <%= form.select :color, @colors %>
+  </div>
+
+  <div>
+    <%= form.label :gender, style: "display: block" %>
+    <%= form.select :gender, ["male", "female", "other"] %>
+  </div>
+
+  <div>
+    <%= form.label :brand, style: "display: block" %>
+    <%= form.select :brand_id, @brands.map { |brand| [brand.name, brand.id]} %>
+  </div>
+  
+  <div>
+    <%= form.label :discount, style: "display: block" %>
+    <%= form.number_field :discount, value: 0 %>
+  </div>
+
+  <div>
+    <%= form.label :category_ids, style: "display: block" %>
+    <%= form.collection_check_boxes(:category_ids, @categories, :id, :name, include_hidden: false) %>
+  </div>
+
+  <div>
+    <%= form.label :quantity, style: "display: block" %>
+    <%= form.number_field :quantity %>
+  </div>
+
+  <div>
+    <%= form.label :image1, style: "display: block" %>
+    <%= form.file_field :image1 %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<button class="open-modal">New Brand</button>
+<button class="open-modal">New Category</button>
+
+<%#  Modal for adding a new Brand %>
+  <div id="brand-modal" style="position: relative; margin: 20px; padding: 20px; background-color: grey">
+    <button class="close-modal" style="position: absolute; top:10px; right: 10px; padding: 6px">X</button>
+    <p>Testing new Category</p>
+    <%= render partial: "categories/form" %>
+    <h3>Categories available</h3>
+    <ul>
+      <% @categories.each do |category| %>
+        <li><%= category.name %></li>
+      <% end %>
+    </ul>
+  </div>
+
+<%#  Modal for adding a new Category %>
+  <div id="category-modal" style="position: relative; margin: 20px; padding: 20px; background-color: grey">
+    <button class="close-modal" style="position: absolute; top:10px; right: 10px; padding: 6px">X</button>
+    <p>Testing new Brand</p>
+    <%= render partial: "brands/form" %>
+    <h3>Brands available</h3>
+    <ul>
+      <% @brands.each do |brand| %>
+        <li><%= brand.name %></li>
+      <% end %>
+    </ul>
+  </div>
+

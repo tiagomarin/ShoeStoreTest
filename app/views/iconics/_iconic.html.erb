@@ -1,0 +1,12 @@
+<div id="iconic-products-container__card">
+  <% if iconic.product.iconicImage.attached? %>
+    <%= link_to product_path(iconic.product), id: "iconic-products-container__link" do %>
+      <%= image_tag iconic.product.iconicImage, id: "iconic-products-container__img", alt: "iconic-product" %>
+    <% end %>
+  <% else %>
+    <%= link_to product_path(iconic.product), id: "iconic-products-container__link" do %>
+      <%= image_tag "no-product-image.png", id: "iconic-products-container__img", alt: "iconic-product" %>
+    <% end %>
+  <% end %>
+  <p id="iconic-products-container__text"><%= iconic.product.name %></p>
+</div>

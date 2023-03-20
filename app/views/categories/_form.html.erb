@@ -1,0 +1,10 @@
+<%= form_with model: Category do |category_form| %>
+  <div>
+    <%= category_form.label :name, style: "display: block" %>
+    <%= category_form.text_field :name, value: "" %>
+  </div>
+
+  <div>
+    <%= category_form.submit "Add Category" %>
+  </div>
+<% end %>

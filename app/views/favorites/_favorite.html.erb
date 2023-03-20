@@ -1,0 +1,20 @@
+<div id="favorites-container__card">
+  <% if favorite.product.image1.attached? %>
+    <%= image_tag favorite.product.image1, id: "favorites-container__image"%>
+  <% else %>
+    <%= image_tag "no-product-image.png", id: "favorites-container__image" %>
+  <% end %>
+  <div id="favorites-container__information">
+
+    <h3><%= favorite.product.name %></h3>
+    <div>
+      <p><%= favorite.product.description %></p>
+      <em>
+        <p>- <%= favorite.product.brand.name.capitalize %></p>
+      </em>
+    </div>
+
+
+    <%= link_to "Check it out", product_path(favorite.product), id: "favorites-container__show-button" %>
+  </div>
+</div>

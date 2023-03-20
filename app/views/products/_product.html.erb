@@ -1,0 +1,114 @@
+  <div id="<%= dom_id product %>" class="products-container__product-card">
+    <% product.discount > 0 ? priceClass = "products-container__product-card-price discounted" : priceClass = "products-container__product-card-price" %>
+
+    <% if product.image1.attached? %>
+      <div class=products-container__product-card-img>
+        <%= image_tag product.image1 %>
+        <span>
+          <p class="<%= priceClass %>">
+            <%= number_to_currency(product.price, precision: 0) %>
+          </p>
+          <% if product.discount > 0 %>
+            <p class="products-container__product-card-price with-discount">
+              <%= number_to_currency(product.price * (1 - (product.discount.to_f/100)), precision: 0) %>
+            </p>
+          <% end %>
+        </span>
+      </div>
+    <% else %>
+      <div class=products-container__product-card-img>
+          <%= image_tag "no-product-image.png"%>
+          <span>
+            <p class="<%= priceClass %>">
+              <%= number_to_currency(product.price, precision: 0) %>
+            </p>
+            <% if product.discount > 0 %>
+              <p class="products-container__product-card-price with-discount">
+                <%= number_to_currency((product.price * (1 - (product.discount.to_f/100))), precision: 0) %>
+              </p>
+            <% end %>
+          </span>
+        </div>
+    <% end %>
+
+    <p><%= product.name %></p>
+    <p><%= product.brand.name %></p>
+    <strong>SIZE: </strong>
+    <p><%= product.size.number %></p>
+    <p> colors: <%= same_product_different_colors(product, @products).length + 1  %> </p>
+
+    <div class="products-container__color-carrousel">
+      <% same_product_different_colors(product, @products).map do |p|%>
+        <div id="products-container__color-carrousel-options">
+          <% if p.image1.attached? %>
+            <%= link_to(p) do %>
+              <%= image_tag p.image1, class: "products-container__color-img", alt: "put name and color of product"%>
+            <% end %>  
+          <% else %>
+            <%= link_to(p) do %>
+              <%= image_tag "no-product-image.png", class: "products-container__color-img", alt: "put name and color of product"%>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <% if @product_categories %>
+      <ul>
+        <strong>Categories:</strong>
+        <% @product_categories.each do |category|  %>
+          <li><%= category.name %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    
+    <% if products_show %>
+      <p>
+        <strong>Sizes sizes_available:</strong>
+        <%# show option of sizes%>
+        <ul class="sizes-available">
+          <% sizes_available = sizes_available(product).map(&:size) %>
+            <% @sizes.each do |size| %>
+            <% if sizes_available.include?(size) %>
+              <li class="size-available"><%= size.number %></li>
+            <% else %>
+              <li><%= size.number %></li>
+            <% end %>
+
+          <% end %>
+        </ul>
+      </p>
+      <strong>Color:</strong>
+      <p><%= product.color.name %></p>
+      <p><strong>gender:</strong><%= product.gender.name %></p>
+
+    <% end %>
+    
+    <% if current_user && products_show %>
+      <%= form_with model: OrderItem, url: user_order_order_items_path(@order, current_user) do |form| %>
+        <div>
+          <%= form.hidden_field :name, value: product.name %>
+        </div>
+
+        <div>
+          <%= form.hidden_field :color, value: product.color %>
+        </div>
+            
+        <div>
+          <%= form.label :quantity, style: "display: block" %>
+          <%= form.number_field :quantity %>
+        </div>
+            
+        <div>
+          <%= form.label :size, style: "display: block" %>
+          <%= form.select :size, sizes_available(product).map(&:size) %>
+        </div>
+          
+        <div>
+          <%= form.submit "Add to cart" %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <%= link_to "Show this product", product %>
+  </div>

@@ -1,0 +1,44 @@
+<table>
+    <thead>
+        <th>ID</th>
+        <th>IMAGE</th>
+        <th>COLLECTION</th>
+        <th>ACTIONS</th>
+    </thead>
+
+    <tbody>
+        <tr>
+          <td><%= home_collection.id %></td>
+          <td>
+            <% if current_page?(admin_collection_home_path) %>
+              <% if home_collection.collection.collectionImage.attached? %>
+                <%= image_tag home_collection.collection.collectionImage, class: "admin-iconics-table__img image-image" %>
+              <% else %>
+                <%= image_tag "no-product-image-16-9.jpg", class: "admin-iconics-table__img image-image" %>
+              <% end %>
+            <% else %>
+              <%= form_with(model: HomeCollection, url: home_collection_path(home_collection), method: :patch) do |form| %>
+                <% if home_collection.collection.collectionImage.attached? %>
+                  <%= image_tag home_collection.collection.collectionImage, class: "admin-iconics-table__img image-image" %>
+                <% else %>
+                  <%= image_tag "no-product-image-16-9.jpg", class: "admin-iconics-table__img image-image" %>
+                <% end %>              
+                <%= form.file_field :collectionImage, accept: "image/jpeg,image/png", options: { button: 'Choose file...' } %>
+                <%= form.submit "✔️" %>
+              <% end %>
+            <% end %>
+          </td>
+          <td>
+            <div class="set-hide">
+              <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
+              <%= home_collection.collection.name %>
+            </div>
+            <%= form_with model: HomeCollection, url: home_collection_path(home_collection), method: :patch, class: "set-form" do |form| %>
+              <%= form.select :collection_id, @collections.map { |collection| [collection.name, collection.id]}, value: home_collection.collection.name %>
+              <%= form.submit "update", class: "set-submit" %>
+            <% end %>          
+          </td>
+          <td></td>
+        </tr>
+    </tbody>
+</table>

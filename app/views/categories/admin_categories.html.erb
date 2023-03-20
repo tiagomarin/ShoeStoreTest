@@ -1,0 +1,5 @@
+<div class="admin-categories-container">
+  <%= link_to "New Category", new_category_path(), id:"admin-categories-container__new-category-button" %>
+
+  <%= render "admin_categories_table", categories: @categories %>
+</div>

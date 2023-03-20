@@ -1,0 +1,63 @@
+<%# DESKTOP ONLY HEADER %>
+
+<header id="header-container">
+  <div id="header-container__icon-text">
+    e-commerce
+  </div>
+  <ul id="header-container__ul">
+    <% if current_user %>
+  <li class="header-container__links"><%= link_to "Hello, #{current_user.name}", edit_user_path(current_user), class: "header-container__links", method: :patch %></li>
+    <% else %>
+    <li class="header-container__links">Anything</li>
+    <% end%>
+    <li></li>
+    <li class="header-container__links">Help</li>
+    <li></li>
+    <li><%= link_to "Meet Us", collaborators_path, class: "header-container__links" %></li>
+    <li></li>
+    <% if current_user %>
+    <li><%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "header-container__links" %></li>
+    <% else %>
+    <li><%= link_to "Sign in", new_user_session_path, class: "header-container__links" %></li>
+    <% end%>
+  </ul>
+</header>
+
+<%# MOBILE/DESKTOP NAV %>
+
+<nav id="nav-container">
+  <%= link_to "V&T", root_path, id: "nav-container__logo" %>
+  <ul id="nav-container__ul">
+    <li><%= link_to "Home", root_path %></li>
+    <li><%= link_to "Products", products_path %></li>
+    <% if current_user %>
+    <li><%= link_to "Orders", user_orders_path(current_user) %></li>
+    <% if current_user && current_user.role === "admin" %>
+    <li><%= link_to "Admin", admin_products_path %></li>
+    <% end %>
+    <% end %>
+  </ul>
+
+  <div id="nav-container__icon-text">
+    <%= form_with(url: products_path, method: :get, data: { turbo_frame: "products", turbo_action: "advance"}) do |form| %>
+      <%= form.text_field :query, placeholder: "Search product", id: "nav-container__search-bar" %>
+    <% end %>
+
+    <% if current_user %>
+      <%= link_to user_favorites_path(current_user), id: "nav-container__favorites" do %>
+        <%= image_tag "icons/heart", alt: "favorites", class: "nav-container-icon" %>
+      <% end %>
+    <% end %> 
+
+    <% if current_user %>
+      <%= link_to user_order_path(current_user, @order), id: "nav-container__shopping-cart" do %>
+        <%= image_tag "icons/shopping-cart", alt: "shopping-cart", class: "nav-container-icon" %>
+      <% end %>
+    <% end %> 
+  </div>
+  <div id="nav-container__hamburger-menu">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</nav>

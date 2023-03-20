@@ -1,0 +1,45 @@
+.pagination {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.pagination > * {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.page {
+  padding: 0.25rem;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.page.current {
+  background-color: #4fc3a1;
+  color: var(--color-background-1);
+  padding: 0.25rem;
+  border-radius: 5px;
+}
+
+.first,
+.prev,
+.next,
+.last {
+  background-color: #324960;
+  color: white;
+  padding: 0.25rem;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.page a,
+.first a,
+.prev a,
+.next a,
+.last a {
+  text-decoration: none;
+  color: white;
+}
+
+.page a {
+  color: black;
+}

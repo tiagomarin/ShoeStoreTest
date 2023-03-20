@@ -1,0 +1,35 @@
+<section id="headline-container">
+  <%= render "home/headlines" %>
+</section>
+
+<section id="new-arrivals-container">
+  <h2>New Arrivals</h2>
+  <%= render "home/new-arrivals" %>
+</section>
+
+<section id="main-categories-container">
+  <h2>Main Categories</h2>
+  <%= render "home/main-categories" %>
+</section>
+
+<section id="collection-container">
+  <h2>Software Developer Collection</h2>
+  <%= render "home/collection" %>
+</section>
+
+<section id="iconic-products-container">
+  <h2>Iconic Products</h2>
+  <div id="iconic-products-container__grid">
+    <%= render "iconics/iconic", iconic: @iconic1 %>
+    <%= render "iconics/iconic", iconic: @iconic2 %>
+    <%= render "iconics/iconic", iconic: @iconic3 %>
+  </div>
+</section>
+
+<section id="decoration-images-container">
+  <%= render "home/background-images" %>
+</section>
+
+<section id="email-container">
+  <%= render "home/email" %>
+</section>

@@ -1,0 +1,5 @@
+<div class="admin-colors-container">
+  <%= link_to "New Color", new_color_path(), id:"admin-colors-container__new-color-button" %>
+
+  <%= render "admin_colors_table", colors: @colors %>
+</div>

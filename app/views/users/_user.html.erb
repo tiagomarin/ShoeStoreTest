@@ -1,0 +1,14 @@
+<div id="<%= dom_id user %>">
+
+  <% if user.avatar.attached? %>
+    <%= image_tag user.avatar, width: "250px" %>
+  <% else %>
+    <%= image_tag "no-image-user.png" %>
+  <% end %>
+
+  <p>
+    <strong>Name:</strong>
+    <%= user.name %>
+  </p>
+
+</div>

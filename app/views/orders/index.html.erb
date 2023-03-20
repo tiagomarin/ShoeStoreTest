@@ -1,0 +1,11 @@
+<p style="color: green"><%= notice %></p>
+
+<section id="orders-container">
+  <h2>Orders history</h2>
+  <% @orders.each do |order| %>
+    <%= render order %>
+    <p>
+      <%= link_to "Show this order", user_order_path(current_user, order.id), class: "orders-container__show-button" %>
+    </p>
+  <% end %>
+</section>

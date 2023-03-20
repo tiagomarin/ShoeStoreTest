@@ -1,0 +1,100 @@
+<nav id="admin-nav-container">
+  <div>
+    <h3 id="admin-nav-container__logo">Dashboard</h3>
+    <ul id="admin-nav-container__ul">
+        <li class="admin-nav-container__li">
+          <%= link_to admin_products_path(), class: "admin-nav-container__link" do %>
+            <%= image_tag "icons/shoes.png", class:"admin-nav-container__link-icon"%>
+            <p>Products</p>
+          <% end %>
+
+          <ul class="admin-nav-container__li-ul">
+            <li>
+              <%= link_to admin_archived_path(), class: "admin-nav-container__link" do %>
+                <p>Archived</p>
+                <% end %>
+            </li>
+          </ul>
+        </li>
+        <li class="admin-nav-container__li">
+          <%= link_to admin_users_path(), class: "admin-nav-container__link" do %>
+            <%= image_tag "icons/users.png", class:"admin-nav-container__link-icon"%>
+            <p>Users</p>
+          <% end %>
+        </li>
+        <li class="admin-nav-container__li">
+          <%= link_to admin_orders_path(), class: "admin-nav-container__link" do %>
+            <%= image_tag "icons/shopping-cart.png", class:"admin-nav-container__link-icon"%>
+            <p>Orders</p>
+          <% end %>
+        </li>
+        <li class="admin-nav-container__li">
+          <%= link_to admin_categories_path(), class: "admin-nav-container__link" do %>
+            <%= image_tag "icons/categories.png", class:"admin-nav-container__link-icon"%>
+            <p>Categories</p>
+          <% end %>
+        </li>
+        <li class="admin-nav-container__li">
+          <%= link_to admin_brands_path(), class: "admin-nav-container__link" do %>
+            <%= image_tag "icons/brands.png", class:"admin-nav-container__link-icon"%>
+            <p>Brands</p>
+          <% end %>
+        </li>
+        <li class="admin-nav-container__li">
+          <%= link_to admin_colors_path(), class: "admin-nav-container__link" do %>
+            <%= image_tag "icons/brands.png", class:"admin-nav-container__link-icon"%>
+            <p>Colors</p>
+          <% end %>
+        </li>
+        <li class="admin-nav-container__li">
+          <%= link_to admin_sizes_path(), class: "admin-nav-container__link" do %>
+            <%= image_tag "icons/brands.png", class:"admin-nav-container__link-icon"%>
+            <p>Sizes</p>
+          <% end %>
+        </li>
+        <li class="admin-nav-container__li">
+          <%= link_to admin_genders_path(), class: "admin-nav-container__link" do %>
+            <%= image_tag "icons/brands.png", class:"admin-nav-container__link-icon"%>
+            <p>Genders</p>
+          <% end %>
+        </li>
+        <li class="admin-nav-container__li">
+          <%= link_to admin_promo_codes_path(), class: "admin-nav-container__link" do %>
+            <%= image_tag "icons/coupons.png", class:"admin-nav-container__link-icon" %>
+            <p>Coupons</p>
+          <% end %>
+        </li>
+        <li class="admin-nav-container__li">
+          <%= link_to admin_iconics_path(), class: "admin-nav-container__link" do %>
+            <%= image_tag "icons/iconics.png", class:"admin-nav-container__link-icon"%>
+            <p>Iconics</p>
+          <% end %>
+        </li>
+        <li class="admin-nav-container__li">
+          <%= link_to admin_decorations_path(), class: "admin-nav-container__link" do %>
+            <%= image_tag "icons/background.png", class:"admin-nav-container__link-icon"%>
+            <p>Decorations</p>
+          <% end %>
+        </li>
+        <li class="admin-nav-container__li">
+          <%= link_to admin_collections_path(), class: "admin-nav-container__link" do %>
+            <%= image_tag "icons/background.png", class:"admin-nav-container__link-icon"%>
+            <p>Collections</p>
+          <% end %>
+          <ul class="admin-nav-container__li-ul">
+            <li>
+              <%= link_to admin_collection_home_path(), class: "admin-nav-container__link" do %>
+                <p>Home</p>
+              <% end %>
+            </li>
+          </ul>
+        </li>
+    </ul>
+  </div>
+  <div>
+    <div id="admin-nav-container__hide">Hide</div>
+    <div id="admin-nav-container__show-store">
+      <%= link_to "Visit Store", root_path, id: "admin-nav-container__show-store-link" %>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,5 @@
+<div class="admin-promo-codes-container">
+  <%= link_to "New Promo Code", new_promo_code_path(), id:"admin-promo-codes-container__new-promo-code-button" %>
+
+  <%= render "admin_promo_codes_table", promo_codes: @promo_codes %>
+</div>

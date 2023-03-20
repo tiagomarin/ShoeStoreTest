@@ -1,0 +1,141 @@
+    <table>
+    <thead>
+        <th>ID</th>
+        <th>IMAGE</th>
+        <th>NAME</th>
+        <th>GENDER</th>
+        <th>SIZE</th>
+        <th>COLOR</th>
+        <th>BRAND</th>
+        <th>COLLECTION</th>
+        <th>QUANTITIY</th>
+        <th>PRICE</th>
+        <th>ACTIONS</th>
+    </thead>
+
+    <tbody>
+      <% products.each do |product| %>
+        <tr>
+          <td><%= product.id %></td>
+          <td>
+            <%= form_with(model: Product, url: product_path(product), method: :patch, id: "edit-user-container__form") do |form| %>
+              <%= image_tag product.image1, class: "admin-users-table__img" %>
+              <%= form.file_field :image1, accept: "image/jpeg,image/png", options: { button: 'Choose file...' } %>
+              <%= form.submit "✔️" %>
+            <% end %>
+          </td>
+          <td>
+            <div class="set-hide">
+              <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
+              <%= product.name %>
+            </div>
+            <%= form_with model: Product, url: product_path(product), method: :patch, class: "set-form" do |form| %>
+              <%= form.text_field :name, value: product.name %>
+              <%= form.submit "update", class: "set-submit" %>
+            <% end %>
+          </td>
+          <td>
+            <div class="set-hide">
+              <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
+              <%= product.gender.name.capitalize %>
+            </div>
+            <%= form_with model: Product, url: product_path(product), method: :patch, class: "set-form" do |form| %>
+              <%= form.select :gender_id, @genders.map { |gender| [gender.name, gender.id]}, value: product.gender.name %>
+              <%= form.submit "update", class: "set-submit" %>
+            <% end %>
+          </td>
+          <td>
+            <div class="set-hide">
+              <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
+              <%= product.size.number %>
+            </div>
+            <%= form_with model: Product, url: product_path(product), method: :patch, class: "set-form" do |form| %>
+              <%= form.select :size_id, @sizes.map { |size| [size.number, size.id]}, value: product.size.number %>
+              <%= form.submit "update", class: "set-submit" %>
+            <% end %>
+          </td>
+          <td>
+            <div class="set-hide">
+              <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
+              <%= product.color.name.capitalize %>
+            </div>
+            <%= form_with model: Product, url: product_path(product), method: :patch, class: "set-form" do |form| %>
+              <%= form.select :color_id, @colors.map { |color| [color.name, color.id]}, value: product.color.name %>
+              <%= form.submit "update", class: "set-submit" %>
+            <% end %>
+          </td>
+          <td>
+            <div class="set-hide">
+              <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
+              <%= product.brand.name.capitalize %>
+            </div>
+            <%= form_with model: Product, url: product_path(product), method: :patch, class: "set-form" do |form| %>
+              <%= form.select :brand_id, @brands.map { |brand| [brand.name, brand.id]}, value: product.brand.name %>
+              <%= form.submit "update", class: "set-submit" %>
+            <% end %>
+          </td>
+          <td>
+            <div class="set-hide">
+              <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
+              <%= product.collection.name.capitalize %>
+            </div>
+            <%= form_with model: Product, url: product_path(product), method: :patch, class: "set-form" do |form| %>
+              <%= form.select :collection_id, @collections.map { |collection| [collection.name, collection.id]}, value: product.collection.name %>
+              <%= form.submit "update", class: "set-submit" %>
+            <% end %>
+          </td>
+          <td>
+            <div class="set-hide">
+              <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
+              <%= product.quantity %>
+            </div>
+            <%= form_with model: Product, url: product_path(product), method: :patch, class: "set-form" do |form| %>
+              <%= form.number_field :quantity, value: product.quantity %>
+              <%= form.submit "update", class: "set-submit" %>
+            <% end %>
+          </td>
+          <td>
+            <div class="set-hide">
+              <%= number_to_currency(product.price) %>
+              <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
+            </div>
+           <%= form_with model: Product, url: product_path(product), method: :patch, class: "set-form" do |form| %>
+              <%= form.number_field :price, step: 0.01, min: 0, value: product.price %>
+              <%= form.submit "update", class: "set-submit" %>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to image_tag("icons/show", class: "admin-products-table__show-icon"), product, id:"admin-products-table__show-product-button" %>
+
+            <% product.archived ? icon = "icons/restore" : icon = "icons/trash"  %>
+            <button class="admin-products-table__delete-product-button" type="button">
+              <%= image_tag icon, class:"admin-products-table__delete-icon" %>
+            </button>
+              
+            <%# modals PopUps %>
+            <div class="admin-products-table__delete-product-popup-wrap">
+              <div class="admin-products-table__delete-product-popup">
+                <button class="admin-products-table__delete-product-popup-close">
+                  <%= image_tag "icons/x", class: "admin-products-table__delete-product-popup-close-icon" %>
+                </button>
+                <% if product.archived %>
+                  <p>Are you sure you want to restore this product?</p>
+                <% else %>
+                  <p>Are you sure you want to delete this product?</p>
+                  <p>You still have <%= product.quantity %> available in your stock</p>
+                <% end %>
+                <%= form_with model: Product, url: product_path(product), method: :patch do |form| %>
+                  <%= form.hidden_field :archived, value: !product.archived %>
+                  <% if product.archived %>
+                    <%= form.submit "Yes, restore it", class: "admin-products-table__confirm-delete-button" %>
+                  <% else %>
+                    <%= form.submit "Yes, delete it", class: "admin-products-table__confirm-delete-button" %>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+</table>

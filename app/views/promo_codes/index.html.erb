@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+
+<div id="coupons-container">
+  <h2>Promo codes</h2>
+  
+  <div id="coupons-container__grid">
+    <% @promo_codes.each do |promo_code| %>
+      <div id="coupons-container__card">
+        <%= render promo_code %>
+      </div>
+    <% end %>
+  </div>
+</div>

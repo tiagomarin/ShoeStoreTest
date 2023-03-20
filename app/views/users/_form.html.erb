@@ -1,0 +1,38 @@
+<%= form_with(model: user, id: "edit-user-container__form") do |form| %>
+  <% if user.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= image_tag user.avatar, id: "edit-user-container__avatar" %>
+    <%= form.file_field :avatar, accept: "image/jpeg,image/png" %>
+  </div>
+
+  <div>
+    <span>Role: </span><%= user.role %>
+  </div>
+
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name, placeholder: "user name" %>
+    <p><small>Your name may appear around GitHub where you contribute or are mentioned. You can remove it at any time.</small></p>
+  </div>
+
+  <div>
+    <%= form.label :address %>
+    <%= form.text_field :address, placeholder: "user address" %>
+    <p><small>Other users will see the time difference from their local time.</small></p>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

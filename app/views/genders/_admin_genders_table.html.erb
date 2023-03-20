@@ -1,0 +1,28 @@
+<table>
+    <thead>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>PRODUCTS</th>
+        <th>ACTIONS</th>
+    </thead>
+
+    <tbody>
+      <% genders.each do |gender| %>
+        <tr>
+          <td><%= gender.id %></td>
+          <td>
+            <div class="set-hide">
+              <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
+              <%= gender.name %>
+            </div>
+            <%= form_with model: gender, url: gender_path(gender), method: :patch, class: "set-form" do |form| %>
+              <%= form.text_field :name, value: gender.name %>
+              <%= form.submit "update", class: "set-submit" %>
+            <% end %>          
+          </td>
+          <td><%= gender.products.count %></td>
+          <td></td>
+        </tr>
+      <% end %>
+    </tbody>
+</table>

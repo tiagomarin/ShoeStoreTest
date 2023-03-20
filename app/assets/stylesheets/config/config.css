@@ -1,0 +1,142 @@
+@import url('https://fonts.cdnfonts.com/css/futura-next');
+@import url('https://fonts.cdnfonts.com/css/collegiateblackflf');
+
+/* ========== SCROLL BAR STYLES ========== */
+
+/* width */
+::-webkit-scrollbar {
+  width: 7.5px;
+  height: 0;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(rgb(38, 36, 36), rgb(62, 70, 76), rgb(38, 36, 36));
+  border-radius: 10px;
+}
+
+/* ========== VARIABLES ========== */
+
+:root {
+  /* Simple fonts */
+  --font-family-1: 'Lato', 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
+  --font-family-2: 'Futura Next', sans-serif;
+  --font-family-3: 'CollegiateBlackFLF', sans-serif;
+
+  /* Classical line heights */
+  --line-height-headers: 1.1;
+  --line-height-body: 1.5;
+
+  /* Classical and robust font sizes system */
+  --font-size-xxs: 0.625rem; /* 10px */
+  --font-size-xs: 0.75rem;   /* 12px */
+  --font-size-s: 0.875rem;   /* 14px */
+  --font-size-m: 1rem;       /* 16px */
+  --font-size-l: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;   /* 20px */
+  --font-size-xxl: 1.5rem;   /* 24px */
+  --font-size-xxxl: 2rem;    /* 32px */
+  --font-size-xxxxl: 2.5rem; /* 40px */
+
+  /* Classical and robust spacing system */
+  --space-xxxs: 0.25rem; /* 4px */
+  --space-xxs: 0.375rem; /* 6px */
+  --space-xs: 0.5rem;    /* 8px */
+  --space-s: 0.75rem;    /* 12px */
+  --space-m: 1rem;       /* 16px */
+  --space-l: 1.5rem;     /* 24px */
+  --space-xl: 2rem;      /* 32px */
+  --space-xxl: 2.5rem;   /* 40px */
+  --space-xxxl: 3rem;    /* 48px */
+  --space-xxxxl: 4rem;   /* 64px */
+
+  /* Background colors */
+  --color-background-1: rgb(255, 255, 255);
+  --color-background-2: rgb(230, 226, 243);
+  --color-background-3: rgb(153, 153, 153);
+  --color-background-4: rgb(102, 102, 102);
+  --color-background-5: rgb(36, 43, 48);
+  --color-background-6: rgb(42, 42, 42);
+
+  /* Text colors */
+  --color-text-1: rgb(255, 255, 255);
+  --color-text-2: rgb(204, 204, 204);
+  --color-text-3: rgb(153, 153, 153);
+  --color-text-4: rgb(102, 102, 102);
+  --color-text-5: rgb(51, 51, 51);
+  --color-text-6: rgb(0, 0, 0);
+
+  /* Paddings */
+  --padding-1: 1rem;
+  --padding-2: 2rem;
+  --padding-3: 3rem;
+  --padding-4: 4rem;
+  --padding-5: 5rem;
+  --padding-6: 6rem;
+
+  /* Paddings */
+  --lateral-padding-1: 0 1rem;
+  --lateral-padding-2: 0 2rem;
+  --lateral-padding-3: 0 3rem;
+  --lateral-padding-4: 0 4rem;
+  --lateral-padding-5: 0 5rem;
+  --lateral-padding-6: 0 6rem;
+
+  /* Gap */
+  --gap-0: 0.5rem;
+  --gap-1: 1rem;
+  --gap-2: 2rem;
+  --gap-3: 3rem;
+
+  /* Border */
+  --border-1: solid 1px var(--color-background-6);
+  --border-2: solid 2px var(--color-background-6);
+  --border-3: solid 3px var(--color-background-6);
+  --border-4: solid 4px var(--color-background-6);
+  --border-5: solid 5px var(--color-background-6);
+  --border-6: solid 6px var(--color-background-6);
+
+  /* Border radius */
+  --border-radius-1: 0.5rem;     /* 8px */
+  --border-radius-2: 0.75rem;    /* 12px */
+  --border-radius-3: 1rem;       /* 16px */
+  --border-radius-4: 1.5rem;     /* 24px */
+  --border-radius-5: 2rem;       /* 32px */
+  --border-radius-6: 2.5rem;     /* 40px */
+
+  /* Shadows */
+  --shadow-large: 2px 4px 10px hsl(0 0% 0% / 0.1);
+  --shadow-small: 1px 3px 6px hsl(0 0% 0% / 0.1);
+}
+
+/* ========== GLOBAL ========== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-family-1);
+}
+
+h2 {
+  font-family: var(--font-family-2);
+  font-weight: 700;
+  font-size: 1.75em;
+  color: var(--color-background-6);
+}
+
+ul {
+  list-style-type: none;
+}
+
+[hidden] {
+  display: none !important;
+}

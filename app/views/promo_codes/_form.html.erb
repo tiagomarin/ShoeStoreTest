@@ -1,0 +1,37 @@
+<%= form_with(model: promo_code) do |form| %>
+  <% if promo_code.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(promo_code.errors.count, "error") %> prohibited this promo_code from being saved:</h2>
+
+      <ul>
+        <% promo_code.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :value, style: "display: block" %>
+    <%= form.text_field :value %>
+  </div>
+
+  <div>
+    <%= form.label :category_ids, style: "display: block" %>
+    <%= form.collection_check_boxes(:category_ids, @categories, :id, :name, include_hidden: false) %>
+  </div>
+
+  <div>
+    <%= form.label :brand_ids, style: "display: block" %>
+    <%= form.collection_check_boxes(:brand_ids, @brands, :id, :name, include_hidden: false) %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

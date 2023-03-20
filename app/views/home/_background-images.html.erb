@@ -1,0 +1,3 @@
+<% @decorations.each do |decoration| %>
+  <div class="decoration-images-container__image" style="background-image: url(<%= rails_blob_url(decoration.avatar) %>)"></div>
+<% end %>
