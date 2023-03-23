@@ -42,10 +42,9 @@ window.addEventListener("click", (event) => {
 })
 
 // add to favorite list
-const addForm = document.getElementById("add-to-favorites-form")
-const removeForm = document.getElementById("remove-from-favorites-form")
 
-addForm.addEventListener("click", (e) => {
+window.addEventListener("click", (e) => {
+  const addForm = document.getElementById("add-to-favorites-form")
   const unFavoriteDiv = document.getElementById("products-show-container__unfavorite-div")
   unFavoriteDiv.classList.add("show")
   const favoriteDiv = document.getElementById("products-show-container__favorite-div")
@@ -54,7 +53,8 @@ addForm.addEventListener("click", (e) => {
 })
 
 // event.preventDefault()
-removeForm.addEventListener("click", (e) => {
+window.addEventListener("click", (e) => {
+  const removeForm = document.getElementById("remove-from-favorites-form")
   const favoriteDiv = document.getElementById("products-show-container__favorite-div")
   favoriteDiv.classList.add("show")
   const unFavoriteDiv = document.getElementById("products-show-container__unfavorite-div")

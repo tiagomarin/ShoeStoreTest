@@ -188,8 +188,6 @@
   align-items: center;
   color: var(--color-background-1);
   font-size: 2em;
-  background-image: url("iconic-item1.jpeg");
-  background-size: cover;
   min-width: 100%;
   aspect-ratio: 16 / 9;
   scroll-snap-align: start;
