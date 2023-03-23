@@ -18,7 +18,6 @@ RSpec.describe HomeCategoriesController, type: :routing do
       expect(get: '/home_categories/1/edit').to route_to('home_categories#edit', id: '1')
     end
 
-
     it 'routes to #create' do
       expect(post: '/home_categories').to route_to('home_categories#create')
     end
