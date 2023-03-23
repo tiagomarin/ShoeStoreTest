@@ -26,7 +26,7 @@
           </td>
           <td>
             <div class="set-hide">
-              <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
+              <%= image_tag "icons/edit.png", class:"admin-products-table__edit-icon set-edit" %>
               <%= product.name %>
             </div>
             <%= form_with model: Product, url: product_path(product), method: :patch, class: "set-form" do |form| %>
@@ -36,7 +36,7 @@
           </td>
           <td>
             <div class="set-hide">
-              <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
+              <%= image_tag "icons/edit.png", class:"admin-products-table__edit-icon set-edit" %>
               <%= product.gender.name.capitalize %>
             </div>
             <%= form_with model: Product, url: product_path(product), method: :patch, class: "set-form" do |form| %>
@@ -46,7 +46,7 @@
           </td>
           <td>
             <div class="set-hide">
-              <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
+              <%= image_tag "icons/edit.png", class:"admin-products-table__edit-icon set-edit" %>
               <%= product.size.number %>
             </div>
             <%= form_with model: Product, url: product_path(product), method: :patch, class: "set-form" do |form| %>
@@ -56,7 +56,7 @@
           </td>
           <td>
             <div class="set-hide">
-              <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
+              <%= image_tag "icons/edit.png", class:"admin-products-table__edit-icon set-edit" %>
               <%= product.color.name.capitalize %>
             </div>
             <%= form_with model: Product, url: product_path(product), method: :patch, class: "set-form" do |form| %>
@@ -66,7 +66,7 @@
           </td>
           <td>
             <div class="set-hide">
-              <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
+              <%= image_tag "icons/edit.png", class:"admin-products-table__edit-icon set-edit" %>
               <%= product.brand.name.capitalize %>
             </div>
             <%= form_with model: Product, url: product_path(product), method: :patch, class: "set-form" do |form| %>
@@ -76,7 +76,7 @@
           </td>
           <td>
             <div class="set-hide">
-              <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
+              <%= image_tag "icons/edit.png", class:"admin-products-table__edit-icon set-edit" %>
               <%= product.collection.name.capitalize %>
             </div>
             <%= form_with model: Product, url: product_path(product), method: :patch, class: "set-form" do |form| %>
@@ -86,7 +86,7 @@
           </td>
           <td>
             <div class="set-hide">
-              <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
+              <%= image_tag "icons/edit.png", class:"admin-products-table__edit-icon set-edit" %>
               <%= product.quantity %>
             </div>
             <%= form_with model: Product, url: product_path(product), method: :patch, class: "set-form" do |form| %>
@@ -97,7 +97,7 @@
           <td>
             <div class="set-hide">
               <%= number_to_currency(product.price) %>
-              <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
+              <%= image_tag "icons/edit.png", class:"admin-products-table__edit-icon set-edit" %>
             </div>
            <%= form_with model: Product, url: product_path(product), method: :patch, class: "set-form" do |form| %>
               <%= form.number_field :price, step: 0.01, min: 0, value: product.price %>
@@ -105,9 +105,9 @@
             <% end %>
           </td>
           <td>
-            <%= link_to image_tag("icons/show", class: "admin-products-table__show-icon"), product, id:"admin-products-table__show-product-button" %>
+            <%= link_to image_tag("icons/show.png", class: "admin-products-table__show-icon"), product, id:"admin-products-table__show-product-button" %>
 
-            <% product.archived ? icon = "icons/restore" : icon = "icons/trash"  %>
+            <% product.archived ? icon = "icons/restore.png" : icon = "icons/trash.png"  %>
             <button class="admin-products-table__delete-product-button" type="button">
               <%= image_tag icon, class:"admin-products-table__delete-icon" %>
             </button>
@@ -116,7 +116,7 @@
             <div class="admin-products-table__delete-product-popup-wrap">
               <div class="admin-products-table__delete-product-popup">
                 <button class="admin-products-table__delete-product-popup-close">
-                  <%= image_tag "icons/x", class: "admin-products-table__delete-product-popup-close-icon" %>
+                  <%= image_tag "icons/x.png", class: "admin-products-table__delete-product-popup-close-icon" %>
                 </button>
                 <% if product.archived %>
                   <p>Are you sure you want to restore this product?</p>

@@ -10,7 +10,7 @@
       <div id="order-container__summary-information">
         <div class="order-container__arrow-down-div">
           <p>Do you have a promo code?</p>
-          <%= image_tag "icons/angle-down", alt: "arrow down", class: "order-container-icon" %>
+          <%= image_tag "icons/angle-down.png", alt: "arrow down", class: "order-container-icon" %>
         </div>
         <div id="order-container__hidden-promo">
             <%= form_for @order, url: add_promo_code_user_order_path(current_user, @order) do |f| %>

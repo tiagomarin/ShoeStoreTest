@@ -32,7 +32,7 @@
           </td>
           <td>
             <div class="set-hide">
-              <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
+              <%= image_tag "icons/edit.png", class:"admin-products-table__edit-icon set-edit" %>
               <%= collection.name %>
             </div>
             <%= form_with model: collection, url: collection_path(collection), method: :patch, class: "set-form" do |form| %>

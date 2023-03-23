@@ -12,7 +12,7 @@
           <td><%= iconic.id %></td>
           <td>
             <div class="set-hide">
-              <%= image_tag "icons/edit", class: "admin-products-table__edit-icon set-edit" %>
+              <%= image_tag "icons/edit.png", class: "admin-products-table__edit-icon set-edit" %>
               <%= iconic.product.name %>
             </div>
             <%= form_with model: Iconic, url: iconic_path(iconic), method: :patch, class: "set-form" do |form| %>
