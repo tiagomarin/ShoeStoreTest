@@ -2,11 +2,11 @@
     <% product.discount > 0 ? priceClass = "products-container__product-card-price discounted" : priceClass = "products-container__product-card-price" %>
       <div class=products-container__product-card-img-div>
         <% if product.image1.attached? %>
-          <%= link_to product, class:"products-container__product-card" do %>
+          <%= link_to product_path(product), data: { turbo: false }, class:"products-container__product-card" do %>
             <%= image_tag product.image1, class:"products-container__product-card-img" %>
           <% end %>
         <% else %>
-          <%= link_to product, class:"products-container__product-card" do %>
+          <%= link_to product_path(product), data: { turbo: false }, class:"products-container__product-card" do %>
             <%= image_tag "no-product-image.png", class:"products-container__product-card-img" %>
           <% end %>
         <% end %>
