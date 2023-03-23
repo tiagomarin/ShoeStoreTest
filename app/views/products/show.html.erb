@@ -19,16 +19,17 @@
         <%= image_tag "no-product-image.png", class:"product-show-container__img no-image" %>
       <% end %>
     </div>
+    
     <div class="products-show-container__color-carrousel">
       <% same_product_different_colors(@product, @products).map do |p|%>
         <div id="products-show-container__color-carrousel-options">
           <% if p.image1.attached? %>
             <%= link_to(p) do %>
-              <%= image_tag p.image1, class: "products-show-container__color-img", alt: "#{@product.name} in #{@product.color}"%>
+              <%= image_tag p.image1, class: "products-show-container__color-carrousel-img", alt: "#{@product.name} in #{@product.color}"%>
             <% end %>  
           <% else %>
             <%= link_to(p) do %>
-              <%= image_tag "no-product-image.png", class: "products-show-container__color-img", alt: "product has no image"%>
+              <%= image_tag "no-product-image.png", class: "products-show-container__color-carrousel-img", alt: "product has no image"%>
             <% end %>
           <% end %>
         </div>
@@ -52,6 +53,22 @@
     <% end %>
 
     <p><%= @product.description %></p>
+
+    <div class="products-show-container__color-grid">
+      <% same_product_different_colors(@product, @products).map do |p|%>
+        <div id="products-show-container__color-grid-options">
+          <% if p.image1.attached? %>
+            <%= link_to(p) do %>
+              <%= image_tag p.image1, class: "products-show-container__color-grid-img", alt: "#{@product.name} in #{@product.color}"%>
+            <% end %>  
+          <% else %>
+            <%= link_to(p) do %>
+              <%= image_tag "no-product-image.png", class: "products-show-container__color-grid-img", alt: "product has no image"%>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
 
     <strong>Select size</strong>
     <div>
