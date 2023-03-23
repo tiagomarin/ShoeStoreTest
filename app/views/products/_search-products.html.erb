@@ -1,3 +1,3 @@
-<%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
-  <%= form.text_field :query, placeholder: "Search product", data: { action: "input->search-form#search", target: "query"} %>
+<%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}, class:"products-container__filters-search-bar-form") do |form| %>
+  <%= form.text_field :query, placeholder: "Search product", data: { action: "input->search-form#search", target: "query"}, class: "products-container__filters-search-bar-input" %>
 <% end %>

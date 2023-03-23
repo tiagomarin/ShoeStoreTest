@@ -1,9 +1,10 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 import "@hotwired/turbo-rails"
-import "./components/addNewProductBrandCategoryPopUp"
-import "./components/admin-products"
-import "./components/products"
-import "./components/products-filter"
+import "./components/product/addNewProdBrandCateg"
+import "./components/product/adminProducts"
+import "./components/product/products"
+import "./components/product/productsFilter"
+import "./components/product/productShow"
 import "controllers"
 
 let lastScrollTop = 32;

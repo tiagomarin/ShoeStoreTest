@@ -1,0 +1,236 @@
+.products-container {
+  position: relative;
+  padding: var(--lateral-padding-1);
+}
+
+/* HEADER OF SESSION */
+
+.products-container__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--color-background-1);
+  padding: var(--space-xs) 0;
+}
+
+.products-container__header-results {
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.products-container__header-options {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+}
+
+.products-container__header-options > * {
+  height: 100%;
+}
+
+.products-container__header-options button {
+  border: none;
+}
+
+.products-container__header-sort-selection {
+  display: none;
+  position: absolute;
+  top: 2rem;
+  right: 0;
+  background: white;
+  color: var(--color-text-5);
+  padding: var(--padding-1) 0 var(--padding-1) var(--padding-1);
+  border-radius: 0 0 0 var(--border-radius-3);
+}
+
+.products-container__header-filter-btn {
+  background-color: var(--color-background-1);
+  color: var(--color-text-5);
+  border: none;
+  font-weight: 500;
+  font-size: 1em;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.products-container__header-filter-btn:hover {
+  transform: scale(1.01);
+}
+
+.products-container__header-filter-btn:active {
+  color: var(--color-text-2);
+}
+
+.products-container__header-sort-btn {
+  background-color: var(--color-background-1);
+  color: var(--color-text-5);
+  border: none;
+  font-weight: 500;
+  font-size: 1em;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.products-container__header-sort-btn:hover {
+  transform: scale(1.01);
+}
+
+.products-container__header-sort-selection.sort-selection_active {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  height: auto;
+  gap: var(--space-xxxs);
+  z-index: 10;
+}
+
+.products-container__header-sort-selection-item {
+  background: var(--color-background-1);
+}
+
+.products-container__header-sort-selection-item.sort-selection-item_active {
+  color: var(--color-text-5);
+  border-bottom: 2px solid var(--color-background-2);
+}
+
+/* LAYOUT --- FILTERS + PRODUCTS GRID */
+.products-container__main {
+  display: flex;
+}
+
+.products-container__filters {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem 1rem 0;
+}
+
+.products-container__filters.filters_active {
+  display: none;
+}
+
+.products-container__grid {
+  display: none;
+  padding: 0 0 1rem 0;
+}
+
+.products-container__grid.filters_active {
+  display: flex;
+  height: max-content;
+}
+
+.pagination {
+  padding: var(--space-xs) 0;
+}
+
+.page.current {
+  background: var(--color-background-2);
+  color: var(--color-text-5);
+}
+
+.next,
+.prev,
+.first,
+.last {
+  background-color: var(--color-background-6);
+  color: var(--color-background-1);
+}
+
+#products {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.products-container__product-card {
+  width: 100%;
+}
+
+@media (min-width: 500px) {
+  #products {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 768px) {
+  .products-container__filters {
+    display: none;
+    min-width: 182px;
+    max-width: 182px;
+  }
+
+  .products-container__filters.filters_active {
+    display: flex;
+  }
+
+  .products-container__grid {
+    display: flex;
+  }
+
+  .products-container__grid.filters_active {
+    display: flex;
+  }
+
+  .products-container__product-card-img {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .products-container {
+    padding: var(--lateral-padding-3);
+  }
+
+  .products-container__header {
+    padding: var(--padding-1) 0;
+  }
+
+  .products-container__header-sort-selection {
+    display: none;
+    position: absolute;
+    top: 3rem;
+    right: 0;
+    background: white;
+    color: var(--color-text-5);
+    padding: var(--padding-1) 0 var(--padding-1) var(--padding-1);
+    border-radius: 0 0 0 var(--border-radius-3);
+  }
+
+  .products-container__filters {
+    min-width: 240px;
+    max-width: 240px;
+  }
+
+  .products-container__pagination-and-grid-parent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .products-container__grid {
+    display: flex;
+  }
+
+  .products-container__grid.filters_active {
+    display: flex;
+  }
+}
+
+@media (min-width: 1280px) {
+  .products-container__filters {
+    min-width: 300px;
+    max-width: 300px;
+  }
+}
+
+@media (min-width: 1440px) {
+  #products {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}

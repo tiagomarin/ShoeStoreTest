@@ -1,6 +1,7 @@
 window.addEventListener("click", (event) => {
   // buttons to add all filters except the price filters
-  if (event.target.className === "options-to-filter") {
+  if (event.target.classList.contains("options-to-filter")) {
+  // if (event.target.className === "options-to-filter") {
     document.querySelectorAll(".applied-filters").forEach((e) => {
       if (e.firstElementChild.firstElementChild.value === event.target.value) {
         e.classList.add("active");

@@ -5,10 +5,8 @@
   <div class="order-container__order-item">
     <div>
       <%= link_to product_path(product.id) do %>
-        <% if product.images.attached? %>
-          <% product.images.each do |image| %>
-            <%= image_tag image, id: "order-container__image" %>
-          <% end %>
+        <% if product.image1.attached? %>
+            <%= image_tag product.image1, id: "order-container__image" %>
         <% else %>
           <%= image_tag "no-product-image.png", id: "order-container__image" %>
         <% end %>

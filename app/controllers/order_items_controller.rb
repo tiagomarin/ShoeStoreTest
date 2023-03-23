@@ -1,8 +1,10 @@
 class OrderItemsController < ApplicationController
   before_action :authenticate_user!
   def create
-    @product = Product.where(name: params[:order_item][:name], color: params[:order_item][:color],
-                             size: params[:order_item][:size]).take
+    size = Size.where(number: params[:order_item][:size]).take
+    color = Color.where(name: params[:order_item][:color]).take
+
+    @product = Product.where(name: params[:order_item][:name], color:, size:).take
 
     quantity_requested = params[:order_item][:quantity].to_i
     quantity_available = if @product
