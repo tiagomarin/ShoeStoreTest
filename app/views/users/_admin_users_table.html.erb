@@ -25,7 +25,7 @@
           <td><%= user.address %></td>
           <td>
             <div class="set-hide">
-              <%= image_tag "icons/edit", class:"admin-products-table__edit-icon set-edit" %>
+              <%= image_tag "icons/edit.png", class:"admin-products-table__edit-icon set-edit" %>
               <%= user.role %>
             </div>
             <%= form_with model: User, url: user_path(user), method: :patch, class: "set-form" do |form| %>

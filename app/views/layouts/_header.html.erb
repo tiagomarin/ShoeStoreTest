@@ -45,13 +45,13 @@
 
     <% if current_user %>
       <%= link_to user_favorites_path(current_user), id: "nav-container__favorites" do %>
-        <%= image_tag "icons/heart", alt: "favorites", class: "nav-container-icon" %>
+        <%= image_tag "icons/heart.png", alt: "favorites", class: "nav-container-icon" %>
       <% end %>
     <% end %> 
 
     <% if current_user %>
       <%= link_to user_order_path(current_user, @order), id: "nav-container__shopping-cart" do %>
-        <%= image_tag "icons/shopping-cart", alt: "shopping-cart", class: "nav-container-icon" %>
+        <%= image_tag "icons/shopping-cart.png", alt: "shopping-cart", class: "nav-container-icon" %>
       <% end %>
     <% end %> 
   </div>
