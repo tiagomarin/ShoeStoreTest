@@ -27,23 +27,28 @@
   </div>
 
   <div>
-    <%= form.label :size, style: "display: block" %>
-    <%= form.select :size, @sizes %>
+    <%= form.label :size_id, style: "display: block" %>
+    <%= form.select :size_id, @sizes.map { |size| [size.number, size.id]} %>
   </div>
 
   <div>
-    <%= form.label :color, style: "display: block" %>
-    <%= form.select :color, @colors %>
+    <%= form.label :color_id, style: "display: block" %>
+    <%= form.select :color_id, @colors.map { |color| [color.name, color.id]} %>
   </div>
 
   <div>
-    <%= form.label :gender, style: "display: block" %>
-    <%= form.select :gender, ["male", "female", "other"] %>
+    <%= form.label :gender_id, style: "display: block" %>
+    <%= form.select :gender_id, @genders.map { |gender| [gender.name, gender.id]} %>
   </div>
 
   <div>
-    <%= form.label :brand, style: "display: block" %>
+    <%= form.label :brand_id, style: "display: block" %>
     <%= form.select :brand_id, @brands.map { |brand| [brand.name, brand.id]} %>
+  </div>
+
+  <div>
+    <%= form.label :collection_id, style: "display: block" %>
+    <%= form.select :collection_id, @collections.map { |collection| [collection.name, collection.id]} %>
   </div>
   
   <div>

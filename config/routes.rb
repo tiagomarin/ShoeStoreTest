@@ -12,7 +12,6 @@ Rails.application.routes.draw do
 
   get 'admin/products', to: 'products#admin_products'
   get 'admin/archived', to: 'products#admin_archived'
-  get 'admin/categories', to: 'categories#admin_categories'
   get 'admin/brands', to: 'brands#admin_brands'
   get 'admin/colors', to: 'colors#admin_colors'
   get 'admin/sizes', to: 'sizes#admin_sizes'
@@ -22,17 +21,20 @@ Rails.application.routes.draw do
   get 'admin/orders', to: 'orders#admin_orders'
   get 'admin/decorations', to: 'decorations#admin_decorations'
   get 'admin/genders', to: 'genders#admin_genders'
+  get 'admin/categories', to: 'categories#admin_categories'
+  get 'admin/category_home', to: 'home_categories#admin_home_category'
   get 'admin/collections', to: 'collections#admin_collections'
   get 'admin/collection_home', to: 'home_collections#admin_home_collection'
 
   resources :products
-  resources :categories
   resources :brands
   resources :colors
   resources :sizes
   resources :genders
   resources :collections
   resources :home_collections
+  resources :categories
+  resources :home_categories
   resources :promo_codes
   resources :iconics
   resources :decorations

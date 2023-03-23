@@ -43,7 +43,6 @@ class CategoriesController < ApplicationController
   end
 
   def category_params
-    params.require(:category).permit(:name)
-    # , :promo_code_ids:[]
+    params.require(:category).permit(:name, :categoryImage)
   end
 end

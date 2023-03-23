@@ -3,6 +3,11 @@ class HomeController < ApplicationController
     # Recent added products
     @new_arrivals = remove_duplicates(Product.last(60))
 
+    # Main categories
+    @home_category1 = HomeCategory.find(1)
+    @home_category2 = HomeCategory.find(2)
+    @home_category3 = HomeCategory.find(3)
+
     # Fixed iconic items
     @iconic1 = Iconic.find(1)
     @iconic2 = Iconic.find(2)
