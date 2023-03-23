@@ -1,0 +1,12 @@
+<div id="main-categories-container__card">
+    <% if home_category.category.categoryImage.attached? %>
+      <%= image_tag home_category.category.categoryImage, class: "main-categories-container__img", alt: "category" %>
+    <% else %>
+      <%= image_tag "no-product-image-16-9.jpg", class: "main-categories-container__img" %>
+    <% end %>              
+
+<%= form_with(url: products_path, method: :get, data: { controller: "search-form",      turbo_frame: "products", turbo_action: "advance"}) do |form| %>
+    <%= form.hidden_field :query, value: home_category.category.name, data: { action: "input->search-form#search"} %>
+    <%= form.submit home_category.category.name, class: "main-categories-container__button" %>
+<% end %>
+</div>

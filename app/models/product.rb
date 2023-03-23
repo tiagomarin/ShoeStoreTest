@@ -1,10 +1,6 @@
 class Product < ApplicationRecord
   has_many :order_items, dependent: :destroy
   has_one_attached :image1
-  has_one_attached :image2
-  has_one_attached :image3
-  has_one_attached :image4
-  has_one_attached :image5
   has_one_attached :iconicImage
 
   belongs_to :brand

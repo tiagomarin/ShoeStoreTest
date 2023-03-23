@@ -1,5 +1,5 @@
- <div class="products-container__filters filters_active" data-controller=>
-    <%# place for filters applied %>
+ <div class="products-container__filters filters_active">
+    <%= render "products/search-products" %>
     <div class="products-container__filters-applied-title-div">
       <div class="products-container__filters-applied-title">
         <p>Applied filters:</p>
@@ -18,14 +18,25 @@
       </div>
 
       <ul class="products-container__applied-filter-sizes">
-        <% @sizes.each do |size| %>
-          <% if @size_filters.present? %>
-            <% @size_filters.include?(size.number.to_s) ? li_class = "applied-filters active" : li_class = "applied-filters" %>
-          <% else %>
-            <% li_class = "applied-filters" %>
-          <% end %>
+        <% @genders.each do |gender| %>
+          <li class="<%= filter_applied_class(gender.name, "gender") %>">
+            <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
+              <button 
+                name="remove_gender_filter" 
+                id="remove_gender_filter" 
+                value=<%= gender.name.downcase %>
+                type="submit"
+                class="applied-filters-btns"
+              >
+                <%= image_tag "icons/x", alt:"remove filter" %>
+                <%= gender.name %> 
+              </button>
+            <% end %>
+          </li>
+        <% end %>
 
-          <li class="<%= li_class %>">
+        <% @sizes.each do |size| %>
+          <li class="<%= filter_applied_class(size.number.to_s, "size") %>">
             <%= form_with(url: products_path, method: :get, data: { controller: "search-form" , turbo_frame: "products", turbo_action: "advance"}) do |form| %>
               <button 
                 name="remove_size_filter" 
@@ -41,8 +52,8 @@
           </li>
         <% end %>
 
-        <% colors.each do |color| %>
-          <li class="applied-filters">
+        <% @colors.each do |color| %>
+          <li class="<%= filter_applied_class(color.name, "color") %>">
             <%= form_with(url: products_path, method: :get, data: { controller: "search-form" , turbo_frame: "products", turbo_action: "advance"}) do |form| %>
               <button 
                 name="remove_color_filter" 
@@ -58,40 +69,43 @@
           </li>
         <% end %>
 
-        <% ["Nike", "Addidas"].each do |brand| %>
-          <li class="applied-filters">
+        <% @brands.each do |brand| %>
+          <li class="<%= filter_applied_class(brand.name, "brand") %>">
             <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
               <button 
                 name="remove_brand_filter" 
                 id="remove_brand_filter" 
-                value=<%= brand.downcase %>
+                value=<%= brand.name.downcase %>
                 type="submit"
                 class="applied-filters-btns"
               >
                 <%= image_tag "icons/x.png", alt:"remove filter" %>
-                <%= brand %> 
+                <%= brand %>
               </button>
             <% end %>
           </li>
         <% end %>
 
-        <% ["Running", "Casual", "Gym", "Style", "Street"].each do |category| %>
-          <li class="applied-filters">
+        <% @categories.each do |category| %>
+          <li class="<%= filter_applied_class(category.name, "category") %>">
             <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
               <button 
                 name="remove_category_filter" 
                 id="remove_category_filter" 
-                value=<%= category.downcase %>
+                value=<%= category.name.downcase %>
                 type="submit"
                 class="applied-filters-btns"
               >
                 <%= image_tag "icons/x.png", alt:"remove filter", class:"applied-filters-btns-x" %>
-                <%= category %> 
+                <%= category %>
               </button>
             <% end %>
           </li>
         <% end %>
-        <li id="min-price-filter-applied" class="applied-filters">
+
+        <% @min_price_filter.present? ? li_class = "applied-filters active" : li_class = "applied-filters" %>
+
+        <li id="min-price-filter-applied" class="<%= li_class %>">
           <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
             <button 
               name="remove_min_price_filter" 
@@ -106,7 +120,9 @@
             </button>
           <% end %>
         </li>
-        <li id="max-price-filter-applied" class="applied-filters">
+
+        <% @max_price_filter.present? ? li_class = "applied-filters active" : li_class = "applied-filters" %>
+        <li id="max-price-filter-applied" class="<%= li_class %>">
           <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
             <button 
               name="remove_max_price_filter" 
@@ -135,7 +151,7 @@
                 name="size_filter"
                 id="size_filter" 
                 value=<%= size.number %>
-                class="options-to-filter"
+                class="options-to-filter products-container__filter-sizes-item-button"
               >
                 <%= size.number %> 
                 
@@ -149,7 +165,7 @@
     <div>
       <p>Color:</p>
       <ul class="products-container__filter-colors">
-        <% colors.each do |color| %>
+        <% @colors.each do |color| %>
           <li class="products-container__filter-colors-item">
             <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
               <button 
@@ -157,7 +173,7 @@
                 type="submit" 
                 id="color-filter"
                 value=<%= color.name.downcase %>
-                class="options-to-filter"
+                class="options-to-filter products-container__filter-colors-item-button"
               >
               </button>
             <% end %>
@@ -169,17 +185,17 @@
     <div>
       <p>Brand:</p>
       <ul class="products-container__filter-brands">
-        <% ["Nike", "Addidas"].each do |brand| %>
+        <% @brands.each do |brand| %>
           <li class="products-container__filter-brands-item">
             <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
               <button 
                 name="brand_filter" 
                 type="submit" 
                 id="brand-filter"
-                value=<%= brand.downcase %>
-                class="options-to-filter"  
+                value=<%= brand.name.downcase %>
+                class="options-to-filter products-container__filter-brands-item-button"  
               >
-                <%= brand %> 
+                <%= brand.name %> 
               </button>
             <% end %>
           </li>
@@ -190,17 +206,17 @@
     <div>
       <p>Category:</p>
       <ul class="products-container__filter-categories">
-        <% ["Running", "Casual", "Gym", "Style", "Street"].each do |category| %>
+        <% @categories.each do |category| %>
           <li class="products-container__filter-categories-item">
             <%= form_with(url: products_path, method: :get, data: { controller: "search-form", turbo_frame: "products", turbo_action: "advance"}) do |form| %>
               <button 
                 name="category_filter" 
                 type="submit" 
                 id="category-filter"
-                value=<%= category.downcase %>
-                class="options-to-filter"
+                value=<%= category.name.downcase %>
+                class="options-to-filter products-container__filter-categories-item-button"
               >
-                <%= category %> 
+                <%= category.name %> 
               </button>
             <% end %>
           </li>

@@ -3,12 +3,12 @@ class ProductsController < ApplicationController
   include FilterProducts
   before_action :authenticate_user!, only: %i[new edit create update destroy]
   before_action :set_product, only: %i[show edit update]
-  before_action :set_brands, only: %i[new edit create admin_products admin_archived]
+  before_action :set_brands, only: %i[index new edit create admin_products admin_archived]
   before_action :set_colors, only: %i[index new edit create admin_products admin_archived]
   before_action :set_sizes, only: %i[index show new edit create admin_products admin_archived]
   before_action :set_genders, only: %i[index new edit create admin_products admin_archived]
   before_action :set_collections, only: %i[index new edit create admin_products admin_archived]
-  before_action :set_categories, only: %i[new edit create]
+  before_action :set_categories, only: %i[index new edit create]
   before_action :set_product_categories, only: %i[show update]
 
   def admin_products
@@ -47,7 +47,10 @@ class ProductsController < ApplicationController
     @products = Kaminari.paginate_array(sort_products(@products)).page(params[:page]).per(18)
     
     # send info to the view with filters that are applied so buttons to remove filter will be displayed
-    @size_filters = session[:size_filters].split if session[:size_filters].present?    
+    # @size_filters = session[:size_filters].split if session[:size_filters].present?
+
+    @min-price_filter = session[:min_price_filter] if session[:min_price_filter].present?
+    @max-price_filter = session[:max_price_filter] if session[:max_price_filter].present?
 
     if turbo_frame_request?
       render partial: 'products', locals: { products: @products }
@@ -57,7 +60,10 @@ class ProductsController < ApplicationController
   end
 
   # GET /products/1 or /products/1.json
-  def show; end
+  def show
+    @products = Product.all
+    @new_arrivals = remove_duplicates(@products)
+  end
 
   # GET /products/new
   def new
@@ -134,6 +140,19 @@ class ProductsController < ApplicationController
   def set_categories
     @categories = Category.all
   end
+
+  def filter_applied_class(filter, type)
+    filter_to_search = ("#{type}_filters").to_sym
+    if session[filter_to_search].present?
+      filters_applied = session[filter_to_search].split
+      filters_applied.include?(filter) ? li_class = "applied-filters active" : li_class = "applied-filters"
+    else
+      li_class = "applied-filters"
+    end
+    li_class    
+  end
+
+  helper_method :filter_applied_class
 
   def set_product_categories
     @product_categories = []

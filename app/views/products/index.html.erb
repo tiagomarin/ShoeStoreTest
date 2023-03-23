@@ -3,9 +3,11 @@
 <section class="products-container">
 
   <div class="products-container__header">
-    <h1>Results (<%= @products.count %>)</h1>
+    <p class="products-container__header-results">Results
+        <span><%= @products.count %><span>
+    </p>
+
     <div class="products-container__header-options">
-      <%= render "products/search-products" %>
       <button class="products-container__header-filter-btn">Hide Filters</button>
       <button class="products-container__header-sort-btn">Sort</button>
       <ul class="products-container__header-sort-selection">
@@ -34,12 +36,12 @@
   </div>
 
   <div class="products-container__main">
-    <%= render "filters", colors: @colors %>
-    <div>
+    <%= render "filters"%>
+    <div class="products-container__pagination-and-grid-parent">
       <%= paginate @products %>
       <div class="products-container__grid filters_active">
         <%= render "products", products: @products %>
-      </div>  
+      </div>
     </div>
   </div>
 </section>
