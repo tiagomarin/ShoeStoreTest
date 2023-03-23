@@ -111,7 +111,7 @@
       <div id="products-show-container__unfavorite-div" class="<%= unfavorite_button_class %>" >
         <%= button_to user_favorite_path(current_user, @product.id), method: :delete, id:"remove-from-favorites-form", class:"products-show-container__unfavorite-product-button" do %>
           <span>Unfavorite</span>
-          <%= image_tag "icons/heart2", alt: "favorite", class: "new-arrivals-container-icon" %>
+          <%= image_tag "icons/heart2.png", alt: "favorite", class: "new-arrivals-container-icon" %>
         <% end %>
       </div>
 
@@ -119,7 +119,7 @@
       <div id="products-show-container__favorite-div" class="<%= favorite_button_class %>">
         <%= button_to user_favorites_path(current_user, product_id: @product.id), method: :post, id:"add-to-favorites-form", class:"products-show-container__favorite-product-button" do %>
           <span>Favorite</span>
-          <%= image_tag "icons/heart", alt: "favorite", class: "products-show-container__heart-icon" %>
+          <%= image_tag "icons/heart.png", alt: "favorite", class: "products-show-container__heart-icon" %>
         <% end %>
       </div>
     <% else %>
