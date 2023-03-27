@@ -2,7 +2,11 @@
   <% @new_arrivals.each do |product| %>
     <div id="new-arrivals-container__new-product-div">
       <div id="new-arrivals-container__image-div">
-        <%= image_tag product.image1, id: "new-arrivals-container__img", alt: "new arrival shoes" %>
+        <% if product.image1.attached? %>
+          <%= image_tag product.image1, id: "new-arrivals-container__img", alt: "new arrival shoes" %>
+        <% else %>
+          <%= image_tag "no-product-image", id: "new-arrivals-container__img", alt: "product has no image"%>
+        <% end %>
         <% if current_user %>
           <% if current_user.favorite_products.include?(product) %>
             <%= button_to user_favorite_path(current_user, current_user.favorites.find_by(product: product)), method: :delete, id: "new-arrivals-container__link-favorite" do %>

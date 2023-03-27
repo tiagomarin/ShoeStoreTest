@@ -19,14 +19,16 @@
                 <%= image_tag "no-product-image-16-9.jpg", class: "admin-iconics-table__img image-image" %>
               <% end %>
             <% else %>
-              <%= form_with(model: Collection, url: collection_path(collection), method: :patch) do |form| %>
+              <%= form_with(model: Collection, url: collection_path(collection), id: "edit-product-container__form", method: :patch) do |form| %>
                 <% if collection.collectionImage.attached? %>
                   <%= image_tag collection.collectionImage, class: "admin-iconics-table__img image-image" %>
                 <% else %>
                   <%= image_tag "no-product-image-16-9.jpg", class: "admin-iconics-table__img image-image" %>
                 <% end %>              
-                <%= form.file_field :collectionImage, accept: "image/jpeg,image/png", options: { button: 'Choose file...' } %>
-                <%= form.submit "✔️" %>
+                <div id="edit-product-container__div">
+                  <%= form.file_field :collectionImage, accept: "image/jpeg,image/png", options: { button: 'Choose file...' } %>
+                  <%= form.submit "Update" %>
+                </div>
               <% end %>
             <% end %>
           </td>
@@ -50,3 +52,6 @@
       <% end %>
     </tbody>
 </table>
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>

@@ -11,27 +11,27 @@
     </div>
   <% end %>
 
-  <div>
+  <div class="new-promo-code-container__form-labels">
     <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, placeholder: "Type promo title (ex: XMAS30)" %>
   </div>
 
-  <div>
+  <div class="new-promo-code-container__form-labels">
     <%= form.label :value, style: "display: block" %>
-    <%= form.text_field :value %>
+    <%= form.text_field :value, placeholder: "%" %>
   </div>
 
-  <div>
-    <%= form.label :category_ids, style: "display: block" %>
+  <div id="new-promo-code-container__form-categories">
+    <%= form.label "Categories", id: "new-product-container__categories-label" %>
     <%= form.collection_check_boxes(:category_ids, @categories, :id, :name, include_hidden: false) %>
   </div>
 
-  <div>
-    <%= form.label :brand_ids, style: "display: block" %>
+  <div id="new-promo-code-container__form-brands">
+    <%= form.label "Brands", id: "new-product-container__categories-label" %>
     <%= form.collection_check_boxes(:brand_ids, @brands, :id, :name, include_hidden: false) %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Add promo code", id: "new-promo-code-container__form-button" %>
   </div>
 <% end %>

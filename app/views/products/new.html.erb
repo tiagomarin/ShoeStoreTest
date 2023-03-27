@@ -1,5 +1,13 @@
 <div id="new-product-container">
-  <h1>New product</h1>
-  <%= render "form", product: @product %>
-  <%= link_to "Back to products", products_path %>
+  <div id="new-product-container__title">
+    <%= link_to admin_products_path do %>
+      <h3>Products</h3>
+    <% end %>
+    <p>/</p>
+    <h3>New Product</h3>
+  </div>
+
+  <div id="new-product-container__form">
+    <%= render "form", product: @product %>
+  </div>
 </div>

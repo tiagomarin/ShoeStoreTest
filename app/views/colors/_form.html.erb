@@ -11,12 +11,12 @@
     </div>
   <% end %>
 
-  <div>
+  <div class="new-color-container__form-labels">
     <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, placeholder: "Type color name" %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Add color", id: "new-color-container__form-button" %>
   </div>
 <% end %>
