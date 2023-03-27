@@ -11,12 +11,12 @@
     </div>
   <% end %>
 
-  <div>
+  <div class="new-size-container__form-labels">
     <%= form.label :number, style: "display: block" %>
-    <%= form.text_field :number %>
+    <%= form.text_field :number, placeholder: "Type size" %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Add size", id: "new-size-container__form-button" %>
   </div>
 <% end %>

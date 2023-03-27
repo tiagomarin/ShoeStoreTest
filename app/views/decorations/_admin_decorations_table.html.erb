@@ -11,19 +11,22 @@
           <td><%= decoration.id %></td>
           <td><%= decoration.name %></td>
           <td>
-              <%= form_with model: Decoration, url: decoration_path(decoration), method: :patch, class: "image-form" do |form| %>
-                <%= form.label :avatar, class: "image-label" do %>
-                  <% if decoration.avatar.attached? %>
-                    <%= image_tag decoration.avatar, class: "admin-products-table__img image-image" %>
-                  <% else %>
-                    <%= image_tag "no-product-image.png", class: "admin-products-table__img image-image" %>
-                  <% end %>
-                  <%= form.file_field :avatar, class: "image-select" %>
+              <%= form_with model: Decoration, url: decoration_path(decoration), id: "edit-product-container__form", method: :patch, class: "image-form" do |form| %>
+                <% if decoration.avatar.attached? %>
+                  <%= image_tag decoration.avatar, class: "admin-products-table__img image-image" %>
+                <% else %>
+                  <%= image_tag "no-product-image.png", class: "admin-products-table__img image-image" %>
                 <% end %>
-                <%= form.submit "✔️", class: "image-submit" %>
+                <div id="edit-product-container__div">
+                  <%= form.file_field :avatar, class: "image-select" %>
+                  <%= form.submit "Update", class: "image-submit" %>
+                </div>
               <% end %>
           </td>
         </tr>
       <% end %>
     </tbody>
 </table>
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>

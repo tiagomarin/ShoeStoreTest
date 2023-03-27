@@ -30,6 +30,7 @@ module ApplicationHelper
       current_page?(new_color_path) ||
       current_page?(new_size_path) ||
       current_page?(new_gender_path) ||
-      current_page?(new_promo_code_path)
+      current_page?(new_promo_code_path) ||
+      current_page?(new_collection_path)
   end
 end

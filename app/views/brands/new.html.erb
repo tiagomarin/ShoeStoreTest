@@ -1,4 +1,13 @@
 <div id="new-brand-container">
-  <h1>New Brand</h1>
-  <%= render "form", brand: @brand %>
+  <div id="new-brand-container__title">
+    <%= link_to admin_brands_path do %>
+      <h3>Brands</h3>
+    <% end %>
+    <p>/</p>
+    <h3>New Brand</h3>
+  </div>
+
+  <div id="new-brand-container__form">
+    <%= render "form", brand: @brand %>
+  </div>
 </div>

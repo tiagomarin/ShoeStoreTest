@@ -1,10 +1,10 @@
 <%= form_with model: Brand do |brand_form| %>
-  <div>
+  <div class="new-brand-container__form-labels">
     <%= brand_form.label :name, style: "display: block" %>
-    <%= brand_form.text_field :name, value: "" %>
+    <%= brand_form.text_field :name, value: "", placeholder: "Type brand name" %>
   </div>
 
   <div>
-    <%= brand_form.submit "Add Brand" %>
+    <%= brand_form.submit "Add Brand", id: "new-brand-container__form-button" %>
   </div>
 <% end %>

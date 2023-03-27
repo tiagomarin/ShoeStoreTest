@@ -1,10 +1,10 @@
 <%= form_with model: Category do |category_form| %>
-  <div>
+  <div class="new-category-container__form-labels">
     <%= category_form.label :name, style: "display: block" %>
-    <%= category_form.text_field :name, value: "" %>
+    <%= category_form.text_field :name, value: "", placeholder: "Type category name" %>
   </div>
 
   <div>
-    <%= category_form.submit "Add Category" %>
+    <%= category_form.submit "Add Category", id: "new-category-container__form-button" %>
   </div>
 <% end %>

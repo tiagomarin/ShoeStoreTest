@@ -19,14 +19,16 @@
                 <%= image_tag "no-product-image-16-9.jpg", class: "admin-iconics-table__img image-image" %>
               <% end %>
             <% else %>
-              <%= form_with(model: category, url: category_path(category), method: :patch) do |form| %>
+              <%= form_with(model: category, url: category_path(category), id: "edit-product-container__form", method: :patch) do |form| %>
                 <% if category.categoryImage.attached? %>
                   <%= image_tag category.categoryImage, class: "admin-iconics-table__img image-image" %>
                 <% else %>
                   <%= image_tag "no-product-image-16-9.jpg", class: "admin-iconics-table__img image-image" %>
                 <% end %>              
-                <%= form.file_field :categoryImage, accept: "image/jpeg,image/png", options: { button: 'Choose file...' } %>
-                <%= form.submit "✔️" %>
+                <div id="edit-product-container__div">
+                  <%= form.file_field :categoryImage, accept: "image/jpeg,image/png", options: { button: 'Choose file...' } %>
+                  <%= form.submit "Update" %>
+                </div>
               <% end %>
             <% end %>
           </td>
@@ -47,3 +49,5 @@
     </tbody>
 </table>
 
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>

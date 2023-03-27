@@ -18,10 +18,16 @@
         <tr>
           <td><%= product.id %></td>
           <td>
-            <%= form_with(model: Product, url: product_path(product), method: :patch, id: "edit-user-container__form") do |form| %>
-              <%= image_tag product.image1, class: "admin-users-table__img" %>
-              <%= form.file_field :image1, accept: "image/jpeg,image/png", options: { button: 'Choose file...' } %>
-              <%= form.submit "✔️" %>
+            <%= form_with(model: Product, url: product_path(product), method: :patch, id: "edit-product-container__form") do |form| %>
+              <% if product.image1.attached? %>
+                <%= image_tag product.image1, class: "admin-users-table__img" %>
+              <% else %>
+                <%= image_tag "no-product-image.png", alt: "product has no image"%>
+              <% end %>
+              <div id="edit-product-container__div">
+                <%= form.file_field :image1, accept: "image/jpeg,image/png" %>
+                <%= form.submit "Update" %>
+              </div>
             <% end %>
           </td>
           <td>
@@ -139,3 +145,6 @@
       <% end %>
     </tbody>
 </table>
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>

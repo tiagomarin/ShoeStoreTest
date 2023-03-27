@@ -21,14 +21,16 @@
             <% end %>
           </td>
           <td>
-            <%= form_with model: Product, url: product_path(iconic.product), method: :patch do |form| %>
+            <%= form_with model: Product, url: product_path(iconic.product), id: "edit-product-container__form", method: :patch do |form| %>
               <% if iconic.product.iconicImage.attached? %>
                   <%= image_tag iconic.product.iconicImage, class: "admin-iconics-table__img image-image" %>
               <% else %>
                   <%= image_tag "no-product-image.png", class: "admin-iconics-table__img image-image" %>
               <% end %>
-              <%= form.file_field :iconicImage %>
-              <%= form.submit "✔️" %>
+              <div id="edit-product-container__div">
+                <%= form.file_field :iconicImage %>
+                <%= form.submit "Update" %>
+              </div>
             <% end %>
           </td>
           <td></td>
@@ -36,3 +38,6 @@
       <% end %>
     </tbody>
 </table>
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>

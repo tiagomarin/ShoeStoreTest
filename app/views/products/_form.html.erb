@@ -11,97 +11,111 @@
     </div>
   <% end %>
 
-  <div>
+  <div class="new-product-container__form-labels">
     <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, placeholder: "Type product name" %>
   </div>
 
-  <div>
-    <%= form.label :price, style: "display: block" %>
-    <%= form.number_field :price %>
-  </div>
-
-  <div>
+  <div class="new-product-container__form-labels">
     <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
+    <%= form.text_field :description, placeholder: "Type product description" %>
   </div>
 
-  <div>
-    <%= form.label :size_id, style: "display: block" %>
-    <%= form.select :size_id, @sizes.map { |size| [size.number, size.id]} %>
+  <div class="new-product-container__form-labels">
+    <%= form.label :quantity, style: "display: block" %>
+    <%= form.number_field :quantity, placeholder: "Type product quantity" %>
   </div>
 
-  <div>
-    <%= form.label :color_id, style: "display: block" %>
-    <%= form.select :color_id, @colors.map { |color| [color.name, color.id]} %>
-  </div>
-
-  <div>
-    <%= form.label :gender_id, style: "display: block" %>
-    <%= form.select :gender_id, @genders.map { |gender| [gender.name, gender.id]} %>
-  </div>
-
-  <div>
-    <%= form.label :brand_id, style: "display: block" %>
-    <%= form.select :brand_id, @brands.map { |brand| [brand.name, brand.id]} %>
-  </div>
-
-  <div>
-    <%= form.label :collection_id, style: "display: block" %>
-    <%= form.select :collection_id, @collections.map { |collection| [collection.name, collection.id]} %>
+  <div class="new-product-container__form-labels">
+    <%= form.label :price, style: "display: block" %>
+    <%= form.number_field :price, placeholder: "$" %>
   </div>
   
-  <div>
+  <div class="new-product-container__form-labels">
     <%= form.label :discount, style: "display: block" %>
-    <%= form.number_field :discount, value: 0 %>
+    <%= form.number_field :discount, value: 0, placeholder: "%" %>
   </div>
 
-  <div>
-    <%= form.label :category_ids, style: "display: block" %>
+  <div id="new-product-container__selects-flex">
+
+    <div class="new-product-container__form-labels">
+      <%= form.label :size_id, style: "display: block" %>
+      <%= form.select :size_id, @sizes.map { |size| [size.number, size.id]} %>
+    </div>
+    
+    <div class="new-product-container__form-labels">
+      <%= form.label :color_id, style: "display: block" %>
+      <%= form.select :color_id, @colors.map { |color| [color.name, color.id]} %>
+    </div>
+
+    <div class="new-product-container__form-labels">
+      <%= form.label :gender_id, style: "display: block" %>
+      <%= form.select :gender_id, @genders.map { |gender| [gender.name, gender.id]} %>
+    </div>
+
+    <div class="new-product-container__form-labels">
+      <%= form.label :brand_id, style: "display: block" %>
+      <%= form.select :brand_id, @brands.map { |brand| [brand.name, brand.id]} %>
+    </div>
+
+    <div class="new-product-container__form-labels">
+      <%= form.label :collection_id, style: "display: block" %>
+      <%= form.select :collection_id, @collections.map { |collection| [collection.name, collection.id]} %>
+    </div>
+  </div>
+
+  <div id="new-product-container__form-categories">
+    <%= form.label :category_ids, id: "new-product-container__categories-label" %>
     <%= form.collection_check_boxes(:category_ids, @categories, :id, :name, include_hidden: false) %>
   </div>
 
-  <div>
-    <%= form.label :quantity, style: "display: block" %>
-    <%= form.number_field :quantity %>
+  <div id="new-product-container__form-product-image">
+    <%= form.label "Product Image", id: "new-product-container__form-product-image-label" %>
+    <%= form.file_field :image1, id: "new-product-container__form-product-image-field" %>
   </div>
 
-  <div>
-    <%= form.label :image1, style: "display: block" %>
-    <%= form.file_field :image1 %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+  <%= form.submit "Add Product", id: "new-product-container__form-button" %>
 <% end %>
 
-<button class="open-modal">New Brand</button>
-<button class="open-modal">New Category</button>
+<div id="fixed-buttons-div">
+  <button class="open-modal">New Brand</button>
+  <button class="open-modal">New Category</button>
+</div>
 
 <%#  Modal for adding a new Brand %>
-  <div id="brand-modal" style="position: relative; margin: 20px; padding: 20px; background-color: grey">
-    <button class="close-modal" style="position: absolute; top:10px; right: 10px; padding: 6px">X</button>
-    <p>Testing new Category</p>
-    <%= render partial: "categories/form" %>
-    <h3>Categories available</h3>
-    <ul>
-      <% @categories.each do |category| %>
-        <li><%= category.name %></li>
-      <% end %>
-    </ul>
+  <div id="brand-modal-wrapper">
+    <div id="brand-modal">
+      <div class="modal-wrapper__title">
+        <h3>New brand</h3>
+        <button class="close-modal">
+          <%= image_tag "icons/x.png" %>
+        </button>      </div>
+      <h4>Brands available</h4>
+      <select>
+        <% @brands.each do |brand| %>
+          <option><%= brand.name %></option>
+        <% end %>
+      </select>
+      <%= render partial: "brands/form" %>
+    </div>
   </div>
 
 <%#  Modal for adding a new Category %>
-  <div id="category-modal" style="position: relative; margin: 20px; padding: 20px; background-color: grey">
-    <button class="close-modal" style="position: absolute; top:10px; right: 10px; padding: 6px">X</button>
-    <p>Testing new Brand</p>
-    <%= render partial: "brands/form" %>
-    <h3>Brands available</h3>
-    <ul>
-      <% @brands.each do |brand| %>
-        <li><%= brand.name %></li>
-      <% end %>
-    </ul>
+  <div id="category-modal-wrapper">
+    <div id="category-modal">
+      <div class="modal-wrapper__title">
+        <h3>New Brand</h3>
+        <button class="close-modal">
+          <%= image_tag "icons/x.png" %>
+        </button>
+      </div>
+      <h4>Categories available</h4>
+      <select>
+        <% @categories.each do |category| %>
+          <option><%= category.name %></option>
+        <% end %>
+      </select>
+      <%= render partial: "categories/form" %>
+    </div>
   </div>
 

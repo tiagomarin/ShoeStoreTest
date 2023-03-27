@@ -1,9 +1,13 @@
-<h1>New promo code</h1>
+<div id="new-promo-code-container">
+  <div id="new-promo-code-container__title">
+    <%= link_to admin_promo_codes_path do %>
+      <h3>Promotional codes</h3>
+    <% end %>
+    <p>/</p>
+    <h3>New Promotional code</h3>
+  </div>
 
-<%= render "form", promo_code: @promo_code %>
-
-<br>
-
-<div>
-  <%= link_to "Back to promo codes", promo_codes_path %>
+  <div id="new-promo-code-container__form">
+    <%= render "form", promo_code: @promo_code %>
+  </div>
 </div>

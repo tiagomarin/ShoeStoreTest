@@ -1,9 +1,13 @@
-<h1>New color</h1>
+<div id="new-color-container">
+  <div id="new-color-container__title">
+    <%= link_to admin_colors_path do %>
+      <h3>Colors</h3>
+    <% end %>
+    <p>/</p>
+    <h3>New Color</h3>
+  </div>
 
-<%= render "form", color: @color %>
-
-<br>
-
-<div>
-  <%= link_to "Back to colors", colors_path %>
+  <div id="new-color-container__form">
+    <%= render "form", color: @color %>
+  </div>
 </div>

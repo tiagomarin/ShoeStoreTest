@@ -1,9 +1,13 @@
-<h1>New gender</h1>
+<div id="new-gender-container">
+  <div id="new-gender-container__title">
+    <%= link_to admin_genders_path do %>
+      <h3>Genders</h3>
+    <% end %>
+    <p>/</p>
+    <h3>New Gender</h3>
+  </div>
 
-<%= render "form", gender: @gender %>
-
-<br>
-
-<div>
-  <%= link_to "Back to genders", genders_path %>
+  <div id="new-gender-container__form">
+    <%= render "form", gender: @gender %>
+  </div>
 </div>
