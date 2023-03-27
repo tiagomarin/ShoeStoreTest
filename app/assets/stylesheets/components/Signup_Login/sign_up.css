@@ -44,13 +44,27 @@
 }
 
 .sign-button {
-  background-color: var(--color-background-2);
+  background-color: var(--color-background-6);
   min-width: 100px;
   max-width: 200px;
   text-align: center;
   text-decoration: none;
-  color: var(--color-text-6);
+  color: var(--color-text-1);
   margin-top: var(--space-xs);
+}
+
+.sign-button:hover {
+  background-color: var(--color-background-2);
+  color: var(--color-text-6);
+}
+
+.sign-button.main-btn {
+  background-color: var(--color-background-1);
+  color: var(--color-text-6);
+}
+
+.sign-button.main-btn:hover {
+  background-color: var(--color-background-2);
 }
 
 .before-links {
