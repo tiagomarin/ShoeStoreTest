@@ -18,6 +18,6 @@ module ProductsHelper
     size_id = product.size_id
     sizes = Product.where(name:).where(brand_id:).where(color_id:).where.not(size_id:)
     @sizes_values = sizes.map(&:size).map(&:number)
-    sizes
+    @sizes_values << product.size.number
   end
 end

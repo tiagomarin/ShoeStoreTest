@@ -74,7 +74,7 @@
     <div>
       <%# show option of sizes%>
       <ul class="products-show-container__sizes">
-        <% sizes_available = sizes_available(@product).map(&:size).map(&:number) %>
+        <% sizes_available = sizes_available(@product) %>
           <% @sizes.each do |size| %>
             <% if sizes_available.include?(size.number) %>
               <li class="products-show-container__size-available"><%= size.number %></li>
