@@ -49,8 +49,8 @@ class ProductsController < ApplicationController
     # send info to the view with filters that are applied so buttons to remove filter will be displayed
     # @size_filters = session[:size_filters].split if session[:size_filters].present?
 
-    @min-price_filter = session[:min_price_filter] if session[:min_price_filter].present?
-    @max-price_filter = session[:max_price_filter] if session[:max_price_filter].present?
+    @min_price_filter = session[:min_price_filter] if session[:min_price_filter].present?
+    @max_price_filter = session[:max_price_filter] if session[:max_price_filter].present?
 
     if turbo_frame_request?
       render partial: 'products', locals: { products: @products }
